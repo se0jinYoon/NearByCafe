@@ -1,6 +1,6 @@
 from django.db import models
 from User.models import User
-from Cafe.models import Cafe
+from Cafe.models import Cafe, Keyword
 
 class Review(models.Model):
     review_time=models.DateTimeField(auto_now_add=True)
