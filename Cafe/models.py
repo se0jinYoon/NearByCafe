@@ -18,13 +18,15 @@ class Cafe(models.Model):
     cafe_menu = models.TextField()
     cafe_number = models.CharField(max_length=16)
     location_id = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL)
-    
-    
+
+
 class Keyword(models.Model):
     keyword_name = models.CharField(max_length=24)
-    
-    
+
+
 class CafeKeyword(models.Model):
+    # Review : Cafe Keyword와 Keyword의 차이는 뭔가요?
+    # Review : 현재 상태로는, 한 클래스로 합칠 수 있을 것 같습니다.
     keyword_id = models.ForeignKey(Keyword,related_name="keyword",on_delete=models.CASCADE)
     review_id = models.ForeignKey(Review,related_name="review",on_delete=models.CASCADE)
     cafe_id = models.ForeignKey(Cafe,related_name="cafe",on_delete=models.CASCADE)
