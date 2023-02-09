@@ -1,0 +1,79 @@
+
+{% include 'nav.html' %}
+{% block content %}
+<div>
+    <link rel="stylesheet"  href="/static/css/mainpage.css">
+    <link rel="stylesheet"  href="/static/css/nav.css">
+    <div id="overlay"></div> <!--검색창 그림자용-->
+    <div class="main_search d-flex flex-column align-items-center">
+        <div class="main_container d-flex flex-column align-items-center">
+        <span class="search_text1 text-light fw-bold ">오늘은 어떤 카페를 찾아볼까요?</span>
+
+        <div class="search_text2">
+        <p>
+            <input class="location_input" type="text" name="location" readonly onfocus="this.blur();" placeholder="지역 선택" onclick="onClickLocationList()"> <span class="search_text_etc text-light fw-bold"> 에서</span>
+        </p>
+            <div class="location_list">
+            </div>
+        <p>
+            <input class="keyword_input" type="text" onclick = "onClickKeywordList()" name="keyword" readonly onfocus="this.blur();" placeholder="키워드 선택">
+           
+            <div class="keyword_list">
+                    
+            </div> <!--주석을 멈춰주세요 ! -->
+            
+            <button class="search_button">
+                <a href="" class="fw-bold text-light" id="search_text" >카페 찾기</a>    <!--카페 찾기 페이지로 이동-->
+            </button>
+        </p>
+        </div>
+        </div>
+    </div>
+<!-- ---------------cj-------------- -->
+    <div class="intro1">
+        <div class="intro_container">
+            <div class="intro1_img">
+                <img src="/static/image/mainpage_search.svg">
+            </div>
+            
+            <div class="intro_comment">
+                <span class="intro1_span1 fw-bold">우리 학교 근처의</br>좋은 카페는 우리가 잘 아니까</span>
+                <span class="intro1_span2 fw-regular">대학교 근처 카페의 리뷰를 보면서</br>처음 가는 지역이라도 좋은 카페를 쉽게 찾을 수 있어요!</span>
+            </div>
+        </div>
+
+    </div>
+    <div class="intro2">
+        <div class="intro_container">
+            <div class="intro_comment">
+                <span class="intro2_span1 fw-bold">대학생 인증 마크로</br>근처 카페의 솔직한 리뷰까지</span>
+                <span class="intro2_span2 fw-regular">해당 지역의 대학생 회원이 작성한</br>솔직한 리뷰로 최고의 카페를 찾아보세요</span>
+            </div>
+            <div class="intro2_img">
+                <img src="/static/image/main_crown.svg">
+            </div>
+        </div>
+    </div>
+    <div class="intro3">
+        <div class="intro_container">
+            <div class="intro3_img">
+                <img src="/static/image/main_map.svg">
+            </div>
+            <div class="intro_comment">
+                <span class="intro3_span1 fw-bold">목적에 맞는 카페 찾기</br>더 이상 고민하지 마세요</span>
+                <span class="intro3_span2 fw-regular">키워드로 카페를 검색하기만 하면</br>목적에 맞는 카페를 빠르게 찾을 수 있어요</span>
+            </div>
+        </div>
+    </div>
+<!-- ---------------cj-------------- -->
+
+</div>
+
+
+<footer class="d-flex justify-content-between align-items-center">
+    <span fw-normal><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;helloncofficial@gmail.com</span>
+    <span fw-normal><i class="fa-regular fa-copyright"></i>&nbsp;&nbsp;NearByCafe 2023 All rights reserved</span>
+</footer>
+
+<script src="/static/js/keyword.js"></script>
+{% endblock %}
