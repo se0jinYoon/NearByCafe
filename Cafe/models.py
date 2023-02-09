@@ -43,7 +43,7 @@ class CafeKeyword(models.Model):
     
     review_id = models.ForeignKey(Review,related_name="review",on_delete=models.CASCADE)
     cafe_id = models.ForeignKey(Cafe,related_name="cafe",on_delete=models.CASCADE)
-    keyword_name = models.CharField(max_length=24)
+    #keyword_name = models.CharField(max_length=24)
 
 
 
