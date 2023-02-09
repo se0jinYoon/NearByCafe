@@ -1,6 +1,6 @@
 from django.db import models
-from User.models import User
-from Review.models import Review
+from User.models import Users
+# from Review.models import Review
 # Create your models here.
 
 
@@ -33,8 +33,8 @@ class Location(models.Model):
     # ]
     #name = models.CharField(max_length=32,choices=Locations)
     name = models.CharField(max_length=32)
-    latitude = models.FloatField(defalut=37.314964)
-    longtitude = models.FloatField(defalut=126.575308)
+    latitude = models.FloatField(default=37.314964)
+    longtitude = models.FloatField(default=126.575308)
 
 
 class Cafe(models.Model):
@@ -67,7 +67,7 @@ class CafeKeyword(models.Model):
     #     ('화장실 깨끗한','화장실 깨끗한'),
     #     ('인테리어 예쁜','인테리어 예쁜'),  
     #     ]
-        CAFE_KEYWORDS=[
+    CAFE_KEYWORDS=[
         ('데이트','데이트'),
         ('작업하기 좋은','작업하기 좋은'),
         ('공부하기 좋은','공부하기 좋은'),
@@ -86,12 +86,11 @@ class CafeKeyword(models.Model):
         ]
    
     
-    review_id = models.ForeignKey(Review,related_name="review",on_delete=models.CASCADE)
-    cafe_id = models.ForeignKey(Cafe,related_name="cafe",on_delete=models.CASCADE)
-    #keyword_name = models.CharField(max_length=24)
-
+    review_id = models.ForeignKey('Review.Review',related_name="cafe_review",on_delete=models.CASCADE)
+    cafe_id = models.ForeignKey(Cafe,related_name="cafe_cafe",on_delete=models.CASCADE)
+        #keyword_name = models.CharField(max_length=24)
 
 
 class CafeLike(models.Model):
-    user_id = models.ForeignKey(User,related_name="user",on_delete=models.CASCADE)
-    cafe_id = models.ForeignKey(Cafe,related_name="cafe",on_delete=models.CASCADE)
+    user_id = models.ForeignKey(Users,related_name="user",on_delete=models.CASCADE)
+    cafe_id = models.ForeignKey(Cafe,related_name="cafe_like",on_delete=models.CASCADE)

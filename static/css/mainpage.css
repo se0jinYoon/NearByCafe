@@ -27,7 +27,7 @@
 .main_search {
     width: 1440px;
     height: 360px;
-    background-image: url('./main.png');
+    background-image: url("/static/image/main.svg");
     background-size: auto;
     z-index: -1;
 }
@@ -151,4 +151,16 @@ img{
     height: auto;
 
     display: block; /*넣으니 예쁘게 들어감*/
+}
+
+footer {
+    width: 1440px;
+    height: 180px;
+    padding-left: 160px;
+    padding-right: 160px;
+}
+
+span {
+    color: #858585;
+    
 }

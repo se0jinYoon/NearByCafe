@@ -15,9 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
+    path('',include("Cafe.urls")), # 메인페이지
     path("admin/", admin.site.urls),
-    path("/cafe",include('Cafe.urls')), 
-    path("/review",include("Review.urls")),
-]
+    path("cafe/",include('Cafe.urls')), # 카페 찾기(지도)
+    path("review/",include("Review.urls")),
+    path("User/",include("User.urls")),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

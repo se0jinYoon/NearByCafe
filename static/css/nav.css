@@ -1,0 +1,47 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+.notosanskr * { 
+ font-family: 'Noto Sans KR', sans-serif;
+}
+
+* {
+    font-family: 'Noto Sans KR', 'sans-serif';
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    margin-left: 56px;
+}
+
+nav {
+    width: 1440px;
+    height: 82px;
+}
+
+.nav_container {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.nav_logo {
+    width: 234px;
+    height: 38px;
+    margin-left: 56px;
+    margin-right: 56px;
+}
+
+.nav_search {
+    width: 708px;
+    height: 48px;
+    border-radius: 45px;
+    border: 1px solid #B1B1B1;
+    cursor: pointer;
+}
+
+
+
+
+
+

@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from models import *
+from Cafe.models import *
 from django.http.request import HttpRequest
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -12,3 +12,9 @@ def main_keyword_list(request, *args, **kwargs):
             'keyword_list' : cafe_keyword,
         }
     return JsonResponse(context)
+
+
+def main_page(request, *args, **kwargs):
+
+    context = {}
+    return render(request, "mainpage.html", context=context)
