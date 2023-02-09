@@ -7,13 +7,8 @@ import json
 
 @csrf_exempt
 def main_keyword_list(request, *args, **kwargs):
-    cafe_keyword = CafeKeyword.CAFE_KEYWORDS
-    if request.method == 'POST':
-        context = {
+    cafe_keyword = CafeKeyword.cafe_temp
+    context = {
             'keyword_list' : cafe_keyword,
         }
-        return JsonResponse(context)
-
-@csrf_exempt
-def show_location_list(request):
-    location_lists=Location.
+    return JsonResponse(context)
