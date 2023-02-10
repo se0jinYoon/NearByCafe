@@ -1,0 +1,29 @@
+{% include 'nav.html' %}
+{% block content %}
+
+<main id="login">
+    <form action="/" method="post"></form> <!--action부분에 백엔드 url삽입-->
+    <div class="login_container">
+        <div class="logo"> <img src="/static/image/logo.png" class="nav_logo" alt="logo"/> 로그인</div> <!--로고 넣는 거 어떤가요-->
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="id_box">
+                <p>아이디</p>
+                <input type="text" name="users_id" />
+            </br>
+                <span>아이디 저장 <input type="checkbox" name="isidstorage" value="1"/></span> <!--체크박스 체크하면 값 1 넘겨줌/ 추후 논의해야될듯-->
+            </div>
+            <div class="pw_box">
+                <p>비밀번호</p>
+                <input type="text" name="password"/>
+            </div>
+            <button id="login_btn" type="button" onclick="">로그인</button> <!--onclick에 뭐 들어가야될 거 같음-->
+            <div class="login_submenu">
+                <a href="">회원가입&nbsp;</a> <!--href부분에 url삽입-->
+                <span class="submenu_bar">|</span>
+                <a href="">&nbsp;비밀번호 찾기</a> <!--href부분에 url삽입-->
+            </div>
+        </form> 
+    </div>
+</main>
+{% endblock %}
