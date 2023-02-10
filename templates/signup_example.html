@@ -1,0 +1,29 @@
+{% include 'nav.html' %} {% block content %}
+
+<h1>Sign Up!</h1>
+<form method="POST" action="">
+    {% csrf_token %}
+    <div class="signup-form">
+      <div class="signup__title">회원가입</div>
+      <div class="signup__hr"></div>
+      <div class="signup__info">
+        <div><span>아이디</span>{{ form.username }}</div>
+        <div><span>비밀번호</span>{{ form.password1 }}</div>
+        <div><span>비밀번호 확인</span>{{ form.password2 }}</div>
+        <div><span>이름</span>{{ form.realname }}</div>
+        <div><span>이메일</span>{{ form.email_address }}</div>
+      </div>
+
+      {% if messages %}
+      <ul class="messages">
+      {% for message in messages %}
+      <li {% if message.tags %} class="{{ message.tags }}"{% endif %} id="signup-error"> {{ message }}</li>
+      {% endfor %}
+      </ul>
+      {% endif %}
+      </form>
+      <input type="submit" value="회원가입" onclick="test()" class="signup__btn"/>
+      <div class="signup__hr"></div>
+    </div>
+
+{% endblock %}
