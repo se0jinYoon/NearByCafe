@@ -9,16 +9,6 @@
     box-sizing: border-box;
 }
 
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.shadow{
-    box-shadow: 0 5px 18px -7px rgba(0,0,0,1);
-}
-
 .overlay {
     width: 100vw;
     height: 100vh;
@@ -26,6 +16,17 @@ body {
     opacity: 0.5;
     z-index: -1;
     background-color: #F8F4E9;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.shadow{
+    box-shadow: 0 5px 18px -7px rgba(0,0,0,1);
 }
 
 .find_pw_container {
