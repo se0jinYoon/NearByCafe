@@ -24,21 +24,27 @@
 
 .send_txt_container {
     margin-top: 96px;
-    margin-bottom: 70px
+    margin-bottom: 10px
 }
 
-.send_txt_text {
+.send_info_container {
     margin-top: 70px;
     margin-bottom: 50px;
-    font-size: 30px;
+    width: 520px;
+    height: 200px;
     text-align: center;
+    background-color: white;
+    border-radius: 20px;
+    border: 1px solid #B1B1B1;
+}
+
+.send_info {
+    font-size: 22px;
 }
 
 .resend_btn {
-    margin-top: 50px;
+    margin-top: 35px;
 }
-
-
 
 .send_text1 {
     font-size: 36px;
