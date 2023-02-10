@@ -32,9 +32,6 @@ body {
 .find_pw_container {
     width: 498px;
     height: 456px;
-    background-color: white;
-    border-radius: 10px; 
-    border: 1px solid black;
 }
 
 .find_btn_text {
