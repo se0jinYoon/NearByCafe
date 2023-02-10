@@ -36,3 +36,8 @@ def find_pw(request):
     else:overlap="pass"
     context={'overlap':overlap}
     return JsonResponse(context)
+
+def findpw_page(request, *args, **kwargs):
+
+    context = {}
+    return render(request, "findpw.html", context=context)

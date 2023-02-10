@@ -8,8 +8,7 @@
     <div class="find_pw_container d-flex flex-column align-items-center">
         <span class="findpw_text fw-bold">비밀번호 찾기</span>
 
-        <form action="{% url '' %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
+        
         <input 
             class="findpw_input shadow"
             type="text" 
@@ -17,7 +16,7 @@
             placeholder="      가입하신 이메일을 입력해주세요.">
         <button class="findpw_btn shadow text-light fw-bold" data-bs-toggle="modal" data-bs-target="#no_email_modal" onclick="onClickFindPw()">찾기</button>
 
-        </form>
+        
         <!--만약 존재하지 않는 이메일이면 !-->
         <!--가입 이력 없음 모달 !-->
         <div class="modal fade" id="no_email_modal">
