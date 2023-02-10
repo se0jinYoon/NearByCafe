@@ -4,8 +4,9 @@ import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
+
 @csrf_exempt
-def find_pw(request):
+def find_pw2(request):
     req=json.loads(request.body)
     find_email=req['find_email']#사용자가 찾기위해 입력한 이메일
     
@@ -22,7 +23,7 @@ def find_pw(request):
         return JsonResponse(context)
     
 @csrf_exempt    
-def find_pw2(request):
+def find_pw(request):
     find_email=request.GET.get('find_email')
     try:
         selected_email=Users.objects.get(email_address=find_email)
