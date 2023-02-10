@@ -52,7 +52,7 @@
     border-radius: 30px;  /*rem으로 나중에 바꿔야할듯*/
     background-color: #DF4629;
     color: #fff;
-    font:28px;
+    font-size:28px;
     border-style: none;
 }
 .login_submenu{
