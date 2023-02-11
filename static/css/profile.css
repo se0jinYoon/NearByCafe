@@ -1,13 +1,13 @@
-@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+/* @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 .notosanskr * { 
  font-family: 'Noto Sans KR', sans-serif;
-}
+} */
 
-* {
+/* * {
     font-family: 'Noto Sans KR';
     box-sizing: border-box;
-}
+} */
 
 .overlay {
     width: 100vw;
@@ -18,13 +18,13 @@
     background-color: #F8F4E9;
 }
 
-body {
+/* body {
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
+} */
 
 .profile_container {
     width: 320px;
