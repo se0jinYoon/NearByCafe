@@ -1,0 +1,136 @@
+@import "reset.css";
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+.notosanskr * { 
+ font-family: 'Noto Sans KR', sans-serif;
+}
+
+* {
+    font-family: 'Noto Sans KR';
+    box-sizing: border-box;
+    background-color: #F8F4E9;
+}
+
+#signup{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 150px;
+    width: 100%;
+    max-width: 1440px;
+}
+
+.signup_container{ 
+    text-align: center;
+}
+
+.box_name{
+    font-size: 18px;
+}
+
+.logo{
+    text-align: center;
+    width: 100%;
+    height: 70px;
+    margin-bottom: 32px;
+}
+
+.id_box{
+    width: 100%;
+    height: 70px;
+    margin-bottom: 60px; /*32+14+14*/
+}
+
+#isonlyid{
+    width: 120px; /*피그마에선 278px*/
+    height: 46px;
+    border-radius: 30px;  /*rem으로 나중에 바꿔야할듯*/
+    background-color: #DF4629;
+    color: #fff;
+    border-style: none;
+}
+
+.pw1_box, .pw2_box{
+    width: 100%;
+    height: 70px;
+    margin-bottom: 60px; /*32+14+14*/
+}
+
+.id_box > input, .pw1_box > input, .pw2_box > input{
+    width: 300px;
+    height: 48px;
+}
+.email_box > input, .username_box > input{
+    width: 300px;
+    height: 48px;
+}
+
+.id_explain,.pw1_explain,.pw2_explain{
+    margin-top: 14px;
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.email_box, .username_box{
+    width: 100%;
+    height: 70px;
+    margin-bottom: 60px; /*32+14+14*/
+}
+
+input::placeholder {
+    font-size: 16px;
+}
+.terms_box{
+    margin-bottom: 32px;
+}
+#signup_btn{
+    width: 300px; /*피그마에선 278px*/
+    height: 76px;
+    border-radius: 30px;  /*rem으로 나중에 바꿔야할듯*/
+    background-color: #DF4629;
+    color: #fff;
+    font-size: 30px;
+    border-style: none;
+    font-weight: bold;
+}
+
+.checkbox{
+    accent-color: #DF4629;
+}
+
+/* 모달 css - 창진버전 */
+.modal-content {
+    width: 520px;
+    height: 240px;
+}
+.modal-dialog{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-header {
+    border-bottom: 0 none;
+}
+.modal-footer {
+    display: flex;
+    justify-content: center;
+    border-top: 0 none;
+}
+.modal-body {
+    text-align: center;
+    
+}
+.modal_text1 {
+    font-size: 20px;
+}
+.close-btn {
+    background-color: #DF4629;
+    color: white;
+    border-radius: 10px;
+    width: 138px;
+    height: 48px;
+    font-weight: bold;
+    border: none;
+    font-size: 22px;
+}
