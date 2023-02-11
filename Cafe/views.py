@@ -18,3 +18,7 @@ def main_page(request, *args, **kwargs):
 
     context = {}
     return render(request, "mainpage.html", context=context)
+
+def find_cafe(request, *args, **kwargs):
+    context = {}
+    return render(request, "find_cafe.html", context=context)
