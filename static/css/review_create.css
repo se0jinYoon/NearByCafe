@@ -1,0 +1,159 @@
+/* @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+.notosanskr * { 
+ font-family: 'Noto Sans KR', sans-serif;
+}
+
+* {
+    font-family: 'Noto Sans KR';
+    box-sizing: border-box;
+} */
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute; 
+    opacity: 0.5;
+    z-index: -1;
+    background-color: #F8F4E9;
+}
+
+.shadow{
+    box-shadow: 0 5px 18px -7px rgba(0,0,0,1);
+}
+/* body {
+    width: 100%;
+    padding: 74px 184px 0 184px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+} */
+
+/* ================ base css ================= */
+
+.container {
+    padding: 55px 200px 80px 200px;
+}
+
+.top {
+    margin-bottom: 50px;
+}
+
+.cafe_name {
+    font-size: 40px;
+    margin-right: 10px;
+}
+
+.text1 {
+    font-size: 28px;
+}
+
+.star {
+    padding-left: 36px;
+    width: 382px;
+    height: 54px;
+    background-color: white;
+    border-radius: 10px;
+    border: none;
+    margin-bottom: 32px;
+}
+
+.star_text {
+    padding-right: 30px;
+    font-size: 24px;
+}
+
+.title_container {
+    padding-left: 36px;
+    width: 100%;
+    height: 54px;
+    background-color: white;
+    border-radius: 10px;
+    border: none;
+    margin-bottom: 30px;
+}
+
+.title {
+    font-size: 24px;
+    padding-right: 10px;
+}
+
+.title_input {
+    width: 60%;
+    height: 35px;
+    border: none;
+}
+
+.title_container input:focus{
+    outline: none;
+}
+
+.title_container>input::placeholder {
+    font-size: 18px;
+    font-weight: light;
+    color: #757575;
+}
+
+.content_container {
+    border-radius: 10px;
+    width: 100%;
+    height: 450px;
+    border: none;
+    background-color: white;
+    padding: 30px 36px 30px 36px;
+    margin-bottom: 30px;
+}
+
+.content {
+    width: 100%;
+    height: 404px;
+    border: none;
+    background-color: white;
+    resize: none;
+}
+
+.content>textarea::placeholder {
+    font-size: 24px;
+    font-weight: light;
+    color: #757575;
+}
+
+.content_container textarea:focus{
+    outline: none;
+}
+
+.keyword_container {
+    border-radius: 10px;
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+    border: none;
+    margin-bottom: 30px;
+    background-color: white;
+    padding-left: 36px;
+}
+
+.main_text {
+    font-size: 24px;
+    font-weight: regular;
+    margin-right: 15px;
+}
+
+.sub_text {
+    font-size: 15px;
+    font-weight: light;
+    color: #757575;
+}
+
+.image_container {
+    border-radius: 10px;
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+    border: none;
+    margin-bottom: 30px;
+    background-color: white;
+    padding-left: 36px;
+}

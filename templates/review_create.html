@@ -1,34 +1,37 @@
 {% include 'nav.html' %}
 {% block content %}
 
+
+<div class="overlay"></div>
 <div class="container d-flex flex-column ">
-    <div class="top d-flex flex-row">
+    <div class="top d-flex flex-row align-items-center">
         <div class="cafe_name fw-bold">카페 상호명</div>  
-        <div class="text1">에 대한 솔직한 리뷰를 써주세요</div>
+        <div class="text1 fw-light">에 대한 솔직한 리뷰를 써주세요</div>
     </div>
 
-    <div class="star">
-        <span class="star_text">평점 남기기</span>
+    <div class="star shadow d-flex flex-row align-items-center">
+        <span class="star_text fw-light">평점 남기기</span>
         <span>⭐️⭐️⭐️⭐️⭐️</span> <!--i태그 써서 구현 변경 필요-->
     </div>
 
     
     <form action="{% url 'Review:review_create' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="title">
-            <span>제목</span>
-            <input type="text" name="title" placeholder="리뷰의 제목을 입력해주세요!">
+        <div class="title_container shadow d-flex flex-row align-items-center">
+            <span class="title fw-light">제목:</span>
+            <input class="title_input" type="text" name="title" placeholder="리뷰의 제목을 입력해주세요!">
         </div>
 
-        <textarea 
-            name="content" 
-            id="content" 
-            cols="100"
-            rows="20"
-            placeholder="00님, 카페는 어떠셨나요? 식당의 분위기와 서비스도 궁금해요!"> <!--ㅇㅇ에 유저 닉네임 추가 필요-->
-        </textarea> 
-
-        <div class="keyword">
+        <!--ㅇㅇ에 유저 닉네임 추가 필요-->
+        <div class="content_container shadow d-flex flex-row align-items-center">
+            <textarea 
+                class="content"
+                name="content" 
+                id="content" 
+                placeholder="00님, 카페는 어떠셨나요? 식당의 분위기와 서비스도 궁금해요!"></textarea> 
+        </div>
+    
+        <div class="keyword_container shadow d-flex flex-row align-items-center">
             <div>
                 <span class="main_text">키워드 고르기</span>
                 <span class="sub_text">최대 4개까지 선택할 수 있어요!</span>
@@ -36,10 +39,10 @@
             <!-- 카테고리를 어떻게 넘기죠.. -->
         </div>
 
-        <div class="image">
+        <div class="image_container shadow d-flex flex-row align-items-center">
             <div>
                 <span class="main_text">사진 등록하기</span>
-                <span class="sub_text">최대 4장까지 업로드 할 수 있어요!!</span>
+                <span class="sub_text">최대 4장까지 업로드 할 수 있어요!</span>
             </div>
         </div>
 
