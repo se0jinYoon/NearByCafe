@@ -5,7 +5,7 @@
     <form action="/" method="post"></form> <!--action부분에 백엔드 url삽입-->
     <div class="login_container">
         <div class="logo"> <img src="/static/image/logo.png" class="nav_logo" alt="logo"/> 로그인</div> <!--로고 넣는 거 어떤가요-->
-        <form action="" method="POST">
+        <form action="/User/login/" method="POST">
             {% csrf_token %}
             <div class="id_box">
                 <p>아이디</p>
@@ -17,7 +17,7 @@
                 <p>비밀번호</p>
                 <input type="text" name="password"/>
             </div>
-            <button id="login_btn" type="button" onclick="">로그인</button> <!--onclick에 뭐 들어가야될 거 같음-->
+            <button id="login_btn" type="submit" onclick="">로그인</button> <!--onclick에 뭐 들어가야될 거 같음-->
             <div class="login_submenu">
                 <a href="">회원가입&nbsp;</a> <!--href부분에 url삽입-->
                 <span class="submenu_bar">|</span>
@@ -26,4 +26,5 @@
         </form> 
     </div>
 </main>
+<script src="/static/js/login.js"></script>
 {% endblock %}
