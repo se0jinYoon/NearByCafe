@@ -17,7 +17,7 @@
                 name="location" 
                 readonly onfocus="this.blur();" 
                 placeholder="선택한 지역 띄우기!" 
-                onclick="onClickLocationList()"/> <!-- onclick main_page랑 같은 거 같은데 모르겠어유..-->
+                onclick="onClickLocationList({location})"/> <!-- onclick main_page랑 같은 거 같은데 모르겠어유..-->
         </div>
         <div class="keyword_container">
             <div class="keyword_text1 fw-bold">키워드 설정</div>
@@ -69,7 +69,7 @@
 
             <div class="cafe_list">
 
-                <div class="cafe d-flex">
+                <!-- <div class="cafe d-flex">
                     <img src="" alt="" class="cafe_img">
                     <div class="cafe_info d-flex flex-column">
                         <span class="cafe_name">카페 상호명</span>                    
@@ -123,7 +123,7 @@
                             <span style="color: #AAAAAA">(65)</span>                    
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
 
             <button class="more_btn"> <span class="more_text">더보기</span></button>
@@ -134,13 +134,15 @@
     <div id="map"></div>
 </div>
 
-<script src="/static/js/keyword.js"></script>
+<!-- <script src="/static/js/keyword.js"></script> -->
+<script src="/static/js/find_cafe.js"></script>
 
 <script>
     var container = document.getElementById('map');
     var options = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667),
+        center: new kakao.maps.LatLng( 37.61065041034093,126.99985276595638 ),
         level: 3
+		 
     };
 
     var map = new kakao.maps.Map(container, options);
