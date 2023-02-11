@@ -20,9 +20,21 @@
 
 body {
     width: 100%;
+    padding: 74px 184px 0 184px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 0;
+}
+
+/* ================ base css ================= */
+
+.cafe_name {
+    font-size: 40px;
+    margin-right: 5px;
+}
+
+.text1 {
+    font-size: 28px;
 }
