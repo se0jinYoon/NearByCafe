@@ -45,6 +45,9 @@ class Cafe(models.Model):
     menu = models.TextField()
     number = models.CharField(max_length=16)
     location_id = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL)
+    
+    #추가한 모델
+    average_star=models.FloatField(default=0)
 
 
 class CafeKeyword(models.Model):
