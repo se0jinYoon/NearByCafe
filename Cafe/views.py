@@ -28,9 +28,22 @@ def main_page(request, *args, **kwargs):
 
 def find_cafe(request, *args, **kwargs):
     Location_list = dict(Location.Locations)
-    context = Location_list
-    print(context)
-    return render(request,"find_cafe.html", context)
+    Location_keys = tuple(Location_list.keys())   #['서울전체', '왕십리',]
+    keys_left = tuple(Location_keys[0:12])
+    keys_right = tuple(Location_keys[12:])
+    Location_list_left = { i : Location_list[i] for i in keys_left}
+    Location_list_right = { i : Location_list[i] for i in keys_right}
+    # for keyL in keys_left:
+    #     Location_list_left = dict(Location_list[keyL])
+    # for keyR in keys_right:
+    #     Loation_list_right = dict(Location_list[keyR])
+
+    context = {
+        "location_list_left": Location_list_left,
+        "location_list_right": Location_list_right
+    }
+    return render(request,"find_cafe.html", context=context)
+
 
 @csrf_exempt
 def find_cafe_ajax(request, *args, **kwargs):
