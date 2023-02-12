@@ -50,6 +50,7 @@ def validate_password(password):  # 비밀번호 검증 메소드
 def validate_email(email):
     pattern = re.compile(r'@([\w.]+)')
     match = pattern.search(email)
+
     if match:
         validate_condition = [
             'g.hongik.ac.kr',  # 홍익대
@@ -100,12 +101,10 @@ def sign_up(request: HttpRequest, *args, **kwargs):
 
     if request.method == "POST":
         form = SignupForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            verify_email(request, form)
-            return redirect('User:mail_notice')  # 인증메일 발송 안내 페이지로 리다이렉트
+        if validate_email(request.POST['email_address']) == False:
+            messages.error(request, '올바른 학교 이메일 형식을 입력해주세요.')
+            return redirect('User:sign_up')
 
-        # else:
         if Users.objects.filter(username=request.POST['username']).exists():
             messages.error(request, '이미 사용 중인 아이디입니다.')
             return redirect('User:sign_up')
@@ -124,9 +123,11 @@ def sign_up(request: HttpRequest, *args, **kwargs):
                 request, '올바른 비밀번호 형식을 입력해주세요. (영문 대소문자, 숫자, 특수문자 일부 허용)')
             return redirect('User:sign_up')
 
-        if validate_email(request.POST['email_address']) == False:
-            messages.error(request, '올바른 학교 이메일 형식을 입력해주세요.')
-            return redirect('User:sign_up')
+        if form.is_valid():
+            user = form.save()
+            verify_email(request, form)
+            return redirect('User:mail_notice')  # 인증메일 발송 안내 페이지로 리다이렉트
+
         else:
             messages.error(request, '비밀번호가 올바르지 않습니다.')
             messages.error(

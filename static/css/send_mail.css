@@ -1,7 +1,7 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
-.notosanskr * { 
- font-family: 'Noto Sans KR', sans-serif;
+.notosanskr * {
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 * {
@@ -9,14 +9,14 @@
     box-sizing: border-box;
 }
 
-.shadow{
-    box-shadow: 0 5px 18px -7px rgba(0,0,0,1);
+.shadow {
+    box-shadow: 0 5px 18px -7px rgba(0, 0, 0, 1);
 }
 
 .overlay {
     width: 100vw;
     height: 100vh;
-    position: absolute; 
+    position: absolute;
     opacity: 0.5;
     z-index: -1;
     background-color: #F8F4E9;
@@ -24,7 +24,7 @@
 
 .send_txt_container {
     margin-top: 96px;
-    margin-bottom: 10px
+    margin-bottom: 10px;
 }
 
 .send_info_container {
@@ -74,7 +74,7 @@
 
 }
 
-.modal-dialog{
+.modal-dialog {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -99,8 +99,8 @@
 }
 
 .close-btn {
-    background-color: #DF4629; 
-    color: white; 
+    background-color: #DF4629;
+    color: white;
     border-radius: 10px;
     width: 138px;
     height: 48px;

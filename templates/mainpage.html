@@ -1,5 +1,6 @@
-{% include 'nav.html' %}
+{% extends 'nav.html' %}
 {% block content %}
+{% load static %}
 <div>
     <!-- <link rel="stylesheet"  href="/static/css/mainpage.css">
     <link rel="stylesheet"  href="/static/css/nav.css"> -->
@@ -33,7 +34,7 @@
     <div class="intro1">
         <div class="intro_container">
             <div class="intro1_img">
-                <img src="/static/image/mainpage_search.svg">
+                <img class="mainpage__img" src="{% static 'image/mainpage_search.svg' %}">
             </div>
             
             <div class="intro_comment">
@@ -50,14 +51,14 @@
                 <span class="intro2_span2 fw-regular">해당 지역의 대학생 회원이 작성한</br>솔직한 리뷰로 최고의 카페를 찾아보세요</span>
             </div>
             <div class="intro2_img">
-                <img src="/static/image/main_crown.svg">
+                <img class="mainpage__img" src="{% static 'image/main_crown.svg' %}">
             </div>
         </div>
     </div>
     <div class="intro3">
         <div class="intro_container">
             <div class="intro3_img">
-                <img src="/static/image/main_map.svg">
+                <img class="mainpage__img" src="{% static 'image/main_map.svg' %}">
             </div>
             <div class="intro_comment">
                 <span class="intro3_span1 fw-bold">목적에 맞는 카페 찾기</br>더 이상 고민하지 마세요</span>
