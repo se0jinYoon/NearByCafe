@@ -16,6 +16,3 @@ def review_create(request):
                 'form':form
             }
             return render(request,"review_create.html",ctx)
-   
-    
-    

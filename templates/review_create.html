@@ -1,0 +1,60 @@
+{% include 'nav.html' %}
+{% block content %}
+
+
+<div class="overlay"></div>
+<div class="container d-flex flex-column ">
+    <div class="top d-flex flex-row align-items-center">
+        <div class="cafe_name fw-bold">카페 상호명</div>  
+        <div class="text1 fw-light">에 대한 솔직한 리뷰를 써주세요</div>
+    </div>
+
+    <div class="star_container shadow d-flex flex-row align-items-center">
+        <span class="star_text fw-light">평점 남기기</span>
+        <div class="star">
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>        
+        </div>
+        <!--i태그 써서 구현 변경 필요-->
+    </div>
+
+    
+    <form action="{% url 'Review:review_create' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="title_container shadow d-flex flex-row align-items-center">
+            <span class="title fw-light">제목:</span>
+            <input class="title_input" type="text" name="title" placeholder="리뷰의 제목을 입력해주세요!">
+        </div>
+
+        <!--ㅇㅇ에 유저 닉네임 추가 필요-->
+        <div class="content_container shadow d-flex flex-row align-items-center">
+            <textarea 
+                class="content"
+                name="content" 
+                id="content" 
+                placeholder="00님, 카페는 어떠셨나요? 식당의 분위기와 서비스도 궁금해요!"></textarea> 
+        </div>
+    
+        <div class="keyword_container shadow d-flex flex-row align-items-center">
+            <div>
+                <span class="main_text">키워드 고르기</span>
+                <span class="sub_text">최대 4개까지 선택할 수 있어요!</span>
+            </div>
+            <!-- 카테고리를 어떻게 넘기죠.. -->
+        </div>
+
+        <div class="image_container shadow d-flex flex-row align-items-center">
+            <div>
+                <span class="main_text">사진 등록하기</span>
+                <span class="sub_text">최대 4장까지 업로드 할 수 있어요!</span>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+{% endblock %}
