@@ -168,3 +168,8 @@ def activate(request, uid64, token):
 
     messages.error(request, '메일 인증에 실패하였습니다.')
     return redirect('Cafe:main')
+
+
+def send_mail(request, *args, **kwargs):
+
+    return render(request, 'send_mail.html')
