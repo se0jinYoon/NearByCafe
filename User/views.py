@@ -1,10 +1,7 @@
 from django.shortcuts import render,redirect
 from User.models import *
-from django.http import HttpResponse
 from django.contrib import auth
-import json
 from django.contrib.auth import login as auth_login
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout as auth_logout
 from django.views.decorators.csrf import csrf_exempt
 #이전 로직
@@ -24,14 +21,13 @@ def login_page(request):
     if request.method == 'POST':
         users_id = request.POST['users_id']
         users_passwd = request.POST['password']
-        isidstorage = request.POST['isidstorage']
-        print(isidstorage)
+        # isidstorage = request.POST['isidstorage']
+        # print(isidstorage)
         print(users_id)
         print(users_passwd)
         users = auth.authenticate(request,username=users_id, password=users_passwd)
 
-        
-        
+            
         if users is not None:
             auth.login(request,users)
             request.session['login_session'] = users_id
