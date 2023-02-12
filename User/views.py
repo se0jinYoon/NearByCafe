@@ -5,8 +5,9 @@ from User.models import Users, School
 from User.forms import SignupForm
 from django.contrib import auth
 from django.contrib import messages
-import re
 
+import re
+import random
 
 # 메일 인증 관련 import
 from User.email_helper import send_mail
@@ -83,12 +84,27 @@ def validate_email(email):
         return False
 
 
+def make_random():
+    seed1 = ['차가운', '따뜻한', '산뜻한', '다정한', '아늑한',
+             '열정적인', '멋있는', '아름다운', '사랑스러운', '자신있는']
+    seed2 = ['호랑이', '토끼', '원숭이', '염소', '코끼리', '오리', '사자', '슈빌', '공작', '타조']
+    seed3 = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+
+    rand1 = random.choice(seed1)
+    rand2 = random.choice(seed2)
+    rand3 = random.choice(seed3)
+    return rand1+rand2+rand3
+
+
 def sign_up(request: HttpRequest, *args, **kwargs):
 
     if request.method == "POST":
         form = SignupForm(request.POST)
         if form.is_valid():
             user = form.save()
+            current_user = Users.objects.get(username=request.POST['username'])
+            current_user.nickname = make_random()
+            current_user.save()
             verify_email(request, form)
             return render(request, "mainpage.html")
 
@@ -168,8 +184,3 @@ def activate(request, uid64, token):
 
     messages.error(request, '메일 인증에 실패하였습니다.')
     return redirect('Cafe:main')
-
-
-def send_mail(request, *args, **kwargs):
-
-    return render(request, 'send_mail.html')
