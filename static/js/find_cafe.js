@@ -16,9 +16,9 @@ const onClickLocationList = async (location) => {
     //받는거
     const {latitude:latitude, longtitude:longtitude, cafes:cafes} = await res.json();
     console.log(latitude,longtitude,cafes);
-
-    panTo(latitude,longtitude)
-    cafeHandleResponse(cafes)
+    cafeHandleResponse(cafes);
+    panTo(latitude,longtitude);
+    
 
     
 
@@ -49,7 +49,13 @@ const cafeHandleResponse = (cafes) => {
 //전달받은 위치의 위도,경도로 카카오맵 이동
 const panTo=(latitude,longtitude)=>{
     var moveLatLon=new kakao.maps.LatLng(latitude,longtitude);
+    var markerPosition = new kakao.maps.LatLng(latitude,longtitude);
+    var marker = new kakao.maps.Marker({
+        position : markerPosition
+    })
+    marker.setMap(map);
     map.panTo(moveLatLon);
+  
 }
 
 
