@@ -54,3 +54,18 @@ def logout(request):
         return redirect('/')
 
 # Create your views here.
+def profile(request, *args, **kwargs):
+
+    if 'login_session' in request.session:
+        login_session = request.session['login_session']
+        user = Users.objects.get(users_id = login_session)
+        email_address = user.email_address
+        nickname = user.nickname
+    else:
+        email_address = 'temp@naver.com'
+        nickname = 'temp'
+
+    context = {'email_address' : email_address, 'nickname' : nickname}
+
+
+    return render(request, "profile.html", context=context)
