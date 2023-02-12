@@ -17,12 +17,13 @@ const onClickLocationList = async (location) => {
     const {latitude:latitude, longtitude:longtitude, cafes:cafes} = await res.json();
     console.log(latitude,longtitude,cafes);
 
+    panTo(latitude,longtitude)
     cafeHandleResponse(cafes)
 
     
 
   
-    
+
 }
 
 const cafeHandleResponse = (cafes) => {
@@ -44,5 +45,12 @@ const cafeHandleResponse = (cafes) => {
     });
    
 }
+
+//전달받은 위치의 위도,경도로 카카오맵 이동
+const panTo=(latitude,longtitude)=>{
+    var moveLatLon=new kakao.maps.LatLng(latitude,longtitude);
+    map.panTo(moveLatLon);
+}
+
 
  
