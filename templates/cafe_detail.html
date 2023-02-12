@@ -1,0 +1,25 @@
+
+<small>카페 상호명::{{cafe.name}}</small><br />
+<small>위치:{{cafe.location_id}}</small><br />
+<small>키워듸:리뷰 등록이랑 합치고 추가</small><br />
+<small>{{review_cnt}}명의 평가</small>
+<small>좋아요</small>
+q.좋아요,,?이거 뭔데..뭐 카페의 전체 하트수 세기?or 유저만 좋아요?
+
+리뷰하기->href로 리뷰 등록 연결
+
+<small>주소:{{cafe.address}}</small>
+<small>전화번호:{{cafe.number}}</small>
+<small>영업시간:{{cafe.runtime}}</small>
+<small>메뉴:{{cafe.menu}}</small>
+
+리뷰들은~
+
+<small> </small>
+name = models.CharField(max_length=32)
+address = models.CharField(max_length=128)
+image = models.ImageField(upload_to="cafephoto/")
+runtime = models.CharField(max_length=48)
+menu = models.TextField()
+number = models.CharField(max_length=16)
+location_id 
