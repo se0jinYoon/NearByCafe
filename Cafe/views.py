@@ -27,8 +27,10 @@ def main_page(request, *args, **kwargs):
     return render(request, "mainpage.html", context=context)
 
 def find_cafe(request, *args, **kwargs):
-    context={}
-    return render(request,"find_cafe.html", context=context)
+    Location_list = dict(Location.Locations)
+    context = Location_list
+    print(context)
+    return render(request,"find_cafe.html", context)
 
 @csrf_exempt
 def find_cafe_ajax(request, *args, **kwargs):
@@ -43,9 +45,8 @@ def find_cafe_ajax(request, *args, **kwargs):
         # selected_location = request.GET['location']
         selected_location = '수유/미아'
         cafe_location = Location.objects.get(name = selected_location)
-
-        cafe_location = Location.objects.get(name = selected_location)
         cafes = cafe_location.cafe_set.all()
+        # cafes_latlog = cafes.location.name
         cafes=list((cafes).values())
         context = {
         'latitude':latitude,
