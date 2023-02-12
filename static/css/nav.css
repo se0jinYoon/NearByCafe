@@ -14,10 +14,10 @@
     color: black;
 }
 
-body {
+/* body {
     display: flex;
     flex-direction: column;
-}
+} */
 
 nav {
     width: 100%;
