@@ -51,12 +51,13 @@ def find_cafe_ajax(request, *args, **kwargs):
     if request.method == 'POST':
         #프론트에서 넘겨줘야함! html에서 location의 문자열 보내주기
         print('get')
-        location = '수유/미아'
+        req = json.loads(request.body)
+        location = req['location']
         location = Location.objects.get(name=location)
         latitude = location.latitude
         longtitude = location.longtitude
         # selected_location = request.GET['location']
-        selected_location = '수유/미아'
+        selected_location = location
         cafe_location = Location.objects.get(name = selected_location)
         cafes = cafe_location.cafe_set.all()
         # cafes_latlog = cafes.location.name
