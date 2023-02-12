@@ -5,6 +5,6 @@ app_name = "User"
 
 urlpatterns = [
     path("signup/", views.sign_up, name='sign_up'),
-    path("sendmail/", views.send_mail, name='send_mail'),
+    path("mail_notice/", views.mail_notice, name='mail_notice'),
     path('activate/<str:uid64>/<str:token>/', views.activate, name='activate'),
 ]

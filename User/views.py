@@ -84,7 +84,7 @@ def validate_email(email):
         return False
 
 
-def make_random():
+def make_random_nickname():
     seed1 = ['차가운', '따뜻한', '산뜻한', '다정한', '아늑한',
              '열정적인', '멋있는', '아름다운', '사랑스러운', '자신있는']
     seed2 = ['호랑이', '토끼', '원숭이', '염소', '코끼리', '오리', '사자', '슈빌', '공작', '타조']
@@ -102,11 +102,8 @@ def sign_up(request: HttpRequest, *args, **kwargs):
         form = SignupForm(request.POST)
         if form.is_valid():
             user = form.save()
-            current_user = Users.objects.get(username=request.POST['username'])
-            current_user.nickname = make_random()
-            current_user.save()
             verify_email(request, form)
-            return render(request, "mainpage.html")
+            return redirect('User:mail_notice')  # 인증메일 발송 안내 페이지로 리다이렉트
 
         # else:
         if Users.objects.filter(username=request.POST['username']).exists():
@@ -151,7 +148,7 @@ def verify_email(request, form, *args, **kwargs):
 
     print(f'object.username is {object.username}')
     print(f'object.email is {object.email_address}')
-
+    print(f'object.nickname is {object.nickname}')
     send_mail(
         '{}님의 회원가입 인증메일 입니다.'.format(object.username),
         [object.email_address],
@@ -162,7 +159,6 @@ def verify_email(request, form, *args, **kwargs):
             'token': default_token_generator.make_token(object),
         }),
     )
-    return redirect('Cafe:main')  # 인증메일 발송 안내 페이지로 리다이렉트
 
 # 계정 활성화
 
@@ -171,12 +167,14 @@ def activate(request, uid64, token):
     try:
         uid = force_str(urlsafe_base64_decode(uid64))
         current_user = Users.objects.get(pk=uid)
+        print(f'current_user is ... {current_user}')
     except (TypeError, ValueError, OverflowError, Users.DoesNotExist, ValidationError):
         messages.error(request, '메일 인증에 실패했습니다.')
         return redirect('Cafe:main')
 
     if default_token_generator.check_token(current_user, token):
         current_user.verified = True
+        current_user.nickname = make_random_nickname()
         current_user.save()
 
         messages.info(request, '메일 인증이 완료되었습니다.')
@@ -184,3 +182,8 @@ def activate(request, uid64, token):
 
     messages.error(request, '메일 인증에 실패하였습니다.')
     return redirect('Cafe:main')
+
+
+def mail_notice(request):
+
+    return render(request, 'send_mail.html')
