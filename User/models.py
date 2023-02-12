@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-#from Cafe.models import Location
-
 
 class School(models.Model):
     location_id = models.ForeignKey(
@@ -22,8 +20,7 @@ class Users(AbstractUser):
     # password = models.CharField(max_length=16)  # 비밀번호
     realname = models.CharField(max_length=20, verbose_name="이름")
     nickname = models.CharField(max_length=32, verbose_name="닉네임")  # 랜덤 생성
-    verified = models.BooleanField(default=True)  # 학교 인증여부 False or True
-
+    verified = models.BooleanField(default=False)  # 학교 인증여부 False or True, is_active로 변경 금지!
 
 class Notice(models.Model):
     # REVIEW: Notice 모델에 notice_가 붙어있을 이유는 없을 것 같습니다.

@@ -1,3 +1,4 @@
+
 from django.shortcuts import redirect, render
 from django.http.request import HttpRequest
 from User.models import Users, School
@@ -6,7 +7,14 @@ from django.contrib import auth
 from django.contrib import messages
 import re
 
-# Create your views here.
+
+# 메일 인증 관련 import
+from User.email_helper import send_mail
+from django.forms import ValidationError
+from django.utils.encoding import force_bytes, force_str
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.contrib.auth.tokens import default_token_generator
+from django.template.loader import render_to_string
 
 
 def validate_username(username):  # 아이디 검증 메소드
@@ -64,6 +72,8 @@ def validate_email(email):
             'sogang.ac.kr',  # 서강대
             'cau.ac.kr',  # 중앙대
             'skku.edu',  # 성균관대
+
+            'naver.com',  # 테스트용 네이버
         ]
         if match.group(1) in validate_condition:
             return True
@@ -79,6 +89,7 @@ def sign_up(request: HttpRequest, *args, **kwargs):
         form = SignupForm(request.POST)
         if form.is_valid():
             user = form.save()
+            verify_email(request, form)
             return render(request, "mainpage.html")
 
         # else:
@@ -113,7 +124,47 @@ def sign_up(request: HttpRequest, *args, **kwargs):
     else:
         form = SignupForm()
         # 템플릿 이름은 임시로
-        return render(request, 'signup_example.html', {"form": form})
+        return render(request, 'signup_cj.html', {"form": form})
 
 
-# def activate(request, *args, **kwargs):
+# 인증 메일 전송
+def verify_email(request, form, *args, **kwargs):
+    object = form.save()
+    print(object)
+    print(' ------------------ SEND THE EMAIL!..')
+
+    print(f'object.username is {object.username}')
+    print(f'object.email is {object.email_address}')
+
+    send_mail(
+        '{}님의 회원가입 인증메일 입니다.'.format(object.username),
+        [object.email_address],
+        html=render_to_string('register_email.html', {
+            'user': object,
+            'uid': urlsafe_base64_encode(force_bytes(object.pk)).encode().decode(),
+            'domain': request.META['HTTP_HOST'],
+            'token': default_token_generator.make_token(object),
+        }),
+    )
+    return redirect('Cafe:main')  # 인증메일 발송 안내 페이지로 리다이렉트
+
+# 계정 활성화
+
+
+def activate(request, uid64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uid64))
+        current_user = Users.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, Users.DoesNotExist, ValidationError):
+        messages.error(request, '메일 인증에 실패했습니다.')
+        return redirect('Cafe:main')
+
+    if default_token_generator.check_token(current_user, token):
+        current_user.verified = True
+        current_user.save()
+
+        messages.info(request, '메일 인증이 완료되었습니다.')
+        return redirect('Cafe:main')
+
+    messages.error(request, '메일 인증에 실패하였습니다.')
+    return redirect('Cafe:main')

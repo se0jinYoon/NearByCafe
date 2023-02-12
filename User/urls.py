@@ -5,5 +5,5 @@ app_name = "User"
 
 urlpatterns = [
     path("signup/", views.sign_up, name='sign_up'),
-    #path('activate/<str:uidb64>/<str:token>', views.activate, name='activate'),
+    path('activate/<str:uid64>/<str:token>/', views.activate, name='activate'),
 ]
