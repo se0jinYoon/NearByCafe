@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from Review.models import *
 from django.views.decorators.csrf import csrf_exempt
-from .forms import ReviewForm
+from Review.forms import ReviewForm
 # Create your views here.
 @csrf_exempt
 def review_create(request):
@@ -13,6 +13,12 @@ def review_create(request):
             return redirect('/')
         else:
             ctx = {
-                'form':form
+                'form':form,
             }
             return render(request,"review_create.html",ctx)
+    elif request.method == 'GET':
+        form = ReviewForm()
+        ctx = {
+            'form' : form,
+        }
+        return render(request,"review_create.html",ctx)
