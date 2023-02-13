@@ -26,17 +26,23 @@
     </head>
 
     <body>
-        <nav class="d-flex">
-            <div class="nav_container">
-                <a href="/" class="logo_container"> <img src="{% static 'image/logo.png' %}" class="nav_logo" alt="logo" /></a>
-                <input type="text" class="nav_search" readonly onfocus="this.blur();" placeholder="    지역, 키워드 선택" />
-                <!--링크 추가 필요-->
-                <a href="" class="menu nav_notice">공지사항</a>
-                <a href="" class="menu nav_login">로그인</a>
-                <a href="" class="menu nav_signup">회원가입</a>
+        <nav class="nav_container d-flex flex-row align-items-center">
+            <a href="/">
+                <img src="/static/image/logo.png" class="nav_logo" alt="logo"></a>
+            <div class="searchbar_container d-flex flex-row justify-content-lg-between">
+                <input type="text" class="nav_search" readonly onfocus="this.blur();" placeholder="    지역, 키워드 선택">
+                <i class="fa-solid fa-magnifying-glass search_img"></i>
             </div>
+            <!--링크 추가 필요-->
+            <a href="" class="menu nav_notice">공지사항</a>
+            <a href="" class="menu nav_login">로그인</a>
+            <a href="" class="menu nav_signup">회원가입</a>
         </nav>
-
-        {% block content %} {% endblock %}
+    
+    {% block content %}
+    {% endblock %}
+    
+    
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </body>
 </html>
