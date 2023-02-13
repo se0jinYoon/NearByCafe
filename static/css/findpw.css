@@ -1,0 +1,115 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+.notosanskr * { 
+ font-family: 'Noto Sans KR', sans-serif;
+}
+
+* {
+    font-family: 'Noto Sans KR';
+    box-sizing: border-box;
+}
+
+.overlay {
+    width: 100vw;
+    height: 100vh;
+    position: absolute; 
+    opacity: 0.5;
+    z-index: -1;
+    background-color: #F8F4E9;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.shadow{
+    box-shadow: 0 5px 18px -7px rgba(0,0,0,1);
+}
+
+.find_pw_container {
+    width: 498px;
+    height: 456px;
+}
+
+.find_btn_text {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.findpw_text {
+    font-size: 42px;
+    margin-top: 94px;
+}
+
+.findpw_input {
+    width: 454px;
+    height: 64px;
+    border-radius: 60px;
+    border: 1px solid #B1B1B1;
+    margin-top: 48px;
+    margin-bottom: 86px;
+    padding-left: 40px;
+    
+}
+
+.findpw_btn {
+    width: 192px;
+    height: 48px;
+    font-size: 24px;
+    background-color: #DF4629;
+    border-radius: 60px;
+    border: none;
+}
+
+/* 모달 css */
+
+.modal-content {
+    width: 520px;
+    height: 240px;
+
+}
+
+.modal-dialog{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.modal-header {
+    border-bottom: 0 none;
+}
+
+.modal-footer {
+    border-top: 0 none;
+    align-self: center;
+}
+
+.modal-body {
+    text-align: center;
+}
+
+.modal_text1 {
+    font-size: 20px;
+}
+
+.close-btn {
+    background-color: #DF4629; 
+    color: white; 
+    border-radius: 10px;
+    width: 138px;
+    height: 48px;
+    font-size: 28px;
+    font-weight: bold;
+    border: none;
+}
+
+.ok_text {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+}

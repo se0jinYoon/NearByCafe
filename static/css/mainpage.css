@@ -6,8 +6,8 @@
 
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
-.notosanskr * { 
- font-family: 'Noto Sans KR', sans-serif;
+.notosanskr * {
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 * {
@@ -19,7 +19,7 @@
     background-color: black;
     width: 100%;
     height: 360px;
-    position: absolute; 
+    position: absolute;
     opacity: 0.5;
     z-index: 0;
 }
@@ -90,66 +90,84 @@ a {
 /* html { font-size: 62.5%; }   */
 /* 1rem = 10px */
 
-h2{
-    font-weight : bold;
-    font-size: 2.8rem; /*28px*/ 
-}
-h3{
-    font-weight : bold;
-    font-size: 2rem; /*20px*/ 
+h2 {
+    font-weight: bold;
+    font-size: 2.8rem;
+    /*28px*/
 }
 
-.intro1, .intro2, .intro3 {
+h3 {
+    font-weight: bold;
+    font-size: 2rem;
+    /*20px*/
+}
+
+.intro1,
+.intro2,
+.intro3 {
     padding: 48px 300px 48px 300px;
     /* display: flex; */
-    justify-content : center;
-    width: 100%; /*100%로 해야되지 않나?*/
+    justify-content: center;
+    width: 100%;
+    /*100%로 해야되지 않나?*/
     height: 360px;
 
 }
-.intro2{
-    background-color:#FFEEEB;
+
+.intro2 {
+    background-color: #FFEEEB;
 }
+
 .intro_container {
     margin: auto;
     display: flex;
-    justify-content : center;
-    
+    justify-content: center;
+
     max-width: 1440px;
     width: 100%;
     height: 300px;
 
 }
-.intro_container .intro1_img,.intro3_img{
+
+.intro_container .intro1_img,
+.intro3_img {
     display: flex;
     margin-right: 188px;
 
 }
-.intro_container .intro2_img{
+
+.intro_container .intro2_img {
     display: flex;
     margin-left: 312px;
 
 }
-.intro_comment{
+
+.intro_comment {
     display: flex;
     flex-direction: column;
     justify-content: center;
     /* align-items: center; */
 }
-.intro1_span1, .intro2_span1, .intro3_span1{
+
+.intro1_span1,
+.intro2_span1,
+.intro3_span1 {
     margin-bottom: 16px;
     font-size: 28px;
 }
 
-.intro1_span2, .intro2_span2, .intro3_span2{
-    font-size: 18px;
+
+.intro1_span2,
+.intro2_span2,
+.intro3_span2 {
+    font-size: 20px;
+
 }
 
-img{
+.mainpage__img {
     width: auto;
     height: auto;
-
-    display: block; /*넣으니 예쁘게 들어감*/
+    display: block;
 }
 
 footer {
