@@ -34,3 +34,8 @@ const likeHandleResponse=(id,clicked)=>{
     }
     
 }
+
+const onClickLikeNotLogin=()=>{
+    const url="/like_denied/"
+    //모달 보내는 요청만 보내기
+}
