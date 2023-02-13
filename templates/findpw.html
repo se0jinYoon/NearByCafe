@@ -1,0 +1,62 @@
+{% include 'nav.html' %}
+{% block content %}
+
+
+
+    <!--nav바 상속-->
+    <div class="overlay"></div>
+    <div class="find_pw_container d-flex flex-column align-items-center">
+        <span class="findpw_text fw-bold">비밀번호 찾기</span>
+
+        
+        <input 
+            class="findpw_input shadow"
+            type="text" 
+            name="find_pw_email" 
+            placeholder="      가입하신 이메일을 입력해주세요.">
+        <button class="findpw_btn shadow text-light fw-bold" data-bs-toggle="modal" data-bs-target="#no_email_modal" onclick="onClickFindPw()">찾기</button>
+
+        
+        <!--만약 존재하지 않는 이메일이면 !-->
+        <!--가입 이력 없음 모달 !-->
+        <div class="modal fade" id="no_email_modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header"></div>
+                    <div class="modal-body">
+                        <span class="modal_text1">가입 이력이 존재하지 않는 이메일입니다.</span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="close-btn" data-bs-dismiss="modal"> 
+                            <span class="ok_text">확인</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+
+        <!-- 존재하는 이메일이면 -->
+        <!-- 메일 전송 안내 모달 -->
+        <div class="modal fade" id="reset_link_modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header"></div>
+                    <div class="modal-body">
+                        <span class="modal_text1">해당 이메일로 비밀번호 재설정 링크를 보냈습니다.</span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="close-btn" data-bs-dismiss="modal"> 
+                            <span class="ok_text">확인</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="/static/js/keyword.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+{% endblock %}

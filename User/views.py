@@ -1,14 +1,4 @@
 
-from django.shortcuts import redirect, render
-from django.http.request import HttpRequest
-from User.models import Users, School
-from User.forms import SignupForm
-from django.contrib import auth
-from django.contrib import messages
-
-import re
-import random
-
 # 메일 인증 관련 import
 from User.email_helper import send_mail
 from django.forms import ValidationError
@@ -16,6 +6,62 @@ from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
 from django.template.loader import render_to_string
+from django.shortcuts import redirect, render
+from django.http.request import HttpRequest
+from User.models import Users, School
+from User.forms import SignupForm
+from django.contrib import auth
+from django.contrib import messages
+from django.shortcuts import render
+from .models import Users
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import re
+import random
+
+@csrf_exempt
+def find_pw2(request):
+    req=json.loads(request.body)
+    find_email=req['find_email']#사용자가 찾기위해 입력한 이메일
+    
+    try:
+        selected_email=Users.objects.get(email_address=find_email)
+        
+    except:#find_email과 동일한 메일 db에 없을때
+        findOrNot=False
+    else:
+        findOrNot=True
+        
+    finally:
+        context={{"findOrNot":findOrNot, "find_email":find_email}}
+        return JsonResponse(context)
+    
+@csrf_exempt    
+def find_pw(request):
+    find_email=request.GET.get('find_email')
+    try:
+        selected_email=Users.objects.get(email_address=find_email)
+        
+    except:
+        selected_email=None
+        
+    if find_email is None:
+        overlap="fail"
+    else:overlap="pass"
+    context={'overlap':overlap}
+    return JsonResponse(context)
+
+def findpw_page(request, *args, **kwargs):
+
+    context = {}
+    return render(request, "findpw.html", context=context)
+
+
+
+
+
+
 
 
 def validate_username(username):  # 아이디 검증 메소드
@@ -188,3 +234,4 @@ def activate(request, uid64, token):
 def mail_notice(request):
 
     return render(request, 'send_mail.html')
+
