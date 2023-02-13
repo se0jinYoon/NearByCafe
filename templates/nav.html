@@ -10,25 +10,24 @@
     <script src="https://kit.fontawesome.com/455c79571e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet"  href="{% static 'css/nav.css' %}">
     <link rel="stylesheet"  href="{% static 'css/mainpage.css' %}">
-    <link rel="stylesheet"  href="/static/css/nav.css">
-    <link rel="stylesheet"  href="/static/css/mainpage.css">
-    <link rel="stylesheet" href="/static/css/find_cafe.css">
+    <link rel="stylesheet"  href="{% static 'css/find_cafe.css' %}">
+    <link rel="stylesheet"  href="{% static 'css/review_create.css' %}">
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=91d2e9aa375c6586364b537512d39938"></script>
-    <link rel="stylesheet" href="/static/css/review_create.css">
     <title>nav</title>
 </head>
 
 <body>
-    <nav class="d-flex">
-        <div class="nav_container">
-            <a href="/">
-                <img src="/static/image/logo.png" class="nav_logo" alt="logo"></a>
+    <nav class="nav_container d-flex flex-row align-items-center">
+        <a href="/">
+            <img src="/static/image/logo.png" class="nav_logo" alt="logo"></a>
+        <div class="searchbar_container d-flex flex-row justify-content-lg-between">
             <input type="text" class="nav_search" readonly onfocus="this.blur();" placeholder="    지역, 키워드 선택">
-            <!--링크 추가 필요-->
-            <a href="" class="nav_notice">공지사항</a>
-            <a href="" class="nav_login">로그인</a>
-            <a href="" class="nav_signup">회원가입</a>
+            <i class="fa-solid fa-magnifying-glass search_img"></i>
         </div>
+        <!--링크 추가 필요-->
+        <a href="" class="menu nav_notice">공지사항</a>
+        <a href="" class="menu nav_login">로그인</a>
+        <a href="" class="menu nav_signup">회원가입</a>
     </nav>
 
 {% block content %}
