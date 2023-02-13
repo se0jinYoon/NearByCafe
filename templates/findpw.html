@@ -1,37 +1,33 @@
-{% extends 'nav.html' %}
-{% block content %}
-{% load static %}
-
-
+{% extends 'nav.html' %} {% block content %} {% load static %}
 
 <!--nav바 상속-->
 <div class="overlay"></div>
 <div class="find_pw_container d-flex flex-column align-items-center">
     <span class="findpw_text fw-bold">비밀번호 찾기</span>
 
-    <form action="" method="POST">
+    <form class="findpw__form" action="" method="POST">
+        {% csrf_token %}
         <input class="findpw_input shadow" type="text" name="find_pw_email" placeholder="      가입하신 이메일을 입력해주세요." />
         <button class="findpw_btn shadow text-light fw-bold" data-bs-toggle="modal" data-bs-target="#no_email_modal" onclick="onClickFindPw()">찾기</button>
     </form>
-    
 </div>
 
 {% if messages %}
-    <div class="modal fade" id="modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header"></div>
-                <div class="modal-body">
-                    {% for message in messages %}
-                    <span class="modal_text1">{{ message }} </span>
-                    {% endfor %}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="close-btn" data-bs-dismiss="modal">확인</button>
-                </div>
+<div class="modal fade" id="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"></div>
+            <div class="modal-body">
+                {% for message in messages %}
+                <span class="modal_text1">{{ message }} </span>
+                {% endfor %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="close-btn" data-bs-dismiss="modal">확인</button>
             </div>
         </div>
     </div>
+</div>
 {% endif %}
 
 <script
@@ -40,7 +36,9 @@
     crossorigin="anonymous"
 ></script>
 
-{% comment %} <script src="/static/js/find_pw.js"></script> {% endcomment %}
+{% comment %}
+<script src="/static/js/find_pw.js"></script>
+{% endcomment %}
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
