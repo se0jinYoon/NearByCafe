@@ -1,0 +1,116 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+.notosanskr * {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+* {
+    font-family: 'Noto Sans KR';
+    box-sizing: border-box;
+}
+
+.shadow {
+    box-shadow: 0 5px 18px -7px rgba(0, 0, 0, 1);
+}
+
+.overlay {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    opacity: 0.5;
+    z-index: -1;
+    background-color: #F8F4E9;
+}
+
+.send_txt_container {
+    margin-top: 96px;
+    margin-bottom: 10px;
+}
+
+.send_info_container {
+    margin-top: 70px;
+    margin-bottom: 50px;
+    width: 520px;
+    height: 200px;
+    text-align: center;
+    background-color: white;
+    border-radius: 20px;
+    border: 1px solid #B1B1B1;
+}
+
+.send_info {
+    font-size: 22px;
+}
+
+.resend_btn {
+    margin-top: 35px;
+}
+
+.send_text1 {
+    font-size: 36px;
+    margin-top: 7px;
+    margin-left: 10px;
+}
+
+.resend_btn {
+    width: 192px;
+    height: 48px;
+    font-size: 20px;
+    background-color: #DF4629;
+    border-radius: 60px;
+    border: none;
+}
+
+.timer {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+/* 모달 css */
+
+.modal-content {
+    width: 520px;
+    height: 240px;
+
+}
+
+.modal-dialog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.modal-header {
+    border-bottom: 0 none;
+}
+
+.modal-footer {
+    border-top: 0 none;
+    align-self: center;
+}
+
+.modal-body {
+    text-align: center;
+}
+
+.modal_text1 {
+    font-size: 20px;
+}
+
+.close-btn {
+    background-color: #DF4629;
+    color: white;
+    border-radius: 10px;
+    width: 138px;
+    height: 48px;
+    font-size: 28px;
+    font-weight: bold;
+    border: none;
+}
+
+.ok_text {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+}
