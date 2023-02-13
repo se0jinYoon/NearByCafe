@@ -1,9 +1,10 @@
 
-# 메일 인증 관련 import
-from User.email_helper import send_mail
-from django.forms import ValidationError
-from django.utils.encoding import force_bytes, force_str
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.shortcuts import render,redirect
+from User.models import *
+from django.contrib import auth
+from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.tokens import default_token_generator
 from django.template.loader import render_to_string
 from django.shortcuts import redirect, render
@@ -17,8 +18,49 @@ from .models import Users
 import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from User.email_helper import send_mail
+from django.forms import ValidationError
+from django.utils.encoding import force_bytes, force_str
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+
 import re
 import random
+@csrf_exempt
+def login_page(request):
+    
+    if request.method == 'POST':
+        users_id = request.POST['users_id']
+        users_passwd = request.POST['password']
+        # isidstorage = request.POST['isidstorage']
+        # print(isidstorage)
+        print(users_id)
+        print(users_passwd)
+        users = auth.authenticate(request,username=users_id, password=users_passwd)
+
+            
+        if users is not None:
+            auth.login(request,users)
+            request.session['login_session'] = users_id
+            
+            return redirect('/')   
+        else:#로그인 실패 시 모달창 띄우는 분기
+            print("failed")
+            context = {'state' : 'false'}
+            return render(request,'login.html',context)
+    else:
+        
+
+        context = {
+            
+        }     
+        return render(request, 'login.html',context)
+def logout(request):
+    if request.method == 'POST':
+        auth_logout(request)
+        return redirect('/')
+
+# 메일 인증 관련 import
+
 
 @csrf_exempt
 def find_pw2(request):
@@ -234,4 +276,5 @@ def activate(request, uid64, token):
 def mail_notice(request):
 
     return render(request, 'send_mail.html')
+
 
