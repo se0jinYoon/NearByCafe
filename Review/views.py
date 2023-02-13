@@ -1,15 +1,35 @@
 from django.shortcuts import render,redirect
 from Review.models import *
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 from Review.forms import ReviewForm
 # Create your views here.
+
+keyword_list=[
+    '데이트',
+    '작업하기 좋은',
+    '공부하기 좋은',
+    '조용한',
+    '시끌벅적한',
+    '의자가 편한',
+    '디저트 맛있는',
+    '커피가 맛있는',
+    '친절한',
+    '혼카페',
+    '장소가 넓은',
+    '콘센트가 많은',
+    '화장실 깨끗한',
+    '인테리어 예쁜',  
+    ]
 @csrf_exempt
+@login_required(login_url='/login')
 def review_create(request):
-    context = {}
+    context = keyword_list
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
-            form.save()
+            review = form.save()
+            review.user_id = request.user
             return redirect('/')
         else:
             ctx = {
@@ -19,6 +39,6 @@ def review_create(request):
     elif request.method == 'GET':
         form = ReviewForm()
         ctx = {
-            'form' : form,
+            'form' : form, 'keyword_list' : keyword_list,'user' : request.user
         }
         return render(request,"review_create.html",ctx)

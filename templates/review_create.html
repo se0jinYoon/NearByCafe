@@ -8,7 +8,7 @@
         <div class="cafe_name fw-bold">카페 상호명</div>  
         <div class="text1 fw-light">에 대한 솔직한 리뷰를 써주세요</div>
     </div>
-
+   
     <div class="star_container shadow d-flex flex-row align-items-center">
         <span class="star_text fw-light">평점 남기기</span>
         <div class="star">
@@ -35,13 +35,16 @@
                 class="content"
                 name="content" 
                 id="content" 
-                placeholder="00님, 카페는 어떠셨나요? 식당의 분위기와 서비스도 궁금해요!"></textarea> 
+                placeholder="{{user}}님, 카페는 어떠셨나요? 식당의 분위기와 서비스도 궁금해요!"></textarea> 
         </div>
     
         <div class="keyword_container shadow d-flex flex-row align-items-center">
             <div>
                 <span class="main_text">키워드 고르기</span>
                 <span class="sub_text">최대 4개까지 선택할 수 있어요!</span>
+                {% for keyword in keyword_list %}
+                <span class="sub_text">{{keyword}}</span>
+                {% endfor %}
             </div>
             <!-- 카테고리를 어떻게 넘기죠.. -->
         </div>
