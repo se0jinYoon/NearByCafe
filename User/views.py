@@ -84,8 +84,15 @@ def findpw(request:HttpRequest, *args, **kwargs):
     context={}
     if request.method == "POST":
         if Users.objects.filter(email_address=request.POST['find_pw_email']).exists():
-                messages.error(request, '해당 이메일로 비밀번호 재설정 링크를 보냈습니다. ')
-                return redirect('User:findpw')
+            user=Users.objects.get(email_address=request.POST['find_pw_email'])
+            print(user)
+            name=user.username
+            email=user.email_address
+            
+            messages.error(request, '해당 이메일로 비밀번호 재설정 링크를 보냈습니다. ')
+            verify_email_later(request,name,email)
+            
+            return redirect('User:findpw')
         else: 
             messages.error(request, '가입 이력이 존재하지 않는 이메일 입니다.')
             return redirect('User:findpw')
@@ -262,7 +269,6 @@ def verify_email(request, form, *args, **kwargs):
     )
 
 # 인증 메일 전송(추후 로그인 과정 시)
-
 
 def verify_email_later(request, user_name, user_email, *args, **kwargs):
     object = Users.objects.get(username=user_name)
