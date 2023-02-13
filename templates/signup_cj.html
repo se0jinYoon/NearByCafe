@@ -1,8 +1,8 @@
-{% include 'nav.html' %} {% block content %}
-
+{% extends 'nav.html' %} {% block content %} {% load static %}
+<div class="overlay_cj"></div>
 <main id="signup">
     <div class="signup_container">
-        <div class="logo"><img src="/static/image/logo.png" class="nav_logo" alt="logo" /> 회원가입</div>
+        <div class="signup__logo"><img src="{% static 'image/logo_small.svg' %}" alt="logo" /> 회원가입</div>
         <form action="" method="POST">
             <!--action부분에 백엔드 url삽입-->
             {% csrf_token %}
@@ -11,7 +11,7 @@
                 <input class="shadow" type="text" name="username" />
                 <!--{{ form.username }}-->
                 <!-- <button id="isonlyid" type="button" onclick="" data-bs-toggle="modal" data-bs-target="#wrong_idform">아이디 중복</br> 확인</button> -->
-                <span class="id_explain">8자이상 20자 이하의 영문,숫자만 가능</span>
+                <span class="id_explain">6자이상 20자 이하의 영문,숫자만 가능</span>
             </div>
 
             <div class="pw1_box">
@@ -25,7 +25,7 @@
                 <p class="box_name">비밀번호 확인</p>
                 <input class="shadow" type="password" name="password2" />
                 <!--{{ form.password2 }}-->
-                <span class="pw2_explain">비밀번호가 일치합니다</span>
+                <!-- <span class="pw2_explain">비밀번호가 일치합니다</span> -->
                 <!--분기처리 필요 / 비밀번호 일치하면 위 내용을, 불일치면 '동일한 비밀번호를 입력해주세요' 출력-->
             </div>
 
@@ -44,7 +44,7 @@
             <!-- 아래에 체크박스 태그 란에 value값을 어케 줘야하나? -->
             <div class="terms_box">
                 <!--NearbyCafe 이용약관 동의-->
-                <p class="box_name"><input class="checkbox shadow" type="checkbox" name="agree" />NearbyCafe 이용약관 동의</p>
+                <p class="box_name"><input class="checkbox shadow" type="checkbox" name="agree1" />NearbyCafe 이용약관 동의</p>
                 <textarea name="" id="" readonly="readonly" cols="60" rows="16">
                 Gorem ipsum dolor sit amet, consectetur 
                   adipiscing elit. Etiam eu turpis molestie, dictu
@@ -63,7 +63,7 @@
 
             <div class="terms_box">
                 <!--개인정보 수집 및 이용 동의-->
-                <p class="box_name"><input class="checkbox shadow" type="checkbox" name="agree" />개인정보 수집 및 이용 동의</p>
+                <p class="box_name"><input class="checkbox shadow" type="checkbox" name="agree2" />개인정보 수집 및 이용 동의</p>
                 <textarea name="" id="" readonly="readonly" cols="60" rows="16">
                 Gorem ipsum dolor sit amet, consectetur 
                   adipiscing elit. Etiam eu turpis molestie, dictu
@@ -82,7 +82,7 @@
 
             <div class="terms_box">
                 <!--위치 기반 서비스 이용약관 동의-->
-                <p class="box_name"><input class="checkbox shadow" type="checkbox" name="agree" />위치 기반 서비스 이용약관 동의</p>
+                <p class="box_name"><input class="checkbox shadow" type="checkbox" name="agree3" />위치 기반 서비스 이용약관 동의</p>
                 <textarea name="" id="" readonly="readonly" cols="60" rows="16">
                 Gorem ipsum dolor sit amet, consectetur 
                   adipiscing elit. Etiam eu turpis molestie, dictu
@@ -114,108 +114,34 @@
     </div>
 
     {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li {% if message.tags %} class="{{ message.tags }}" {% endif %} id="signup-error">{{ message }}</li>
-        {% endfor %}
-    </ul>
+    <div class="modal fade" id="howorder">
+        <!--분기처리 어케 해야될지 모르겠음-->
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"></div>
+                <div class="modal-body">
+                    {% for message in messages %}
+                    <span class="modal_text1">{{ message }} </span>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="close-btn" data-bs-dismiss="modal">확인</button>
+                </div>
+            </div>
+        </div>
+    </div>
     {% endif %}
-
-    <!-- modal, 분기처리 어케하는지 모르는 부분(경우2~5)은 #howorder라고 처리 -->
-    <!-- 경우1-1) 올바른 아이디 형식을 입력하지 않았을 때 8자 이상 20자이하의 영문, 숫자 아닐시 띄우는 모달-->
-    <div class="modal fade" id="wrong_idform">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header"></div>
-                <div class="modal-body">
-                    <span class="modal_text1">올바른 아이디 형식을 지켜주세요</span>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="close-btn" data-bs-dismiss="modal">확인</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- 경우1-2) 중복 아이디 입력시 띄우는 모달-->
-    <div class="modal fade" id="wrong_idform">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header"></div>
-                <div class="modal-body">
-                    <span class="modal_text1">이미 사용중인 아이디 입니다</span>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="close-btn" data-bs-dismiss="modal">확인</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- 경우2) 올바른 비밀번호 형식을 입력하지 않았을 때 8자 이상 15자이하의 영문, 숫자 아닐시 띄우는 모달-->
-    <div class="modal fade" id="howorder">
-        <!--분기처리 어케 해야될지 모르겠음-->
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header"></div>
-                <div class="modal-body">
-                    <span class="modal_text1">올바른 비밀번호 형식을 지켜주세요</span>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="close-btn" data-bs-dismiss="modal">확인</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 경우3) 학교 이메일 형식이 맞지 않을시 띄우는 모달-->
-    <div class="modal fade" id="howorder">
-        <!--분기처리 어케 해야될지 모르겠음-->
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header"></div>
-                <div class="modal-body">
-                    <span class="modal_text1">올바른 학교 이메일 형식을 지켜주세요</span>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="close-btn" data-bs-dismiss="modal">확인</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- 경우4) 이름 형식이 맞지 않을때 한글로 2~10자 사이를 입력하지 않을시 띄우는 모달-->
-    <div class="modal fade" id="howorder">
-        <!--분기처리 어케 해야될지 모르겠음-->
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header"></div>
-                <div class="modal-body">
-                    <span class="modal_text1">이름을 올바르게 입력해주세요</span>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="close-btn" data-bs-dismiss="modal">확인</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- 경우5) 이용약관 동의 미체크시 띄우는 모달-->
-    <div class="modal fade" id="howorder">
-        <!--분기처리 어케 해야될지 모르겠음-->
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header"></div>
-                <div class="modal-body">
-                    <span class="modal_text1">이용약관에 동의를 해주셔야 회원가입이 가능합니다</span>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="close-btn" data-bs-dismiss="modal">확인</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </main>
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"
 ></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#howorder").modal("show");
+    });
+</script>
 
 {% endblock %}
