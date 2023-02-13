@@ -1,20 +1,36 @@
 const strip = (string) => {
     return string.replace(/^\s+|\s+$/g, "");
 };
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+const requestFindPw=new XMLHttpRequest();
 
-// const requestFindPw=new XMLHttpRequest();
+const onClickFindPw=async()=>{
+    const url='/find_pw/'; //?
+    var find_email=document.getElementsByName('find_pw_email').value;
+    const {data}=await axios.post(url,{
+        overlap,
+    });
+    // requestFindPw.open('POST',url,true)
+    // requestFindPw.setRequestHeader(
+    //     "Content-Type",
+    //     "application/x-www-form-urlencoded"
+    // );
+    //requestFindPw.send(JSON.stringify({find_email:find_email}));
+    requestFindPwHandleResponse(data.overlap);
+};
 
-// const onClickFindPw=()=>{
-//     const url='User/views/find_pw'; //?
-//     var find_email=document.getElementsByName('find_pw_email').value;
-//     requestFindPw.open('POST',url,true)
-//     requestFindPw.setRequestHeader(
-//         "Content-Type",
-//         "application/x-www-form-urlencoded"
-//     );
+const requestFindPwHandleResponse=(overlap)=>{
+    if (overlap== "fail") {
+    //일치 이메일 없음 안내 모달 띄우기
+       var modal = document.getElementById("no_email_modal"); 
+    }
+    else {
+        var modal = document.getElementById("reset_link_modal"); // ! 재설정 모달로 지정
+    }
+      $("#modal").modal("show");
 
-//     requestFindPw.send(JSON.stringify({find_email:find_email}));
-// };
+}
+
 
 // requestFindPw.onreadystatechange=()=>{
 //     if(requestFindPw.readyState==XMLHttpRequest.DONE){
@@ -38,24 +54,24 @@ const strip = (string) => {
 //방법2
 // if ($(".findpw_input"));
 
-const onClickFindPw=()=>{
-    find_email = document.querySelector(".findpw_input");
+// const onClickFindPw=()=>{
+//     find_email = document.querySelector(".findpw_input").val();
 
-    $.ajax({
-        url: "{% url 'User:find_pw' %}",
-        data: {
-            find_email: find_email.value,
-        },
-        datatype: "json",
-        success: function (data) {
-            if (data["overlap"] == "fail") {
-                //일치 이메일 없음 안내 모달 띄우기
-                var modal = document.getElementById("no_email_modal"); //일치 이메일 없음 안내 모달
-            } else {
-                //비번 재설정 안내 모달
-                var modal = document.getElementById("reset_link_modal"); // ! 재설정 모달로 지정
-            }
-            $("#modal").modal("show");
-        },
-    });
-}
+//     $.ajax({
+//         url: "{% url 'User:find_pw' %}",
+//         data: {
+//             find_email: find_email.value,
+//         },
+//         datatype: "json",
+//         success: function (data) {
+//             if (data["overlap"] == "fail") {
+//                 //일치 이메일 없음 안내 모달 띄우기
+//                 var modal = document.getElementById("no_email_modal"); //일치 이메일 없음 안내 모달
+//             } else {
+//                 //비번 재설정 안내 모달
+//                 var modal = document.getElementById("reset_link_modal"); // ! 재설정 모달로 지정
+//             }
+//             $("#modal").modal("show");
+//         },
+//     });
+// }

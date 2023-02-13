@@ -91,7 +91,9 @@ def find_pw2(request):
 # 비밀번호 찾기 메소드
 @csrf_exempt    
 def find_pw(request):
-    find_email=request.GET.get('find_email')
+    #find_email=request.GET.get('find_email')
+    req=json.loads(request.body)
+    find_email=req['find_email']
     try:
         selected_email=Users.objects.get(email_address=find_email)
         
@@ -103,6 +105,15 @@ def find_pw(request):
     else:overlap="pass"
     context={'overlap':overlap}
     return JsonResponse(context)
+
+#비밀번호 찾기 메소드-form 이용
+def findpw(request: HttpRequest, *args, **kwargs):
+    if Users.objects.filter(email_address=request.POST['find_pw_email']).exists():
+            messages.error(request, '해당 이메일로 비밀번호 재설정 링크를 보냈습니다. ')
+    else: 
+            messages.error(request, '가입 이력이 존재하지 않는 이메일 입니다.')
+    
+    return redirect('User:find_pw')
 
 
 # 비밀번호 찾기 메인 페이지
