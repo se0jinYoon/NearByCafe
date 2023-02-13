@@ -18,9 +18,9 @@
             </div>
             <button id="login_btn" type="submit" onclick="" data-bs-toggle="modal" data-bs-target="#wrong_information">로그인</button> <!--onclick에 뭐 들어가야될 거 같음-->
             <div class="login_submenu">
-                <a href="">회원가입&nbsp;</a> <!--href부분에 url삽입-->
+                <a href="{% url 'User:sign_up' %}">회원가입&nbsp;</a> <!--href부분에 url삽입-->
                 <span class="submenu_bar">|</span>
-                <a href="/find_pw/">&nbsp;비밀번호 찾기</a> <!--href부분에 url삽입-->
+                <a href="{% url 'User:find_pw' %}">&nbsp;비밀번호 찾기</a> <!--href부분에 url삽입-->
             </div>
         </form> 
     </div>
