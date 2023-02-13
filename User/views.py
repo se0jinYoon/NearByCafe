@@ -41,14 +41,17 @@ def login_page(request):
 
             
         if users is not None:
+            print("user")
             auth.login(request,users)
             request.session['login_session'] = users_id
-            
+            messages.info(request,"로그인이 완료되었습니다.")
             return redirect('/')   
-        else:#로그인 실패 시 모달창 띄우는 분기
+        elif users is None:#로그인 실패 시 모달창 띄우는 분기
             print("failed")
-            context = {'state' : 'false'}
-            return render(request,'login.html',context)
+            messages.error(
+                request, '아이디 또는 비밀번호를 잘못 입력 했습니다.'
+            )
+            return redirect('User:login')
     else:
         
 

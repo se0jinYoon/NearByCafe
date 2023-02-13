@@ -19,35 +19,42 @@
             <button id="login_btn" type="submit" onclick="" data-bs-toggle="modal" data-bs-target="#wrong_infromation">로그인</button>
             <!--onclick에 뭐 들어가야될 거 같음-->
             <div class="login_submenu">
-                <a href="">회원가입&nbsp;</a>
-                <!--href부분에 url삽입-->
+                <a href="{% url 'User:sign_up' %}">회원가입&nbsp;</a> <!--href부분에 url삽입-->
                 <span class="submenu_bar">|</span>
-                <a href="">&nbsp;비밀번호 찾기</a>
-                <!--href부분에 url삽입-->
+                <a href="{% url 'User:find_pw' %}">&nbsp;비밀번호 찾기</a> <!--href부분에 url삽입-->
             </div>
         </form>
     </div>
-</main>
-
-<!-- modal -->
-<!--아이디 또는 비밀번호를 잘못 입력시 띄우는 모달-->
-<div class="modal fade" id="wrong_infromation">
+    {% if messages %}
+<div class="modal fade" id="wrong_information">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header"></div>
             <div class="modal-body">
-                <span class="modal_text1">아이디 또는 비밀번호를 잘못 입력 했습니다.</span>
+                {% for message in messages %}
+                <span class="modal_text1">{{message}}</span>
+                </span>
+                {% endfor %}
             </div>
             <div class="modal-footer">
                 <button type="button" class="close-btn" data-bs-dismiss="modal">확인</button>
             </div>
         </div>
     </div>
+  </div>
+    {% endif %}
+</main>
 </div>
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"
 ></script>
-<script src="/static/js/login.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function () {
+        $("#wrong_information").modal("show");
+    });
+</script>
 {% endblock %}
