@@ -79,61 +79,19 @@ def logout(request):
         return redirect('/')
 
 
-# 비밀번호 찾기 메소드
-@csrf_exempt
-def find_pw2(request):
-    req = json.loads(request.body)
-    find_email = req['find_email']  # 사용자가 찾기위해 입력한 이메일
-
-    try:
-        selected_email = Users.objects.get(email_address=find_email)
-
-    except:  # find_email과 동일한 메일 db에 없을때
-        findOrNot = False
-    else:
-        findOrNot = True
-
-    finally:
-        context = {{"findOrNot": findOrNot, "find_email": find_email}}
-        return JsonResponse(context)
-
-
-# 비밀번호 찾기 메소드
-@csrf_exempt
-def find_pw(request):
-    # find_email=request.GET.get('find_email')
-    req = json.loads(request.body)
-    find_email = req['find_email']
-    try:
-        selected_email = Users.objects.get(email_address=find_email)
-
-    except:
-        selected_email = None
-
-    if find_email is None:
-        overlap = "fail"
-    else:
-        overlap = "pass"
-    context = {'overlap': overlap}
-    return JsonResponse(context)
-
-# 비밀번호 찾기 메소드-form 이용
-
-
-def findpw(request: HttpRequest, *args, **kwargs):
-    if Users.objects.filter(email_address=request.POST['find_pw_email']).exists():
-        messages.error(request, '해당 이메일로 비밀번호 재설정 링크를 보냈습니다. ')
-    else:
-        messages.error(request, '가입 이력이 존재하지 않는 이메일 입니다.')
-
-    return redirect('User:find_pw')
-
-
-# 비밀번호 찾기 메인 페이지
-def findpw_page(request, *args, **kwargs):
-    context = {}
-    return render(request, "findpw.html", context=context)
-
+#비밀번호 찾기 메소드-form 이용
+def findpw(request:HttpRequest, *args, **kwargs):
+    context={}
+    if request.method == "POST":
+        if Users.objects.filter(email_address=request.POST['find_pw_email']).exists():
+                messages.error(request, '해당 이메일로 비밀번호 재설정 링크를 보냈습니다. ')
+                return redirect('User:findpw')
+        else: 
+            messages.error(request, '가입 이력이 존재하지 않는 이메일 입니다.')
+            return redirect('User:findpw')
+    
+    return render(request,'findpw.html',context=context)
+    
 
 # 아이디 검증 메소드
 def validate_username(username):
@@ -175,7 +133,7 @@ def validate_email(email):
         validate_condition = [
             'g.hongik.ac.kr',  # 홍익대
             'smu.kr',  # 상명대
-            'ewhain.com',  # 이화여대
+            'ewhain.net',  # 이화여대
             'khu.ac.kr',  # 경희대
             'hufs.ac.kr',  # 한국외대
             'yonsei.ac.kr',  # 연세대
