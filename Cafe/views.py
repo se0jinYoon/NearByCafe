@@ -14,6 +14,7 @@ def main_keyword_list(request, *args, **kwargs):
     return JsonResponse(context)
 
 
+
 def main_page(request, *args, **kwargs):
 
     context = {}
