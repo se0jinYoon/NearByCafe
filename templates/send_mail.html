@@ -19,6 +19,15 @@
         <span class="timer"> <span id="minute">05</span>:<span id="second">00</span> </span>
     </div>
 
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="d-flex flex-column align-items-center">
+            <button type="submit" class="resend_btn shadow text-light fw-regular" data-bs-toggle="modal" data-bs-target="#send_notice">인증메일 재전송</button>
+            <!--모달과 연동 필요-->
+            <span class="timer"> <span id="minute">05</span>:<span id="second">00</span> </span>
+        </div>
+    </form>
+
     <!-- 재전송 5분되기 전에 눌렀을 경우 뜨는 모달 -->
     <div class="modal fade" id="send_notice">
         <div class="modal-dialog">

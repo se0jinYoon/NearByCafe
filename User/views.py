@@ -29,7 +29,7 @@ import random
 # 로그인 페이지
 @csrf_exempt
 def login_page(request):
-    
+
     if request.method == 'POST':
         users_id = request.POST['users_id']
         users_passwd = request.POST['password']
@@ -37,29 +37,39 @@ def login_page(request):
         # print(isidstorage)
         print(users_id)
         print(users_passwd)
-        users = auth.authenticate(request,username=users_id, password=users_passwd)
+        users = auth.authenticate(
+            request, username=users_id, password=users_passwd)
 
-            
         if users is not None:
-            print("user")
-            auth.login(request,users)
-            request.session['login_session'] = users_id
-            messages.info(request,"로그인이 완료되었습니다.")
-            return redirect('/')   
-        elif users is None:#로그인 실패 시 모달창 띄우는 분기
+            # 만약 인증 메일로 인증을 하지 않았을 때 분기
+            current_user = Users.objects.get(username=users_id).verified
+
+            if current_user:  # True
+                print("user")
+                auth.login(request, users)
+                request.session['login_session'] = users_id
+                messages.info(request, "로그인이 완료되었습니다.")
+                return redirect('/')
+
+            else:
+                user_email = Users.objects.get(username=users_id).email_address
+                user_name = Users.objects.get(username=users_id).username
+                verify_email_later(
+                    request, user_name=user_name, user_email=user_email)
+                return render(request, 'send_mail.html')
+
+        elif users is None:  # 로그인 실패 시 모달창 띄우는 분기
             print("failed")
             messages.error(
                 request, '아이디 또는 비밀번호를 잘못 입력 했습니다.'
             )
             return redirect('User:login')
     else:
-        
 
         context = {
-            
-        }     
-        return render(request, 'login.html',context)
 
+        }
+        return render(request, 'login.html', context)
 
 
 # 로그아웃 페이지
@@ -72,47 +82,50 @@ def logout(request):
 # 비밀번호 찾기 메소드
 @csrf_exempt
 def find_pw2(request):
-    req=json.loads(request.body)
-    find_email=req['find_email']#사용자가 찾기위해 입력한 이메일
-    
+    req = json.loads(request.body)
+    find_email = req['find_email']  # 사용자가 찾기위해 입력한 이메일
+
     try:
-        selected_email=Users.objects.get(email_address=find_email)
-        
-    except:#find_email과 동일한 메일 db에 없을때
-        findOrNot=False
+        selected_email = Users.objects.get(email_address=find_email)
+
+    except:  # find_email과 동일한 메일 db에 없을때
+        findOrNot = False
     else:
-        findOrNot=True
-        
+        findOrNot = True
+
     finally:
-        context={{"findOrNot":findOrNot, "find_email":find_email}}
+        context = {{"findOrNot": findOrNot, "find_email": find_email}}
         return JsonResponse(context)
 
 
 # 비밀번호 찾기 메소드
-@csrf_exempt    
+@csrf_exempt
 def find_pw(request):
-    #find_email=request.GET.get('find_email')
-    req=json.loads(request.body)
-    find_email=req['find_email']
+    # find_email=request.GET.get('find_email')
+    req = json.loads(request.body)
+    find_email = req['find_email']
     try:
-        selected_email=Users.objects.get(email_address=find_email)
-        
+        selected_email = Users.objects.get(email_address=find_email)
+
     except:
-        selected_email=None
-        
+        selected_email = None
+
     if find_email is None:
-        overlap="fail"
-    else:overlap="pass"
-    context={'overlap':overlap}
+        overlap = "fail"
+    else:
+        overlap = "pass"
+    context = {'overlap': overlap}
     return JsonResponse(context)
 
-#비밀번호 찾기 메소드-form 이용
+# 비밀번호 찾기 메소드-form 이용
+
+
 def findpw(request: HttpRequest, *args, **kwargs):
     if Users.objects.filter(email_address=request.POST['find_pw_email']).exists():
-            messages.error(request, '해당 이메일로 비밀번호 재설정 링크를 보냈습니다. ')
-    else: 
-            messages.error(request, '가입 이력이 존재하지 않는 이메일 입니다.')
-    
+        messages.error(request, '해당 이메일로 비밀번호 재설정 링크를 보냈습니다. ')
+    else:
+        messages.error(request, '가입 이력이 존재하지 않는 이메일 입니다.')
+
     return redirect('User:find_pw')
 
 
@@ -123,7 +136,7 @@ def findpw_page(request, *args, **kwargs):
 
 
 # 아이디 검증 메소드
-def validate_username(username):  
+def validate_username(username):
     validate_condition = [
         lambda s: all(x.islower() or x.isdigit() for x in s),  # 영문자, 숫자 허용
         lambda s: any(x.islower() for x in s),  # 영어 소문자는 필수
@@ -138,7 +151,7 @@ def validate_username(username):
 
 
 # 비밀번호 검증 메소드
-def validate_password(password):  
+def validate_password(password):
     validate_condition = [
         lambda s: all(x.islower() or x.isupper() or x.isdigit() or (x in [
                       '!', '@', '#', '$', '%', '^', '&', '*', '_']) for x in s),  # 영문자 대소문자, 숫자, 특수문자(리스트)만 허용
@@ -210,12 +223,17 @@ def sign_up(request: HttpRequest, *args, **kwargs):
 
     if request.method == "POST":
         form = SignupForm(request.POST)
+
         if validate_email(request.POST['email_address']) == False:
             messages.error(request, '올바른 학교 이메일 형식을 입력해주세요.')
             return redirect('User:sign_up')
 
         if Users.objects.filter(username=request.POST['username']).exists():
             messages.error(request, '이미 사용 중인 아이디입니다.')
+            return redirect('User:sign_up')
+
+        if Users.objects.filter(username=request.POST['email_address']).exists():
+            messages.error(request, '이미 사용 중인 이메일입니다.')
             return redirect('User:sign_up')
 
         if validate_username(request.POST['username']):
@@ -230,6 +248,21 @@ def sign_up(request: HttpRequest, *args, **kwargs):
         if validate_password(request.POST['password1']):
             messages.error(
                 request, '올바른 비밀번호 형식을 입력해주세요. (영문 대소문자, 숫자, 특수문자 일부 허용)')
+            return redirect('User:sign_up')
+
+        if len(request.POST.getlist('agree1')) == 0:
+            messages.error(
+                request, '이용 약관에 동의해주세요.')
+            return redirect('User:sign_up')
+
+        if len(request.POST.getlist('agree2')) == 0:
+            messages.error(
+                request, '개인정보 수집 및 이용에 동의해주세요.')
+            return redirect('User:sign_up')
+
+        if len(request.POST.getlist('agree3')) == 0:
+            messages.error(
+                request, '위치 기반 서비스 이용약관에 동의해주세요.')
             return redirect('User:sign_up')
 
         if form.is_valid():
@@ -270,6 +303,28 @@ def verify_email(request, form, *args, **kwargs):
         }),
     )
 
+# 인증 메일 전송(추후 로그인 과정 시)
+
+
+def verify_email_later(request, user_name, user_email, *args, **kwargs):
+    object = Users.objects.get(username=user_name)
+    print(object)
+    print(' ------------------ SEND THE EMAIL!..')
+
+    print(f'object.username is {object.username}')
+    print(f'object.email is {object.email_address}')
+
+    send_mail(
+        '{}님의 회원가입 인증메일 입니다.'.format(user_name),
+        [user_email],
+        html=render_to_string('register_email.html', {
+            'user': object,
+            'uid': urlsafe_base64_encode(force_bytes(object.pk)).encode().decode(),
+            'domain': request.META['HTTP_HOST'],
+            'token': default_token_generator.make_token(object),
+        }),
+    )
+
 
 # 계정 활성화
 def activate(request, uid64, token):
@@ -297,5 +352,3 @@ def activate(request, uid64, token):
 def mail_notice(request):
 
     return render(request, 'send_mail.html')
-
-

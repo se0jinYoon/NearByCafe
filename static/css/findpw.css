@@ -1,7 +1,7 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
-.notosanskr * { 
- font-family: 'Noto Sans KR', sans-serif;
+.notosanskr * {
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 * {
@@ -12,7 +12,7 @@
 .overlay {
     width: 100vw;
     height: 100vh;
-    position: absolute; 
+    position: absolute;
     opacity: 0.5;
     z-index: -1;
     background-color: #F8F4E9;
@@ -21,12 +21,12 @@
 body {
     height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center;
+    align-items: center; */
 }
 
-.shadow{
-    box-shadow: 0 5px 18px -7px rgba(0,0,0,1);
+.shadow {
+    box-shadow: 0 5px 18px -7px rgba(0, 0, 0, 1);
 }
 
 .find_pw_container {
@@ -53,7 +53,7 @@ body {
     margin-top: 48px;
     margin-bottom: 86px;
     padding-left: 40px;
-    
+
 }
 
 .findpw_btn {
@@ -73,7 +73,7 @@ body {
 
 }
 
-.modal-dialog{
+.modal-dialog {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -98,8 +98,8 @@ body {
 }
 
 .close-btn {
-    background-color: #DF4629; 
-    color: white; 
+    background-color: #DF4629;
+    color: white;
     border-radius: 10px;
     width: 138px;
     height: 48px;
