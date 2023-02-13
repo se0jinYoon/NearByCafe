@@ -99,23 +99,12 @@
                 >
             </div>
 
-            <!-- 백앤드 form.py 부분, 아래 button태그 부분 을 form태그 밖으로 빼야되나? -->
-            <!--  {% if messages %}
-                  <ul class="messages">
-                  {% for message in messages %}
-                  <li {% if message.tags %} class="{{ message.tags }}"{% endif %} id="signup-error"> {{ message }}</li>
-                  {% endfor %}
-                  </ul>
-                  {% endif %} -->
-
             <button id="signup_btn" type="submit" onclick="" data-bs-toggle="modal" data-bs-target="#howorder">다음</button>
-            <!--onclick에 뭐 들어가야될 거 같음-->
         </form>
     </div>
 
     {% if messages %}
     <div class="modal fade" id="howorder">
-        <!--분기처리 어케 해야될지 모르겠음-->
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header"></div>

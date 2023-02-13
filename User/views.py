@@ -1,21 +1,19 @@
 
-from django.shortcuts import render,redirect
-from User.models import *
+
 from django.contrib import auth
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
-from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.tokens import default_token_generator
 from django.template.loader import render_to_string
 from django.shortcuts import redirect, render
 from django.http.request import HttpRequest
+
 from User.models import Users, School
+from User.models import *
 from User.forms import SignupForm
 from django.contrib import auth
 from django.contrib import messages
-from django.shortcuts import render
-from .models import Users
-import json
+
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from User.email_helper import send_mail
@@ -23,8 +21,12 @@ from django.forms import ValidationError
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
+import json
 import re
 import random
+
+
+# 로그인 페이지
 @csrf_exempt
 def login_page(request):
     
@@ -54,14 +56,17 @@ def login_page(request):
             
         }     
         return render(request, 'login.html',context)
+
+
+
+# 로그아웃 페이지
 def logout(request):
     if request.method == 'POST':
         auth_logout(request)
         return redirect('/')
 
-# 메일 인증 관련 import
 
-
+# 비밀번호 찾기 메소드
 @csrf_exempt
 def find_pw2(request):
     req=json.loads(request.body)
@@ -78,7 +83,9 @@ def find_pw2(request):
     finally:
         context={{"findOrNot":findOrNot, "find_email":find_email}}
         return JsonResponse(context)
-    
+
+
+# 비밀번호 찾기 메소드
 @csrf_exempt    
 def find_pw(request):
     find_email=request.GET.get('find_email')
@@ -94,19 +101,15 @@ def find_pw(request):
     context={'overlap':overlap}
     return JsonResponse(context)
 
-def findpw_page(request, *args, **kwargs):
 
+# 비밀번호 찾기 메인 페이지
+def findpw_page(request, *args, **kwargs):
     context = {}
     return render(request, "findpw.html", context=context)
 
 
-
-
-
-
-
-
-def validate_username(username):  # 아이디 검증 메소드
+# 아이디 검증 메소드
+def validate_username(username):  
     validate_condition = [
         lambda s: all(x.islower() or x.isdigit() for x in s),  # 영문자, 숫자 허용
         lambda s: any(x.islower() for x in s),  # 영어 소문자는 필수
@@ -120,7 +123,8 @@ def validate_username(username):  # 아이디 검증 메소드
             return True
 
 
-def validate_password(password):  # 비밀번호 검증 메소드
+# 비밀번호 검증 메소드
+def validate_password(password):  
     validate_condition = [
         lambda s: all(x.islower() or x.isupper() or x.isdigit() or (x in [
                       '!', '@', '#', '$', '%', '^', '&', '*', '_']) for x in s),  # 영문자 대소문자, 숫자, 특수문자(리스트)만 허용
@@ -135,6 +139,7 @@ def validate_password(password):  # 비밀번호 검증 메소드
             return True
 
 
+# 이메일 검증 메소드
 def validate_email(email):
     pattern = re.compile(r'@([\w.]+)')
     match = pattern.search(email)
@@ -173,6 +178,7 @@ def validate_email(email):
         return False
 
 
+# 닉네임 랜덤 생성 메소드
 def make_random_nickname():
     seed1 = ['차가운', '따뜻한', '산뜻한', '다정한', '아늑한',
              '열정적인', '멋있는', '아름다운', '사랑스러운', '자신있는']
@@ -185,6 +191,7 @@ def make_random_nickname():
     return rand1+rand2+rand3
 
 
+# 회원 가입
 def sign_up(request: HttpRequest, *args, **kwargs):
 
     if request.method == "POST":
@@ -249,9 +256,8 @@ def verify_email(request, form, *args, **kwargs):
         }),
     )
 
+
 # 계정 활성화
-
-
 def activate(request, uid64, token):
     try:
         uid = force_str(urlsafe_base64_decode(uid64))
@@ -273,6 +279,7 @@ def activate(request, uid64, token):
     return redirect('Cafe:main')
 
 
+# 안내 메일 페이지
 def mail_notice(request):
 
     return render(request, 'send_mail.html')
