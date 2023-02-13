@@ -1,4 +1,3 @@
-
 const strip = (string) => {
     return string.replace(/^\s+|\s+$/g, "");
 };
@@ -17,20 +16,19 @@ const strip = (string) => {
 //     requestFindPw.send(JSON.stringify({find_email:find_email}));
 // };
 
-
 // requestFindPw.onreadystatechange=()=>{
 //     if(requestFindPw.readyState==XMLHttpRequest.DONE){
 //         if(requestCommentCreate.status<400){
 //             const {findOrNot,find_email}=Json.parse(requestFindPw.response);
-            
+
 //             if (findOrNot==True){//일치하는 pw찾았을때, 비밀번호 재설정 링크 안내 모달
 //                 var modal=document.getElementById('reset_link_modal')// ! 재설정 모달로 지정
-//             } 
-               
+//             }
+
 //             else{//일치하는 pw 없을때
 //                 var modal=document.getElementById('no_email_modal')  //일치 이메일 없음 안내 모달
 //             }
-                
+
 //             $('#modal').modal("show");
 
 //     }
@@ -38,24 +36,23 @@ const strip = (string) => {
 // }
 
 //방법2
-if ($('.findpw_input'));
-find_email=document.querySelector('.findpw_input');
+// if ($(".findpw_input"));
+find_email = document.querySelector(".findpw_input");
 
 $.ajax({
-    url:"{% url 'User:find_pw' %}",
-    data:{
-        'find_email':find_email.value
+    url: "{% url 'User:find_pw' %}",
+    data: {
+        find_email: find_email.value,
     },
-    datatype:'json',
-    success:function(data){
-        if(data['overlap']=="fail"){
+    datatype: "json",
+    success: function (data) {
+        if (data["overlap"] == "fail") {
             //일치 이메일 없음 안내 모달 띄우기
-            var modal=document.getElementById('reset_link_modal')// ! 재설정 모달로 지정
+            var modal = document.getElementById("no_email_modal"); //일치 이메일 없음 안내 모달
+        } else {
+            //비번 재설정 안내 모달
+            var modal = document.getElementById("reset_link_modal"); // ! 재설정 모달로 지정
         }
-        else{//비번 재설정 안내 모달
-            var modal=document.getElementById('no_email_modal')  //일치 이메일 없음 안내 모달
-
-        }
-        $('#modal').modal("show");
-    }
-})
+        $("#modal").modal("show");
+    },
+});

@@ -1,28 +1,31 @@
-{% include 'nav.html' %}
-{% block content %}
-
+{% extends 'nav.html' %} {% block content %} {% load static %}
 <main id="login">
     <div class="login_container">
-        <div class="logo"> <img src="/static/image/logo.png" class="nav_logo" alt="logo"/> 로그인</div> <!--로고 넣는 거 어떤가요-->
-        <form action="/User/login/" method="POST">
+        <div class="logo"><img src="/static/image/logo.png" class="nav_logo" alt="logo" /> 로그인</div>
+        <!--로고 넣는 거 어떤가요-->
+        <form action="" method="POST">
             {% csrf_token %}
             <div class="id_box">
                 <p class="box_name">아이디</p>
                 <input class="shadow" type="text" name="users_id" />
-                </br>
-                <span>아이디 저장 <input class="checkbox shadow" type="checkbox" name="isidstorage" value="1"/></span> <!--체크박스 체크하면 값 1 넘겨줌/ 추후 논의해야될듯-->
+                <br />
+                <span>아이디 저장 <input class="checkbox shadow" type="checkbox" name="isidstorage" value="1" /></span>
+                <!--체크박스 체크하면 값 1 넘겨줌/ 추후 논의해야될듯-->
             </div>
             <div class="pw_box">
                 <p class="box_name">비밀번호</p>
-                <input class="shadow" type="text" name="password"/>
+                <input class="shadow" type="password" name="password" />
             </div>
-            <button id="login_btn" type="submit" onclick="" data-bs-toggle="modal" data-bs-target="#wrong_infromation">로그인</button> <!--onclick에 뭐 들어가야될 거 같음-->
+            <button id="login_btn" type="submit" onclick="" data-bs-toggle="modal" data-bs-target="#wrong_infromation">로그인</button>
+            <!--onclick에 뭐 들어가야될 거 같음-->
             <div class="login_submenu">
-                <a href="">회원가입&nbsp;</a> <!--href부분에 url삽입-->
+                <a href="">회원가입&nbsp;</a>
+                <!--href부분에 url삽입-->
                 <span class="submenu_bar">|</span>
-                <a href="">&nbsp;비밀번호 찾기</a> <!--href부분에 url삽입-->
+                <a href="">&nbsp;비밀번호 찾기</a>
+                <!--href부분에 url삽입-->
             </div>
-        </form> 
+        </form>
     </div>
 </main>
 
@@ -36,13 +39,15 @@
                 <span class="modal_text1">아이디 또는 비밀번호를 잘못 입력 했습니다.</span>
             </div>
             <div class="modal-footer">
-                <button type="button" class="close-btn" data-bs-dismiss="modal">
-                    확인
-                </button>
+                <button type="button" class="close-btn" data-bs-dismiss="modal">확인</button>
             </div>
         </div>
     </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</div>
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"
+></script>
 <script src="/static/js/login.js"></script>
 {% endblock %}

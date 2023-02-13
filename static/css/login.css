@@ -1,19 +1,19 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
-.notosanskr * { 
- font-family: 'Noto Sans KR', sans-serif;
+.notosanskr * {
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 * {
     font-family: 'Noto Sans KR';
     box-sizing: border-box;
-    background-color: #F8F4E9;
-}
-.shadow{
-    box-shadow: 0 5px 18px -7px rgba(0,0,0,1);
 }
 
-#login{
+.shadow {
+    box-shadow: 0 5px 18px -7px rgba(0, 0, 0, 1);
+}
+
+#login {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,44 +22,55 @@
     max-width: 1440px;
     height: 300px;
 }
+
 /* .login_container{ 
     text-align: center;
     justify-content: center;
     align-items: center;
 } */
-.box_name{
+.box_name {
     font-size: 20px;
 }
-.logo{
-     text-align: center;
+
+.logo {
+    text-align: center;
     width: 100%;
     height: 70px;
 }
-.id_box{
+
+.id_box {
     width: 100%;
     height: 70px;
     margin-bottom: 40px;
 }
-.id_box > span{
+
+.id_box>span {
     display: flex;
     justify-content: end;
 }
-.id_box .checkbox{
+
+.id_box .checkbox {
     accent-color: #DF4629;
 }
-.pw_box{
+
+.pw_box {
     width: 100%;
     height: 70px;
     margin-bottom: 80px;
 }
-.id_box > input,.pw_box > input{
+
+.id_box>input,
+.pw_box>input {
     width: 300px;
     height: 48px;
 }
-#login_btn{
-    width: 278px; /*피그마에선 278px*/
+
+#login_btn {
+    width: 278px;
+    /*피그마에선 278px*/
     height: 70px;
-    border-radius: 30px;  /*rem으로 나중에 바꿔야할듯*/
+    border-radius: 30px;
+    /*rem으로 나중에 바꿔야할듯*/
     background-color: #DF4629;
     color: #fff;
     font-size: 28px;
@@ -67,17 +78,19 @@
     font-weight: bold;
 }
 
-.login_submenu{
+.login_submenu {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.login_submenu > a{
+
+.login_submenu>a {
     text-decoration-line: none;
-    color:#A3A3A3;
+    color: #A3A3A3;
 }
-.submenu_bar{
-    color:#A3A3A3;
+
+.submenu_bar {
+    color: #A3A3A3;
 }
 
 /* 모달 css - 창진버전 */
@@ -85,26 +98,32 @@
     width: 520px;
     height: 240px;
 }
-.modal-dialog{
+
+.modal-dialog {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .modal-header {
     border-bottom: 0 none;
 }
+
 .modal-footer {
     display: flex;
     justify-content: center;
     border-top: 0 none;
 }
+
 .modal-body {
     text-align: center;
-    
+
 }
+
 .modal_text1 {
     font-size: 20px;
 }
+
 .close-btn {
     background-color: #DF4629;
     color: white;
