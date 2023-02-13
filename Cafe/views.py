@@ -26,21 +26,26 @@ def main_page(request, *args, **kwargs):
     context = {}
     return render(request, "mainpage.html", context=context)
 
+
+
+
 def find_cafe(request, *args, **kwargs):
-    Location_list = dict(Location.Locations)
-    Location_keys = tuple(Location_list.keys())   #['서울전체', '왕십리',]
-    keys_left = tuple(Location_keys[0:12])
-    keys_right = tuple(Location_keys[12:])
-    Location_list_left = { i : Location_list[i] for i in keys_left}
-    Location_list_right = { i : Location_list[i] for i in keys_right}
-    # for keyL in keys_left:
-    #     Location_list_left = dict(Location_list[keyL])
-    # for keyR in keys_right:
-    #     Loation_list_right = dict(Location_list[keyR])
+    location_list = list(Location.Locations)
+    pre_location_list_left = location_list[0:12]
+    pre_location_list_right = location_list[12:]
+
+    location_list_left = []
+    location_list_right = []
+
+    for i in range(len(pre_location_list_left)) :
+        location_list_left.append(pre_location_list_left[i][0])
+
+    for i in range(len(pre_location_list_right)) :
+        location_list_right.append(pre_location_list_right[i][0])
 
     context = {
-        "location_list_left": Location_list_left,
-        "location_list_right": Location_list_right
+        "location_list_left" : location_list_left,
+        "location_list_right" : location_list_right,
     }
     return render(request,"find_cafe.html", context=context)
 

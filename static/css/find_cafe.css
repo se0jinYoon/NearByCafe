@@ -56,6 +56,20 @@ body {
     background-color: transparent;
 }
 
+.selected_location_cat {
+    border: none;
+    width: 160px;
+    height: 32px;
+    background-color: #728137;
+    cursor: default;
+}
+
+input::placeholder{
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+}
+
 .location_list {
     background-color: white;
     border: 1px solid #B1B1B1;
@@ -214,4 +228,14 @@ body {
 #map {
     width:100%;
     height:942px;
+}
+
+.dropdown_location_list {
+    top:200px;
+    position: absolute;
+    z-index: 999;
+}
+
+.display_none {
+    display: none;
 }

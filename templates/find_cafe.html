@@ -1,29 +1,21 @@
-{% include 'nav.html' %}
+{% extends 'nav.html' %}
 {% block content %}
-<!-- <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>findCafe</title>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=91d2e9aa375c6586364b537512d39938"></script>
-</head> -->
-<!-- <div class="overlay"></div> -->
+
 <div class="container1 d-flex">
     <div class="left_container">
         <div class="location_container d-flex flex-column">
             <div class="location_text fw-bold">지역 설정</div>
-            <input class="selected_location" 
+
+            <button class="selected_location" onClick="onClickLocationButton()" >
+                <input class="selected_location_cat" 
                 type="text" 
                 name="location" 
                 readonly onfocus="this.blur();" 
                 placeholder="선택한 지역 띄우기!" 
                 /> <!-- onclick main_page랑 같은 거 같은데 모르겠어유..-->
-        </div>
-<!-- 
-        {% for location in location_list %}
-            <div>{{location}}</div> 
-        {% endfor %} -->
-
+            </button>
+        
+        <div class="dropdown_location_list">
         <div class="location_list d-flex flex-column shadow">
             <div class="loc-text1">검색할 위치를 선택해주세요.</div>
             <div class="d-flex flex-row ">
@@ -39,10 +31,11 @@
                     <div class="loc1 d-flex flex-row align-center"><button class="loc_btn" onclick="onClickLocationList({{location}})"> <span class="loc_list">{{location}}</span></button></div>
                 {% endfor %}
                 </div>
-            
             </div>
         </div>
-        
+        </div>
+
+        </div>
 
         <div class="keyword_container">
             <div class="keyword_text1 fw-bold">키워드 설정</div>
@@ -159,7 +152,26 @@
 </div>
 
 <!-- <script src="/static/js/keyword.js"></script> -->
-<script src="/static/js/find_cafe.js"></script>
+<!-- <script src="/static/js/find_cafe.js"></script> -->
+
+<script>
+
+    const dropdown_menu = document.querySelector(".dropdown_location_list");
+
+    var clicked_state = 0;
+    function onClickLocationButton(){
+        if (clicked_state === 0){
+            dropdown_menu.classList.add("display_none");
+            clicked_state = 1;
+        }
+        else {
+            dropdown_menu.classList.remove("display_none");
+            clicked_state = 0;
+            
+        }
+    }
+
+</script>
 
 <script>
     var container = document.getElementById('map');

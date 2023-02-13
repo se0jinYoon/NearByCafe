@@ -18,13 +18,9 @@ const onClickLocationList = async (location) => {
     console.log(latitude,longtitude,cafes);
     cafeHandleResponse(cafes);
     panTo(latitude,longtitude);
-    
-
-    
-
-  
 
 }
+
 
 const cafeHandleResponse = (cafes) => {
     var element = document.querySelector(".cafe_list");
