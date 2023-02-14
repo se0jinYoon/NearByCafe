@@ -1,4 +1,4 @@
-{% block content %} {% load static %}
+{% extends 'nav.html' %} {% block content %} {% load static %}
 <div class="overlay_cj"></div>
 <main id="signup">
     <div class="signup_container">
@@ -80,8 +80,8 @@
                 >
             </div>
 
-            <div class="terms_box">
-                <!--위치 기반 서비스 이용약관 동의-->
+            <!-- <div class="terms_box">
+                위치 기반 서비스 이용약관 동의
                 <p class="box_name"><input class="checkbox shadow" type="checkbox" name="agree3" />위치 기반 서비스 이용약관 동의</p>
                 <textarea name="" id="" readonly="readonly" cols="60" rows="16">
                 Gorem ipsum dolor sit amet, consectetur 
@@ -97,7 +97,7 @@
                   Quisque mauris dolor, fringilla sed tincidunt ac, finibus non odio. Sed vitae mauris nec ante pretium finibus. Donec nisl neque, pharetra ac elit eu, faucibus aliquam ligula. Nullam dictum, tellus tincidunt tempor laoreet, nibh elit sollicitudin felis, eget feugiat sapien diam nec nisl. Aenean gravida turpis nisi, consequat dictum risus dapibus a. Duis felis ante, varius in neque eu, tempor suscipit sem. Maecenas ullamcorper gravida se.
               </textarea
                 >
-            </div>
+            </div> -->
 
             <button id="signup_btn" type="submit" onclick="" data-bs-toggle="modal" data-bs-target="#howorder">다음</button>
         </form>
