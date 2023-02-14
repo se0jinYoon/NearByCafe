@@ -5,22 +5,15 @@
 <small>{{review_cnt}}명의 평가</small>
 
 
-{% comment %} 로그인한 사용자{% endcomment %}
-
-<div class onclick="onClickLike({{cafe.id}})">좋아요</div>
 {% if request.user.is_authenticated %}
-    onClickLike({{cafe.id}})
+<div class onclick="onClickLike({{cafe.id}})">좋아요</div>
+<a href=""> 
+
 {% else %}
-    {% comment %} <p>User is not logged in :(</p> {% endcomment %}
+    
 {% endif %}
 
 <small>{{cafe.average_star}}점</small>
-
-{% if request.user.is_authenticated %}
-    리뷰하기->href로 리뷰 등록 연결
-{% else %}
-    '리뷰작성은 로그인 후에 띄어주세요' 모달 띄어주세요~
-{% endif %}
 
 <small>주소:{{cafe.address}}</small>
 <small>전화번호:{{cafe.number}}</small>

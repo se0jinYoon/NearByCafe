@@ -3,7 +3,7 @@ from Cafe.models import *
 from django.http.request import HttpRequest
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-import json
+import json,math
 
 @csrf_exempt
 def main_keyword_list(request, *args, **kwargs):
@@ -20,6 +20,7 @@ def main_page(request, *args, **kwargs):
     return render(request, "mainpage.html", context=context)
 
 #q.여기서 우리가 클릭한 카페 id를 보내줘야하는데 js로 html에 바로 구겨넣었는데 그거 어케하지?
+# 카페 찾기(지도)랑 연결 후 수정
 def cafe_detail(request,pk,*args,**kwargs):
     cafe=Cafe.objects.get(id=pk)
     
@@ -37,6 +38,8 @@ def cafe_detail(request,pk,*args,**kwargs):
     
     average_star=sum_star/review_cnt
     
+    r_average_star=round(average_star)
+    
     cafe.average_star=average_star
     cafe.save()
     
@@ -44,10 +47,11 @@ def cafe_detail(request,pk,*args,**kwargs):
         "cafe":cafe,
         "review_cnt":review_cnt,
         "all_review":all_review,
+        "r_average_start":r_average_star,
            
     }
     
-    return render(request,"cafe_detail.html",context=context)
+    return render(request,"cafe_detail_cj.html",context=context)
 
 @csrf_exempt
 def cafe_like(request):
@@ -59,8 +63,8 @@ def cafe_like(request):
     #좋아요 누름
     if clicked== True:
         CafeLike.objects.create(
-            cafe_id=cafe
-            #! user_id=user 여기는 user랑 합친후에 수정
+            cafe_id=cafe,
+            user_id=request.user,
         )
         
     else:#취소 누름

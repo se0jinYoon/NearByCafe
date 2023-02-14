@@ -18,24 +18,16 @@ const onClickLike=async(id)=>{
         id,clicked
     });
 
-    likeHandleResponse(data.id,data.clicked);
-    //한번 더 눌렀을땐 취소인거 추가~
-
+    likeHandleResponse(data.clicked);
 }
 
-const likeHandleResponse=(id,clicked)=>{
-    //좋아요 누른 경우
+const likeHandleResponse=(clicked)=>{
+    var element=document.querySelector('.review_like');
     if(clicked=true){
-    //좋아요 색 채워지는 html 추가해주세요!-to 프론트
-
+        element.innerHTML=`♥좋아요`;
     }
     else{
-    //한번 더 눌러서 좋아요 취소되는거라 하트색 다시 없어지는 html 추가해주세요~
+        element.innerHTML=`♡좋아요`;
     }
     
-}
-
-const onClickLikeNotLogin=()=>{
-    const url="/like_denied/"
-    //모달 보내는 요청만 보내기
-}
+};
