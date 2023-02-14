@@ -79,26 +79,27 @@ def logout(request):
         return redirect('/')
 
 
-#비밀번호 찾기 메소드-form 이용
-def findpw(request:HttpRequest, *args, **kwargs):
-    context={}
+# 비밀번호 찾기 메소드-form 이용
+def findpw(request: HttpRequest, *args, **kwargs):
+    context = {}
     if request.method == "POST":
         if Users.objects.filter(email_address=request.POST['find_pw_email']).exists():
-            user=Users.objects.get(email_address=request.POST['find_pw_email'])
+            user = Users.objects.get(
+                email_address=request.POST['find_pw_email'])
             print(user)
-            name=user.username
-            email=user.email_address
-            
+            name = user.username
+            email = user.email_address
+
             messages.error(request, '해당 이메일로 비밀번호 재설정 링크를 보냈습니다. ')
-            verify_email_later(request,name,email)
-            
+            verify_email_later(request, name, email)
+
             return redirect('User:findpw')
-        else: 
+        else:
             messages.error(request, '가입 이력이 존재하지 않는 이메일 입니다.')
             return redirect('User:findpw')
-    
-    return render(request,'findpw.html',context=context)
-    
+
+    return render(request, 'findpw.html', context=context)
+
 
 # 아이디 검증 메소드
 def validate_username(username):
@@ -225,10 +226,10 @@ def sign_up(request: HttpRequest, *args, **kwargs):
                 request, '개인정보 수집 및 이용에 동의해주세요.')
             return redirect('User:sign_up')
 
-        if len(request.POST.getlist('agree3')) == 0:
-            messages.error(
-                request, '위치 기반 서비스 이용약관에 동의해주세요.')
-            return redirect('User:sign_up')
+        # if len(request.POST.getlist('agree3')) == 0:
+        #     messages.error(
+        #         request, '위치 기반 서비스 이용약관에 동의해주세요.')
+        #     return redirect('User:sign_up')
 
         if form.is_valid():
             user = form.save()
@@ -269,6 +270,7 @@ def verify_email(request, form, *args, **kwargs):
     )
 
 # 인증 메일 전송(추후 로그인 과정 시)
+
 
 def verify_email_later(request, user_name, user_email, *args, **kwargs):
     object = Users.objects.get(username=user_name)

@@ -1,4 +1,4 @@
-{% block content %} {% load static %}
+{% extends 'nav.html' %} {% block content %} {% load static %}
 <div class="overlay_cj"></div>
 <main id="signup">
     <div class="signup_container">
@@ -32,7 +32,7 @@
             <div class="email_box">
                 <p class="box_name">학교 이메일</p>
                 <!--{{ form.email_address }}-->
-                <input class="shadow" type="email" name="email_address" placeholder="nearbycafe@exmaple.com" />
+                <input class="shadow" type="email" name="email_address" placeholder="    nearbycafe@exmaple.com" />
             </div>
 
             <div class="username_box">
@@ -76,27 +76,7 @@
                   id condimentum diam faucibus at. Aliquam lacus nisi, 
                   sollicitudin at nisi nec, fermentum congue felis. 
                   Quisque mauris dolor, fringilla sed tincidunt ac, finibus non odio. Sed vitae mauris nec ante pretium finibus. Donec nisl neque, pharetra ac elit eu, faucibus aliquam ligula. Nullam dictum, tellus tincidunt tempor laoreet, nibh elit sollicitudin felis, eget feugiat sapien diam nec nisl. Aenean gravida turpis nisi, consequat dictum risus dapibus a. Duis felis ante, varius in neque eu, tempor suscipit sem. Maecenas ullamcorper gravida se.
-              </textarea
-                >
-            </div>
-
-            <div class="terms_box">
-                <!--위치 기반 서비스 이용약관 동의-->
-                <p class="box_name"><input class="checkbox shadow" type="checkbox" name="agree3" />위치 기반 서비스 이용약관 동의</p>
-                <textarea name="" id="" readonly="readonly" cols="60" rows="16">
-                Gorem ipsum dolor sit amet, consectetur 
-                  adipiscing elit. Etiam eu turpis molestie, dictu
-                  m est a, mattis tellus. Sed dignissim, metus nec 
-                  fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi convallis convallis diam sit amet lacinia.
-                   Aliquam in elementum tellus.
-                  Curabitur tempor quis eros tempus lacinia. Nam bibendum pellentesque quam a convallis. Sed ut vulputate nisi. Integer in felis sed leo vestibulum venenatis. Suspendisse quis arcu sem. Aenean feugiat ex eu vestibulum vestibulum. Morbi a eleifend magna. Nam metus lacus, porttitor eu mauris a, blandit ultrices nibh. Mauris sit amet magna non ligula vestibulum eleifend. Nulla varius volutpat turpis sed lacinia. Nam eget mi in purus lobortis eleifend. Sed nec ante dictum sem condimentum ullamcorper quis venenatis nisi.
-                   Proin vitae facilisis nisi, ac posuere leo.
-                  Nam pulvinar blandit velit, 
-                  id condimentum diam faucibus at. Aliquam lacus nisi, 
-                  sollicitudin at nisi nec, fermentum congue felis. 
-                  Quisque mauris dolor, fringilla sed tincidunt ac, finibus non odio. Sed vitae mauris nec ante pretium finibus. Donec nisl neque, pharetra ac elit eu, faucibus aliquam ligula. Nullam dictum, tellus tincidunt tempor laoreet, nibh elit sollicitudin felis, eget feugiat sapien diam nec nisl. Aenean gravida turpis nisi, consequat dictum risus dapibus a. Duis felis ante, varius in neque eu, tempor suscipit sem. Maecenas ullamcorper gravida se.
-              </textarea
-                >
+              </textarea>
             </div>
 
             <button id="signup_btn" type="submit" onclick="" data-bs-toggle="modal" data-bs-target="#howorder">다음</button>

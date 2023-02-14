@@ -38,29 +38,29 @@
     height: 70px;
 }
 
-.id_box {
+.login_id_box {
     width: 100%;
     height: 70px;
     margin-bottom: 40px;
 }
 
-.id_box>span {
+.login_id_box>span {
     display: flex;
     justify-content: end;
 }
 
-.id_box .checkbox {
+.login_id_box .checkbox {
     accent-color: #DF4629;
 }
 
-.pw_box {
+.login_pw_box {
     width: 100%;
     height: 70px;
     margin-bottom: 80px;
 }
 
-.id_box>input,
-.pw_box>input {
+.login_id_box>input,
+.login_pw_box>input {
     width: 300px;
     height: 48px;
 }
