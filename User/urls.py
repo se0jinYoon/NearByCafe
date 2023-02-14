@@ -12,8 +12,7 @@ urlpatterns = [
     path('sendmail/<str:user_name>/<str:user_email>/',
          views.mail_notice, name='mail_notice'),
     path('activate/<str:uid64>/<str:token>/', views.activate, name='activate'),
-
     path('withdrawal/', views.delete_user, name='withdrawal')
-    
+    path('profile', views.profile ,name='profile') 
 ]
 

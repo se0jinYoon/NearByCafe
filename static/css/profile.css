@@ -1,0 +1,119 @@
+/* @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+.notosanskr * { 
+ font-family: 'Noto Sans KR', sans-serif;
+} */
+
+/* * {
+    font-family: 'Noto Sans KR';
+    box-sizing: border-box;
+} */
+
+.overlay {
+    width: 100vw;
+    height: 100vh;
+    position: absolute; 
+    opacity: 0.5;
+    z-index: -2;
+    background-color: #F8F4E9;
+}
+
+.contain_all {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0;
+
+}
+
+.profile_container {
+    width: 320px;
+    height: 250px;
+    background-color: white;
+    border-radius: 20px;
+    border: 1px solid #B1B1B1;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.profile_info_container {
+    width: 320px;
+    height: 250px;
+    background-color: white;
+    border-radius: 20px;
+    border: 1px solid #B1B1B1;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.nickname_container{
+    margin-bottom: 20px;
+}
+
+.email_container, .nickname_container {
+    height: 36px;
+}
+
+.email_container {
+    margin-top: 24px;
+    margin-bottom: 36px;
+}
+
+.nickname_container {
+    margin-bottom: 52px;
+}
+
+.email_text, .nickname_text {
+    font-size: 16px;
+    color: #9F9F9F;
+}
+
+.nickname {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+}
+
+.account {
+    margin-bottom: 16px;
+    font-size: 22px;
+}
+
+.small_text {
+    font-size: 11px;
+    color: #9F9F9F;
+    position: absolute;
+    top: 23px;
+}
+
+.email_address, .nickname {
+    font-size: 16px;
+    margin-left: 28px;
+}
+
+.btn_1, .btn_2 {
+    width: 120px;
+    height: 40px;
+    background-color: #F3F0E7;
+    border-radius: 10px;
+    border: none;
+}
+
+.btn_1 {
+    margin-right: 40px;
+    background-color: #DF4629 !important;
+}
+
+.text1 {
+    color: white !important;
+}
+
+.btn_container a {
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+}

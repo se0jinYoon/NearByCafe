@@ -1,0 +1,36 @@
+{% extends 'nav.html' %}
+{% block content %}
+
+
+
+<div class="overlay"></div>
+<div class="contain_all d-flex flex-column justify-content-center align-items-center">
+    <div class="account fw-bold">계정 정보</div>
+
+    <div class="profile_info_container d-flex flex-column">
+        <div class="email_container d-flex">
+            <span class="email_text">이메일</span>
+            <span class="email_address">{{email_address}}</span>
+        </div>
+
+        <div class="nickname_container d-flex">
+            <span class="nickname_text">닉네임</span>
+            <span class="nickname">{{nickname}}<br> <span class="small_text">닉네임은 랜덤으로 지정됩니다.</span></span> <!--뷰에서 받아온 값으로 변경 필요-->          
+        </div>
+
+        <div class="btn_container d-flex">
+            <button class="shadow btn_1">
+                <a class="text1">비밀번호 변경</a>
+            </button>
+
+            <button class="shadow btn_2">
+                <a class="text2">탈퇴하기</a>
+            </button>
+        </div>
+
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+{% endblock %}
