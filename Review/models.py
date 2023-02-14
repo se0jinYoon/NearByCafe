@@ -2,17 +2,7 @@ from django.db import models
 from User.models import Users
 from Cafe.models import Cafe
 from multiselectfield import MultiSelectField
-
-class Review(models.Model):
-    time = models.DateTimeField(auto_now_add=True)
-    title = models.CharField(max_length=80)
-    content = models.CharField(max_length=1000)
-    image = models.ImageField(blank=True, upload_to='review_images/%Y%m%d')
-    star = models.IntegerField()
-    mark = models.BooleanField()
-    #created_at = models.DateTimeField(auto_now_add=True)
-    
-    CAFE_KEYWORDS=[
+CAFE_KEYWORDS=[
         ('데이트','데이트'),
         ('작업하기 좋은','작업하기 좋은'),
         ('공부하기 좋은','공부하기 좋은'),
@@ -29,6 +19,17 @@ class Review(models.Model):
         ('화장실 깨끗한','화장실 깨끗한'),
         ('인테리어 예쁜','인테리어 예쁜'),  
         ]
+
+class Review(models.Model):
+    time = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=80)
+    content = models.CharField(max_length=1000)
+    image = models.ImageField(blank=True, upload_to='review_images/%Y%m%d')
+    star = models.IntegerField()
+    mark = models.BooleanField()
+    #created_at = models.DateTimeField(auto_now_add=True)
+    
+    
     keywords = MultiSelectField(max_length=40,choices=CAFE_KEYWORDS,max_choices=3)
     
 

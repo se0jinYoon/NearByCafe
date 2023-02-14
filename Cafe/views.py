@@ -4,6 +4,7 @@ from django.http.request import HttpRequest
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json,math
+from Review.models import *
 
 @csrf_exempt
 def main_keyword_list(request, *args, **kwargs):
@@ -30,9 +31,10 @@ def cafe_detail(request,pk,*args,**kwargs):
     #all_review=cafe.review_set.all()
     
     #리뷰 관련 코드
+
+    #all_review=cafe.cafeid_set.all()
     
-    all_review=cafe.cafeid_set.all()
-    
+    all_review=cafe.cafe_id.all()
     review_cnt=0
     sum_star=0
     average_star=0
@@ -73,7 +75,7 @@ def cafe_like(request):
         
     else:#취소 누름
         #cafe_like=cafe.cafelike_set.all
-        cafe_like=cafe.cafeid_set.all()
+        cafe_like=cafe.cafe_like.all()
         cafe_like.delete()
         
         
