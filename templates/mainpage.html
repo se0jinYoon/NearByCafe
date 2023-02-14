@@ -148,12 +148,31 @@
         else {
             location_drop.classList.remove("display_none");
             clicked_state1 = 1;
+            if(clicked_state2 === 1) {
+                keyword_drop.classList.add("display_none");
+                clicked_state2 = 1;
+            }
         }
     }
 
     const keyword_drop = document.querySelector(".keyword_drop");
     var clicked_state2 = 0;
     function onClickKeywordButton(){
+        if (clicked_state2 === 1){
+            keyword_drop.classList.add("display_none");
+            clicked_state2 = 0;
+        }
+        else {
+            keyword_drop.classList.remove("display_none");
+            clicked_state2 = 1;
+            if(clicked_state1 === 1) {
+                location_drop.classList.add("display_none");
+                clicked_state1 = 1;
+            }
+        }      
+    }
+
+        function onClickKeywordText() {
         if (clicked_state2 === 1){
             keyword_drop.classList.add("display_none");
             clicked_state2 = 0;
@@ -187,16 +206,7 @@
     location_picked_text.innerHTML = `<button class="location_picked" onclick="${onClickLocationText()}"><span class="location_picked_text">${location_each}</span></button>`;
     }
 
-    function onClickKeywordText() {
-        if (clicked_state2 === 1){
-            keyword_drop.classList.add("display_none");
-            clicked_state2 = 0;
-        }
-        else {
-            keyword_drop.classList.remove("display_none");
-            clicked_state2 = 1;
-        }      
-    }
+
 
     // function onClickRemove1() {
     //     const remove1 = document.querySelector(".key1")
@@ -252,7 +262,7 @@
         const keyword_picked_text = document.querySelector(".keyword_input");
         keyword_picked_text.innerHTML += `<button class="keyword_picked" onclick="${onClickKeywordText()}">
         <span class="keyword_picked_text">${keyword_each}</span>
-        <button class="remove_btn" onclick="onClickRemove3()">X</button>
+        <button class="remove_btn" onclick="">X</button>
         </button>`;
         console.log(count)
         console.log("test")
@@ -263,7 +273,7 @@
         const keyword_picked_text = document.querySelector(".keyword_input");
         keyword_picked_text.innerHTML += `<button class="keyword_picked">
         <span class="keyword_picked_text">${keyword_each}</span>
-        <button class="remove_btn" onclick="onClickRemove2()">X</button>
+        <button class="remove_btn" onclick="">X</button>
         </button>`;
     
         console.log(count)
