@@ -1,4 +1,15 @@
+from django.shortcuts import render
 
+@csrf_exempt
+def delete_user(request):
+    context = {}
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            request.user.delete()
+            auth_logout(request)
+        # return redirect('Cafe:main')
+        return render(request,'withdrawal.html',context)
+    return render(request,'withdrawal.html',context)
 
 from django.contrib import auth
 from django.contrib.auth import login as auth_login
