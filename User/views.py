@@ -1,5 +1,4 @@
-
-
+from django.shortcuts import render
 from django.contrib import auth
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
@@ -64,9 +63,9 @@ def login_page(request):
                 user_name = Users.objects.get(username=users_id).username
                 verify_email_later(
                     request, user_name=user_name, user_email=user_email)
-                    
+
                 # admin 테스트 할꺼면 이렇게 렌더로 받아봐야함
-                # return render(request, 'send_mail.html', {'current_user': Users.objects.get(username=users_id)}) 
+                # return render(request, 'send_mail.html', {'current_user': Users.objects.get(username=users_id)})
 
                 url = reverse('User:mail_notice', kwargs={
                               'user_name': user_name, 'user_email': user_email})
@@ -96,6 +95,21 @@ def logout(request):
     if request.method == 'POST':
         auth_logout(request)
         return redirect('/')
+
+
+# 프로필 페이지
+def profile(request, *args, **kwargs):
+
+    if request.user.is_authenticated:
+        user = Users.objects.get(username=request.user)
+        email_address = user.email_address
+        nickname = user.nickname
+        context = {'email_address': email_address, 'nickname': nickname}
+
+    else:
+        return redirect('Cafe:main')
+
+    return render(request, "profile.html", context=context)
 
 
 # 비밀번호 찾기 메소드-form 이용
@@ -330,10 +344,10 @@ def activate(request, uid64, token):
         current_user.save()
 
         messages.info(request, '메일 인증이 완료되었습니다.')
-        return redirect('Cafe:main')
+        return redirect('User:login')
 
     messages.error(request, '메일 인증에 실패하였습니다.')
-    return redirect('Cafe:main')
+    return redirect('User:login')
 
 
 # 안내 메일 페이지
@@ -343,3 +357,16 @@ def mail_notice(request, user_name=None, user_email=None):
     if request.method == "POST":
         verify_email_later(request, user_name=user_name, user_email=user_email)
     return render(request, 'send_mail.html')
+
+
+@csrf_exempt
+def delete_user(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            request.user.delete()
+            auth_logout(request)
+            return redirect('Cafe:main')
+        else:
+            return render(request, 'withdrawal.html')
+    else:
+        return redirect("Cafe:main")

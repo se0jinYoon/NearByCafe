@@ -1,0 +1,99 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+.notosanskr * { 
+ font-family: 'Noto Sans KR', sans-serif;
+}
+
+* {
+    font-family: 'Noto Sans KR';
+    box-sizing: border-box;
+}
+.overlay {
+    width: 100vw;
+    height: 100vh;
+    position: absolute; 
+    opacity: 0.5;
+    z-index: -1;
+    background-color: #F8F4E9;
+}
+.shadow {
+    box-shadow: 0 5px 18px -7px rgba(0, 0, 0, 1);
+}
+
+#withdraw{
+    justify-content: center;
+    align-items: center;
+}
+.withdraw_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 60px;
+    background-color: #fff;
+    border: 1px solid #D6D6D6;
+    margin-top: 150px;
+    width: 30%;
+    height: 192px;
+}
+.withdraw_info{
+    text-align: center;
+    font-size: 18px;
+}
+.withdraw_home_btn{
+    background-color: #F3F0E7;
+    border-radius: 24px;
+    width: 138px;
+    height: 48px;
+    margin-right: 40px;
+    font-weight: bold;
+    border: 1px solid #D6D6D6;
+    font-size: 22px;
+    /* color: #fff; */
+}
+.withdraw_real_btn{
+    background-color: #df47298c;
+    border-radius: 24px;
+    width: 138px;
+    height: 48px;
+    font-weight: bold;
+    border: 1px solid #DF4629;
+    font-size: 22px;
+    /* color: #fff; */
+}
+
+
+/* 모달 css */
+.modal-content {
+    width: 520px;
+    height: 240px;
+}
+.modal-dialog{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-header {
+    border-bottom: 0 none;
+}
+.modal-footer {
+    display: flex;
+    justify-content: center;
+    border-top: 0 none;
+}
+.modal-body {
+    text-align: center;
+    
+}
+.modal_text1 {
+    font-size: 20px;
+}
+.close-btn {
+    background-color: #DF4629;
+    color: white;
+    border-radius: 10px;
+    width: 138px;
+    height: 48px;
+    font-weight: bold;
+    border: none;
+    font-size: 22px;
+}
