@@ -3,7 +3,8 @@ from Cafe.models import *
 from django.http.request import HttpRequest
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-import json,math
+import json,math,re
+from User.views import validate_email
 from Review.models import *
 
 #1.지역설정
@@ -43,9 +44,12 @@ def cafe_detail(request,pk,*args,**kwargs):
         sum_star+=review.star
         
         #학교인증마크 획득
-        if school_match(review.user_id.email_address,cafe.location_id.name):
+        if school_match(cafe.location_id.name,review.user_id.email_address):
+            print("1")
             review.mark=True
-        else:review.mark=False
+        else:
+            review.mark=False
+            print("2")
         review.save()
     average_star=sum_star/review_cnt
     
@@ -67,33 +71,36 @@ def cafe_detail(request,pk,*args,**kwargs):
     return render(request,"cafe_detail_cj.html",context=context)
 
 def school_match(cafe_location,user_school_email):
-    school_to_location=[
-        {'g.hongik.ac.kr':'신촌/이대/서대문/아현'},
-        {'smu.kr','종로/인사동/동대문'},
-        {'ewhain.net','신촌/이대/서대문/아현'},
-        {'khu.ac.kr','청량리/회기'},
-        {'hufs.ac.kr','청량리/회기'},
-        {'yonsei.ac.kr','신촌/이대/서대문/아현'},
-        {'duksung.ac.kr','광운대/공릉/노원/도봉'},
-        {'sju.ac.kr','건대입구/세종대'},
-        {'uos.ac.kr','청량리/회기'},
-        {'dongduk.ac.kr','성신여대/안암/성북/길음'},
-        {'kookmin.ac.kr','성신여대/안암/성북/길음'},
-        {'snu.ac.kr','서울대입구/신림'},
-        {'sungshin.ac.kr','성신여대/안암/성북/길음'},
-        {'kw.ac.kr','광운대/공릉/노원/도봉'},
-        {'konkuk.ac.kr','건대입구/세종대'},
-        {'korea.ac.kr','성신여대/안암/성북/길음'},
-        {'hanyang.ac.kr','왕십리/한양대/성수'},
-        {'catholic.ac.kr','서초/교대/사당'},
-        {'sogang.ac.kr','신촌/이대/서대문/아현'},
-        {'cau.ac.kr','동작/흑석/상도'},
-        { 'skku.edu','혜화/성균관대'},]
+    pattern = re.compile(r'@([\w.]+)')
+    match = pattern.findall(user_school_email)
+    school_to_location={
+        'g.hongik.ac.kr':'신촌/이대/서대문/아현',
+        'smu.kr':'종로/인사동/동대문',
+        'ewhain.net':'신촌/이대/서대문/아현',
+        'khu.ac.kr':'청량리/회기',
+        'hufs.ac.kr':'청량리/회기',
+        'yonsei.ac.kr':'신촌/이대/서대문/아현',
+        'duksung.ac.kr':'광운대/공릉/노원/도봉',
+        'sju.ac.kr':'건대입구/세종대',
+        'uos.ac.kr':'청량리/회기',
+        'dongduk.ac.kr':'성신여대/안암/성북/길음',
+        'kookmin.ac.kr':'성신여대/안암/성북/길음',
+        'snu.ac.kr':'서울대입구/신림',
+        'sungshin.ac.kr':'성신여대/안암/성북/길음',
+        'kw.ac.kr':'광운대/공릉/노원/도봉',
+        'konkuk.ac.kr':'건대입구/세종대',
+        'korea.ac.kr':'성신여대/안암/성북/길음',
+        'hanyang.ac.kr':'왕십리/한양대/성수',
+        'catholic.ac.kr':'서초/교대/사당',
+        'sogang.ac.kr':'신촌/이대/서대문/아현',
+        'cau.ac.kr':'동작/흑석/상도',
+        'skku.edu':'혜화/성균관대'
+        }
     
-    for key in school_to_location:
-        if key==user_school_email:
-            cafe_location==school_to_location[key]
-            return True
+    for key,value in school_to_location.items():
+        for i in match:
+            if key==i and cafe_location==value:
+                return True
     return False
         
 

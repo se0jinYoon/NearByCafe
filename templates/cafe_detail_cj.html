@@ -7,7 +7,11 @@
         
         <div class="cafe_index shadow d-flex">
             <div class="cafe_index_image">
-                <img src="https://picsum.photos/300/400" width="150" height="200"/> <!-- ERD : Cafe image 대표사진-->
+                {% if cafe.image %}
+                    <p>
+                        <img src="{{cafe.image.url}}">
+                    </p>
+                {% endif %}
             </div>
             <div class="cafe_indexbox">
                 <div class="cafe_index_name">
