@@ -1,16 +1,4 @@
 from django.shortcuts import render
-
-@csrf_exempt
-def delete_user(request):
-    context = {}
-    if request.user.is_authenticated:
-        if request.method == 'POST':
-            request.user.delete()
-            auth_logout(request)
-        # return redirect('Cafe:main')
-        return render(request,'withdrawal.html',context)
-    return render(request,'withdrawal.html',context)
-
 from django.contrib import auth
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
@@ -75,9 +63,9 @@ def login_page(request):
                 user_name = Users.objects.get(username=users_id).username
                 verify_email_later(
                     request, user_name=user_name, user_email=user_email)
-                    
+
                 # admin 테스트 할꺼면 이렇게 렌더로 받아봐야함
-                # return render(request, 'send_mail.html', {'current_user': Users.objects.get(username=users_id)}) 
+                # return render(request, 'send_mail.html', {'current_user': Users.objects.get(username=users_id)})
 
                 url = reverse('User:mail_notice', kwargs={
                               'user_name': user_name, 'user_email': user_email})
@@ -354,3 +342,15 @@ def mail_notice(request, user_name=None, user_email=None):
     if request.method == "POST":
         verify_email_later(request, user_name=user_name, user_email=user_email)
     return render(request, 'send_mail.html')
+
+
+@csrf_exempt
+def delete_user(request):
+    context = {}
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            request.user.delete()
+            auth_logout(request)
+        # return redirect('Cafe:main')
+        return render(request, 'withdrawal.html', context)
+    return render(request, 'withdrawal.html', context)
