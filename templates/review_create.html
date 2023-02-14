@@ -12,6 +12,7 @@
     <div class="star_container shadow d-flex flex-row align-items-center">
         <span class="star_text fw-light">평점 남기기</span>
         <div class="star">
+        
             <i class="fa-regular fa-star"></i>
             <i class="fa-regular fa-star"></i>
             <i class="fa-regular fa-star"></i>
@@ -24,9 +25,10 @@
     
     <form action="{% url 'Review:review_create' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        <input class="star_input" type="text" name="star" id="star" placeholder="별">
         <div class="title_container shadow d-flex flex-row align-items-center">
             <span class="title fw-light">제목:</span>
-            <input class="title_input" type="text" name="title" placeholder="리뷰의 제목을 입력해주세요!">
+            <input class="title_input" type="text" name="title" id="title" placeholder="리뷰의 제목을 입력해주세요!">
         </div>
 
         <!--ㅇㅇ에 유저 닉네임 추가 필요-->
@@ -41,17 +43,20 @@
         <div class="keyword_container shadow d-flex flex-column justify-content-center"> 
             <div>
                 <span class="main_text">키워드 고르기</span>
-                <span class="sub_text">최대 4개까지 선택할 수 있어요!</span>
-
-                {% for keyword in keyword_list %}
-                    <span class="sub_text">{{keyword}}</span>
-                {% endfor %}
-
+                <span class="sub_text">최대 4개까지 선택할 수 있어요!</span>     
+            </div>
+            <div>
+            
             </div>
             <!-- 키워드 선택부분 / 설명 : 4개 선택 후 5번째 선택을 하게 되면 젤 처음에 선택된게 삭제됨(큐 방식)-->
             <div class="review_create_keywordselect">
                 <!-- <div class="container"></div> -->
+                {% for keyword in keyword_list %}
                 <div class="row mb-3">
+                    <div class="col"><button class="keyword_btn " name="mark" id="{{keyword}}" type="button" >{{keyword}}</button></div>
+                   {% endfor %}
+                </div>
+                <!-- <div class="row mb-3">
                     <div class="col"><button class="keyword_btn " id="keyword1" type="button" >키워드1</button></div>
                     <div class="col"><button class="keyword_btn " id="keyword2" type="button" >키워드2</button></div>
                     <div class="col"><button class="keyword_btn " id="keyword3" type="button" >키워드3</button></div>
@@ -73,7 +78,7 @@
                     <div class="col"><button class="keyword_btn" id="keyword15" type="button">키워드555</button></div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="image_container shadow d-flex flex-row align-items-center">
             <div>
@@ -81,12 +86,13 @@
                 <span class="sub_text">최대 4장까지 업로드 할 수 있어요!</span>
             </div>
         </div>
-
+<!-- 제출 임시구현 -->
+<button id="login_btn" type="button" onclick="onClickReview()" >제출</button>
     </form>
 </div>
 <script>
+    var keywords_selected = [];
     function change_btn() {
-        var keywords_selected = [];
         var buttons = document.getElementsByClassName("keyword_btn");
         
         for (var i = 0; i < buttons.length; i++) {
@@ -123,6 +129,36 @@
         }
     }   
     change_btn();
+
+    function onClickReview(){
+        const title = document.getElementById('title').value
+        const content = document.getElementById('content').value
+        const star = document.getElementById('star').value
+        const data = {
+            
+                "title" : title,
+                "content" : content,
+                 "star" : star,
+                 "keywords" : keywords_selected,
+            
+        }
+        
+       const res = fetch('/review_create/',{
+            method : "POST",
+            headers: {
+      'Content-Type': 'application/json', 
+      'X-CSRFToken': 'your-csrf-token'},
+      
+            body: JSON.stringify(data)
+            // body : data,
+        }).then((data) =>{
+            console.log(data);
+        }).catch(e => {
+            console.log(e);
+            throw new Error(e);
+        })
+    }
+
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 {% endblock %}

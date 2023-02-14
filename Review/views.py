@@ -1,4 +1,3 @@
-from django.shortcuts import render
 
 from rest_framework.response import Response
 from .models import Review
@@ -9,12 +8,15 @@ from Review.models import *
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from Review.forms import ReviewForm
+import json
 class ReviewListAPI(APIView):
     def get(self, request):
         queryset = Review.objects.all()
         print(queryset)
         serializer = ReviewSerializer(queryset, many=True)
         return Response(serializer.data)
+
+
 keyword_list=[
     '데이트',
     '작업하기 좋은',
@@ -31,24 +33,34 @@ keyword_list=[
     '화장실 깨끗한',
     '인테리어 예쁜',  
     ]
+def insert_cafe(request,pk):
+    cafe = Cafe.objects.get(id = pk)
+    keywords = ReviewListAPI.get()
+
 @csrf_exempt
-@login_required(login_url='/login')
+@login_required(login_url='User:login')
 def review_create(request):
-    context = keyword_list
     if request.method == 'POST':
-        form = ReviewForm(request.POST)
+        ctx = {}
+        req = json.loads(request.body)
+        # print(request.POST['title'])
+        form = ReviewForm(req)
         if form.is_valid():
-            review = form.save()
+            review = form.save(commit=False)
             review.user_id = request.user
-            return redirect('/')
+            review.cafe_id = Cafe.objects.get(pk=1)
+            # review.cafe_id = Cafe.objects.get(pk=pk)
+            review.save()
+
         else:
+            for field in form:
+                print("Field Error:", field.name,  field.errors)
+            print("failed")
             ctx = {
-                'form':form,
+                'form':form,'keyword_list' : keyword_list
             }
             return render(request,"review_create.html",ctx)
-    elif request.method == 'GET':
-        form = ReviewForm()
-        ctx = {
-            'form' : form, 'keyword_list' : keyword_list,'user' : request.user
-        }
-        return render(request,"review_create.html",ctx)
+        return redirect('Cafe:main')
+ 
+    else :
+        return render(request,"review_create.html",{"keyword_list" : keyword_list})
