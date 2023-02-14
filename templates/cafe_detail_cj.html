@@ -17,7 +17,7 @@
                     위치:{{cafe.location_id}}<!-- ERD에 명시x , Cafe address에서 '구'만 따로 빼와야할까? -->
                 </div>
                 <div class="cafe_index_keywords">
-                    #공부하기 좋은 #분위기 예쁜 #저렴한 <!-- ERD : 'CafeKeyword cafe_id 카페식별자' 외래키참조 -->
+                    #우선 나중에 <!-- ERD : 'CafeKeyword cafe_id 카페식별자' 외래키참조 -->
                 </div>
                 <div class="cafe_index_review d-flex flex-column">
                     <div class="cafe_index_reviewers">
@@ -48,7 +48,7 @@
                     <!-- <button  href="#not_login" class="review_like d-flex" role="button" data-toggle="modal">♥좋아요</button> -->
                     
                     {% if request.user.is_authenticated %}
-                    <button class="review_like d-flex" data-bs-toggle="modal" data-bs-target="#not_login" onclick="onClickLike({{cafe.id}}">♥좋아요</button>
+                    <button class="review_like d-flex" data-bs-toggle="modal" data-bs-target="#not_login" onclick="onClickLike({{cafe.id}}"></button>
                     <button class="review_write d-flex" data-bs-toggle="modal" data-bs-target="#not_login" href="">✍🏻리뷰 하기</button>
                     {% else %}
     
@@ -92,10 +92,14 @@
                         창창한 강쥐 {{review.user_id.nickname}}
                     </div>
                     <div class="cafe_review_time d-flex">
-                        2023.02.01 <!-- ERD : Review time 작성날짜-->
+                        {{review.created_at}} <!-- ERD : Review time 작성날짜-->
                     </div>
-                    <div class="cafe_review_studentmark d-flex"> 
+                    <div class="cafe_review_studentmark d-flex">
+                        {% if review.mark == true %} 
                         <img src="/static/image/main_crown 2.png" class="studentmark" width="80px" height="80px"> 
+                        {%else%}
+                        
+                        {% endif %}
                     </div> <!--대학생 인증 마크-->
                 </div>
                 <div class="cafe_review_scorestar d-flex">
@@ -126,6 +130,12 @@
                     Placerat erat interdum tortor semper.
             </div>
             <div class="cafe_review_keywords d-flex">
+                {% for value, text in form..field.choices %}
+                <div class="ui slider checkbox"></div>
+                <input id="id_providers_{{ forloop.counter0 }}" name="{{ form.providers.name }}" type="checkbox" value="{{ value }}"{% if value in checked_providers %} checked="checked"{% endif %}>
+                <label>{{ text }}</label>
+                </div>
+                {% endfor %}
                 #공부하기 좋은 #분위기 예쁜 #저렴한 <!-- ERD :  'CafeKeyword review_id 리뷰식별자' 외래키참조-->
             </div>
             <div class="cafe_review_images">

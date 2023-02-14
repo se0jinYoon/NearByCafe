@@ -20,6 +20,7 @@ def main_page(request, *args, **kwargs):
     return render(request, "mainpage.html", context=context)
 
 #q.여기서 우리가 클릭한 카페 id를 보내줘야하는데 js로 html에 바로 구겨넣었는데 그거 어케하지?
+# <a href="{% url 'Cafe:cafe_detail' post.pk %}">{{post.title}}</a></p>
 # 카페 찾기(지도)랑 연결 후 수정
 def cafe_detail(request,pk,*args,**kwargs):
     cafe=Cafe.objects.get(id=pk)
