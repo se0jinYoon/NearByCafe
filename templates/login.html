@@ -1,8 +1,8 @@
 {% extends 'nav.html' %} {% block content %} {% load static %}
+
+<div class="overlay"></div>
 <main id="login">
     <div class="login_container">
-        <div class="logo"><img src="{% static 'image/logo.png' %}" class="nav_logo" alt="logo" /> 로그인</div>
-
         <form action="" method="POST">
             {% csrf_token %}
             <div class="login_id_box">
