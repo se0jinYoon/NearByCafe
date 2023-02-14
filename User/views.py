@@ -5,7 +5,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.tokens import default_token_generator
 from django.template.loader import render_to_string
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, reverse
 from django.http.request import HttpRequest
 
 from User.models import Users, School
@@ -30,8 +30,8 @@ import random
 @csrf_exempt
 def login_page(request):
     if request.method == 'POST':
-        users_id = request.POST['users_id']
-        users_passwd = request.POST['password']
+        users_id = request.POST.get('users_id')
+        users_passwd = request.POST.get('password')
 
         if request.POST.get('isidstorage'):
             request.session['login_session'] = users_id
@@ -64,7 +64,13 @@ def login_page(request):
                 user_name = Users.objects.get(username=users_id).username
                 verify_email_later(
                     request, user_name=user_name, user_email=user_email)
-                return render(request, 'send_mail.html', {'current_user': Users.objects.get(username=users_id)})
+                    
+                # admin 테스트 할꺼면 이렇게 렌더로 받아봐야함
+                # return render(request, 'send_mail.html', {'current_user': Users.objects.get(username=users_id)}) 
+
+                url = reverse('User:mail_notice', kwargs={
+                              'user_name': user_name, 'user_email': user_email})
+                return redirect(url)  # 인증메일 발송 안내 페이지로 리다이렉트
 
         elif users is None:  # 로그인 실패 시 모달창 띄우는 분기
             print("failed")
@@ -247,7 +253,10 @@ def sign_up(request: HttpRequest, *args, **kwargs):
         if form.is_valid():
             user = form.save()
             verify_email(request, form)
-            return redirect('User:mail_notice')  # 인증메일 발송 안내 페이지로 리다이렉트
+
+            url = reverse('User:mail_notice', kwargs={
+                          'user_name': request.POST['username'], 'user_email': request.POST['email_address']})
+            return redirect(url)  # 인증메일 발송 안내 페이지로 리다이렉트
 
         else:
             messages.error(request, '비밀번호가 올바르지 않습니다.')
@@ -328,6 +337,9 @@ def activate(request, uid64, token):
 
 
 # 안내 메일 페이지
-def mail_notice(request):
-
+def mail_notice(request, user_name=None, user_email=None):
+    print(user_name)
+    print(user_email)
+    if request.method == "POST":
+        verify_email_later(request, user_name=user_name, user_email=user_email)
     return render(request, 'send_mail.html')

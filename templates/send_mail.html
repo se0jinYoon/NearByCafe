@@ -14,8 +14,11 @@
     </div>
 
     <div class="d-flex flex-column align-items-center">
-        <button class="resend_btn shadow text-light fw-regular" data-bs-toggle="modal" data-bs-target="#send_notice">인증메일 재전송</button>
-        <!--모달과 연동 필요-->
+        <form action="" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="resend_btn shadow text-light fw-regular" data-bs-toggle="modal" data-bs-target="#send_notice">인증메일 재전송</button>
+            <!--모달과 연동 필요-->
+        </form>
         <span class="timer"> <span id="minute">05</span>:<span id="second">00</span> </span>
     </div>
 
@@ -43,4 +46,5 @@
     crossorigin="anonymous"
 ></script>
 <script src="{% static 'js/send_mail_timer.js' %}"></script>
+
 {% endblock %}
