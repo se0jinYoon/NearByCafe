@@ -28,7 +28,7 @@
     <body>
         <nav class="nav_container d-flex flex-row align-items-center">
             <a href="/">
-                <img src="/static/image/logo.png" class="nav_logo" alt="logo"></a>
+                <img src="{% static 'image/logo.png' %}" class="nav_logo" alt="logo"></a>
             <div class="searchbar_container d-flex flex-row justify-content-lg-between">
                 <input type="text" class="nav_search" readonly onfocus="this.blur();" placeholder="    지역, 키워드 선택">
                 <i class="fa-solid fa-magnifying-glass search_img"></i>
