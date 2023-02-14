@@ -33,8 +33,6 @@ class Location(models.Model):
     # ]
     #name = models.CharField(max_length=32,choices=Locations)
     name = models.CharField(max_length=32)
-    latitude = models.FloatField(default=37.314964)
-    longtitude = models.FloatField(default=126.575308)
 
 
 class Cafe(models.Model):
@@ -45,8 +43,8 @@ class Cafe(models.Model):
     menu = models.TextField()
     number = models.CharField(max_length=16)
     location_id = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL)
-    
-    #추가한 모델
+    latitude = models.FloatField(default=37.314964)
+    longtitude = models.FloatField(default=126.575308)
     average_star=models.FloatField(default=0)
 
 

@@ -11,45 +11,36 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ("Cafe", "0002_initial"),
         ("Review", "0001_initial"),
-        ("Cafe", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name="cafelike",
+            model_name="reviewlike",
             name="user_id",
             field=models.ForeignKey(
                 on_delete=django.db.models.deletion.CASCADE,
-                related_name="user",
+                related_name="ReviewLike_user",
                 to=settings.AUTH_USER_MODEL,
             ),
         ),
         migrations.AddField(
-            model_name="cafekeyword",
+            model_name="review",
             name="cafe_id",
             field=models.ForeignKey(
                 on_delete=django.db.models.deletion.CASCADE,
-                related_name="cafe_cafe",
+                related_name="cafe_id",
                 to="Cafe.cafe",
             ),
         ),
         migrations.AddField(
-            model_name="cafekeyword",
-            name="review_id",
+            model_name="review",
+            name="user_id",
             field=models.ForeignKey(
                 on_delete=django.db.models.deletion.CASCADE,
-                related_name="cafe_review",
-                to="Review.review",
-            ),
-        ),
-        migrations.AddField(
-            model_name="cafe",
-            name="location_id",
-            field=models.ForeignKey(
-                null=True,
-                on_delete=django.db.models.deletion.SET_NULL,
-                to="Cafe.location",
+                related_name="Review_user",
+                to=settings.AUTH_USER_MODEL,
             ),
         ),
     ]
