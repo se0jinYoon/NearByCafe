@@ -10,6 +10,8 @@ class Review(models.Model):
     image = models.ImageField(blank=True, upload_to='review_images/%Y%m%d')
     star = models.IntegerField()
     mark = models.BooleanField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    
 
     cafe_id = models.ForeignKey(
         Cafe, on_delete=models.CASCADE, related_name="cafe_id")
