@@ -1,7 +1,7 @@
 from django.db import models
 from User.models import Users
 from Cafe.models import Cafe
-
+from multiselectfield import MultiSelectField
 
 class Review(models.Model):
     time = models.DateTimeField(auto_now_add=True)
@@ -11,6 +11,25 @@ class Review(models.Model):
     star = models.IntegerField()
     mark = models.BooleanField()
     #created_at = models.DateTimeField(auto_now_add=True)
+    
+    CAFE_KEYWORDS=[
+        ('데이트','데이트'),
+        ('작업하기 좋은','작업하기 좋은'),
+        ('공부하기 좋은','공부하기 좋은'),
+        ('조용한','조용한'),
+        ('시끌벅적한','시끌벅적한'),
+        ('의자가 편한','의자가 편한'),
+        ('디저트 맛있는','디저트 맛있는'),
+        ('커피가 맛있는','커피가 맛있는'),
+        ('저렴한','저렴한'),
+        ('친절한','친절한'),
+        ('혼카페','혼카페'),
+        ('장소가 넓은','장소가 넓은'),
+        ('콘센트가 많은','콘센트가 많은'),
+        ('화장실 깨끗한','화장실 깨끗한'),
+        ('인테리어 예쁜','인테리어 예쁜'),  
+        ]
+    keywords = MultiSelectField(max_length=40,choices=CAFE_KEYWORDS,max_choices=3)
     
 
     cafe_id = models.ForeignKey(
