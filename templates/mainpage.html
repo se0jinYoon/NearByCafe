@@ -7,15 +7,16 @@
         <span class="search_text1 text-light fw-bold ">오늘은 어떤 카페를 찾아볼까요?</span>
 
         <div class="search_text2">
-        <p>
+        <div>
             <input class="location_input" 
             type="text" 
             name="location" 
             readonly onfocus="this.blur();" 
             placeholder="&nbsp&nbsp&nbsp&nbsp지역 선택" 
-            onclick="onClickLocationButton ()"> 
+            onclick="onClickLocationButton()"> 
 
-            <div class="dropdown_location_list">
+            <!-- 위치 모달 -->
+            <div class="location_drop">
                 <div class="location_list d-flex flex-column shadow">
                     <div class="loc-text1">검색할 위치를 선택해주세요.</div>
                     <div class="d-flex flex-row ">
@@ -36,22 +37,43 @@
             </div>
 
             <span class="search_text_etc text-light fw-bold"> 에서</span>
-        </p>
-            <div class="location_list"></div>
-        <p>
+        </div>
+        
+        <div>
             <input class="keyword_input" 
             type="text" 
-            onclick = "onClickKeywordList()" 
+            onclick = "onClickKeywordButton()" 
             name="keyword" readonly onfocus="this.blur();" 
             placeholder="&nbsp&nbsp&nbsp&nbsp키워드 선택">
            
+            <!-- 키워드 모달 -->
+            <div class="keyword_drop">
+                <div class="location_list d-flex flex-column shadow">
+                    <div class="loc-text1">검색할 키워드를 선택해주세요.</div>
+                    <div class="d-flex flex-row ">
+                        <div class="d-flex flex-column ">
+                        {% for keyword in keyword_list_left %}
+                            <div class="loc1 d-flex flex-row align-center"><button class="loc_btn"> <span class="loc_list">{{keyword}}</span></button></div>
+                        {% endfor %}
+                        </div>
+                        
+        
+                        <div class="d-flex flex-column ">
+                        {% for keyword in keyword_list_right %}
+                            <div class="loc1 d-flex flex-row align-center"><button class="loc_btn" onclick="onClickLocationList({{keyword}})"> <span class="loc_list">{{keyword}}</span></button></div>
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <button class="search_button">
                 <a href="" class="fw-bold text-light" id="search_text" >카페 찾기</a>    <!--카페 찾기 페이지로 이동-->
             </button>
 
             <div class="keyword_list"></div> 
             
-        </p>
+        </div>
         </div>
         </div>
     </div>
@@ -98,20 +120,33 @@
 
 <script>
 
-    const dropdown_menu = document.querySelector(".dropdown_location_list");
+    const location_drop = document.querySelector(".location_drop");
 
-    var clicked_state = 0;
+    var clicked_state1 = 0;
     function onClickLocationButton(){
-        if (clicked_state === 0){
-            dropdown_menu.classList.add("display_none");
-            clicked_state = 1;
+        if (clicked_state1 === 1){
+            location_drop.classList.add("display_none");
+            clicked_state1 = 0;
         }
         else {
-            dropdown_menu.classList.remove("display_none");
-            clicked_state = 0;
-            
+            location_drop.classList.remove("display_none");
+            clicked_state1 = 1;
         }
     }
+
+    const keyword_drop = document.querySelector(".keyword_drop");
+
+    var clicked_state2 = 0;
+    function onClickKeywordButton(){
+        if (clicked_state2 === 1){
+            keyword_drop.classList.add("display_none");
+            clicked_state2 = 0;
+        }
+        else {
+            keyword_drop.classList.remove("display_none");
+            clicked_state2 = 1;
+        }
+}
 
 </script>
 
@@ -120,6 +155,6 @@
     <span fw-normal><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;helloncofficial@gmail.com</span>
     <span fw-normal><i class="fa-regular fa-copyright"></i>&nbsp;&nbsp;NearByCafe 2023 All rights reserved</span>
 </footer>
-
-<script src="/static/js/keyword.js"></script>
+<!-- 
+<script src="/static/js/keyword.js"></script> -->
 {% endblock %}

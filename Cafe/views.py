@@ -14,8 +14,41 @@ def main_keyword_list(request, *args, **kwargs):
     return JsonResponse(context)
 
 
-
 def main_page(request, *args, **kwargs):
+    # 위치 키워드 전처리
+    location_list = list(Location.Locations)
+    pre_location_list_left = location_list[0:12]
+    pre_location_list_right = location_list[12:]
 
-    context = {}
-    return render(request, "mainpage.html", context=context)
+    location_list_left = []
+    location_list_right = []
+
+    for i in range(len(pre_location_list_left)) :
+        location_list_left.append(pre_location_list_left[i][0])
+
+    for i in range(len(pre_location_list_right)) :
+        location_list_right.append(pre_location_list_right[i][0])
+
+    # 카페 키워드 전처리
+    keyword_list = list(CafeKeyword.CAFE_KEYWORDS)
+    pre_keyword_list_left = keyword_list[:8]
+    pre_keyword_list_right = keyword_list[8:]
+
+    keyword_list_left = []
+    keyword_list_right = []
+
+    for i in range(len(pre_keyword_list_left)) :
+        keyword_list_left.append(pre_keyword_list_left[i][0])
+    
+    for i in range(len(pre_keyword_list_right)) :
+        keyword_list_right.append(pre_keyword_list_right[i][0])
+
+    context = {
+        "location_list_left" : location_list_left,
+        "location_list_right" : location_list_right,
+        "keyword_list_left" : keyword_list_left,
+        "keyword_list_right" : keyword_list_right,
+    }
+
+
+    return render(request,"mainpage.html", context=context)
