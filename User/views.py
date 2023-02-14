@@ -29,47 +29,60 @@ import random
 # 로그인 페이지
 @csrf_exempt
 def login_page(request):
-
     if request.method == 'POST':
         users_id = request.POST['users_id']
         users_passwd = request.POST['password']
-        # isidstorage = request.POST['isidstorage']
-        # print(isidstorage)
+
+        if request.POST.get('isidstorage'):
+            request.session['login_session'] = users_id
+            request.session['isidstorage'] = True
+        else:
+            request.session.pop('login_session', None)
+            request.session.pop('isidstorage', None)
+
         print(users_id)
         print(users_passwd)
+
         users = auth.authenticate(
             request, username=users_id, password=users_passwd)
+        context = {
+            "recent_login_id": request.session.get('login_session'),
+            "isidstorage": request.session.get('isidstorage')
+        }
 
         if users is not None:
-            # 만약 인증 메일로 인증을 하지 않았을 때 분기
+            # 만약 이메일 인증을 하지 않았을 때 분기 : verified field로 확인
             current_user = Users.objects.get(username=users_id).verified
-
             if current_user:  # True
                 print("user")
                 auth.login(request, users)
-                request.session['login_session'] = users_id
                 messages.info(request, "로그인이 완료되었습니다.")
                 return redirect('/')
 
-            else:
+            else:  # False, 이메일 전송 페이지로 유저 정보와 함께 넘김
                 user_email = Users.objects.get(username=users_id).email_address
                 user_name = Users.objects.get(username=users_id).username
                 verify_email_later(
                     request, user_name=user_name, user_email=user_email)
-                return render(request, 'send_mail.html')
+                return render(request, 'send_mail.html', {'current_user': Users.objects.get(username=users_id)})
 
         elif users is None:  # 로그인 실패 시 모달창 띄우는 분기
             print("failed")
             messages.error(
                 request, '아이디 또는 비밀번호를 잘못 입력 했습니다.'
             )
-            return redirect('User:login')
+            print(context['isidstorage'])
+            return render(request, 'login.html', context=context)
     else:
+        # 아이디 저장 체크되어 있으면 세션으로 저장
 
         context = {
-
+            "recent_login_id": request.session.get('login_session'),
+            "isidstorage": request.session.get('isidstorage')
         }
-        return render(request, 'login.html', context)
+        print(context['isidstorage'])
+
+        return render(request, 'login.html', context=context)
 
 
 # 로그아웃 페이지
