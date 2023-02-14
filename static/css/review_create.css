@@ -137,6 +137,17 @@ body {
     padding-left: 36px;
 }
 
+/*-- 키워드버튼 추가 부분 --*/
+.keyword_btn{
+    background-color: #F3F0E7;
+    border-radius: 24px;
+    width: 138px;
+    height: 48px;
+    font-weight: bold;
+    border: 1px solid #D6D6D6;
+    font-size: 22px;
+}
+/* ---- */
 .main_text {
     font-size: 24px;
     font-weight: regular;
