@@ -6,17 +6,24 @@ from django.views.decorators.csrf import csrf_exempt
 import json,math
 from Review.models import *
 
+#1.지역설정
+#2.키워드 설정 필터링
+#3.지도에 핀 꽂기 
+#  
 @csrf_exempt
 def main_keyword_list(request, *args, **kwargs):
     cafe_keyword = CafeKeyword.cafe_temp
     context = {
             'keyword_list' : cafe_keyword,
-        }
+    } 
+
+
     return JsonResponse(context)
 
 
-def main_page(request, *args, **kwargs):
 
+
+def main_page(request, *args, **kwargs):
     context = {}
     return render(request, "mainpage.html", context=context)
 

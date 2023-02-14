@@ -1,0 +1,128 @@
+{% extends 'nav.html' %}
+{% block content %}
+
+
+<div class="overlay"></div>
+<div class="container d-flex flex-column ">
+    <div class="top d-flex flex-row align-items-center">
+        <div class="cafe_name fw-bold">카페 상호명</div>  
+        <div class="text1 fw-light">에 대한 솔직한 리뷰를 써주세요</div>
+    </div>
+   
+    <div class="star_container shadow d-flex flex-row align-items-center">
+        <span class="star_text fw-light">평점 남기기</span>
+        <div class="star">
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>        
+        </div>
+        <!--i태그 써서 구현 변경 필요-->
+    </div>
+
+    
+    <form action="{% url 'Review:review_create' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="title_container shadow d-flex flex-row align-items-center">
+            <span class="title fw-light">제목:</span>
+            <input class="title_input" type="text" name="title" placeholder="리뷰의 제목을 입력해주세요!">
+        </div>
+
+        <!--ㅇㅇ에 유저 닉네임 추가 필요-->
+        <div class="content_container shadow d-flex flex-row align-items-center">
+            <textarea 
+                class="content"
+                name="content" 
+                id="content" 
+                placeholder="{{user}}님, 카페는 어떠셨나요? 식당의 분위기와 서비스도 궁금해요!"></textarea> 
+        </div>
+    
+        <div class="keyword_container shadow d-flex flex-column justify-content-center"> 
+            <div>
+                <span class="main_text">키워드 고르기</span>
+                <span class="sub_text">최대 4개까지 선택할 수 있어요!</span>
+
+                {% for keyword in keyword_list %}
+                    <span class="sub_text">{{keyword}}</span>
+                {% endfor %}
+
+            </div>
+            <!-- 키워드 선택부분 / 설명 : 4개 선택 후 5번째 선택을 하게 되면 젤 처음에 선택된게 삭제됨(큐 방식)-->
+            <div class="review_create_keywordselect">
+                <!-- <div class="container"></div> -->
+                <div class="row mb-3">
+                    <div class="col"><button class="keyword_btn " id="keyword1" type="button" >키워드1</button></div>
+                    <div class="col"><button class="keyword_btn " id="keyword2" type="button" >키워드2</button></div>
+                    <div class="col"><button class="keyword_btn " id="keyword3" type="button" >키워드3</button></div>
+                    <div class="col"><button class="keyword_btn " id="keyword4" type="button" >키워드4</button></div>
+                    <div class="col"><button class="keyword_btn " id="keyword5" type="button" >키워드5</button></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col"><button class="keyword_btn" id="keyword6" type="button" >키워드11</button></div>
+                    <div class="col"><button class="keyword_btn" id="keyword7" type="button" >키워드22</button></div>
+                    <div class="col"><button class="keyword_btn" id="keyword8" type="button" >키워드33</button></div>
+                    <div class="col"><button class="keyword_btn" id="keyword9" type="button" >키워드44</button></div>
+                    <div class="col"><button class="keyword_btn" id="keyword10" type="button">키워드55</button></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col"><button class="keyword_btn" id="keyword11" type="button">키워드111</button></div>
+                    <div class="col"><button class="keyword_btn" id="keyword12" type="button">키워드222</button></div>
+                    <div class="col"><button class="keyword_btn" id="keyword13" type="button">키워드333</button></div>
+                    <div class="col"><button class="keyword_btn" id="keyword14" type="button">키워드444</button></div>
+                    <div class="col"><button class="keyword_btn" id="keyword15" type="button">키워드555</button></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="image_container shadow d-flex flex-row align-items-center">
+            <div>
+                <span class="main_text">사진 등록하기</span>
+                <span class="sub_text">최대 4장까지 업로드 할 수 있어요!</span>
+            </div>
+        </div>
+
+    </form>
+</div>
+<script>
+    function change_btn() {
+        var keywords_selected = [];
+        var buttons = document.getElementsByClassName("keyword_btn");
+        
+        for (var i = 0; i < buttons.length; i++) {
+          buttons[i].addEventListener("click", function() {
+            if (keywords_selected.length < 4) {
+              if (keywords_selected.indexOf(this.id) === -1) {
+                this.style.backgroundColor = "#728137";
+                this.style.color= "#fff";
+                keywords_selected.push(this.id);
+                console.log(keywords_selected); //값 잘 넘겨지는지 확인용
+              } else {
+                this.style.backgroundColor = "";
+                this.style.color= "";
+                keywords_selected.splice(keywords_selected.indexOf(this.id), 1);
+                console.log(keywords_selected); //값 잘 넘겨지는지 확인용
+              }
+            } else {
+              if (keywords_selected.indexOf(this.id) === -1) {
+                document.getElementById(keywords_selected[0]).style.backgroundColor = "";
+                document.getElementById(keywords_selected[0]).style.color = "";
+                keywords_selected.splice(0, 1);
+                this.style.backgroundColor = "#728137";
+                this.style.color= "#fff";
+                keywords_selected.push(this.id);
+                console.log(keywords_selected); //값 잘 넘겨지는지 확인용
+              } else {
+                this.style.backgroundColor = "";
+                this.style.color = "";
+                keywords_selected.splice(keywords_selected.indexOf(this.id), 1);
+                console.log(keywords_selected); //값 잘 넘겨지는지 확인용
+              }
+            }
+          });
+        }
+    }   
+    change_btn();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+{% endblock %}
