@@ -1,0 +1,217 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+.notosanskr * { 
+ font-family: 'Noto Sans KR', sans-serif;
+}
+
+* {
+    font-family: 'Noto Sans KR';
+    box-sizing: border-box;
+    /* background-color: #F8F4E9; */
+}
+.overlay_cj {
+    width: 100vw;
+    height: 100vh;
+    position: fixed; /*기존(overlay) : position: absolute;*/
+    opacity: 0.5;
+    z-index: -1;
+    background-color: #F8F4E9;
+}
+.shadow{
+    box-shadow: 0 5px 18px -7px rgba(0,0,0,1);
+}
+
+#cafe_detail{
+    display: flex;
+    justify-content: center;
+    padding-top: 80px;
+    width: 100%;
+}
+.detail_container{
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+}
+
+/* cafe_index */
+.cafe_index{
+    background-color: #ffffff;
+    width: 80%;
+    height: auto;
+    padding: 20px 0 36px 20px;
+    margin-bottom: 80px;
+}
+.cafe_index_image{
+    width: 150px;
+    height: 200px;
+    margin: 20px 40px 30px 20px;
+}
+.cafe_index_name{
+    font-size: 40px;
+    font-weight: 500;
+}
+.cafe_index_district{
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+.cafe_index_keywords{
+    font-size: 24px;
+    margin-bottom: 28px;
+}
+.cafe_index_reviewers{
+    font-size: 30px;
+    
+}
+.cafe_index_score{
+    font-size: 25px;
+}
+.cafe_index_star{  
+    font-size: 30px;
+    margin-bottom: 28px;
+}
+.review_like, .review_write{
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 54px;
+    margin-right: auto;
+    
+    border-radius: 30px;  /*rem으로 나중에 바꿔야할듯*/
+    background-color: #df47297c;
+    color: #000;
+    border-style: none;
+    font-size: 24px;
+}
+.review_like:hover, .review_write:hover{
+    color: #DF4629;
+}
+
+/* cafe_info */
+.cafe_info{
+    background-color: #ffffff;
+    width: 80%;
+    height: auto;
+    padding: 48px 0 24px 64px;
+    margin-bottom: 80px;
+}
+.cafe_info_index{
+    color: gray;
+    margin-right: 40px;
+    font-size: 30px;
+}
+.cafe_info_address{
+    margin-bottom: 28px;
+    font-size: 30px;
+}
+.cafe_info_number{
+    margin-bottom: 28px;
+    font-size: 30px;
+}
+.cafe_info_runtime{
+    margin-bottom: 28px;
+    font-size: 30px;
+}
+.cafe_info_menu{
+    margin-bottom: 28px;
+    font-size: 30px;
+    text-align: end;
+}
+
+/* cafe_reviews */
+.cafe_reviews{
+    background-color: #ffffff;
+    width: 80%;
+    height: auto;
+    padding: 42px 24px 26px 40px;
+    margin-bottom: 80px;
+}
+/* .cafe_review_Allinfo{
+
+} */
+.cafe_review_info{
+    margin-bottom: 20px;
+}
+.cafe_review_title{
+    font-size: 40px;
+    font-weight: 500;
+    margin-right: 24px;
+}
+.cafe_review_nickname{
+    font-size: 24px;
+    margin-right: 20px;
+}
+.cafe_review_time{
+    font-size: 24px;
+}
+
+.cafe_review_scorestar{
+    margin-bottom: 20px;
+}
+.cafe_review_score{
+    font-size: 24px;
+    margin-right: 12px;
+}
+.cafe_review_star{
+    font-size: 24px;
+}
+.cafe_review_content{
+    font-size: 24px;
+    margin-bottom: 26px;
+    font-weight: 300;
+}
+.cafe_review_keywords{
+    font-size: 24px;
+    margin-bottom: 26px;
+    font-weight: 500;
+}
+.cafe_review_image{
+    margin-right: 12px;
+}
+
+.cafe_review_studentmark{
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border-style: none;
+    width: 100px;
+    height: 100px;
+    background-color: #D6D6D6;
+    margin-left: auto;
+}
+
+/* 모달 css */
+.modal-content {
+    width: 520px;
+    height: 240px;
+}
+.modal-dialog{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-header {
+    border-bottom: 0 none;
+}
+.modal-footer {
+    display: flex;
+    justify-content: center;
+    border-top: 0 none;
+}
+.modal-body {
+    text-align: center;
+    
+}
+.modal_text1 {
+    font-size: 20px;
+}
+.close-btn {
+    background-color: #DF4629;
+    color: white;
+    border-radius: 10px;
+    width: 138px;
+    height: 48px;
+    font-weight: bold;
+    border: none;
+    font-size: 22px;
+}

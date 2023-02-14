@@ -1,0 +1,35 @@
+
+<small>카페 상호명::{{cafe.name}}</small><br />
+<small>위치:{{cafe.location_id}}</small><br />
+<small>키워듸:리뷰 등록이랑 합치고 추가</small><br />
+<small>{{review_cnt}}명의 평가</small>
+
+
+{% if request.user.is_authenticated %}
+<div class onclick="onClickLike({{cafe.id}})">좋아요</div>
+<a href=""> 
+
+{% else %}
+    
+{% endif %}
+
+<small>{{cafe.average_star}}점</small>
+
+<small>주소:{{cafe.address}}</small>
+<small>전화번호:{{cafe.number}}</small>
+<small>영업시간:{{cafe.runtime}}</small>
+<small>메뉴:{{cafe.menu}}</small>
+
+리뷰들~
+{% for review in all_review %}
+{{review.title}}
+{{review.content}}
+    {% comment %}키워드는 review랑 합치고 다시 추가~  {% endcomment %}
+{{cafe.image}}
+{% endfor %}
+
+
+
+<small> </small>
+
+
