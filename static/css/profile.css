@@ -12,7 +12,7 @@
 .overlay {
     width: 100vw;
     height: 100vh;
-    position: absolute; 
+    position: absolute;
     opacity: 0.5;
     z-index: -2;
     background-color: #F8F4E9;
@@ -23,8 +23,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 0;
-
+    margin-top: 4rem;
 }
 
 .profile_container {
@@ -49,11 +48,12 @@
     padding-left: 20px;
 }
 
-.nickname_container{
+.nickname_container {
     margin-bottom: 20px;
 }
 
-.email_container, .nickname_container {
+.email_container,
+.nickname_container {
     height: 36px;
 }
 
@@ -66,7 +66,8 @@
     margin-bottom: 52px;
 }
 
-.email_text, .nickname_text {
+.email_text,
+.nickname_text {
     font-size: 16px;
     color: #9F9F9F;
 }
@@ -89,12 +90,14 @@
     top: 23px;
 }
 
-.email_address, .nickname {
+.email_address,
+.nickname {
     font-size: 16px;
     margin-left: 28px;
 }
 
-.btn_1, .btn_2 {
+.btn_1,
+.btn_2 {
     width: 120px;
     height: 40px;
     background-color: #F3F0E7;
@@ -113,6 +116,7 @@
 
 .btn_container a {
     font-size: 14px;
+    font-weight: 600;
     text-align: center;
     text-decoration: none;
     color: black;

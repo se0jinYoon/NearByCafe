@@ -96,22 +96,22 @@ def logout(request):
         auth_logout(request)
         return redirect('/')
 
-# Create your views here.
+
+# 프로필 페이지
 def profile(request, *args, **kwargs):
 
-    if 'login_session' in request.session:
-        login_session = request.session['login_session']
-        user = Users.objects.get(users_id = login_session)
+    if request.user.is_authenticated:
+        user = Users.objects.get(username=request.user)
         email_address = user.email_address
         nickname = user.nickname
+        context = {'email_address': email_address, 'nickname': nickname}
+
     else:
-        email_address = 'temp@naver.com'
-        nickname = 'temp'
-
-    context = {'email_address' : email_address, 'nickname' : nickname}
-
+        return redirect('Cafe:main')
 
     return render(request, "profile.html", context=context)
+
+
 # 비밀번호 찾기 메소드-form 이용
 def findpw(request: HttpRequest, *args, **kwargs):
     context = {}
@@ -344,10 +344,10 @@ def activate(request, uid64, token):
         current_user.save()
 
         messages.info(request, '메일 인증이 완료되었습니다.')
-        return redirect('Cafe:main')
+        return redirect('User:login')
 
     messages.error(request, '메일 인증에 실패하였습니다.')
-    return redirect('Cafe:main')
+    return redirect('User:login')
 
 
 # 안내 메일 페이지
@@ -361,11 +361,12 @@ def mail_notice(request, user_name=None, user_email=None):
 
 @csrf_exempt
 def delete_user(request):
-    context = {}
     if request.user.is_authenticated:
         if request.method == 'POST':
             request.user.delete()
             auth_logout(request)
-        # return redirect('Cafe:main')
-        return render(request, 'withdrawal.html', context)
-    return render(request, 'withdrawal.html', context)
+            return redirect('Cafe:main')
+        else:
+            return render(request, 'withdrawal.html')
+    else:
+        return redirect("Cafe:main")
