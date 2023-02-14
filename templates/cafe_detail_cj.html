@@ -1,0 +1,131 @@
+{% extends 'nav.html' %}
+{% block content %} {% load static %}
+
+<div class="overlay_cj"></div>
+<main id="cafe_detail">
+    <div class="detail_container d-flex flex-column">
+        
+        <div class="cafe_index shadow d-flex">
+            <div class="cafe_index_image">
+                <img src="https://picsum.photos/300/400" width="150" height="200"/> <!-- ERD : Cafe image 대표사진-->
+            </div>
+            <div class="cafe_indexbox">
+                <div class="cafe_index_name">
+                    카페 상호명 <!-- ERD : Cafe name 상호명-->
+                </div>
+                <div class="cafe_index_district">
+                    용산구 <!-- ERD에 명시x , Cafe address에서 '구'만 따로 빼와야할까? -->
+                </div>
+                <div class="cafe_index_keywords">
+                    #공부하기 좋은 #분위기 예쁜 #저렴한 <!-- ERD : 'CafeKeyword cafe_id 카페식별자' 외래키참조 -->
+                </div>
+                <div class="cafe_index_review d-flex flex-column">
+                    <div class="cafe_index_reviewers">
+                        65명의 평가 <!-- Review user_id 유저식별자에서 명 수 세서 표시해야 할듯 -->
+                    </div>
+                    <div class="cafe_index_score">
+                        4.4점 <!-- 어케 할지 모르겠음 -->
+                    </div>
+                    <div class="cafe_index_star">
+                        ⭐️️️️⭐️️️️⭐️️️️⭐️️️️ ☆️️️️ <!-- 어케 할지 모르겠음 -->
+                    </div>
+                </div>
+                <div class="index_buttons d-flex">
+                    <!-- <button id="signup_btn" type="submit" onclick="" data-bs-toggle="modal" data-bs-target="#howorder"></button> -->
+                    <!-- <button  href="#not_login" class="review_like d-flex" role="button" data-toggle="modal">♥좋아요</button> -->
+                    <button class="review_like d-flex" data-bs-toggle="modal" data-bs-target="#not_login">♥좋아요</button>
+                    <button class="review_write d-flex" data-bs-toggle="modal" data-bs-target="#not_login">✍🏻리뷰 하기</button>
+                </div>
+            </div>
+        </div>
+        <div class="cafe_info shadow d-flex flex-column">
+            <div class="cafe_info_address d-flex">
+                <div class="cafe_info_index">주소</div>
+                <div class="address"> 서울특별시 중구 북창동 93-36</div> <!-- ERD : Cafe address 상세주소-->
+            </div>
+            <div class="cafe_info_number d-flex">
+                <div class="cafe_info_index">전화번호</div>
+                <div class="number">  02-352-0303</div> <!-- ERD : Cafe number 전화번호-->
+            </div>
+            <div class="cafe_info_runtime d-flex">
+                <div class="cafe_info_index">영업시간</div>
+                <div class="runtime"> 월~금 10:00 ~ 23:30</br>토,일  11:00 ~ 23:30</div> <!-- ERD : Cafe runtime 영업시간-->
+            </div>
+            <div class="cafe_info_menu d-flex">
+                <div class="cafe_info_index">메뉴</div>
+                &nbsp; &nbsp;
+                <div class="menu">
+                    아메리카노 &nbsp; &nbsp; &nbsp; 4,000원
+                    </br>오츠라떼 &nbsp; &nbsp; &nbsp; 4,500원
+                    </br>아인슈페너 &nbsp; &nbsp; &nbsp; 5,500원
+                    </br>더치 &nbsp; &nbsp; &nbsp; 4,000원
+                    </br>더치 바닐라 &nbsp; &nbsp; &nbsp; 4,500원</div> <!-- ERD : Cafe menu 메뉴정보-->
+            </div>
+        </div>
+        
+        <div class="cafe_reviews shadow d-flex flex-column">
+            <div class="cafe_review_Allinfo d-flex flex-column">
+                <div class="cafe_review_info d-flex">
+                    <div class="cafe_review_title d-flex">
+                        리뷰 제목 <!-- ERD : Review title 제목-->
+                    </div>
+                    <div class="cafe_review_nickname d-flex">
+                        창창한 강쥐 <!-- ERD :  Review user_id 유저식별자 외래키 참조 - User nickname 닉네임-->
+                    </div>
+                    <div class="cafe_review_time d-flex">
+                        2023.02.01 <!-- ERD : Review time 작성날짜-->
+                    </div>
+                    <div class="cafe_review_studentmark d-flex"> 
+                        <img src="/static/image/main_crown 2.png" class="studentmark" width="80px" height="80px"> 
+                    </div> <!--대학생 인증 마크-->
+                </div>
+                <div class="cafe_review_scorestar d-flex">
+                    <div class="cafe_review_score d-flex">
+                        4.4점  
+                    </div>
+                    <div class="cafe_review_star d-flex">
+                        ⭐️️️️⭐️️️️⭐️️️️⭐️️️️⭐️️️️ 
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cafe_review_content d-flex"> <!-- ERD : Review content 내용-->
+                    Lorem ipsum dolor sit amet consectetur.
+                    Massa augue pellentesque at leo sed viverra sed lacus lacus.
+                    Risus sit eu id turpis lacus amet nunc quis fames.
+                    Tortor volutpat arcu pharetra sed sed elit blandit purus.
+                    Placerat erat interdum tortor semper.
+            </div>
+            <div class="cafe_review_keywords d-flex">
+                #공부하기 좋은 #분위기 예쁜 #저렴한 <!-- ERD :  'CafeKeyword review_id 리뷰식별자' 외래키참조-->
+            </div>
+            <div class="cafe_review_images">
+                <img class="cafe_review_image" src="https://picsum.photos/150/150"/> <!-- ERD : Cafe image 대표사진, 사진을 담을 erd개체가 필요해보임[Review.image개체가 있단다 창진아]-->
+                <img class="cafe_review_image" src="https://picsum.photos/150/150"/> <!-- ERD : Cafe image 대표사진, 사진을 담을 erd개체가 필요해보임[Review.image개체가 있단다 창진아]-->
+                <img class="cafe_review_image" src="https://picsum.photos/150/150"/> <!-- ERD : Cafe image 대표사진, 사진을 담을 erd개체가 필요해보임[Review.image개체가 있단다 창진아]-->
+                <img class="cafe_review_image" src="https://picsum.photos/150/150"/> <!-- ERD : Cafe image 대표사진, 사진을 담을 erd개체가 필요해보임[Review.image개체가 있단다 창진아]-->
+                
+            </div>
+        </div>
+    </div>
+</main>
+<!-- modal -->
+<!--로그인 안하고 리뷰쓰기or 좋아요 클릭시 띄우는 모달-->
+<div class="modal fade" id="not_login">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"></div>
+            <div class="modal-body">
+                <span class="modal_text1">로그인 이후에 사용 가능합니다.</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick = "location.href = '#로그인페이지주소' " class="close-btn" data-bs-dismiss="modal">
+                    로그인
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+{% endblock %}
