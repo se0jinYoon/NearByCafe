@@ -28,6 +28,9 @@ def cafe_detail(request,pk,*args,**kwargs):
     #리뷰가 cafe_id를 가지고 있고
     #나의 cafe_id를 가진 리뷰를 가져오면 all_review
     #all_review=cafe.review_set.all()
+    
+    #리뷰 관련 코드
+    
     all_review=cafe.cafeid_set.all()
     
     review_cnt=0
