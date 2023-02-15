@@ -213,6 +213,7 @@
 
     var repeatCheck = []; //여기 전역변수 써도 되나..
     function onClickKeyword() {
+        console.log("clicked!");
         var keyword_picked = event.target;
         var keyword_each = keyword_picked.innerText;
 
@@ -256,6 +257,7 @@
         <button class="remove_btn" onclick="">X</button>
         </button>`;
             }
+            console.log(repeatCheck);
         }
 
         // 키워드 제거
@@ -270,23 +272,23 @@
 
                 // Check if the parent element has class 'keyword_input'
                 if (parent.classList.contains("keyword_input")) {
-                    // If so, get only the child element with class 'keyword_picked'
-                    var keywordPicked = parent.querySelector(".keyword_picked");
-                    // Remove the keywordPicked element
-                    keywordPicked.remove();
-                } else {
-                    // Otherwise, remove the entire parent element
-                    parent.parentNode.removeChild(parent);
+                    console.log(event.target.previousSibling.innerText);
+
+                    for (var i = 0; i < repeatCheck.length; i++) {
+                        if (repeatCheck[i] === event.target.previousSibling.innerText) {
+                            repeatCheck.splice(i, 1);
+                            i--;
+                        }
+                    }
+                    var keywordSibling = event.target.previousSibling;
+                    keywordSibling.remove();
                 }
 
                 // Remove the entire button element that includes the 'remove_btn' class
                 removeButton.parentNode.removeChild(removeButton);
-                repeatCheck.pop(keyword_picked.innerText);
             });
         });
     }
-
-    // Get all the remove buttons on the page
 </script>
 
 <footer class="d-flex justify-content-between align-items-center">
