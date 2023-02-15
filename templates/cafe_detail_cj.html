@@ -53,7 +53,7 @@
                     
                     {% comment %} q.안먹힘..user질문 {% endcomment %}
                     {% if request.user.is_authenticated %}
-                    <button class="review_like d-flex" data-bs-toggle="modal" data-bs-target="#not_login" onclick="onClickLike({{cafe.id}}">♡좋아요</button>
+                    <button class="review_like d-flex" data-bs-toggle="modal" data-bs-target="#not_login" onclick="onClickLike({{cafe.id}})">♡좋아요</button>
                     <button class="review_write d-flex" data-bs-toggle="modal" data-bs-target="#not_login" href="">✍🏻리뷰 하기</button>
                     {% else %}
     
@@ -99,13 +99,15 @@
                         {{review.created_at}} <!-- ERD : Review time 작성날짜-->
                     </div>
                     <div class="cafe_review_studentmark d-flex">
-                        {% if review.mark == True %} 
-    
-                        <img src="/static/image/main_crown 2.png" class="studentmark" width="80px" height="80px"> 
-                        {%else%}
-                        
-                        {% endif %}
+                        <img src="{% static 'image/main_crown.svg' %}" class="studentmark" width="80px" height="80px"> 
                     </div> <!--대학생 인증 마크-->
+                    {% if review.mark == True %}
+                    <div class="cafe_review_studentmark d-flex">
+                        <img src="{% static 'image/main_crown.svg' %}" class="studentmark" width="80px" height="80px"> 
+                    </div> <!--대학생 인증 마크-->
+                    {%else%}
+                           
+                    {% endif %}
                 </div>
                 <div class="cafe_review_scorestar d-flex">
                     <div class="cafe_review_score d-flex">
@@ -170,5 +172,6 @@
     </div>
 </div> {% endcomment %}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<script src="/static/js/cafe_like.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="{% static 'js/cafe_like.js' %}"></script>
 {% endblock %}
