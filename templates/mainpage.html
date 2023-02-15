@@ -1,154 +1,144 @@
-{% extends 'nav.html' %}
-{% block content %}
+{% extends 'nav.html' %} {% block content %}
 <div>
-    <div id="overlay"></div> <!--검색창 그림자용-->
+    <div id="overlay"></div>
+    <!--검색창 그림자용-->
     <div class="main_search d-flex flex-column align-items-center">
         <div class="main_container d-flex flex-column align-items-center">
-        <span class="search_text1 text-light fw-bold ">오늘은 어떤 카페를 찾아볼까요?</span>
+            <span class="search_text1 text-light fw-bold">오늘은 어떤 카페를 찾아볼까요?</span>
 
-        <div class="search_text2">
-        <div>
-            <div class="d-flex flex-row align-items-center">
-                <div class="location_input" onclick="onClickLocationButton()">
-                    <p>지역 선택</p>
-                </div>
-                <span class="search_text_etc text-light fw-bold"> 에서</span>
-            </div>
-            
-
-            <!-- 위치 모달 -->
-            <div class="location_drop display_none">
-                <div class="location_list d-flex flex-column shadow">
-                    <div class="loc-text1">검색할 위치를 선택해주세요.</div>
-                    <div class="d-flex flex-row ">
-                        <div class="d-flex flex-column ">
-                        {% for location in location_list_left %}
-                            <div class="loc1 d-flex flex-row align-center">
-                                <button class="loc_btn "> 
-                                    <span class="loc_list" onclick="onClickLocation()">{{location}}</span>
-                                </button>
-                            </div>
-                        {% endfor %}
+            <div class="search_text2">
+                <div>
+                    <div class="d-flex flex-row align-items-center">
+                        <div class="location_input" onclick="onClickLocationButton()">
+                            <p>지역 선택</p>
                         </div>
-                        
-        
-                        <div class="d-flex flex-column ">
-                        {% for location in location_list_right %}
-                            <div class="loc1 d-flex flex-row align-center">
-                                <button class="loc_btn"> 
-                                    <span class="loc_list" onclick="onClickLocation()">{{location}}</span>
-                                </button>
+                        <span class="search_text_etc text-light fw-bold"> 에서</span>
+                    </div>
+
+                    <!-- 위치 모달 -->
+                    <div class="location_drop display_none">
+                        <div class="location_list d-flex flex-column shadow">
+                            <div class="loc-text1">검색할 위치를 선택해주세요.</div>
+                            <div class="d-flex flex-row">
+                                <div class="d-flex flex-column">
+                                    {% for location in location_list_left %}
+                                    <div class="loc1 d-flex flex-row align-center">
+                                        <button class="loc_btn">
+                                            <span class="loc_list" onclick="onClickLocation()">{{location}}</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+
+                                <div class="d-flex flex-column">
+                                    {% for location in location_list_right %}
+                                    <div class="loc1 d-flex flex-row align-center">
+                                        <button class="loc_btn">
+                                            <span class="loc_list" onclick="onClickLocation()">{{location}}</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+                                </div>
                             </div>
-                        {% endfor %}
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
-        
-        <div>
-            <div class="d-flex flex-row align-items-center">
-                <div class="keyword_input" onclick = "onClickKeywordButton()">
-                    <p>키워드 선택</p>
-                </div>
-                <!-- <div>
+                <div>
+                    <div class="d-flex flex-row align-items-center">
+                        <div class="keyword_input" onclick="onClickKeywordButton()">
+                            <p>키워드 선택</p>
+                        </div>
+                        <!-- <div>
                     <div class="key1"></div>
                     <div class="key2"></div>
                     <div class="key3"></div>
                 </div> -->
 
+                        <button class="search_button">
+                            <a href="" class="fw-bold text-light" id="search_text">카페 찾기</a>
+                            <!--카페 찾기 페이지로 이동-->
+                        </button>
+                    </div>
 
-                <button class="search_button">
-                    <a href="" class="fw-bold text-light" id="search_text" >카페 찾기</a>    <!--카페 찾기 페이지로 이동-->
-                </button>
+                    <div class="keyword_picked_container"></div>
 
-            </div>
-           
-        
-        
-            <div class="keyword_picked_container"></div>
+                    <!-- 키워드 모달 -->
+                    <div class="keyword_drop display_none">
+                        <div class="location_list d-flex flex-column shadow">
+                            <div class="loc-text1">검색할 키워드를 선택해주세요.</div>
+                            <div class="d-flex flex-row">
+                                <div class="d-flex flex-column">
+                                    {% for keyword in keyword_list_left %}
+                                    <div class="loc1 d-flex flex-row align-center">
+                                        <button class="loc_btn"><span class="key_list" onclick="onClickKeyword()">{{keyword}}</span></button>
+                                    </div>
+                                    {% endfor %}
+                                </div>
 
-            <!-- 키워드 모달 -->
-            <div class="keyword_drop display_none">
-                <div class="location_list d-flex flex-column shadow">
-                    <div class="loc-text1">검색할 키워드를 선택해주세요.</div>
-                    <div class="d-flex flex-row ">
-                        <div class="d-flex flex-column ">
-                        {% for keyword in keyword_list_left %}
-                            <div class="loc1 d-flex flex-row align-center"><button class="loc_btn"> <span class="key_list" onclick="onClickKeyword()">{{keyword}}</span></button></div>
-                        {% endfor %}
-                        </div>
-                        
-        
-                        <div class="d-flex flex-column ">
-                        {% for keyword in keyword_list_right %}
-                            <div class="loc1 d-flex flex-row align-center"><button class="loc_btn"> <span class="key_list" onclick="onClickKeyword()">{{keyword}}</span></button></div>
-                        {% endfor %}
+                                <div class="d-flex flex-column">
+                                    {% for keyword in keyword_list_right %}
+                                    <div class="loc1 d-flex flex-row align-center">
+                                        <button class="loc_btn"><span class="key_list" onclick="onClickKeyword()">{{keyword}}</span></button>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            
-        </div>
-        </div>
         </div>
     </div>
-<!-- ---------------cj-------------- -->
+    <!-- ---------------cj-------------- -->
     <div class="intro1">
         <div class="intro_container">
             <div class="intro1_img">
-                <img src="/static/image/mainpage_search.svg">
+                <img src="/static/image/mainpage_search.svg" />
             </div>
-            
+
             <div class="intro_comment">
-                <span class="intro1_span1 fw-bold">우리 학교 근처의</br>좋은 카페는 우리가 잘 아니까</span>
-                <span class="intro1_span2 fw-regular">대학교 근처 카페의 리뷰를 보면서</br>처음 가는 지역이라도 좋은 카페를 쉽게 찾을 수 있어요!</span>
+                <span class="intro1_span1 fw-bold">우리 학교 근처의<br />좋은 카페는 우리가 잘 아니까</span>
+                <span class="intro1_span2 fw-regular">대학교 근처 카페의 리뷰를 보면서<br />처음 가는 지역이라도 좋은 카페를 쉽게 찾을 수 있어요!</span>
             </div>
         </div>
-
     </div>
     <div class="intro2">
         <div class="intro_container">
             <div class="intro_comment">
-                <span class="intro2_span1 fw-bold">대학생 인증 마크로</br>근처 카페의 솔직한 리뷰까지</span>
-                <span class="intro2_span2 fw-regular">해당 지역의 대학생 회원이 작성한</br>솔직한 리뷰로 최고의 카페를 찾아보세요</span>
+                <span class="intro2_span1 fw-bold">대학생 인증 마크로<br />근처 카페의 솔직한 리뷰까지</span>
+                <span class="intro2_span2 fw-regular">해당 지역의 대학생 회원이 작성한<br />솔직한 리뷰로 최고의 카페를 찾아보세요</span>
             </div>
             <div class="intro2_img">
-                <img src="/static/image/main_crown.svg">
+                <img src="/static/image/main_crown.svg" />
             </div>
         </div>
     </div>
     <div class="intro3">
         <div class="intro_container">
             <div class="intro3_img">
-                <img src="/static/image/main_map.svg">
+                <img src="/static/image/main_map.svg" />
             </div>
             <div class="intro_comment">
-                <span class="intro3_span1 fw-bold">목적에 맞는 카페 찾기</br>더 이상 고민하지 마세요</span>
-                <span class="intro3_span2 fw-regular">키워드로 카페를 검색하기만 하면</br>목적에 맞는 카페를 빠르게 찾을 수 있어요</span>
+                <span class="intro3_span1 fw-bold">목적에 맞는 카페 찾기<br />더 이상 고민하지 마세요</span>
+                <span class="intro3_span2 fw-regular">키워드로 카페를 검색하기만 하면<br />목적에 맞는 카페를 빠르게 찾을 수 있어요</span>
             </div>
         </div>
     </div>
-<!-- ---------------cj-------------- -->
-
+    <!-- ---------------cj-------------- -->
 </div>
 
-
 <script>
-
     const location_drop = document.querySelector(".location_drop");
     var clicked_state1 = 0;
-    function onClickLocationButton(){
-        if (clicked_state1 === 1){
+    function onClickLocationButton() {
+        if (clicked_state1 === 1) {
             location_drop.classList.add("display_none");
             clicked_state1 = 0;
-        }
-        else {
+        } else {
             location_drop.classList.remove("display_none");
             clicked_state1 = 1;
-            if(clicked_state2 === 1) {
+            if (clicked_state2 === 1) {
                 keyword_drop.classList.add("display_none");
                 clicked_state2 = 1;
             }
@@ -157,56 +147,51 @@
 
     const keyword_drop = document.querySelector(".keyword_drop");
     var clicked_state2 = 0;
-    function onClickKeywordButton(){
-        if (clicked_state2 === 1){
+    function onClickKeywordButton() {
+        if (clicked_state2 === 1) {
             keyword_drop.classList.add("display_none");
             clicked_state2 = 0;
-        }
-        else {
+        } else {
             keyword_drop.classList.remove("display_none");
             clicked_state2 = 1;
-            if(clicked_state1 === 1) {
+            if (clicked_state1 === 1) {
                 location_drop.classList.add("display_none");
                 clicked_state1 = 1;
             }
-        }      
+        }
     }
 
-        function onClickKeywordText() {
-        if (clicked_state2 === 1){
+    function onClickKeywordText() {
+        if (clicked_state2 === 1) {
             keyword_drop.classList.add("display_none");
             clicked_state2 = 0;
-        }
-        else {
+        } else {
             keyword_drop.classList.remove("display_none");
             clicked_state2 = 1;
-        }      
+        }
     }
 
-    function onClickLocationText(){
-        if (clicked_state1 === 1){
+    function onClickLocationText() {
+        if (clicked_state1 === 1) {
             location_drop.classList.add("display_none");
             clicked_state1 = 0;
-        }
-        else {
+        } else {
             location_drop.classList.remove("display_none");
             clicked_state1 = 1;
         }
     }
 
     function onClickLocation() {
-    var location_picked = event.target;
-    var location_each = location_picked.innerText;
+        var location_picked = event.target;
+        var location_each = location_picked.innerText;
 
-    const location_input = document.querySelector(".location_input");
-    let location_placeholder = location_input.placeholder;
-    location_placeholder = ''
+        const location_input = document.querySelector(".location_input");
+        let location_placeholder = location_input.placeholder;
+        location_placeholder = "";
 
-    const location_picked_text = document.querySelector(".location_input");
-    location_picked_text.innerHTML = `<button class="location_picked" onclick="${onClickLocationText()}"><span class="location_picked_text">${location_each}</span></button>`;
+        const location_picked_text = document.querySelector(".location_input");
+        location_picked_text.innerHTML = `<button class="location_picked" onclick="${onClickLocationText()}"><span class="location_picked_text">${location_each}</span></button>`;
     }
-
-
 
     // function onClickRemove1() {
     //     const remove1 = document.querySelector(".key1")
@@ -226,67 +211,83 @@
     //     console.log('please')
     // }
 
-
-    var repeatCheck = [] //여기 전역변수 써도 되나..
+    var repeatCheck = []; //여기 전역변수 써도 되나..
     function onClickKeyword() {
-    var keyword_picked = event.target;
-    var keyword_each = keyword_picked.innerText;
+        var keyword_picked = event.target;
+        var keyword_each = keyword_picked.innerText;
 
-    const keyword_input = document.querySelector(".keyword_input");
-    // keyword_input.innerText ='';
+        const keyword_input = document.querySelector(".keyword_input");
+        // keyword_input.innerText ='';
 
-    const count = document.querySelectorAll(".keyword_picked_text").length +1
-    
-    if (count === 1) {
-        keyword_input.innerText =''; 
-    }
-    
+        const count = document.querySelectorAll(".keyword_picked_text").length + 1;
 
+        if (count === 1) {
+            keyword_input.innerText = "";
+        }
 
-    if (count < 4 && !repeatCheck.includes(keyword_each)) {
-        // if (count === 1 && !repeatCheck.includes(keyword_each)) {
-        // repeatCheck.push(keyword_each)
-    
-        // const keyword_picked_text = document.querySelector(".key1");
+        if (count < 4 && !repeatCheck.includes(keyword_each)) {
+            // if (count === 1 && !repeatCheck.includes(keyword_each)) {
+            // repeatCheck.push(keyword_each)
 
-        // keyword_picked_text.innerHTML += `<button class="keyword_picked">
-        // <span class="keyword_picked_text">${keyword_each}</span>
-        // <button class="remove_btn" onclick="onClickRemove1()">X</button>
-        // </button>`;
+            // const keyword_picked_text = document.querySelector(".key1");
 
-        // console.log(count)
-    // }
-        if (count === 3 && !repeatCheck.includes(keyword_each)){
-        repeatCheck.push(keyword_each)
-    
-        const keyword_picked_text = document.querySelector(".keyword_input");
-        keyword_picked_text.innerHTML += `<button class="keyword_picked" onclick="${onClickKeywordText()}">
+            // keyword_picked_text.innerHTML += `<button class="keyword_picked">
+            // <span class="keyword_picked_text">${keyword_each}</span>
+            // <button class="remove_btn" onclick="onClickRemove1()">X</button>
+            // </button>`;
+
+            // console.log(count)
+            // }
+            if (count === 3 && !repeatCheck.includes(keyword_each)) {
+                repeatCheck.push(keyword_each);
+
+                const keyword_picked_text = document.querySelector(".keyword_input");
+                keyword_picked_text.innerHTML += `<button class="keyword_picked" onclick="${onClickKeywordText()}">
         <span class="keyword_picked_text">${keyword_each}</span>
         <button class="remove_btn" onclick="">X</button>
         </button>`;
-        console.log(count)
-        console.log("test")
-    }
-    if (count < 4 && !repeatCheck.includes(keyword_each)){    
-        repeatCheck.push(keyword_each)
-    
-        const keyword_picked_text = document.querySelector(".keyword_input");
-        keyword_picked_text.innerHTML += `<button class="keyword_picked">
+            }
+            if (count < 4 && !repeatCheck.includes(keyword_each)) {
+                repeatCheck.push(keyword_each);
+
+                const keyword_picked_text = document.querySelector(".keyword_input");
+                keyword_picked_text.innerHTML += `<button class="keyword_picked">
         <span class="keyword_picked_text">${keyword_each}</span>
         <button class="remove_btn" onclick="">X</button>
         </button>`;
-    
-        console.log(count)
+            }
+        }
+
+        // 키워드 제거
+        // Get all the remove buttons on the page
+        var removeButtons = document.querySelectorAll(".remove_btn");
+
+        // Loop through each remove button and add a click event listener
+        removeButtons.forEach(function (removeButton) {
+            removeButton.addEventListener("click", function () {
+                // Get the parent element of the remove button
+                var parent = removeButton.parentNode;
+
+                // Check if the parent element has class 'keyword_input'
+                if (parent.classList.contains("keyword_input")) {
+                    // If so, get only the child element with class 'keyword_picked'
+                    var keywordPicked = parent.querySelector(".keyword_picked");
+                    // Remove the keywordPicked element
+                    keywordPicked.remove();
+                } else {
+                    // Otherwise, remove the entire parent element
+                    parent.parentNode.removeChild(parent);
+                }
+
+                // Remove the entire button element that includes the 'remove_btn' class
+                removeButton.parentNode.removeChild(removeButton);
+                repeatCheck.pop(keyword_picked.innerText);
+            });
+        });
     }
-    }
 
-    }
-
-
-
-
+    // Get all the remove buttons on the page
 </script>
-
 
 <footer class="d-flex justify-content-between align-items-center">
     <span fw-normal><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;helloncofficial@gmail.com</span>
