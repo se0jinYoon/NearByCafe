@@ -23,7 +23,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */ /* 메인페이지에서 위에 커피콩 그림부분이 깨져서 임시로 주석처리 */
     margin: 0;
 }
 
