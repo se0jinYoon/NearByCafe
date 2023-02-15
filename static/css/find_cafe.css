@@ -239,3 +239,20 @@ input::placeholder{
 .display_none {
     display: none;
 }
+
+
+.location_picked {
+    background-color: #728137;
+    /* position: absolute;
+    top: 238px;
+    left: 462px; */
+    border-radius: 4px;
+    border: none;
+    margin-left: 10px;
+}
+
+.location_picked_text{
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
