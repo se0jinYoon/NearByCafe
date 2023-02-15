@@ -5,6 +5,32 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 
+class location:
+   def __init__(self,name,lat,lng):
+    self.name = name
+    self.lat = lat
+    self.lng = lng
+
+
+location_dict = {'왕십리' : [37.56122596158312,127.03430549372456],
+'강남':[37.49766189275592 , 127.02829414076893],
+'건대':[37.53945064514514,127.0707408606652],
+'서울대':[37.480482246689576, 126.95181374421041],
+'동작':[37.49804283076126, 126.98563799296839],
+'노량진':[37.513022816640365,126.9432870154441],
+'구로':[37.503177063791,126.88453062451542],
+'목동/양천':[37.52784583486552,126.86675357877786],
+'광운대':[37.623248712464395,127.06054605501177],
+'수유':[37.63783923564135,127.0264551328912],
+'김포공항':[37.56599532536502,126.82612996276936],
+'서울전체(용산)':[ 37.52986223233116, 126.96586726417681]
+}
+
+
+
+
+
+
 #1.지역설정
 #2.키워드 설정 필터링
 #3.지도에 핀 꽂기 
@@ -68,8 +94,8 @@ def find_cafe_ajax(request, *args, **kwargs):
         # cafes_latlog = cafes.location.name
         cafes=list((cafes).values())
         context = {
-        'latitude':latitude,
-        'longtitude':longtitude,
+        'latitude':location_dict[location][0],
+        'longtitude':location_dict[location][1],
         'cafes':cafes,
         }
         

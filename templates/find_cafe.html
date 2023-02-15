@@ -30,7 +30,7 @@
                 {% for location in location_list_left %}
                     <div class="loc1 d-flex flex-row align-center">
                         <button class="loc_btn"> 
-                            <span class="loc_list" onclick="onClickLocation()">{{location}}</span>
+                            <span class="loc_list" onclick="onClickLocation('{{location}}')">{{location}}</span>
                         </button>
                     </div>
                 {% endfor %}
@@ -41,7 +41,7 @@
                 {% for location in location_list_right %}
                     <div class="loc1 d-flex flex-row align-center">
                         <button class="loc_btn"> 
-                            <span class="loc_list" onclick="onClickLocation()">{{location}}</span>
+                            <span class="loc_list" onclick="onClickLocation('{{location}}')">{{location}}</span>
                         </button>
                     </div>
                 {% endfor %}
@@ -198,7 +198,7 @@
         }
     }
 
-    function onClickLocation() {
+    const onClickLocation =  async (location) => {
         var location_picked = event.target;
         var location_each = location_picked.innerText;
 
@@ -210,6 +210,24 @@
         location_picked_text.innerHTML = `<button class="location_picked" onclick="${onClickLocationText()}">
             <span class="location_picked_text">${location_each}</span>
             </button>`;
+        const res = await fetch('/find_cafe_ajax/', {
+        method:"POST",
+        headers:{
+            "Content-Type":"application/x-www-form-urlencoded",
+        },
+        body:JSON.stringify({location:location}),//보내는거
+    });
+
+    // const res = await fetch('/cafe/find_cafe')
+    // .then(console.log(Response))
+    // .catch(console.log(console.error()))
+
+    //받는거
+    const {latitude:latitude, longtitude:longtitude, cafes:cafes} = await res.json();
+    console.log(latitude,longtitude,cafes);
+    cafeHandleResponse(cafes);
+    panTo(latitude,longtitude);
+
     }
 
 </script>
@@ -227,4 +245,5 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="static/find_cafe.js"
 {% endblock %}

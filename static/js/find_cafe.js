@@ -1,6 +1,6 @@
 const onClickLocationList = async (location) => {
     
-    const res = await fetch('/cafe/find_cafe_ajax/', {
+    const res = await fetch('/find_cafe_ajax/', {
         method:"POST",
         headers:{
             "Content-Type":"application/x-www-form-urlencoded",
