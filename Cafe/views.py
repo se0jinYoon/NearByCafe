@@ -5,25 +5,19 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 
-class location:
-   def __init__(self,name,lat,lng):
-    self.name = name
-    self.lat = lat
-    self.lng = lng
 
-
-location_dict = {'왕십리' : [37.56122596158312,127.03430549372456],
-'강남':[37.49766189275592 , 127.02829414076893],
-'건대':[37.53945064514514,127.0707408606652],
-'서울대':[37.480482246689576, 126.95181374421041],
-'동작':[37.49804283076126, 126.98563799296839],
-'노량진':[37.513022816640365,126.9432870154441],
-'구로':[37.503177063791,126.88453062451542],
-'목동/양천':[37.52784583486552,126.86675357877786],
-'광운대':[37.623248712464395,127.06054605501177],
-'수유':[37.63783923564135,127.0264551328912],
-'김포공항':[37.56599532536502,126.82612996276936],
-'서울전체(용산)':[ 37.52986223233116, 126.96586726417681]
+location_dict = {'왕십리/한양대/성수' : [37.56122596158312,127.03430549372456],
+'강남/역삼/선릉/압구정':[37.49766189275592 , 127.02829414076893],
+'건대입구/세종대':[37.53945064514514,127.0707408606652],
+'서울대입구/신림':[37.480482246689576, 126.95181374421041],
+'동작/흑석/상도':[37.49804283076126, 126.98563799296839],
+'노량진/여의도/영등포/당산':[37.513022816640365,126.9432870154441],
+'구로/신도림':[37.503177063791,126.88453062451542],
+'목동/양천/금천':[37.52784583486552,126.86675357877786],
+'광운대/공릉/노원/도봉':[37.623248712464395,127.06054605501177],
+'수유/미아':[37.63783923564135,127.0264551328912],
+'김포공항/염창/강서':[37.56599532536502,126.82612996276936],
+'서울 전체':[ 37.52986223233116, 126.96586726417681]
 }
 
 
@@ -41,7 +35,6 @@ def main_keyword_list(request, *args, **kwargs):
     context = {
             'keyword_list' : cafe_keyword,
     } 
-    return JsonResponse(context)
 
 
 def main_page(request, *args, **kwargs):
@@ -116,9 +109,6 @@ def find_cafe_ajax(request, *args, **kwargs):
         print('get')
         req = json.loads(request.body)
         location = req['location']
-        location = Location.objects.get(name=location)
-        latitude = location.latitude
-        longtitude = location.longtitude
         # selected_location = request.GET['location']
         selected_location = location
         cafe_location = Location.objects.get(name = selected_location)
