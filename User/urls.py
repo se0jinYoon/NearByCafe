@@ -6,6 +6,7 @@ app_name = "User"
 urlpatterns = [
 
     path('login/', views.login_page, name='login'),
+    path('logout/', views.logout_page, name='logout'),
     path("findpw/", views.findpw, name="findpw"),
     path("signup/", views.sign_up, name='sign_up'),
     path('sendmail/<str:user_name>/<str:user_email>/',

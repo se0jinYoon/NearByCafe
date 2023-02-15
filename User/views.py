@@ -12,6 +12,7 @@ from User.models import *
 from User.forms import SignupForm
 from django.contrib import auth
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -91,10 +92,11 @@ def login_page(request):
 
 
 # 로그아웃 페이지
-def logout(request):
-    if request.method == 'POST':
+def logout_page(request):
+    if request.user.is_authenticated:
         auth_logout(request)
-        return redirect('/')
+
+    return redirect('/')
 
 
 # 프로필 페이지
