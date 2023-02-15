@@ -45,13 +45,14 @@ def cafe_detail(request,pk,*args,**kwargs):
         
         #학교인증마크 획득
         if school_match(cafe.location_id.name,review.user_id.email_address):
-            print("1")
+           
             review.mark=True
         else:
             review.mark=False
-            print("2")
+            
         review.save()
-    average_star=sum_star/review_cnt
+    if review_cnt==0:average_star==0
+    else:average_star=sum_star/review_cnt
     
     r_average_star=round(average_star)
     
@@ -70,6 +71,7 @@ def cafe_detail(request,pk,*args,**kwargs):
     
     return render(request,"cafe_detail_cj.html",context=context)
 
+#리뷰에서 대학생인증마크 획득
 def school_match(cafe_location,user_school_email):
     pattern = re.compile(r'@([\w.]+)')
     match = pattern.findall(user_school_email)
