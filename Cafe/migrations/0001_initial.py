@@ -29,6 +29,8 @@ class Migration(migrations.Migration):
                 ("runtime", models.CharField(max_length=48)),
                 ("menu", models.TextField()),
                 ("number", models.CharField(max_length=16)),
+                ("latitude", models.FloatField(default=37.314964)),
+                ("longtitude", models.FloatField(default=126.575308)),
             ],
         ),
         migrations.CreateModel(
@@ -58,8 +60,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("name", models.CharField(max_length=32)),
-                ("latitude", models.FloatField(default=37.314964)),
-                ("longtitude", models.FloatField(default=126.575308)),
+               
             ],
         ),
         migrations.CreateModel(
