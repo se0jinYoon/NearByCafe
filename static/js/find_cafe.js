@@ -1,17 +1,25 @@
+
 const onClickLocationList = async (location) => {
+
+    //선택 키워드 뽑아내기
+    var seleted_ck=[];
+
+    $("input[name=checkbox]:checked").each(function(){
+            var chk=$(this).val();
+        seleted_ck.push(chk);
+    })
     
     const res = await fetch('/cafe/find_cafe_ajax/', {
         method:"POST",
         headers:{
             "Content-Type":"application/x-www-form-urlencoded",
         },
-        body:JSON.stringify({location:location}),//보내는거
+        body:JSON.stringify({location:location,seleted_ck:seleted_ck}),//보내는거
     });
 
     // const res = await fetch('/cafe/find_cafe')
     // .then(console.log(Response))
     // .catch(console.log(console.error()))
-
 
     //받는거
     const {latitude:latitude, longtitude:longtitude, cafes:cafes} = await res.json();
@@ -55,4 +63,4 @@ const panTo=(latitude,longtitude)=>{
 }
 
 
- 
+
