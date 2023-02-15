@@ -1,0 +1,258 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+.notosanskr * { 
+ font-family: 'Noto Sans KR', sans-serif;
+}
+
+* {
+    font-family: 'Noto Sans KR';
+    box-sizing: border-box;
+}
+
+.overlay {
+    width: 100vw;
+    height: 100vh;
+    position: absolute; 
+    opacity: 0.5;
+    z-index: -1;
+    background-color: #F8F4E9;
+}
+
+body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+/* ======================  base.css ====================== */
+
+.container1 {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.left_container {
+    padding: 34px 20px 34px 20px;
+    width: 400px;
+    margin-right: 20px;
+}
+
+.location_text, .keyword_text1 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.selected_location {
+    width: 220px;
+    height: 48px;
+    margin-bottom: 14px;
+    cursor: pointer;
+    border: 1px solid #B1B1B1;
+    border-radius: 4px;
+    background-color: transparent;
+}
+
+.selected_location_cat {
+    border: none;
+    width: 160px;
+    height: 32px;
+    background-color: #728137;
+    cursor: default;
+}
+
+input::placeholder{
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.location_list {
+    background-color: white;
+    border: 1px solid #B1B1B1;
+    width: 384px;
+}
+
+.loc-text1{
+    padding: 18px 10px 18px 10px;
+    font-weight: bold;
+}
+
+.loc1 {
+    width: 192px;
+    border: 0.5px solid #B1B1B1;
+    padding-left: 10px;
+}
+
+.loc_list {
+    color: #3D3D3D;
+    font-size: 14px;
+}
+
+.loc_btn {
+    background-color: white;
+    border: none;
+    padding: 5px 0 5px 0;
+
+}
+
+.keyword_box {
+    width: 360px;
+    height: 180px;
+    padding: 16px;
+    border: 1px solid #B1B1B1;
+    border-radius: 4px;
+    background-color: transparent;
+}
+
+.checkbox {
+    width: 16px;
+    height: 16px;
+    color: #D9D9D9;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.checkbox_list {
+    font-size: 10px;
+    font-weight: light;
+}
+
+.sort_abc {
+    width: 100px;
+    height: 32px;
+    background-color: #728137;
+    /* border: 1px solid #B1B1B1; */
+    border: none;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.sort_container {
+    position: relative;
+}
+
+.sort {
+    padding: 22px 0 16px 18px;
+}
+
+.sort_star {
+    width: 80px;
+    height: 32px;
+    background-color: #F3F0E7;
+    /* border: 1px solid #B1B1B1; */
+    border: none;
+    border-radius: 4px;
+}
+
+.date_text {
+    margin-right: 20px;
+}
+
+.cat1, .cat2 {
+    margin-right: 20px;
+    margin-bottom: 6px;
+}
+
+.cat3 {
+    margin-bottom: 6px;
+}
+
+.sort_text3 {
+    font-size: 12px;
+    font-weight: light;
+    position: absolute;
+    right: 10px;
+}
+
+.btn_text1 {
+    color: white;
+    font-weight: bold;
+}
+
+.btn_text2 {
+    color: black;
+    font-weight: bold;
+}
+
+.cafe {
+    width: 400px;
+    height: 200px;
+    background-color: white;
+    padding: 50px 0 50px 0;
+    border-top: 2px #B1B1B1;
+    border-bottom: 3px solid #e4e4e4;
+}
+
+.cafe_img {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+}
+
+.cafe_name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.cafe_loc {
+    font-size: 12px;
+    color: #757575;
+}
+
+.cafe_categ {
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+.more_btn {
+    width: 200px;
+    height: 32px;
+    background-color: #728137;
+    border: none;
+    border-radius: 4px;
+    margin-top: 32px;
+    text-align: center;
+}
+
+.more_text {
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    align-self: center;
+}
+
+#map {
+    width:100%;
+    height:942px;
+}
+
+.dropdown_location_list {
+    top:200px;
+    position: absolute;
+    z-index: 999;
+}
+
+.display_none {
+    display: none;
+}
+
+
+.location_picked {
+    background-color: #728137;
+    /* position: absolute;
+    top: 238px;
+    left: 462px; */
+    border-radius: 4px;
+    border: none;
+    margin-left: 10px;
+}
+
+.location_picked_text{
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
