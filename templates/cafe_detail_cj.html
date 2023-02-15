@@ -98,9 +98,9 @@
                     <div class="cafe_review_time d-flex">
                         {{review.created_at}} <!-- ERD : Review time 작성날짜-->
                     </div>
-                    <div class="cafe_review_studentmark d-flex">
+                    {% comment %} <div class="cafe_review_studentmark d-flex">
                         <img src="{% static 'image/main_crown.svg' %}" class="studentmark" width="80px" height="80px"> 
-                    </div> <!--대학생 인증 마크-->
+                    </div> <!--대학생 인증 마크--> {% endcomment %}
                     {% if review.mark == True %}
                     <div class="cafe_review_studentmark d-flex">
                         <img src="{% static 'image/main_crown.svg' %}" class="studentmark" width="80px" height="80px"> 
