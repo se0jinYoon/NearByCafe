@@ -1,6 +1,9 @@
-
+const strip = (string) => {
+    return string.replace(/^\s+|\s+$/g, "");
+};
 cnt=0
-const onClickLike=async(id)=>{
+// <button class="review_like d-flex" data-bs-toggle="modal" data-bs-target="#not_login" onclick="onClickLike({{cafe.id}}">♡좋아요</button>
+const onClickLike=async(id,clicked)=>{
     
     //좋아요 눌렀을때
     if (cnt==0){
@@ -15,15 +18,16 @@ const onClickLike=async(id)=>{
 
     const url="/cafe_like/"
     const {data}=await axios.post(url,{
-        id,clicked
+        id,clicked,
     });
 
-    likeHandleResponse(data.clicked);
+    likeHandleResponse(data.id,data.clicked);
 }
 
-const likeHandleResponse=(clicked)=>{
-    var element=document.querySelector('.review_like');
-    if(clicked=true){
+const likeHandleResponse=(id,clicked)=>{
+    const element=document.querySelector('.review_like');
+    const orginhtml=element.innerHTML;
+    if(clicked===true){
         element.innerHTML=`♥좋아요`;
     }
     else{
