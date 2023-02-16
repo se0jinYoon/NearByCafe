@@ -4,6 +4,8 @@
     <div class="left_container">
         <div class="location_container d-flex flex-column">
             <div class="location_text fw-bold">지역 설정</div>
+            <button class="search" onclick="onClickSearch('{{location}}')">검색하기</button>
+                   
 
             <!-- <button class="selected_location" onClick="onClickLocationButton()" >
                 <input class="selected_location_cat" 
@@ -23,9 +25,7 @@
             <div class="dropdown_location_list display_none">
                 <div class="location_list d-flex flex-column shadow">
                     <div class="loc-text1">검색할 위치를 선택해주세요.</div>
-
-                    <button class="search" onclick="onClickLocationList('{{location}}')">검색하기</button>
-                        
+     
                     <div class="d-flex flex-row">
                         <div class="d-flex flex-column">
                             {% for location in location_list_left %}
@@ -220,7 +220,7 @@
     }
 
 
-    const onClickLocation = async (location) => {
+    const onClickSearch = async (location) => {
 
         var location_picked = event.target;
         var location_each = location_picked.innerText;
@@ -240,8 +240,7 @@
         var chk=$(this).val();
         seleted_ck.push(chk);
         console.log(chk);
-            //키워드 선택//
-
+    
         })
     
         const res = await fetch("/find_cafe_ajax/", {
