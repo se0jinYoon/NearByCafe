@@ -85,10 +85,13 @@ def main_page(request, *args, **kwargs):
         "keyword_list_right" : keyword_list_right,
     }
 
+    # 카페 검색 POST를 받았을 시
+    if request.method == 'POST':
+        loc = request.POST.get('cafe_location_name','test')
+        keywrd = request.POST.get('cafe_keyword_name','test')
 
+        
     return render(request,"mainpage.html", context=context)
-
-
 
 
 
