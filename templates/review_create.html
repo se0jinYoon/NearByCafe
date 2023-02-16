@@ -12,12 +12,22 @@
     <div class="star_container shadow d-flex flex-row align-items-center">
         <span class="star_text fw-light">평점 남기기</span>
         <div class="star">
-        
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>        
+            <!-- 별점 찍기 (cj) -->
+            <fieldset>
+                <div>
+                    <input type="radio" style="display: none;" id="star1" name="stars" value="1" onclick="review_starlike(1)">
+                    <label for="star1"><i class="fa-regular fa-star"></i></label>
+                    <input type="radio" style="display: none;" id="star2" name="stars" value="2" onclick="review_starlike(2)">
+                    <label for="star2"><i class="fa-regular fa-star"></i></label>
+                    <input type="radio" style="display: none;" id="star3" name="stars" value="3" onclick="review_starlike(3)">
+                    <label for="star3"><i class="fa-regular fa-star"></i></label>
+                    <input type="radio" style="display: none;" id="star4" name="stars" value="4" onclick="review_starlike(4)">
+                    <label for="star4"><i class="fa-regular fa-star"></i></label>
+                    <input type="radio" style="display: none;" id="star5" name="stars" value="5" onclick="review_starlike(5)">
+                    <label for="star5"><i class="fa-regular fa-star"></i></label>
+                </div>
+            </fieldset>    
+        <!--  -->
         </div>
         <!--i태그 써서 구현 변경 필요-->
     </div>
@@ -85,11 +95,95 @@
                 <span class="main_text">사진 등록하기</span>
                 <span class="sub_text">최대 4장까지 업로드 할 수 있어요!</span>
             </div>
+
+            <!-- 사진 등록(미완,cj, 16일 3시 24분) -->
+            <input type="file" class="real-upload" accept="image/*" required multiple style="display: none;">
+            <div class=" d-flex" style="display: contents;">
+                <div class="image_preview d-flex">
+                    <!-- <img src="Frame 1.png" alt="" width="150" height="150"> -->
+                </div>
+                <img src="addimage.svg" class="upload_img" width="200" height="200"/>
+            </div>
+            <!--  -->
+
         </div>
 <!-- 제출 임시구현 -->
 <button id="login_btn" type="button" onclick="onClickReview()" >제출</button>
     </form>
 </div>
+
+<!--  별점찍기, 사진 등록 js (cj,16일 3시 24분) -->
+<!-- 별점 찍기(값 넘겨주기는 미완) -->
+<script>
+    function review_starlike(value) {
+      for (let i = 1; i <= 5; i++) {
+        let star_icon = document.getElementById("star" + i).nextElementSibling.firstElementChild;
+        if (i <= value) {
+          star_icon.classList.remove("fa-regular");
+          star_icon.classList.add("fa-solid");
+        } else {
+          star_icon.classList.remove("fa-solid");
+          star_icon.classList.add("fa-regular");
+        }
+      }
+    }
+    </script>
+    
+   <!--사진 등록하기(미완, 사진 4개 이상 저장시 추가버튼 사라지기 구현 못함) -->
+   <script> 
+       function getImageFiles(e){
+           const uploadFiles=[];
+           const files=e.currentTarget.files;
+           const imagepreview=document.querySelector('.image_preview');
+           const docFrag=new DocumentFragment()
+          //  console.log(typeof files,files)
+           if ([...files].length>4){
+              alert('최대 4장까지 가능');
+              return;
+           }
+           [...files].forEach(file =>{
+               if (!file.type.match("image/.*")){
+                  alert('이미지 파일만 업로드 가능');
+                  return;
+               }
+           
+           if ([...files].length<=4){
+               uploadFiles.push(files);
+               const reader =new FileReader();
+               reader.onload=(e)=>{
+                   const preview =createElement(e,file);
+                   imagepreview.appendChild(preview);
+               };
+               reader.readAsDataURL(file);
+           }
+           });
+       }
+   function createElement(e,file){
+       const li= document.createElement('ui');
+       const img= document.createElement('img');
+       img.setAttribute('src',e.target.result);
+       img.setAttribute('data-file',file.name);
+       li.appendChild(img);
+       li.classList.add("d-flex");
+       li.classList.add("img_here");
+       img.classList.add("post_reviewimg")
+       return li;
+   }
+   function count_four(){
+      const four_ui=document.querySelectorAll('.img_here');
+      console.log(four_ui);
+   }
+   
+     const realUpload = document.querySelector('.real-upload');
+     const upload = document.querySelector('.upload_img');
+     const img_tag = document.querySelector('.post_reviewimg');
+     upload.addEventListener('click', () => realUpload.click());
+     realUpload.addEventListener('change', getImageFiles);
+     img_tag.addEventListener('onclick', count_four);
+   
+   </script>
+<!--  -->
+
 <script>
     var keywords_selected = [];
     function change_btn() {
