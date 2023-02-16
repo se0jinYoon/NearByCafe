@@ -1,14 +1,15 @@
 
 const onClickLocationList = async (location) => {
 
-    //선택 키워드 뽑아내기
+        //선택 키워드 뽑아내기
     var seleted_ck=[];
 
     $("input[name=checkbox]:checked").each(function(){
             var chk=$(this).val();
         seleted_ck.push(chk);
+        console.log(chk);
     })
-    
+
     const res = await fetch('/find_cafe_ajax/', {
         method:"POST",
         headers:{

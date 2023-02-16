@@ -163,14 +163,14 @@ def find_cafe_ajax(request, *args, **kwargs):
             if len(same)>=2:
                 cafes.append(cafe)
 
-        context = {
+        ctx = {
         'latitude':location_dict[location][0],
         'longtitude':location_dict[location][1],
         'cafes':cafes,
         }
         
  
-    return JsonResponse(context=context)
+    return JsonResponse(context=ctx)
 
     
     
