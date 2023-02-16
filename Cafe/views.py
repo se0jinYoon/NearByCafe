@@ -1,7 +1,7 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, reverse
 from Cafe.models import *
 from django.http.request import HttpRequest
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import json,math
 from Review.models import *
@@ -88,9 +88,10 @@ def main_page(request, *args, **kwargs):
 
     # 카페 검색 POST를 받았을 시
     if request.method == 'POST':
-        loc = request.POST.get('cafe_location_name','test')
-        keywrd = request.POST.get('cafe_keyword_name','test')
-
+        loc = request.POST.get('cafe_location_name')
+        keyword = request.POST.get('cafe_keyword_name')
+        print(request.POST)
+        return redirect("Cafe:find_cafe")
         
     return render(request,"mainpage.html", context=context)
 
@@ -114,12 +115,13 @@ def find_cafe(request, *args, **kwargs):
         "location_list_left" : location_list_left,
         "location_list_right" : location_list_right,
     }
+
+    print(request.GET)
     return render(request,"find_cafe.html", context=context)
 
 
 @csrf_exempt
 def find_cafe_ajax(request, *args, **kwargs):
-
     if request.method == 'POST':
         #프론트에서 넘겨줘야함! html에서 location의 문자열 보내주기
         print('get')

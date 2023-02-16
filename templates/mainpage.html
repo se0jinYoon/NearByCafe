@@ -55,11 +55,10 @@
                 </div> -->
                         <form action="" method="POST">
                             {% csrf_token %}
-                            <input type="hidden" name="request_type" id="request_type" value="POST" />
                             <input type="hidden" name="cafe_location_name" id="cafe_location_name" value="" />
                             <input type="hidden" name="cafe_keyword_name" id="cafe_keyword_name" value="" />
                             <button type="submit" class="search_button">
-                                <a href="" class="fw-bold text-light" id="search_text">카페 찾기</a>
+                                <span class="fw-bold text-light" id="search_text">카페 찾기</span>
                                 <!--카페 찾기 페이지로 이동-->
                             </button>
                         </form>
