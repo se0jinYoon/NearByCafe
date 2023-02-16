@@ -14,6 +14,7 @@ class Review(models.Model):
     #keyword_id=models.ForeignKey(Keyword,on_delete=models.CASCADE,related_name="keyword_id")
     user_id=models.ForeignKey(Users,on_delete=models.CASCADE,related_name="Review_user")
     
+    #keywords=models.Textfield()~
     
 class ReviewLike(models.Model):
     user_id=models.ForeignKey(Users,on_delete=models.CASCADE,related_name="ReviewLike_user")
