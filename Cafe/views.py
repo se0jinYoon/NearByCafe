@@ -124,13 +124,23 @@ def find_cafe_ajax(request, *args, **kwargs):
         # selected_location = request.GET['location']
         selected_location = location
         cafe_location = Location.objects.get(name = selected_location)
-        cafes = cafe_location.cafe_set.all()
+        cafes_objects = cafe_location.cafe_set.all()
         # cafes_latlog = cafes.location.name
-        cafes=list((cafes).values())
+        cafes=list((cafes_objects).values())
+        
+        #키워드 해당하는 cafes필터링
+        #q1. 저 cafes첫번째꺼 변수명 바꿔도되나요?저는 객체가 필요해섭,,
+        #qq. 카페키워드 가진 애 filter 변수 채우기
+         
+        seleted_keywords=req['seleted_ck']#선택된 키워드 리스트
+        #selected_cafe=cafes_objects.filter()
+        
+        
         context = {
         'latitude':location_dict[location][0],
         'longtitude':location_dict[location][1],
         'cafes':cafes,
+        'selected_cafe':selected_cafe,
         }
         
     # return render(request,"find_cafe.html",context=context)
