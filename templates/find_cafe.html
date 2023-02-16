@@ -234,15 +234,31 @@
     var element = document.querySelector(".cafe_list");
     element.innerHTML = `<div class="cafe_list">`
     cafes.forEach(item => {
+        let start = '⭐⭐⭐⭐⭐'
+        if(item.average_star === 1){
+            star = '⭐';
+        }
+        else if(item.aver_start === 2){
+            star = '⭐⭐';
+        }
+        else if(item.aver_start === 3){
+            star = '⭐⭐⭐';
+        }
+        else if(item.aver_start === 4){
+            star = '⭐⭐⭐⭐';
+        }
+        else if(item.aver_start === 5){
+            star = '⭐⭐⭐⭐⭐';
+        }
         element.innerHTML +=  `
         <div class="cafe d-flex">
-            <img src=${item.image}></img>
+            <img src="${item.image}" alt="이미지가 없습니다" class="cafe_img">
         <span class="cafe_name">${item.name}</span>                    
         <span class="cafe_loc">${item.address}</span>         
-        <span class="cafe_categ">#공부하기 좋은 #분위기 예쁜 #저렴한</span> 
+        <span class="cafe_categ">${item.keywords}</span> 
         <div class="cafe_star_info">             
             <span style="color: #F8AA14">3.0</span>                     
-            <span>⭐️⭐️⭐️⭐️⭐️</span>                
+            <span>${star}</span>                
             <span style="color: #AAAAAA">(65)</span>                    
         </div>
     </div>`

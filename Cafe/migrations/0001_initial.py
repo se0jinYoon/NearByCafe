@@ -31,6 +31,7 @@ class Migration(migrations.Migration):
                 ("number", models.CharField(max_length=16)),
                 ("latitude", models.FloatField(default=37.314964)),
                 ("longtitude", models.FloatField(default=126.575308)),
+                ("keywords",models.TextField(null=True))
             ],
         ),
         migrations.CreateModel(
