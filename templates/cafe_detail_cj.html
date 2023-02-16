@@ -21,7 +21,9 @@
                     위치:{{cafe.location_id.name}}<!-- ERD에 명시x , Cafe address에서 '구'만 따로 빼와야할까? -->
                 </div>
                 <div class="cafe_index_keywords">
-                    #우선 나중에 <!-- ERD : 'CafeKeyword cafe_id 카페식별자' 외래키참조 -->
+                    #우선 나중에
+                    {{cafe.keywords}}
+                    <!-- ERD : 'CafeKeyword cafe_id 카페식별자' 외래키참조 -->
                 </div>
                 <div class="cafe_index_review d-flex flex-column">
                     <div class="cafe_index_reviewers">
@@ -135,12 +137,8 @@
                     
             </div>
             <div class="cafe_review_keywords d-flex">
-                {% for value, text in form.review.keywords.field.choices %}
-                <div class="ui slider checkbox"></div>
-                <input id="id_keywords_{{ forloop.counter0 }}" name="{{ form.review.keywords.name }}" type="checkbox" value="{{ value }}"{% if value in checked_keywords %} checked="checked"{% endif %}>
-                <label>{{ text }}</label>
-                </div>
-                {% endfor %}
+                {% comment %} {{review.keywords}} {% endcomment %}
+
                 #리뷰키워드 <!-- ERD :  'CafeKeyword review_id 리뷰식별자' 외래키참조-->
             </div>
             <div class="cafe_review_images">
