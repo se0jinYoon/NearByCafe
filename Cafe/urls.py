@@ -9,4 +9,9 @@ urlpatterns = [
     path('keyword_list/', views.main_keyword_list, name='keyword_list'),
     path('find_cafe/',views.find_cafe,name="find_cafe"),
     path('find_cafe_ajax/',views.find_cafe_ajax,name="find_cafe_ajax"),
+<<<<<<< Updated upstream
+=======
+    # path('cafe_detail/<int:pk>/',views.cafe_detail,name="cafe_detail"),
+  
+>>>>>>> Stashed changes
 ]

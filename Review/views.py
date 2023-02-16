@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from Review.forms import ReviewForm
 import json
+from collections import Counter
 
 
 
@@ -45,6 +46,23 @@ def review_create(request):
             # review.cafe_id = Cafe.objects.get(pk=pk)
             review.save()
 
+            #리뷰의 키워드(review의 keywords)를 카운트해서 카페 키워드(cafe의 keywords)로 보내주기
+            cafe_keywords=[]
+            cnt=Counter(review.keywords)
+            if cnt>=3:
+                x=cnt.most_common(3)
+            else:x=cnt.most_common(len(cnt))
+
+            for key in x.itmes():
+                cafe_keywords.append(key)
+
+            #리뷰키워드 cafe키워드에 추가
+        
+            review.cafe_id.keywords=json.dumps(review.keywords)
+            review.cafe_id.save()
+
+            
+            
         else:
             for field in form:
                 print("Field Error:", field.name,  field.errors)
