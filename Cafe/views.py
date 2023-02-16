@@ -133,6 +133,12 @@ def find_cafe_ajax(request, *args, **kwargs):
         #qq. 카페키워드 가진 애 filter 변수 채우기
          
         seleted_keywords=req['seleted_ck']#선택된 키워드 리스트
+        #review에서 keywords 리스트 가져와서 필터링
+        #for cafe in cafes_objects:
+            #cafe의 리뷰에서 keywords를 가져와서 selected_keywords랑비교
+            
+            
+        
         #selected_cafe=cafes_objects.filter()
         
         
