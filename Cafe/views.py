@@ -3,7 +3,8 @@ from Cafe.models import *
 from django.http.request import HttpRequest
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-import json
+import json,math
+from Review.models import *
 
 
 location_dict = {'왕십리/한양대/성수' : [37.56122596158312,127.03430549372456],
@@ -156,20 +157,19 @@ def find_cafe_ajax(request, *args, **kwargs):
         'cafes':cafes,
         }
         
-    # return render(request,"find_cafe.html",context=context)
-        return JsonResponse(context)
+    else:#취소 누름
+        #cafe_like=cafe.cafelike_set.all
+        cafe_like=cafe.cafe_like.all()
+        cafe_like.delete()
+        
+        
+    #cafe_like2=cafe.cafelike_set.all
+    #cafe_like=CafeLike.objects.get(cafe_id=like_id) #cafe_like객체
+    #cafe_like.num+=1
+    #cafe_like.save()
     
-    # return render(request, "find_cafe.html", context=context)
+    return JsonResponse({'id':like_id,'clicked':clicked})
 
-    #selected_location 과 같은 cafe의 location의 name을 가져와야 한다. 
-
-    #지역에 저장된 카페를 띄우자
-    #위에서 받아온 location  name 정보를 ㄱ가진 카페를 가져온다. 
-    #그 애들을 컨텍스트에 담아서 html에 보내주면 html에서는 for문으로 보여준다~
-    #이거를 ajax해본다...
-    #cafes = cafe_location.cafe_set.all()
-    #cafe_location은 selected_location과 같은 location 객체 받아옴..
-
-    #이 카페들을 html에 보내서 for문 돌려서 출력
-
-
+    
+    
+    
