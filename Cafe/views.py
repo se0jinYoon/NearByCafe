@@ -66,7 +66,7 @@ def main_page(request, *args, **kwargs):
         location_list_right.append(pre_location_list_right[i][0])
 
     # 카페 키워드 전처리
-    keyword_list = list(CafeKeyword.CAFE_KEYWORDS)
+    keyword_list = list(CAFE_KEYWORDS)
     pre_keyword_list_left = keyword_list[:8]
     pre_keyword_list_right = keyword_list[8:]
 
