@@ -3,7 +3,8 @@ from Cafe.models import *
 from django.http.request import HttpRequest
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-import json
+import json,math
+from Review.models import *
 
 #1.지역설정
 #2.키워드 설정 필터링
@@ -26,48 +27,72 @@ def main_page(request, *args, **kwargs):
     context = {}
     return render(request, "mainpage.html", context=context)
 
-def find_cafe(request, *args, **kwargs):
-    Location_list = dict(Location.Locations)
-    context = Location_list
-    print(context)
-    return render(request,"find_cafe.html", context)
+#q.여기서 우리가 클릭한 카페 id를 보내줘야하는데 js로 html에 바로 구겨넣었는데 그거 어케하지?
+# <a href="{% url 'Cafe:cafe_detail' post.pk %}">{{post.title}}</a></p>
+# 카페 찾기(지도)랑 연결 후 수정
+def cafe_detail(request,pk,*args,**kwargs):
+    cafe=Cafe.objects.get(id=pk)
+    
+    #리뷰가 cafe_id를 가지고 있고
+    #나의 cafe_id를 가진 리뷰를 가져오면 all_review
+    #all_review=cafe.review_set.all()
+    
+    #리뷰 관련 코드
+
+    #all_review=cafe.cafeid_set.all()
+    
+    all_review=cafe.cafe_id.all()
+    review_cnt=0
+    sum_star=0
+    average_star=0
+    for review in all_review:
+        review_cnt+=1
+        sum_star+=review.star
+    
+    average_star=sum_star/review_cnt
+    
+    r_average_star=round(average_star)
+    
+    cafe.average_star=average_star
+    cafe.save()
+    
+    context={
+        "cafe":cafe,
+        "review_cnt":review_cnt,
+        "all_review":all_review,
+        "r_average_start":r_average_star,
+           
+    }
+    
+    return render(request,"cafe_detail_cj.html",context=context)
 
 @csrf_exempt
-def find_cafe_ajax(request, *args, **kwargs):
-
-    if request.method == 'POST':
-        #프론트에서 넘겨줘야함! html에서 location의 문자열 보내주기
-        print('get')
-        location = '수유/미아'
-        location = Location.objects.get(name=location)
-        latitude = location.latitude
-        longtitude = location.longtitude
-        # selected_location = request.GET['location']
-        selected_location = '수유/미아'
-        cafe_location = Location.objects.get(name = selected_location)
-        cafes = cafe_location.cafe_set.all()
-        # cafes_latlog = cafes.location.name
-        cafes=list((cafes).values())
-        context = {
-        'latitude':latitude,
-        'longtitude':longtitude,
-        'cafes':cafes,
-        }
-        
-    # return render(request,"find_cafe.html",context=context)
-        return JsonResponse(context)
+def cafe_like(request):
+    req=json.loads(request.body)
+    like_id=req['id']
+    clicked=req['clicked']
+    cafe=Cafe.objects.get(id=like_id) #cafe객체
     
-    # return render(request, "find_cafe.html", context=context)
+    #좋아요 누름
+    if clicked== True:
+        CafeLike.objects.create(
+            cafe_id=cafe,
+            user_id=request.user,
+        )
+        
+    else:#취소 누름
+        #cafe_like=cafe.cafelike_set.all
+        cafe_like=cafe.cafe_like.all()
+        cafe_like.delete()
+        
+        
+    #cafe_like2=cafe.cafelike_set.all
+    #cafe_like=CafeLike.objects.get(cafe_id=like_id) #cafe_like객체
+    #cafe_like.num+=1
+    #cafe_like.save()
+    
+    return JsonResponse({'id':like_id,'clicked':clicked})
 
-    #selected_location 과 같은 cafe의 location의 name을 가져와야 한다. 
-
-    #지역에 저장된 카페를 띄우자
-    #위에서 받아온 location  name 정보를 ㄱ가진 카페를 가져온다. 
-    #그 애들을 컨텍스트에 담아서 html에 보내주면 html에서는 for문으로 보여준다~
-    #이거를 ajax해본다...
-    #cafes = cafe_location.cafe_set.all()
-    #cafe_location은 selected_location과 같은 location 객체 받아옴..
-
-    #이 카페들을 html에 보내서 for문 돌려서 출력
-
-
+    
+    
+    

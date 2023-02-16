@@ -1,10 +1,10 @@
 from django.contrib import admin
-from .models import Location,Cafe,CafeKeyword
+from .models import Cafe,Location,CafeLike,CafeKeyword
 
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
-    list_display = ['name','latitude','longtitude']
-    list_display_links = ['name','latitude','longtitude']
+    list_display = ['name']
+    list_display_links = ['name']
 
 @admin.register(Cafe)
 class CafeAdmin(admin.ModelAdmin):
@@ -13,3 +13,21 @@ class CafeAdmin(admin.ModelAdmin):
 # class CafeKeywordAdmin(admin.ModelAdmin):
 #     list_display = ['name','review_id','cafe_id']
 # Register your models here.
+
+class LocationAdmin(admin.ModelAdmin):
+    pass
+
+class CafeAdmin(admin.ModelAdmin):
+    pass
+
+class CafeLikeAdmin(admin.ModelAdmin):
+    pass
+
+class CafeKeywordAdmin(admin.ModelAdmin):
+    pass
+
+
+# admin.site.register(Cafe,CafeAdmin)
+# admin.site.register(CafeLike,CafeAdmin)
+# admin.site.register(CafeKeyword,CafeAdmin)
+# admin.site.register(Location,LocationAdmin)
