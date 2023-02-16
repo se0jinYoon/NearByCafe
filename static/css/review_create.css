@@ -170,3 +170,17 @@ body {
     background-color: white;
     padding-left: 36px;
 }
+
+/* ---- */
+/* 별점 매기기 */
+.star > fieldset > input[type=radio]{
+    display: none;
+}
+.fa-regular,.fa-solid{
+    color: gold;
+}
+.post_reviewimg{
+    width: 200px;
+    height: 200px;
+    margin-right: 20px;
+}

@@ -1,6 +1,6 @@
 {% extends 'nav.html' %}
 {% block content %}
-
+{% load static %}
 
 <div class="overlay"></div>
 <div class="container d-flex flex-column ">
@@ -102,7 +102,7 @@
                 <div class="image_preview d-flex">
                     <!-- <img src="Frame 1.png" alt="" width="150" height="150"> -->
                 </div>
-                <img src="addimage.svg" class="upload_img" width="200" height="200"/>
+                <img src="{% static 'image/addimage.svg' %}" class="upload_img" width="200" height="200"/>
             </div>
             <!--  -->
 
