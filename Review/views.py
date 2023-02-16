@@ -1,20 +1,13 @@
 
-from rest_framework.response import Response
 from .models import Review
-from rest_framework.views import APIView
-from .serializers import ReviewSerializer
+
 from django.shortcuts import render,redirect
 from Review.models import *
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from Review.forms import ReviewForm
 import json
-class ReviewListAPI(APIView):
-    def get(self, request):
-        queryset = Review.objects.all()
-        print(queryset)
-        serializer = ReviewSerializer(queryset, many=True)
-        return Response(serializer.data)
+
 
 
 keyword_list=[
@@ -35,7 +28,7 @@ keyword_list=[
     ]
 def insert_cafe(request,pk):
     cafe = Cafe.objects.get(id = pk)
-    keywords = ReviewListAPI.get()
+    # keywords = ReviewListAPI.get()
 
 @csrf_exempt
 @login_required(login_url='User:login')

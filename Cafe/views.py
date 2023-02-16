@@ -154,21 +154,10 @@ def find_cafe_ajax(request, *args, **kwargs):
         'latitude':location_dict[location][0],
         'longtitude':location_dict[location][1],
         'cafes':cafes,
-        'cafes':cafes,
         }
         
-    else:#취소 누름
-        #cafe_like=cafe.cafelike_set.all
-        cafe_like=cafe.cafe_like.all()
-        cafe_like.delete()
-        
-        
-    #cafe_like2=cafe.cafelike_set.all
-    #cafe_like=CafeLike.objects.get(cafe_id=like_id) #cafe_like객체
-    #cafe_like.num+=1
-    #cafe_like.save()
-    
-    return JsonResponse({'id':like_id,'clicked':clicked})
+ 
+    return JsonResponse(context=context)
 
     
     

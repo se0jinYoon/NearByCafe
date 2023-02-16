@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     "User",
     "Review",
     "Cafe",
-    'rest_framework',
+  
 ]
 
 MIDDLEWARE = [
