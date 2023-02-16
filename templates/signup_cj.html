@@ -1,8 +1,8 @@
 {% extends 'nav.html' %} {% block content %} {% load static %}
 <div class="overlay_cj"></div>
 <main id="signup">
-    <div class="signup_container">
-        <div class="signup__logo"><img src="{% static 'image/logo_small.svg' %}" alt="logo" /> 회원가입</div>
+    <div class="signup_container ">
+        <div class="signup__logo d-flex flex-row align-items-center justify-content-center"><img src="{% static 'image/logo_small.svg' %}" alt="logo" /> <span class="signup_text">회원가입</span> </div>
         <form action="" method="POST">
             <!--action부분에 백엔드 url삽입-->
             {% csrf_token %}

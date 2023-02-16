@@ -56,7 +56,7 @@ def login_page(request):
             if current_user:  # True
                 print("user")
                 auth.login(request, users)
-                messages.info(request, "로그인이 완료되었습니다.")
+                # messages.info(request, "로그인이 완료되었습니다.")
                 return redirect('/')
 
             else:  # False, 이메일 전송 페이지로 유저 정보와 함께 넘김
@@ -93,10 +93,10 @@ def login_page(request):
 
 # 로그아웃 페이지
 def logout_page(request):
-    if request.user.is_authenticated:
-        auth_logout(request)
-
-    return redirect('/')
+    if request.method == "POST":
+        if request.user.is_authenticated:
+            auth_logout(request)
+        return redirect('/')
 
 
 # 프로필 페이지
@@ -271,7 +271,8 @@ def sign_up(request: HttpRequest, *args, **kwargs):
             verify_email(request, form)
 
             url = reverse('User:mail_notice', kwargs={
-                          'user_name': request.POST['username'], 'user_email': request.POST['email_address']})
+                          'user_name': request.POST['username'], 
+                          'user_email': request.POST['email_address']})
             return redirect(url)  # 인증메일 발송 안내 페이지로 리다이렉트
 
         else:

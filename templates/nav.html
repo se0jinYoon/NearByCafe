@@ -27,6 +27,7 @@
     </head>
 
     <body>
+        {% if request.user.is_authenticated %}
         <nav class="nav_container d-flex flex-row align-items-center">
             <a href="/"> <img src="{% static 'image/logo.png' %}" class="nav_logo" alt="logo" /></a>
             <div class="searchbar_container d-flex flex-row justify-content-lg-between">
@@ -35,9 +36,26 @@
             </div>
             <!--링크 추가 필요-->
             <a href="" class="menu nav_notice">공지사항</a>
-            <a href="" class="menu nav_login">로그인</a>
-            <a href="" class="menu nav_signup">회원가입</a>
+            <a href="/profile" class="menu nav_login">프로필정보</a>
+            <form action="/logout/" method="POST">
+                {% csrf_token %}
+                <input class="logout_input" type="submit" value="로그아웃">
+            </form>
         </nav>
+
+        {% else %}
+        <nav class="nav_container d-flex flex-row align-items-center">
+            <a href="/"> <img src="{% static 'image/logo.png' %}" class="nav_logo" alt="logo" /></a>
+            <div class="searchbar_container d-flex flex-row justify-content-lg-between">
+                <input type="text" class="nav_search" readonly onfocus="this.blur();" placeholder="    지역, 키워드 선택" />
+                <i class="fa-solid fa-magnifying-glass search_img"></i>
+            </div>
+            <!-- 링크 추가 필요 -->
+            <a href="" class="menu nav_notice">공지사항</a>
+            <a href="/login" class="menu nav_login">로그인</a>
+            <a href="/signup" class="menu nav_signup">회원가입</a>
+        </nav>
+        {% endif %}
 
         {% block content %} {% endblock %}
 

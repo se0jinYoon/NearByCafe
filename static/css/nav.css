@@ -77,3 +77,9 @@ nav {
     margin-left: 3.5rem;
     color: black;
 }
+
+.logout_input {
+    border: none;
+    background-color: white;
+    margin-left: 3.5rem;
+}
