@@ -91,13 +91,18 @@ def main_page(request, *args, **kwargs):
         loc = request.POST.get('cafe_location_name')
         keyword = request.POST.get('cafe_keyword_name')
         print(request.POST)
-        return redirect("Cafe:find_cafe")
+
+        if len(loc) == 0:
+            loc = '서울 전체'
+        
+        return redirect(reverse("Cafe:find_cafe") + f"?loc={loc}&keyword={keyword}")
         
     return render(request,"mainpage.html", context=context)
 
 
 
 def find_cafe(request, *args, **kwargs):
+
     location_list = list(Location.Locations)
     pre_location_list_left = location_list[0:12]
     pre_location_list_right = location_list[12:]
@@ -105,19 +110,25 @@ def find_cafe(request, *args, **kwargs):
     location_list_left = []
     location_list_right = []
 
-    for i in range(len(pre_location_list_left)) :
+    for i in range(len(pre_location_list_left)):
         location_list_left.append(pre_location_list_left[i][0])
 
-    for i in range(len(pre_location_list_right)) :
+    for i in range(len(pre_location_list_right)):
         location_list_right.append(pre_location_list_right[i][0])
 
+    loc = request.GET.get('loc')
+    keyword = request.GET.get('keyword')
     context = {
-        "location_list_left" : location_list_left,
-        "location_list_right" : location_list_right,
+        "location_list_left": location_list_left,
+        "location_list_right": location_list_right,
+        "loc": loc,
+        "keyword": keyword,
+        "latitude": location_dict[loc][0],
+        "longtitude": location_dict[loc][1],
     }
 
-    print(request.GET)
     return render(request,"find_cafe.html", context=context)
+
 
 
 @csrf_exempt
