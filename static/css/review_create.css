@@ -143,9 +143,9 @@ body {
     border-radius: 24px;
     width: 138px;
     height: 48px;
+    font-size: 20px;
     font-weight: bold;
     border: 1px solid #D6D6D6;
-    font-size: 22px;
 }
 /* ---- */
 .main_text {

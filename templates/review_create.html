@@ -35,7 +35,6 @@
     
     <form action="{% url 'Review:review_create' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <input class="star_input" type="text" name="star" id="star" placeholder="별">
         <div class="title_container shadow d-flex flex-row align-items-center">
             <span class="title fw-light">제목:</span>
             <input class="title_input" type="text" name="title" id="title" placeholder="리뷰의 제목을 입력해주세요!">
@@ -60,35 +59,28 @@
             </div>
             <!-- 키워드 선택부분 / 설명 : 4개 선택 후 5번째 선택을 하게 되면 젤 처음에 선택된게 삭제됨(큐 방식)-->
             <div class="review_create_keywordselect">
-                <!-- <div class="container"></div> -->
-                {% for keyword in keyword_list %}
                 <div class="row mb-3">
-                    <div class="col"><button class="keyword_btn " name="mark" id="{{keyword}}" type="button" >{{keyword}}</button></div>
-                   {% endfor %}
-                </div>
-                <!-- <div class="row mb-3">
-                    <div class="col"><button class="keyword_btn " id="keyword1" type="button" >키워드1</button></div>
-                    <div class="col"><button class="keyword_btn " id="keyword2" type="button" >키워드2</button></div>
-                    <div class="col"><button class="keyword_btn " id="keyword3" type="button" >키워드3</button></div>
-                    <div class="col"><button class="keyword_btn " id="keyword4" type="button" >키워드4</button></div>
-                    <div class="col"><button class="keyword_btn " id="keyword5" type="button" >키워드5</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="데이트" value="데이트" type="button" >데이트</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="작업하기 좋은" value="작업하기 좋은" type="button" >작업하기 좋은</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="공부하기 좋은" value="공부하기 좋은" type="button" >공부하기 좋은</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="조용한" value="조용한" type="button" >조용한</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="시끌벅적한" value="시끌벅적한" type="button" >시끌벅적한</button></div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col"><button class="keyword_btn" id="keyword6" type="button" >키워드11</button></div>
-                    <div class="col"><button class="keyword_btn" id="keyword7" type="button" >키워드22</button></div>
-                    <div class="col"><button class="keyword_btn" id="keyword8" type="button" >키워드33</button></div>
-                    <div class="col"><button class="keyword_btn" id="keyword9" type="button" >키워드44</button></div>
-                    <div class="col"><button class="keyword_btn" id="keyword10" type="button">키워드55</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="의자가 편한" value="의자가 편한" type="button" >의자가 편한</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="디저트 맛있는" value="디저트 맛있는" type="button" >디저트 맛있는</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="커피가 맛있는" value="커피가 맛있는" type="button" >커피가 맛있는</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="친절한" value="친절한" type="button" >친절한</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="혼카페" value="혼카페" type="button">혼카페</button></div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col"><button class="keyword_btn" id="keyword11" type="button">키워드111</button></div>
-                    <div class="col"><button class="keyword_btn" id="keyword12" type="button">키워드222</button></div>
-                    <div class="col"><button class="keyword_btn" id="keyword13" type="button">키워드333</button></div>
-                    <div class="col"><button class="keyword_btn" id="keyword14" type="button">키워드444</button></div>
-                    <div class="col"><button class="keyword_btn" id="keyword15" type="button">키워드555</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="장소가 넓은" value="장소가 넓은" type="button">장소가 넓은</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="콘센트가 많은" value="콘센트가 많은" type="button">콘센트가 많은</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="화장실 깨끗한" value="화장실 깨끗한" type="button">화장실 깨끗한</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="인테리어 예쁜" value="인테리어 예쁜" type="button">인테리어 예쁜</button></div>
                 </div>
             </div>
-        </div> -->
+        </div>
 
         <div class="image_container shadow d-flex flex-row align-items-center">
             <div>
