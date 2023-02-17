@@ -75,3 +75,12 @@ nav {
     margin-left: 3.5rem;
     color: black;
 }
+.nav_notice {
+    width: 59px;
+}
+.nav_login {
+    width: 45px;
+}
+.nav_signup {
+    width: 59px;
+}

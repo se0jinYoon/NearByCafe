@@ -262,11 +262,26 @@ h3 {
 .intro1_span1 {
     width: 340px;
 }
+.intro2_span1 {
+    width: 330px;
+}
+.intro3_span1 {
+    width: 340px;
+}
 
 .intro1_span2, .intro2_span2, .intro3_span2{
     /* color: gray; */
     font-size: 20px;
     color: black;
+}
+.intro1_span2 {
+    width: 448px;
+}
+.intro2_span2 {
+    width: 331px;
+}
+.intro3_span2 {
+    width: 340px;
 }
 
 .mainpage__img {
