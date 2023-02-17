@@ -15,10 +15,10 @@
             </div>
             <div class="cafe_indexbox">
                 <div class="cafe_index_name">
-                    카페 상호명:{{cafe.name}} <!-- ERD : Cafe name 상호명-->
+                    카페 상호명:  {{cafe.name}} <!-- ERD : Cafe name 상호명-->
                 </div>
                 <div class="cafe_index_district">
-                    위치:{{cafe.location_id.name}}<!-- ERD에 명시x , Cafe address에서 '구'만 따로 빼와야할까? -->
+                    위치:  {{cafe.location_id.name}}<!-- ERD에 명시x , Cafe address에서 '구'만 따로 빼와야할까? -->
                 </div>
                 <div class="cafe_index_keywords">
                     #우선 나중에
@@ -55,8 +55,8 @@
                     
                     {% comment %} q.안먹힘..user질문 {% endcomment %}
                     {% if request.user.is_authenticated %}
-                    <button class="review_like d-flex" data-bs-toggle="modal" data-bs-target="#not_login" onclick="onClickLike({{cafe.id}})">♡좋아요</button>
-                    <button class="review_write d-flex" data-bs-toggle="modal" data-bs-target="#not_login" href="">✍🏻리뷰 하기</button>
+                    <button class="review_like d-flex" data-bs-toggle="modal" data-bs-target="#not_login" onclick="onClickLike({{cafe.id}})">♡ 좋아요</button>
+                    <button class="review_write d-flex" data-bs-toggle="modal" data-bs-target="#not_login" href="">✍🏻 리뷰 하기</button>
                     {% else %}
     
                     {% endif %}
@@ -64,22 +64,22 @@
             </div>
         </div>
         <div class="cafe_info shadow d-flex flex-column">
-            <div class="cafe_info_address d-flex">
+            <div class="cafe_info_address d-flex align-items-center">
                 <div class="cafe_info_index">주소</div>
                 <div class="address"> {{cafe.address}}</div> <!-- ERD : Cafe address 상세주소-->
             </div>
-            <div class="cafe_info_number d-flex">
+            <div class="cafe_info_number d-flex align-items-center">
                 <div class="cafe_info_index">전화번호</div>
                 <div class="number"> {{cafe.number}}</div> <!-- ERD : Cafe number 전화번호-->
             </div>
-            <div class="cafe_info_runtime d-flex">
+            <div class="cafe_info_runtime d-flex align-items-center">
                 <div class="cafe_info_index">영업시간</div>
                 <div class="runtime"> {{cafe.runtime}}</br></div> <!-- ERD : Cafe runtime 영업시간-->
             </div>
-            <div class="cafe_info_menu d-flex">
+            <div class="cafe_info_menu d-flex align-items-center">
                 <div class="cafe_info_index">메뉴</div>
                 &nbsp; &nbsp;
-                <div class="menu">
+                <div class="cafe_menu">
                     {{cafe.menu}}
                     </div> <!-- ERD : Cafe menu 메뉴정보-->
             </div>
