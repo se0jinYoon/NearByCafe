@@ -82,25 +82,29 @@
             </div>
         </div>
 
-        <div class="image_container shadow d-flex flex-row align-items-center">
+        <div class="image_container shadow d-flex flex-column">
             <div>
                 <span class="main_text">사진 등록하기</span>
-                <span class="sub_text">최대 4장까지 업로드 할 수 있어요!</span>
+                <span class="sub_text">최대 1장까지 업로드 할 수 있어요!</span>
             </div>
 
             <!-- 사진 등록(미완,cj, 16일 3시 24분) -->
-            <input type="file" class="real-upload" accept="image/*" required multiple style="display: none;">
+            <input type="file" class="real-upload" accept="image/*" style="display: none;">
             <div class=" d-flex" style="display: contents;">
                 <div class="image_preview d-flex">
-                    <!-- <img src="Frame 1.png" alt="" width="150" height="150"> -->
                 </div>
-                <img src="{% static 'image/addimage.svg' %}" class="upload_img" width="200" height="200"/>
+                <div class="upload_btn" width="200" height="200">추가하기</div>
             </div>
             <!--  -->
 
         </div>
 <!-- 제출 임시구현 -->
-<button id="login_btn" type="button" onclick="onClickReview()" >제출</button>
+<!-- <button id="login_btn" type="button" onclick="onClickReview()" >제출</button> -->
+        <div class="review_btns">
+            <button id="login_btn" type="button" onclick="onClickReview()" >등록하기</button>
+            <button id="review_cancel_btn" type="button" onclick="" >취소하기</button> <!--어디 페이지로 가려나-->
+        </div>
+
     </form>
 </div>
 
@@ -129,17 +133,17 @@
            const imagepreview=document.querySelector('.image_preview');
            const docFrag=new DocumentFragment()
           //  console.log(typeof files,files)
-           if ([...files].length>4){
-              alert('최대 4장까지 가능');
+           if ([...files].length>1){
+              alert('1장만 등록하실 수 있습니다.');
               return;
            }
            [...files].forEach(file =>{
                if (!file.type.match("image/.*")){
-                  alert('이미지 파일만 업로드 가능');
+                  alert('이미지 파일만 업로드 가능합니다.');
                   return;
                }
            
-           if ([...files].length<=4){
+           if ([...files].length==1){
                uploadFiles.push(files);
                const reader =new FileReader();
                reader.onload=(e)=>{
@@ -151,28 +155,53 @@
            });
        }
    function createElement(e,file){
-       const li= document.createElement('ui');
+       const ui= document.createElement('ui');
        const img= document.createElement('img');
+       const upload_btn= document.querySelector('.upload_btn');
+
        img.setAttribute('src',e.target.result);
        img.setAttribute('data-file',file.name);
-       li.appendChild(img);
-       li.classList.add("d-flex");
-       li.classList.add("img_here");
-       img.classList.add("post_reviewimg")
-       return li;
+
+       ui.append(img);
+
+       ui.classList.add("d-flex");
+       ui.classList.add("flex-column");
+       ui.classList.add("img_here");
+       img.classList.add("post_reviewimg");
+       ui.innerHTML+=`<button class="remove_btn_review" onclick="remove_img()">삭제하기</button>`;
+
+
+       if (upload_btn.style.display!=='none'){
+        upload_btn.style.display ='none';
+       }
+       else{
+        upload_btn.style.display ='';
+       }
+       
+       return ui;
    }
-   function count_four(){
-      const four_ui=document.querySelectorAll('.img_here');
-      console.log(four_ui);
+   function remove_img(){
+    let img_remove = document.querySelector('.post_reviewimg');
+    const upload_btn= document.querySelector('.upload_btn');
+
+    img_remove.parentNode.remove(img_remove);
+    img_remove.nextSibling.remove();
+
+    if (upload_btn.style.display!=='none'){
+        upload_btn.style.display ='none';
+       }
+       else{
+        upload_btn.style.display ='';
+       }
    }
-   
-     const realUpload = document.querySelector('.real-upload');
-     const upload = document.querySelector('.upload_img');
-     const img_tag = document.querySelector('.post_reviewimg');
-     upload.addEventListener('click', () => realUpload.click());
-     realUpload.addEventListener('change', getImageFiles);
-     img_tag.addEventListener('onclick', count_four);
-   
+    const realUpload = document.querySelector('.real-upload');
+    const upload = document.querySelector('.upload_btn');
+    const img_tag = document.querySelector('.post_reviewimg');
+    const remove_btn = document.querySelector('.remove_btn_review');
+
+    upload.addEventListener('click', () => realUpload.click());
+    realUpload.addEventListener('change', getImageFiles);
+    remove_btn.addEventListener('click',remove_img);
    </script>
 <!--  -->
 
