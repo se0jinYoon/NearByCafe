@@ -5,38 +5,37 @@
 <div class="overlay"></div>
 <div class="container d-flex flex-column ">
     <div class="top d-flex flex-row align-items-center">
-        <div class="cafe_name fw-bold">{{ cafe.name }}카페 상호명</div>  
+        <div class="cafe_name fw-bold">카페 상호명</div>  
         <div class="rc_text1 fw-light">에 대한 솔직한 리뷰를 써주세요</div>
+    </div>
+   
+    <div class="star_container shadow d-flex flex-row align-items-center">
+        <span class="star_text fw-light">평점 남기기</span>
+        <div class="star">
+            <input type="number" id="star" placeholder="별점"/>
+            <!-- 별점 찍기 (cj) -->
+            <!-- <fieldset>
+                <div>
+                    <input type="radio" style="display: none;" id="star1" name="stars" value="1" onclick="review_starlike(1)">
+                    <label for="star1"><i class="fa-regular fa-star"></i></label>
+                    <input type="radio" style="display: none;" id="star2" name="stars" value="2" onclick="review_starlike(2)">
+                    <label for="star2"><i class="fa-regular fa-star"></i></label>
+                    <input type="radio" style="display: none;" id="star3" name="stars" value="3" onclick="review_starlike(3)">
+                    <label for="star3"><i class="fa-regular fa-star"></i></label>
+                    <input type="radio" style="display: none;" id="star4" name="stars" value="4" onclick="review_starlike(4)">
+                    <label for="star4"><i class="fa-regular fa-star"></i></label>
+                    <input type="radio" style="display: none;" id="star5" name="stars" value="5" onclick="review_starlike(5)">
+                    <label for="star5"><i class="fa-regular fa-star"></i></label>
+                </div>
+            </fieldset>     -->
+        <!--  -->
+        </div>
+        <!--i태그 써서 구현 변경 필요-->
     </div>
 
     
     <form action="{% url 'Review:review_create' pk%}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="star_container shadow d-flex flex-row align-items-center">
-            <span class="star_text fw-light">평점 남기기</span>
-            <input type="number" id="star" min="1" max="5" placeholder="별점"/>
-            <div class="star">
-                <!-- <input type="number" id="star" min="1" max="5" placeholder="별점"/> -->
-                <!-- <input type="range" id="star" min="1" max="5" placeholder="별점"/> -->
-                <!-- 별점 찍기 (cj) -->
-                <!-- <fieldset>
-                    <div>
-                        <input type="radio" style="display: none;" id="star1" name="stars" value="1" onclick="review_starlike(1)">
-                        <label for="star1"><i class="fa-regular fa-star"></i></label>
-                        <input type="radio" style="display: none;" id="star2" name="stars" value="2" onclick="review_starlike(2)">
-                        <label for="star2"><i class="fa-regular fa-star"></i></label>
-                        <input type="radio" style="display: none;" id="star3" name="stars" value="3" onclick="review_starlike(3)">
-                        <label for="star3"><i class="fa-regular fa-star"></i></label>
-                        <input type="radio" style="display: none;" id="star4" name="stars" value="4" onclick="review_starlike(4)">
-                        <label for="star4"><i class="fa-regular fa-star"></i></label>
-                        <input type="radio" style="display: none;" id="star5" name="stars" value="5" onclick="review_starlike(5)">
-                        <label for="star5"><i class="fa-regular fa-star"></i></label>
-                    </div>
-                </fieldset>     -->
-            <!--  -->
-            </div>
-            <!--i태그 써서 구현 변경 필요-->
-        </div>
         <div class="title_container shadow d-flex flex-row align-items-center">
             <span class="title fw-light">제목:</span>
             <input class="title_input" type="text" name="title" id="title" placeholder="리뷰의 제목을 입력해주세요!">
@@ -105,7 +104,7 @@
 <!-- <button id="login_btn" type="button" onclick="onClickReview()" >제출</button> -->
         <div class="review_btns">
             <button id="login_btn" type="button" onclick="onClickReview()" >등록하기</button>
-            <button id="review_cancel_btn" type="button" href="{% url 'find_cafe/cafe_detail' cafe.id %}" >취소하기</button> <!--어디 페이지로 가려나-->
+            <button id="review_cancel_btn" type="button" onclick="" >취소하기</button> <!--어디 페이지로 가려나-->
         </div>
 
     </form>
@@ -260,7 +259,7 @@
             
         }
         
-       const res = fetch('/review_create/1/',{
+       const res = fetch('/review_create/',{
             method : "POST",
             headers: {
       'Content-Type': 'application/json', 
