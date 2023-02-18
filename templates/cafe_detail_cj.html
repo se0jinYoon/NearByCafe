@@ -143,11 +143,9 @@
                 #리뷰키워드 <!-- ERD :  'CafeKeyword review_id 리뷰식별자' 외래키참조-->
             </div>
             <div class="cafe_review_images">
-                <img class="cafe_review_image" src="https://picsum.photos/150/150"/> <!-- ERD : Cafe image 대표사진, 사진을 담을 erd개체가 필요해보임[Review.image개체가 있단다 창진아]-->
-                <img class="cafe_review_image" src="https://picsum.photos/150/150"/> <!-- ERD : Cafe image 대표사진, 사진을 담을 erd개체가 필요해보임[Review.image개체가 있단다 창진아]-->
-                <img class="cafe_review_image" src="https://picsum.photos/150/150"/> <!-- ERD : Cafe image 대표사진, 사진을 담을 erd개체가 필요해보임[Review.image개체가 있단다 창진아]-->
-                <img class="cafe_review_image" src="https://picsum.photos/150/150"/> <!-- ERD : Cafe image 대표사진, 사진을 담을 erd개체가 필요해보임[Review.image개체가 있단다 창진아]-->
-                
+                {% if cafe.image %}
+                        <img src="{{ cafe.image.url }}" class="cd_img">
+                {% endif %}
             </div>
         </div>
         {% endfor %}
