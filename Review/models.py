@@ -1,7 +1,6 @@
 from django.db import models
 from User.models import Users
 from Cafe.models import Cafe
-from multiselectfield import MultiSelectField
 CAFE_KEYWORDS=[
         ('데이트','데이트'),
         ('작업하기 좋은','작업하기 좋은'),

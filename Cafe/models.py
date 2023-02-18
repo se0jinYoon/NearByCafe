@@ -1,8 +1,6 @@
 from django.db import models
-from multiselectfield import MultiSelectField
 
 from User.models import Users
-from multiselectfield import MultiSelectField
 import json
 # from Review.models import Review
 # Create your models here.
