@@ -210,12 +210,14 @@ input::placeholder {
     width: 100px;
     height: 100px;
     margin-right: 20px;
+    object-fit: contain;
 }
 
 .find_cafe_name {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 5px;
+    color: black;
 }
 
 .cafe_loc {
