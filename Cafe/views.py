@@ -155,10 +155,7 @@ def find_cafe_ajax(request, *args, **kwargs):
         # cafes_latlog = cafes.location.name
         #cafes=list((cafes_objects).values())
         
-        #키워드 해당하는 cafes필터링
-        #q1. 저 cafes첫번째꺼 변수명 바꿔도되나요?저는 객체가 필요해섭,,
-        #qq. 카페키워드 가진 애 filter 변수 채우기
-         
+        print(selected_location)
         seleted_keywords=req['seleted_ck']#선택된 키워드 리스트
         #review에서 keywords 리스트 가져와서 필터링
         cafes=[]

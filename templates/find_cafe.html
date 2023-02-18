@@ -5,7 +5,7 @@
         <div class="location_container d-flex flex-column">
             <div class="location_text fw-bold">지역 설정</div>
             <!-- <button class="search" onclick="onClickSearch('{{location}}')">검색하기</button> -->
-
+                   
             <!-- <button class="selected_location" onClick="onClickLocationButton()" >
                 <input class="selected_location_cat" 
                 type="text" 
@@ -20,7 +20,7 @@
                     <p>지역 선택</p>
                 </div>
             </div>
-
+            
             <div class="dropdown_location_list display_none">
                 <div class="location_list d-flex flex-column shadow">
                     <div class="loc-text1">검색할 위치를 선택해주세요.</div>
@@ -223,6 +223,7 @@
                 checkedCheckboxes.splice(checkedCheckboxes.indexOf(this), 1);
             }
             console.log(checkedCheckboxes)
+            
         });
     });
     const dropdown_menu = document.querySelector(".dropdown_location_list");
@@ -250,6 +251,7 @@
     }
 
     var form_keyword_input = document.querySelector('input[name="cafe_keyword_name"]');
+
     function onClickLocationList() {
         var location_picked = event.target;
         var location_each = location_picked.innerText;
@@ -273,27 +275,23 @@
         var keyword_picked = event.target;
         var keyword_each = keyword_picked.value;
         clickedKeywordList.push(keyword_each);
-        // console.log(clickedKeywordList)
+        console.log(clickedKeywordList)
         form_keyword_input.value = JSON.stringify(clickedKeywordList);
     }
 
 
-
+    console.log(checkedCheckboxes);
     const onClickSearch = async (location) => {
         //키워드 선택//
-        var seleted_ck = [];
-        $("input[name=checkbox]:checked").each(function () {
-            var chk = $(this).val();
-            seleted_ck.push(chk);
-            console.log(chk);
-        });
+        var selected_ck=checkedCheckboxes;
+        console.log(selected_ck); 
 
         const res = await fetch("/find_cafe_ajax/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
-            body: JSON.stringify({ location: location }), //보내는거
+            body: JSON.stringify({ location: location,selected_ck:selected_ck}), //보내는거
         });
 
         // const res = await fetch('/cafe/find_cafe')
