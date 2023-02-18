@@ -407,16 +407,19 @@ const cafeMarker=(cafes) => {
             } else if (item.average_star === 5) {
                 star = "⭐⭐⭐⭐⭐";
             }
+            console.log(item.average_star)
             element.innerHTML += `
         <div class="cafe d-flex">
-            <img src="media/${item.image}" alt="이미지가 없습니다" class="cafe_img">
+            <img src="${item.image}" alt="이미지가 없습니다" class="cafe_img">
+        <div class="d-flex flex-column">
         <span class="cafe_name">${item.name}</span>
         <span class="cafe_loc">${item.address}</span>
         <span class="cafe_categ">${item.keywords}</span>
         <div class="cafe_star_info">
-            <span style="color: #F8AA14">3.0</span>
+            <span style="color: #F8AA14">평균별점</span>
             <span>${star}</span>
-            <span style="color: #AAAAAA">(65)</span>                   
+            <span style="color: #AAAAAA">리뷰 수</span>                   
+        </div>
         </div>
     </div>`;
         });
