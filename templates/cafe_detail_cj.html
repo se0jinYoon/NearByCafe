@@ -56,8 +56,7 @@
                     {% comment %} q.안먹힘..user질문 {% endcomment %}
                     {% if request.user.is_authenticated %}
                     <button class="review_like d-flex" data-bs-toggle="modal" data-bs-target="#not_login" onclick="onClickLike({{cafe.id}})">♡ 좋아요</button>
-                    <a class="review_write d-flex" href="{% url 'Review:review_create' cafe.id %}">✍🏻 리뷰 하기</a>
-                    
+                    <a class="review_write d-flex" data-bs-toggle="modal" data-bs-target="#not_login" href="">✍🏻 리뷰 하기</button>
                     {% else %}
     
                     {% endif %}
@@ -143,11 +142,9 @@
                 #리뷰키워드 <!-- ERD :  'CafeKeyword review_id 리뷰식별자' 외래키참조-->
             </div>
             <div class="cafe_review_images">
-                <img class="cafe_review_image" src="https://picsum.photos/150/150"/> <!-- ERD : Cafe image 대표사진, 사진을 담을 erd개체가 필요해보임[Review.image개체가 있단다 창진아]-->
-                <img class="cafe_review_image" src="https://picsum.photos/150/150"/> <!-- ERD : Cafe image 대표사진, 사진을 담을 erd개체가 필요해보임[Review.image개체가 있단다 창진아]-->
-                <img class="cafe_review_image" src="https://picsum.photos/150/150"/> <!-- ERD : Cafe image 대표사진, 사진을 담을 erd개체가 필요해보임[Review.image개체가 있단다 창진아]-->
-                <img class="cafe_review_image" src="https://picsum.photos/150/150"/> <!-- ERD : Cafe image 대표사진, 사진을 담을 erd개체가 필요해보임[Review.image개체가 있단다 창진아]-->
-                
+                {% if cafe.image %}
+                        <img src="{{ cafe.image.url }}" class="cd_img">
+                {% endif %}
             </div>
         </div>
         {% endfor %}
