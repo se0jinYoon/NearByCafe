@@ -4,7 +4,7 @@
     <div class="left_container">
         <div class="location_container d-flex flex-column">
             <div class="location_text fw-bold">지역 설정</div>
-            <button class="search" onclick="onClickSearch('{{location}}')">검색하기</button>
+            <!-- <button class="search" onclick="onClickSearch('{{location}}')">검색하기</button> -->
                    
 
             <!-- <button class="selected_location" onClick="onClickLocationButton()" >
@@ -31,7 +31,7 @@
                             {% for location in location_list_left %}
                             <div class="loc1 d-flex flex-row align-center">
                                 <button class="loc_btn">
-                                    <span class="loc_list">{{location}}</span>
+                                    <span class="loc_list" onclick="onClickSearch({{location}})">{{location}}</span>
                                 </button>
                             </div>
                             {% endfor %}
@@ -40,7 +40,7 @@
                             {% for location in location_list_right %}
                             <div class="loc1 d-flex flex-row align-center">
                                 <button class="loc_btn">
-                                    <span class="loc_list">{{location}}</span>
+                                    <span class="loc_list" onclick="onClickSearch({{location}})">{{location}}</span>
                                 </button>
                             </div>
                             {% endfor %}
@@ -218,6 +218,22 @@
             clicked_state = 1;
         }
     }
+
+
+    function onClickLocationList() {
+        var location_picked = event.target;
+        var location_each = location_picked.innerText;
+
+        const location_input = document.querySelector(".location_input");
+        // let location_placeholder = location_input.placeholder;
+        // location_placeholder = "";
+
+        const location_picked_text = document.querySelector(".location_input");
+        location_picked_text.innerHTML = `<button class="location_picked" onclick="${onClickLocationText()}">
+            <span class="location_picked_text">${location_each}</span>
+            </button>`;
+    }
+
 
 
     const onClickSearch = async (location) => {
