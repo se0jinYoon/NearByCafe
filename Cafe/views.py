@@ -127,6 +127,16 @@ def find_cafe(request, *args, **kwargs):
         "longtitude": location_dict[loc][1],
     }
 
+    if request.method == 'POST':
+        loc = request.POST.get('cafe_location_name')
+        keyword = request.POST.get('cafe_keyword_name')
+        print(request.POST)
+
+        if len(loc) == 0:
+            loc = '서울 전체'
+        
+        return redirect(reverse("Cafe:find_cafe") + f"?loc={loc}&keyword={keyword}")
+
     return render(request,"find_cafe.html", context=context)
 
 

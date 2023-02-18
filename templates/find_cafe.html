@@ -54,13 +54,13 @@
             <div class="keyword_box container d-flex flex-row justify-content-space-between">
                 <div class="d-flex flex-column">
                     <div class="cat1 d-flex flex-row align-center">
-                        <input class="checkbox" type="checkbox" name="date" value="데이트" /> <span class="checkbox_list date_text">데이트</span>
+                        <input class="checkbox" type="checkbox" name="date" value="데이트" onclick="onClickKeyword()"/> <span class="checkbox_list date_text">데이트</span>
                     </div>
                     <div class="cat1 d-flex flex-row align-center">
-                        <input class="checkbox" type="checkbox" name="quiet" value="조용한" /> <span class="checkbox_list">조용한</span>
+                        <input class="checkbox" type="checkbox" name="quiet" value="조용한" onclick="onClickKeyword()"/> <span class="checkbox_list">조용한</span>
                     </div>
                     <div class="cat1 d-flex flex-row align-center">
-                        <input class="checkbox" type="checkbox" name="dessert" value="디저트가 맛있는" /> <span class="checkbox_list">디저트가 맛있는</span>
+                        <input class="checkbox" type="checkbox" name="dessert" value="디저트가 맛있는" onclick="onClickKeyword()"/> <span class="checkbox_list">디저트가 맛있는</span>
                     </div>
                     <div class="cat1 d-flex flex-row align-center">
                         <input class="checkbox" type="checkbox" name="kind" value="친절한" /> <span class="checkbox_list">친절한</span>
@@ -108,11 +108,20 @@
             </div>
         </div>
 
+
         <div class="cafe_list_container">
             <div class="sort_container">
                 <div class="sort">
                     <button class="sort_abc"><span class="btn_text1">가나다 순</span></button>
                     <button class="sort_star"><span class="btn_text2">평점 순</span></button>
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="cafe_location_name" id="cafe_location_name" value="" />
+                        <input type="hidden" name="cafe_keyword_name" id="cafe_keyword_name" value="" />
+                        <button class="search" type="submit" onclick="onClickSearch('{{location}}')"><span class="btn_text3">카페 검색하기</span></button>                
+                    </form>
+
+
                 </div>
                 <p class="sort_text3">총 <span style="color: #df4629">갯수 넣기</span>개의 카페가 검색되었습니다.</p>
             </div>
@@ -236,6 +245,7 @@
         }
     }
 
+    var form_keyword_input = document.querySelector('input[name="cafe_keyword_name"]');
     function onClickLocationList() {
         var location_picked = event.target;
         var location_each = location_picked.innerText;
@@ -248,21 +258,24 @@
         location_picked_text.innerHTML = `<button class="location_picked" onclick="${onClickLocationText()}">
             <span class="location_picked_text">${location_each}</span>
             </button>`;
+
+        const locationInput = document.querySelector("#cafe_location_name");
+        locationInput.value = location_each;
+        console.log(locationInput);
     }
 
+    var clickedKeywordList = []
+    function onClickKeyword() {
+        var keyword_picked = event.target;
+        var keyword_each = keyword_picked.value;
+        clickedKeywordList.push(keyword_each);
+        console.log(clickedKeywordList)
+        form_keyword_input.value = JSON.stringify(clickedKeywordList);
+    }
+
+
+
     const onClickSearch = async (location) => {
-        // var location_picked = event.target;
-        // var location_each = location_picked.innerText;
-
-        // const location_input = document.querySelector(".location_input");
-        // // let location_placeholder = location_input.placeholder;
-        // // location_placeholder = "";
-
-        // const location_picked_text = document.querySelector(".location_input");
-        // location_picked_text.innerHTML = `<button class="location_picked" onclick="${onClickLocationText()}">
-        //     <span class="location_picked_text">${location_each}</span>
-        //     </button>`;
-
         //키워드 선택//
         var seleted_ck = [];
         $("input[name=checkbox]:checked").each(function () {
@@ -290,6 +303,7 @@
         panTo(latitude, longtitude);
         cafeMarker(cafes);
     };
+
     const cafeHandleResponse = (cafes) => {
         var element = document.querySelector(".cafe_list");
         element.innerHTML = `<div class="cafe_list">`;
@@ -315,7 +329,7 @@
         <div class="cafe_star_info">
             <span style="color: #F8AA14">3.0</span>
             <span>${star}</span>
-            <span style="color: #AAAAAA">(65)</span>
+            <span style="color: #AAAAAA">(65)</span>                   
         </div>
     </div>`;
         });

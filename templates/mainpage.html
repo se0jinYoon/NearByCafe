@@ -48,11 +48,6 @@
                         <div class="keyword_input" onclick="onClickKeywordButton()">
                             <p>키워드 선택</p>
                         </div>
-                        <!-- <div>
-                    <div class="key1"></div>
-                    <div class="key2"></div>
-                    <div class="key3"></div>
-                </div> -->
                         <form action="" method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="cafe_location_name" id="cafe_location_name" value="" />
@@ -201,24 +196,6 @@
         console.log(locationInput);
     }
 
-    // function onClickRemove1() {
-    //     const remove1 = document.querySelector(".key1")
-    //     remove1.remove()
-    //     console.log('please')
-    // }
-
-    // function onClickRemove2() {
-    //     const remove1 = document.querySelector(".key2")
-    //     remove1.remove()
-    //     console.log('please')
-    // }
-
-    // function onClickRemove3() {
-    //     const remove1 = document.querySelector(".key3")
-    //     remove1.remove()
-    //     console.log('please')
-    // }
-
     var repeatCheck = []; //여기 전역변수 써도 되나..
     var form_keyword_input = document.querySelector('input[name="cafe_keyword_name"]');
 
@@ -237,18 +214,6 @@
         }
 
         if (count < 4 && !repeatCheck.includes(keyword_each)) {
-            // if (count === 1 && !repeatCheck.includes(keyword_each)) {
-            // repeatCheck.push(keyword_each)
-
-            // const keyword_picked_text = document.querySelector(".key1");
-
-            // keyword_picked_text.innerHTML += `<button class="keyword_picked">
-            // <span class="keyword_picked_text">${keyword_each}</span>
-            // <button class="remove_btn" onclick="onClickRemove1()">X</button>
-            // </button>`;
-
-            // console.log(count)
-            // }
             if (count === 3 && !repeatCheck.includes(keyword_each)) {
                 repeatCheck.push(keyword_each);
 
