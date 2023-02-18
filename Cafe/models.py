@@ -1,8 +1,5 @@
 from django.db import models
-from multiselectfield import MultiSelectField
-
 from User.models import Users
-from multiselectfield import MultiSelectField
 import json
 # from Review.models import Review
 # Create your models here.
@@ -34,8 +31,6 @@ class Location(models.Model):
         ('중랑/쌍봉','중랑/쌍봉'),
     ]
     name = models.CharField(max_length=32,choices=Locations)
-    #name = models.CharField(max_length=32)
-
 
 class Cafe(models.Model):
     name = models.CharField(max_length=32)
@@ -47,13 +42,12 @@ class Cafe(models.Model):
     location_id = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL)
     latitude = models.FloatField(default=37.314964)
     longtitude = models.FloatField(default=126.575308)
-    average_star=models.FloatField(default=0)
+    keywords = models.TextField(null=True)
 
 
 class CafeKeyword(models.Model):
     # Review : Cafe Keyword와 Keyword의 차이는 뭔가요?
     # Review : 현재 상태로는, 한 클래스로 합칠 수 있을 것 같습니다.
-   
     # 리뷰로 이전
     #   CAFE_KEYWORDS=[
     #     ('데이트','데이트'),

@@ -1,17 +1,17 @@
 .root {
-    --color-red: #DF4629;
+    --color-red: #df4629;
     --color-green: #728137;
-    --color-ivory: #FAF7F1;
+    --color-ivory: #faf7f1;
 }
 
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 .notosanskr * {
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: "Noto Sans KR", sans-serif;
 }
 
 * {
-    font-family: 'Noto Sans KR';
+    font-family: "Noto Sans KR";
     box-sizing: border-box;
 }
 
@@ -28,7 +28,7 @@
     width: 100%;
     height: 360px;
     background-image: url("/static/image/main.svg");
-    background-size: auto;
+    background-size: cover;
     z-index: -1;
 }
 
@@ -38,6 +38,31 @@
     z-index: 1;
 }
 
+.location_picked {
+    background-color: #728137;
+    /* position: absolute;
+    top: 238px;
+    left: 462px; */
+    border-radius: 4px;
+    border: none;
+}
+
+.keyword_picked {
+    background-color: #728137;
+    /* position: absolute;
+    top: 294px;
+    left: 462px; */
+    border-radius: 4px;
+    border: none;
+}
+
+.location_picked_text,
+.keyword_picked_text {
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+
 .search_text1 {
     margin-top: 24px;
     font-size: 36px;
@@ -45,37 +70,56 @@
 
 .search_text_etc {
     display: inline-block;
+    margin-bottom: 19px;
+    margin-left: 10px;
     padding-top: 4px;
     font-size: 36px;
 }
 
 .search_text2 {
     width: 600px;
-    margin-top: 30px;
+    margin-top: 50px;
     margin-bottom: 30px;
 }
 
 .location_input {
+    display: flex;
+    align-items: center;
     width: 258px;
     height: 48px;
     border-radius: 60px;
-    border: 1px solid #B1B1B1;
+    border: 1px solid #b1b1b1;
     margin-bottom: 10px;
+    padding-left: 20px;
     cursor: pointer;
+    background-color: white;
 }
 
 .keyword_input {
+    display: flex;
+    align-items: center;
     width: 450px;
     height: 48px;
     border-radius: 60px;
-    border: 1px solid #B1B1B1;
+    border: 1px solid #b1b1b1;
+    margin-bottom: 10px;
+    padding-left: 20px;
     cursor: pointer;
+    background-color: white;
+}
+
+.location_input > p,
+.keyword_input > p {
+    margin: 0 0 0 0;
+    color: #9b9b9b;
 }
 
 .search_button {
     width: 128px;
     height: 48px;
-    background-color: #DF4629;
+    margin-left: 20px;
+    margin-bottom: 5px;
+    background-color: #df4629;
     border-radius: 60px;
     border: none;
 }
@@ -84,8 +128,60 @@ a {
     text-decoration: none;
 }
 
-/* -------------------------------------------- */
+.location_list {
+    background-color: white;
+    border: 1px solid #b1b1b1;
+    width: 384px;
+}
 
+.loc-text1 {
+    padding: 18px 10px 18px 10px;
+    font-weight: bold;
+}
+
+.loc1 {
+    width: 192px;
+    border: 0.5px solid #b1b1b1;
+    padding-left: 10px;
+}
+
+.loc_list,
+.key_list {
+    color: #3d3d3d;
+    font-size: 14px;
+}
+
+.loc_btn {
+    background-color: white;
+    border: none;
+    padding: 5px 0 5px 0;
+}
+
+.location_drop {
+    top: 266px;
+    position: absolute;
+    z-index: 999;
+}
+
+.keyword_drop {
+    top: 334px;
+    position: absolute;
+    z-index: 999;
+}
+
+.display_none {
+    display: none;
+}
+
+.remove_btn {
+    font-size: 0.5px;
+    border: 1px solid black;
+    border-radius: 50px;
+    margin-left: 1.5px;
+    margin-right: 7.5px;
+}
+
+/* -------------------------------------------- */
 
 /* html { font-size: 62.5%; }   */
 /* 1rem = 10px */
@@ -111,11 +207,10 @@ h3 {
     width: 100%;
     /*100%로 해야되지 않나?*/
     height: 360px;
-
 }
 
 .intro2 {
-    background-color: #FFEEEB;
+    background-color: #ffeeeb;
 }
 
 .intro_container {
@@ -126,20 +221,20 @@ h3 {
     max-width: 1440px;
     width: 100%;
     height: 300px;
-
+}
+.intro_container .intro3_img {
+    display: flex;
+    margin-right: 257px;
 }
 
-.intro_container .intro1_img,
-.intro3_img {
+.intro_container .intro1_img {
     display: flex;
-    margin-right: 188px;
-
+    margin-right: 148px;
 }
 
 .intro_container .intro2_img {
     display: flex;
-    margin-left: 312px;
-
+    margin-left: 266px;
 }
 
 .intro_comment {
@@ -154,14 +249,34 @@ h3 {
 .intro3_span1 {
     margin-bottom: 16px;
     font-size: 28px;
+    color: black;
 }
 
+.intro1_span1 {
+    width: 340px;
+}
+.intro2_span1 {
+    width: 330px;
+}
+.intro3_span1 {
+    width: 340px;
+}
 
 .intro1_span2,
 .intro2_span2,
 .intro3_span2 {
+    /* color: gray; */
     font-size: 20px;
-
+    color: black;
+}
+.intro1_span2 {
+    width: 448px;
+}
+.intro2_span2 {
+    width: 331px;
+}
+.intro3_span2 {
+    width: 340px;
 }
 
 .mainpage__img {
@@ -175,4 +290,8 @@ footer {
     height: 180px;
     padding-left: 160px;
     padding-right: 160px;
+}
+
+span {
+    color: #858585;
 }

@@ -1,11 +1,11 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 .notosanskr * {
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: "Noto Sans KR", sans-serif;
 }
 
 * {
-    font-family: 'Noto Sans KR', 'sans-serif';
+    font-family: "Noto Sans KR", "sans-serif";
     box-sizing: border-box;
 }
 
@@ -25,8 +25,8 @@ nav {
     position: sticky;
     top: 0;
     z-index: 3;
-    background-color: #FFFFFF;
-    border-bottom: 2px solid #D1D1D1;
+    background-color: #ffffff;
+    border-bottom: 2px solid #d1d1d1;
 }
 
 .nav_container {
@@ -56,20 +56,18 @@ nav {
     width: 708px;
     height: 48px;
     border-radius: 45px;
-    border: 1px solid #B1B1B1;
+    border: 1px solid #b1b1b1;
     cursor: pointer;
 }
 
 .search_img {
     width: 24px;
     height: 24px;
-    color: #AAAAAA;
+    color: #aaaaaa;
     position: absolute;
     top: 16px;
     right: 14px;
 }
-
-
 
 .nav_notice,
 .nav_login,
@@ -82,4 +80,14 @@ nav {
     border: none;
     background-color: white;
     margin-left: 3.5rem;
+}
+
+.nav_notice {
+    width: 59px;
+}
+.nav_login {
+    width: 45px;
+}
+.nav_signup {
+    width: 59px;
 }

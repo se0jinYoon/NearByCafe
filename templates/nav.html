@@ -23,6 +23,9 @@
         <link rel="stylesheet" href="{% static 'css/signup.css' %}" />
         <link rel="stylesheet" href="{% static 'css/send_mail.css' %}" />
         <link rel="stylesheet" href="{% static 'css/cafe_detail.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/find_cafe.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/review_create.css' %}" />
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=91d2e9aa375c6586364b537512d39938"></script>
         <title>nav</title>
     </head>
 
@@ -39,7 +42,7 @@
             <a href="/profile" class="menu nav_login">프로필정보</a>
             <form action="/logout/" method="POST">
                 {% csrf_token %}
-                <input class="logout_input" type="submit" value="로그아웃">
+                <input class="logout_input" type="submit" value="로그아웃" />
             </form>
         </nav>
 
@@ -55,9 +58,7 @@
             <a href="/login" class="menu nav_login">로그인</a>
             <a href="/signup" class="menu nav_signup">회원가입</a>
         </nav>
-        {% endif %}
-
-        {% block content %} {% endblock %}
+        {% endif %} {% block content %} {% endblock %}
 
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

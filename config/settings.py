@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     "User",
     "Review",
     "Cafe",
-   
 ]
 
 MIDDLEWARE = [

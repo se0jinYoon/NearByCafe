@@ -1,16 +1,42 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, reverse
 from Cafe.models import *
 from django.http.request import HttpRequest
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import json,math,re
 from User.views import validate_email
 from Review.models import *
 
+
+location_dict = {'왕십리/한양대/성수' : [37.56122596158312,127.03430549372456],
+'강남/역삼/선릉/압구정':[37.49766189275592 , 127.02829414076893],
+'건대입구/세종대':[37.53945064514514,127.0707408606652],
+'서울대입구/신림':[37.480482246689576, 126.95181374421041],
+'동작/흑석/상도':[37.49804283076126, 126.98563799296839],
+'노량진/여의도/영등포/당산':[37.513022816640365,126.9432870154441],
+'구로/신도림':[37.503177063791,126.88453062451542],
+'목동/양천/금천':[37.52784583486552,126.86675357877786],
+'광운대/공릉/노원/도봉':[37.623248712464395,127.06054605501177],
+'수유/미아':[37.63783923564135,127.0264551328912],
+'김포공항/염창/강서':[37.56599532536502,126.82612996276936],
+'서울 전체':[ 37.52986223233116, 126.96586726417681],
+'홍대/합정/망원/서강' :[37.555801113296894, 126.92495439649478],
+'신촌/이대/서대문/아현':[ 37.554294814089644,126.93763112560798],
+'혜화/성균관대':[37.58186370670705,127.00259258535856],
+'청량리/회기':[ 37.58035852300995,127.04751467848493],
+'성신여대/안암/성북/길음':[37.59229597707164,127.01721082858734],
+'잠실/송파/강동':[ 37.5135067680033,127.10106376984062],
+'을지로/명동/중구':[37.56092381888689,126.98636161215958],
+'서초/교대/사당':[ 37.49354668637486,127.01532232510674],
+'종로/인사동/동대문':[ 37.57054723602707,127.0014262721575],
+'서울역/이태원/용산':[37.55437973351499,126.97071115287041],
+'중랑/쌍봉':[37.59221753953163,127.07778832853602],
+}
+
 #1.지역설정
 #2.키워드 설정 필터링
 #3.지도에 핀 꽂기 
-#  
+
 @csrf_exempt
 def main_keyword_list(request, *args, **kwargs):
     cafe_keyword = CafeKeyword.cafe_temp
@@ -19,21 +45,58 @@ def main_keyword_list(request, *args, **kwargs):
     } 
 
 
-    return JsonResponse(context)
-
-
-
-
 def main_page(request, *args, **kwargs):
-    context = {}
-    return render(request, "mainpage.html", context=context)
+    # 위치 키워드 전처리
+    location_list = list(Location.Locations)
+    pre_location_list_left = location_list[0:12]
+    pre_location_list_right = location_list[12:]
 
-#q.여기서 우리가 클릭한 카페 id를 보내줘야하는데 js로 html에 바로 구겨넣었는데 그거 어케하지?
-# <a href="{% url 'Cafe:cafe_detail' post.pk %}">{{post.title}}</a></p>
-# 카페 찾기(지도)랑 연결 후 수정
+    location_list_left = []
+    location_list_right = []
+
+    for i in range(len(pre_location_list_left)) :
+        location_list_left.append(pre_location_list_left[i][0])
+
+    for i in range(len(pre_location_list_right)) :
+        location_list_right.append(pre_location_list_right[i][0])
+
+    # 카페 키워드 전처리
+    keyword_list = list(CAFE_KEYWORDS)
+    pre_keyword_list_left = keyword_list[:8]
+    pre_keyword_list_right = keyword_list[8:]
+
+    keyword_list_left = []
+    keyword_list_right = []
+
+    for i in range(len(pre_keyword_list_left)) :
+        keyword_list_left.append(pre_keyword_list_left[i][0])
+    
+    for i in range(len(pre_keyword_list_right)) :
+        keyword_list_right.append(pre_keyword_list_right[i][0])
+
+    context = {
+        "location_list_left" : location_list_left,
+        "location_list_right" : location_list_right,
+        "keyword_list_left" : keyword_list_left,
+        "keyword_list_right" : keyword_list_right,
+    }
+
+    # 카페 검색 POST를 받았을 시
+    if request.method == 'POST':
+        loc = request.POST.get('cafe_location_name')
+        keyword = request.POST.get('cafe_keyword_name')
+        print(request.POST)
+
+        if len(loc) == 0:
+            loc = '서울 전체'
+        
+        return redirect(reverse("Cafe:find_cafe") + f"?loc={loc}&keyword={keyword}")
+        
+    return render(request,"mainpage.html", context=context)
+
+
 def cafe_detail(request,pk,*args,**kwargs):
     cafe=Cafe.objects.get(id=pk)
-  
     #카페에 등록된 리뷰들 불러오기
     all_review=cafe.cafe_id.all()
     review_cnt=0
@@ -45,7 +108,6 @@ def cafe_detail(request,pk,*args,**kwargs):
         
         #학교인증마크 획득
         if school_match(cafe.location_id.name,review.user_id.email_address):
-           
             review.mark=True
         else:
             review.mark=False
@@ -59,14 +121,11 @@ def cafe_detail(request,pk,*args,**kwargs):
     cafe.average_star=average_star
     cafe.save()
     
-    
-    
     context={
         "cafe":cafe,
         "review_cnt":review_cnt,
         "all_review":all_review,
         "r_average_start":r_average_star,
-           
     }
     
     return render(request,"cafe_detail_cj.html",context=context)
@@ -133,66 +192,79 @@ def cafe_like(request):
     
     return JsonResponse({'id':like_id,'clicked':clicked})
 
-    
-    
-    
-
 def find_cafe(request, *args, **kwargs):
-    Location_list = dict(Location.Locations)
-    Location_keys = tuple(Location_list.keys())   #['서울전체', '왕십리',]
-    keys_left = tuple(Location_keys[0:12])
-    keys_right = tuple(Location_keys[12:])
-    Location_list_left = { i : Location_list[i] for i in keys_left}
-    Location_list_right = { i : Location_list[i] for i in keys_right}
-    # for keyL in keys_left:
-    #     Location_list_left = dict(Location_list[keyL])
-    # for keyR in keys_right:
-    #     Loation_list_right = dict(Location_list[keyR])
 
+    location_list = list(Location.Locations)
+    pre_location_list_left = location_list[0:12]
+    pre_location_list_right = location_list[12:]
+
+    location_list_left = []
+    location_list_right = []
+
+    for i in range(len(pre_location_list_left)):
+        location_list_left.append(pre_location_list_left[i][0])
+
+    for i in range(len(pre_location_list_right)):
+        location_list_right.append(pre_location_list_right[i][0])
+
+    loc = request.GET.get('loc')
+    keyword = request.GET.get('keyword')
     context = {
-        "location_list_left": Location_list_left,
-        "location_list_right": Location_list_right
+        "location_list_left": location_list_left,
+        "location_list_right": location_list_right,
+        "loc": loc,
+        "keyword": keyword,
+        "latitude": location_dict[loc][0],
+        "longtitude": location_dict[loc][1],
     }
+
+    if request.method == 'POST':
+        loc = request.POST.get('cafe_location_name')
+        keyword = request.POST.get('cafe_keyword_name')
+        print(request.POST)
+
+        if len(loc) == 0:
+            loc = '서울 전체'
+        
+        return redirect(reverse("Cafe:find_cafe") + f"?loc={loc}&keyword={keyword}")
+
     return render(request,"find_cafe.html", context=context)
+
 
 
 @csrf_exempt
 def find_cafe_ajax(request, *args, **kwargs):
-
     if request.method == 'POST':
         #프론트에서 넘겨줘야함! html에서 location의 문자열 보내주기
         print('get')
         req = json.loads(request.body)
         location = req['location']
-        location = Location.objects.get(name=location)
-        latitude = location.latitude
-        longtitude = location.longtitude
         # selected_location = request.GET['location']
         selected_location = location
         cafe_location = Location.objects.get(name = selected_location)
-        cafes = cafe_location.cafe_set.all()
+        cafes_objects = cafe_location.cafe_set.all()
         # cafes_latlog = cafes.location.name
-        cafes=list((cafes).values())
-        context = {
-        'latitude':latitude,
-        'longtitude':longtitude,
+        #cafes=list((cafes_objects).values())
+        
+        print(selected_location)
+        seleted_keywords=req['seleted_ck']#선택된 키워드 리스트
+        #review에서 keywords 리스트 가져와서 필터링
+        cafes=[]
+
+        for cafe in cafes_objects:
+
+            # cafe의 리뷰에서 keywords를 가져와서 selected_keywords랑비교
+            cafe_keywords=cafe.keywords
+            #cafe_keywords랑 selected_keywords 비교
+            same=[i for i,j in zip(seleted_keywords,cafe_keywords) if i==j]
+            
+            if len(same)>=2:
+                cafes.append(cafe)
+
+        ctx = {
+        'latitude':location_dict[location][0],
+        'longtitude':location_dict[location][1],
         'cafes':cafes,
         }
         
-    # return render(request,"find_cafe.html",context=context)
-        return JsonResponse(context)
-    
-    # return render(request, "find_cafe.html", context=context)
-
-    #selected_location 과 같은 cafe의 location의 name을 가져와야 한다. 
-
-    #지역에 저장된 카페를 띄우자
-    #위에서 받아온 location  name 정보를 ㄱ가진 카페를 가져온다. 
-    #그 애들을 컨텍스트에 담아서 html에 보내주면 html에서는 for문으로 보여준다~
-    #이거를 ajax해본다...
-    #cafes = cafe_location.cafe_set.all()
-    #cafe_location은 selected_location과 같은 location 객체 받아옴..
-
-    #이 카페들을 html에 보내서 for문 돌려서 출력
-
-
+    return JsonResponse(context=ctx)
