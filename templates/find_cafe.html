@@ -393,7 +393,7 @@ const cafeMarker=(cafes) => {
 
     const cafeHandleResponse = (cafes) => {
         var element = document.querySelector(".cafe_list");
-        element.innerHTML = `<div class="cafe_list">`;
+        // element.innerHTML = `<div class="cafe_list">`;
         cafes.forEach((item) => {
             let star = "⭐⭐⭐⭐⭐";
             if (item.average_star === 1) {
@@ -407,13 +407,11 @@ const cafeMarker=(cafes) => {
             } else if (item.average_star === 5) {
                 star = "⭐⭐⭐⭐⭐";
             }
-            console.log("starTest")
-            console.log(item.id)
+            console.log(item.average_star)
             element.innerHTML += `
         <div class="cafe d-flex">
-            <img src="${item.image}" alt="이미지가 없습니다" class="cafe_img">
-        <div class="d-flex flex-column">
-        <a href='cafe_detail/${item.id}' class="find_cafe_name">${item.name}</a>
+            <img src="/media/${item.image}" alt="이미지가 없습니다" class="cafe_img">
+            <a href='cafe_detail/${item.id}'>${item.name}</a>
         <span class="cafe_loc">${item.address}</span>
         <span class="cafe_categ">${item.keywords}</span>
         <div class="cafe_star_info">
