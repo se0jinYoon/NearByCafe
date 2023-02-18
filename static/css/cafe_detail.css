@@ -47,6 +47,11 @@
     height: 200px;
     margin: 20px 40px 30px 20px;
 }
+.cd_img{
+    width: 150px;
+    height: 200px;
+    object-fit: contain;
+}
 .cafe_index_name{
     font-size: 35px;
     font-weight: 500;
