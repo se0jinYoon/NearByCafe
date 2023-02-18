@@ -31,7 +31,7 @@
                             {% for location in location_list_left %}
                             <div class="loc1 d-flex flex-row align-center">
                                 <button class="loc_btn">
-                                    <span class="loc_list" onclick="onClickSearch({{location}})">{{location}}</span>
+                                    <span class="loc_list" onclick="onClickLocationList()">{{location}}</span>
                                 </button>
                             </div>
                             {% endfor %}
@@ -40,7 +40,7 @@
                             {% for location in location_list_right %}
                             <div class="loc1 d-flex flex-row align-center">
                                 <button class="loc_btn">
-                                    <span class="loc_list" onclick="onClickSearch({{location}})">{{location}}</span>
+                                    <span class="loc_list" onclick="onClickLocationList()">{{location}}</span>
                                 </button>
                             </div>
                             {% endfor %}
@@ -224,7 +224,7 @@
         var location_picked = event.target;
         var location_each = location_picked.innerText;
 
-        const location_input = document.querySelector(".location_input");
+        // const location_input = document.querySelector(".location_input");
         // let location_placeholder = location_input.placeholder;
         // location_placeholder = "";
 
@@ -238,17 +238,17 @@
 
     const onClickSearch = async (location) => {
 
-        var location_picked = event.target;
-        var location_each = location_picked.innerText;
+        // var location_picked = event.target;
+        // var location_each = location_picked.innerText;
 
-        const location_input = document.querySelector(".location_input");
-        // let location_placeholder = location_input.placeholder;
-        // location_placeholder = "";
+        // const location_input = document.querySelector(".location_input");
+        // // let location_placeholder = location_input.placeholder;
+        // // location_placeholder = "";
 
-        const location_picked_text = document.querySelector(".location_input");
-        location_picked_text.innerHTML = `<button class="location_picked" onclick="${onClickLocationText()}">
-            <span class="location_picked_text">${location_each}</span>
-            </button>`;
+        // const location_picked_text = document.querySelector(".location_input");
+        // location_picked_text.innerHTML = `<button class="location_picked" onclick="${onClickLocationText()}">
+        //     <span class="location_picked_text">${location_each}</span>
+        //     </button>`;
 
         //키워드 선택//
         var seleted_ck=[];
