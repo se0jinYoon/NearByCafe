@@ -136,6 +136,10 @@ body {
     background-color: white;
     padding-left: 36px;
 }
+.review_create_keywordselect{
+    margin-top: 20px;
+}
+
 
 /*-- 키워드버튼 추가 부분 --*/
 .keyword_btn{
