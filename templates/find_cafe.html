@@ -131,7 +131,7 @@
             {% endfor %} -->
 
             <div class="cafe_list">
-                <!-- <div class="cafe d-flex">
+                  <!-- <div class="cafe d-flex">
                     <img src="" alt="" class="cafe_img">
                     <div class="cafe_info d-flex flex-column">
                         <span class="cafe_name">카페 상호명</span>                    
@@ -220,9 +220,9 @@
             } else {
                 checkedCheckboxes.splice(checkedCheckboxes.indexOf(this), 1);
             }
-            console.log(checkedCheckboxes);
         });
     });
+    console.log(checkedCheckboxes);
     const dropdown_menu = document.querySelector(".dropdown_location_list");
     const location_drop = document.querySelector(".location_drop");
 
@@ -322,7 +322,7 @@
             element.innerHTML += `
         <div class="cafe d-flex">
             <img src="${item.image}" alt="이미지가 없습니다" class="cafe_img">
-        <span class="cafe_name">${item.name}</span>
+            <a href='cafe_detail/${item.id}'>${item.name}</a>
         <span class="cafe_loc">${item.address}</span>
         <span class="cafe_categ">${item.keywords}</span>
         <div class="cafe_star_info">

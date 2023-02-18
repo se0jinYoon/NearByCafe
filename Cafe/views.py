@@ -241,11 +241,10 @@ def find_cafe_ajax(request, *args, **kwargs):
         location = req['location']
         # selected_location = request.GET['location']
         selected_location = location
+        
         cafe_location = Location.objects.get(name = selected_location)
         cafes_objects = cafe_location.cafe_set.all()
         # cafes_latlog = cafes.location.name
-        print("!!")
-        print(selected_location)
         #seleted_keywords=req['seleted_ck']#선택된 키워드 리스트
         #review에서 keywords 리스트 가져와서 필터링
         #cafes=[]
@@ -254,10 +253,11 @@ def find_cafe_ajax(request, *args, **kwargs):
             #     cafe_keywords=cafe.keywords
             #     #cafe_keywords랑 selected_keywords 비교
             #     same=[i for i,j in zip(seleted_keywords,cafe_keywords) if i==j]
+                
             #     if len(same)>=2:
             #         cafes.append(cafe)
         cafes=list((cafes_objects).values())
-        print("cafes : ",cafes)
+
         ctx = {
         'latitude':location_dict[location][0],
         'longtitude':location_dict[location][1],
