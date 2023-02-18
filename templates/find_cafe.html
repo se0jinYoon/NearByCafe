@@ -5,7 +5,7 @@
         <div class="location_container d-flex flex-column">
             <div class="location_text fw-bold">지역 설정</div>
             <!-- <button class="search" onclick="onClickSearch('{{location}}')">검색하기</button> -->
-                   
+
             <!-- <button class="selected_location" onClick="onClickLocationButton()" >
                 <input class="selected_location_cat" 
                 type="text" 
@@ -20,7 +20,7 @@
                     <p>지역 선택</p>
                 </div>
             </div>
-            
+
             <div class="dropdown_location_list display_none">
                 <div class="location_list d-flex flex-column shadow">
                     <div class="loc-text1">검색할 위치를 선택해주세요.</div>
@@ -108,14 +108,13 @@
             </div>
         </div>
 
-
         <div class="cafe_list_container">
             <div class="sort_container">
                 <form action="" method="POST">
                     {% csrf_token %}
                     <input type="hidden" name="cafe_location_name" id="cafe_location_name" value="" />
                     <input type="hidden" name="cafe_keyword_name" id="cafe_keyword_name" value="" />
-                    <button class="search" type="submit" onclick="onClickSearch('{{location}}')"><span class="btn_text3">카페 검색하기</span></button>                
+                    <button class="search" type="submit" onclick="onClickSearch('{{location}}')"><span class="btn_text3">카페 검색하기</span></button>
                 </form>
                 <div class="sort">
                     <button class="sort_abc"><span class="btn_text1">가나다 순</span></button>
@@ -204,14 +203,14 @@
     const MAX_CHECKBOXES = 3;
     var checkboxes = document.querySelectorAll(".checkbox");
     var checkedCheckboxes = [];
-    var checked = []
+    var checked = [];
 
     // 모든 체크박스마다 이벤트 리스너 추가
     checkboxes.forEach(function (checkbox) {
         checkbox.addEventListener("change", function () {
             if (this.checked) {
                 checkedCheckboxes.push(this.value); // 체크된 리스트에 추가
-                checked.push(this)
+                checked.push(this);
                 if (checkedCheckboxes.length > MAX_CHECKBOXES) {
                     var oldestCheckbox = checkedCheckboxes.shift();
                     var oldestCheck = checked.shift();
@@ -220,8 +219,7 @@
             } else {
                 checkedCheckboxes.splice(checkedCheckboxes.indexOf(this), 1);
             }
-            console.log(checkedCheckboxes)
-            
+            console.log(checkedCheckboxes);
         });
     });
     const dropdown_menu = document.querySelector(".dropdown_location_list");
@@ -268,28 +266,27 @@
         console.log(locationInput);
     }
 
-    var clickedKeywordList = []
+    var clickedKeywordList = [];
     function onClickKeyword() {
         var keyword_picked = event.target;
         var keyword_each = keyword_picked.value;
         clickedKeywordList.push(keyword_each);
-        console.log(clickedKeywordList)
+        console.log(clickedKeywordList);
         form_keyword_input.value = JSON.stringify(clickedKeywordList);
     }
-
 
     console.log(checkedCheckboxes);
     const onClickSearch = async (location) => {
         //키워드 선택//
-        var selected_ck=checkedCheckboxes;
-        console.log(selected_ck); 
+        var selected_ck = checkedCheckboxes;
+        console.log(selected_ck);
 
         const res = await fetch("/find_cafe_ajax/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
-            body: JSON.stringify({ location: location,selected_ck:selected_ck}), //보내는거
+            body: JSON.stringify({ location: location, selected_ck: selected_ck }), //보내는거
         });
 
         // const res = await fetch('/cafe/find_cafe')
@@ -395,7 +392,7 @@
 </script>
 
 <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"
 ></script>

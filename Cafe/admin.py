@@ -15,8 +15,3 @@ class CafeLikeAdmin(admin.ModelAdmin):
 
 class CafeKeywordAdmin(admin.ModelAdmin):
     pass
-
-admin.site.register(CafeLike)
-admin.site.register(CafeAdmin)
-admin.site.register(CafeKeyword)
-
