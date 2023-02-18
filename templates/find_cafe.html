@@ -110,12 +110,12 @@
 
         <div class="cafe_list_container">
             <div class="sort_container">
-                <form action="" method="POST">
+                <!-- <form action="" method="POST"> -->
                     {% csrf_token %}
                     <input type="hidden" name="cafe_location_name" id="cafe_location_name" value="" />
                     <input type="hidden" name="cafe_keyword_name" id="cafe_keyword_name" value="" />
-                    <button class="search" type="submit" onclick="onClickSearch('{{location}}')"><span class="btn_text3">카페 검색하기</span></button>
-                </form>
+                    <button class="search" type="button" onclick="onClickSearch()"><span class="btn_text3">카페 검색하기</span></button>
+                <!-- </form> -->
                 <div class="sort">
                     <button class="sort_abc"><span class="btn_text1">가나다 순</span></button>
                     <button class="sort_star"><span class="btn_text2">평점 순</span></button>
@@ -204,6 +204,7 @@
     var checkboxes = document.querySelectorAll(".checkbox");
     var checkedCheckboxes = [];
     var checked = [];
+    const locationInput = document.querySelector("#cafe_location_name");
 
     // 모든 체크박스마다 이벤트 리스너 추가
     checkboxes.forEach(function (checkbox) {
@@ -261,7 +262,7 @@
             <span class="location_picked_text">${location_each}</span>
             </button>`;
 
-        const locationInput = document.querySelector("#cafe_location_name");
+       
         locationInput.value = location_each;
         console.log(locationInput);
     }
@@ -276,17 +277,18 @@
     }
 
     console.log(checkedCheckboxes);
-    const onClickSearch = async (location) => {
+    const onClickSearch = async () => {
         //키워드 선택//
-        var selected_ck = checkedCheckboxes;
-        console.log(selected_ck);
+       
+        const location = locationInput.value;
+        console.log('지역',location);
 
         const res = await fetch("/find_cafe_ajax/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
-            body: JSON.stringify({ location: location, selected_ck: selected_ck }), //보내는거
+            body: JSON.stringify({ location: location,}), 
         });
 
         // const res = await fetch('/cafe/find_cafe')
@@ -305,7 +307,7 @@
         var element = document.querySelector(".cafe_list");
         element.innerHTML = `<div class="cafe_list">`;
         cafes.forEach((item) => {
-            let start = "⭐⭐⭐⭐⭐";
+            let star = "⭐⭐⭐⭐⭐";
             if (item.average_star === 1) {
                 star = "⭐";
             } else if (item.aver_start === 2) {
