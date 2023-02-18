@@ -35,7 +35,6 @@
     
     <form action="{% url 'Review:review_create' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <input class="star_input" type="text" name="star" id="star" placeholder="별">
         <div class="title_container shadow d-flex flex-row align-items-center">
             <span class="title fw-light">제목:</span>
             <input class="title_input" type="text" name="title" id="title" placeholder="리뷰의 제목을 입력해주세요!">
@@ -47,7 +46,7 @@
                 class="content"
                 name="content" 
                 id="content" 
-                placeholder="{{user}}님, 카페는 어떠셨나요? 식당의 분위기와 서비스도 궁금해요!"></textarea> 
+                placeholder="{{user}}님, 카페는 어떠셨나요? 카페의 분위기와 서비스도 궁금해요!"></textarea> 
         </div>
     
         <div class="keyword_container shadow d-flex flex-column justify-content-center"> 
@@ -60,55 +59,53 @@
             </div>
             <!-- 키워드 선택부분 / 설명 : 4개 선택 후 5번째 선택을 하게 되면 젤 처음에 선택된게 삭제됨(큐 방식)-->
             <div class="review_create_keywordselect">
-                <!-- <div class="container"></div> -->
-                {% for keyword in keyword_list %}
                 <div class="row mb-3">
-                    <div class="col"><button class="keyword_btn " name="mark" id="{{keyword}}" type="button" >{{keyword}}</button></div>
-                   {% endfor %}
-                </div>
-                <!-- <div class="row mb-3">
-                    <div class="col"><button class="keyword_btn " id="keyword1" type="button" >키워드1</button></div>
-                    <div class="col"><button class="keyword_btn " id="keyword2" type="button" >키워드2</button></div>
-                    <div class="col"><button class="keyword_btn " id="keyword3" type="button" >키워드3</button></div>
-                    <div class="col"><button class="keyword_btn " id="keyword4" type="button" >키워드4</button></div>
-                    <div class="col"><button class="keyword_btn " id="keyword5" type="button" >키워드5</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="데이트" value="데이트" type="button" >데이트</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="작업하기 좋은" value="작업하기 좋은" type="button" >작업하기 좋은</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="공부하기 좋은" value="공부하기 좋은" type="button" >공부하기 좋은</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="조용한" value="조용한" type="button" >조용한</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="시끌벅적한" value="시끌벅적한" type="button" >시끌벅적한</button></div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col"><button class="keyword_btn" id="keyword6" type="button" >키워드11</button></div>
-                    <div class="col"><button class="keyword_btn" id="keyword7" type="button" >키워드22</button></div>
-                    <div class="col"><button class="keyword_btn" id="keyword8" type="button" >키워드33</button></div>
-                    <div class="col"><button class="keyword_btn" id="keyword9" type="button" >키워드44</button></div>
-                    <div class="col"><button class="keyword_btn" id="keyword10" type="button">키워드55</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="의자가 편한" value="의자가 편한" type="button" >의자가 편한</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="디저트 맛있는" value="디저트 맛있는" type="button" >디저트 맛있는</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="커피가 맛있는" value="커피가 맛있는" type="button" >커피가 맛있는</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="친절한" value="친절한" type="button" >친절한</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="혼카페" value="혼카페" type="button">혼카페</button></div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col"><button class="keyword_btn" id="keyword11" type="button">키워드111</button></div>
-                    <div class="col"><button class="keyword_btn" id="keyword12" type="button">키워드222</button></div>
-                    <div class="col"><button class="keyword_btn" id="keyword13" type="button">키워드333</button></div>
-                    <div class="col"><button class="keyword_btn" id="keyword14" type="button">키워드444</button></div>
-                    <div class="col"><button class="keyword_btn" id="keyword15" type="button">키워드555</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="장소가 넓은" value="장소가 넓은" type="button">장소가 넓은</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="콘센트가 많은" value="콘센트가 많은" type="button">콘센트가 많은</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="화장실 깨끗한" value="화장실 깨끗한" type="button">화장실 깨끗한</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="인테리어 예쁜" value="인테리어 예쁜" type="button">인테리어 예쁜</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="저렴한" value="저렴한" type="button">저렴한</button></div>
                 </div>
             </div>
-        </div> -->
+        </div>
 
-        <div class="image_container shadow d-flex flex-row align-items-center">
+        <div class="image_container shadow d-flex flex-column">
             <div>
                 <span class="main_text">사진 등록하기</span>
-                <span class="sub_text">최대 4장까지 업로드 할 수 있어요!</span>
+                <span class="sub_text">최대 1장까지 업로드 할 수 있어요!</span>
             </div>
 
             <!-- 사진 등록(미완,cj, 16일 3시 24분) -->
-            <input type="file" class="real-upload" accept="image/*" required multiple style="display: none;">
+            <input type="file" class="real-upload" accept="image/*" style="display: none;">
             <div class=" d-flex" style="display: contents;">
                 <div class="image_preview d-flex">
-                    <!-- <img src="Frame 1.png" alt="" width="150" height="150"> -->
                 </div>
-                <img src="{% static 'image/addimage.svg' %}" class="upload_img" width="200" height="200"/>
+                <div class="upload_btn" width="200" height="200">추가하기</div>
             </div>
             <!--  -->
 
         </div>
 <!-- 제출 임시구현 -->
-<button id="login_btn" type="button" onclick="onClickReview()" >제출</button>
+<!-- <button id="login_btn" type="button" onclick="onClickReview()" >제출</button> -->
+        <div class="review_btns">
+            <button id="login_btn" type="button" onclick="onClickReview()" >등록하기</button>
+            <button id="review_cancel_btn" type="button" onclick="" >취소하기</button> <!--어디 페이지로 가려나-->
+        </div>
+
     </form>
 </div>
 
@@ -137,17 +134,17 @@
            const imagepreview=document.querySelector('.image_preview');
            const docFrag=new DocumentFragment()
           //  console.log(typeof files,files)
-           if ([...files].length>4){
-              alert('최대 4장까지 가능');
+           if ([...files].length>1){
+              alert('1장만 등록하실 수 있습니다.');
               return;
            }
            [...files].forEach(file =>{
                if (!file.type.match("image/.*")){
-                  alert('이미지 파일만 업로드 가능');
+                  alert('이미지 파일만 업로드 가능합니다.');
                   return;
                }
            
-           if ([...files].length<=4){
+           if ([...files].length==1){
                uploadFiles.push(files);
                const reader =new FileReader();
                reader.onload=(e)=>{
@@ -159,28 +156,53 @@
            });
        }
    function createElement(e,file){
-       const li= document.createElement('ui');
+       const ui= document.createElement('ui');
        const img= document.createElement('img');
+       const upload_btn= document.querySelector('.upload_btn');
+
        img.setAttribute('src',e.target.result);
        img.setAttribute('data-file',file.name);
-       li.appendChild(img);
-       li.classList.add("d-flex");
-       li.classList.add("img_here");
-       img.classList.add("post_reviewimg")
-       return li;
+
+       ui.append(img);
+
+       ui.classList.add("d-flex");
+       ui.classList.add("flex-column");
+       ui.classList.add("img_here");
+       img.classList.add("post_reviewimg");
+       ui.innerHTML+=`<button class="remove_btn_review" onclick="remove_img()">삭제하기</button>`;
+
+
+       if (upload_btn.style.display!=='none'){
+        upload_btn.style.display ='none';
+       }
+       else{
+        upload_btn.style.display ='';
+       }
+       
+       return ui;
    }
-   function count_four(){
-      const four_ui=document.querySelectorAll('.img_here');
-      console.log(four_ui);
+   function remove_img(){
+    let img_remove = document.querySelector('.post_reviewimg');
+    const upload_btn= document.querySelector('.upload_btn');
+
+    img_remove.parentNode.remove(img_remove);
+    img_remove.nextSibling.remove();
+
+    if (upload_btn.style.display!=='none'){
+        upload_btn.style.display ='none';
+       }
+       else{
+        upload_btn.style.display ='';
+       }
    }
-   
-     const realUpload = document.querySelector('.real-upload');
-     const upload = document.querySelector('.upload_img');
-     const img_tag = document.querySelector('.post_reviewimg');
-     upload.addEventListener('click', () => realUpload.click());
-     realUpload.addEventListener('change', getImageFiles);
-     img_tag.addEventListener('onclick', count_four);
-   
+    const realUpload = document.querySelector('.real-upload');
+    const upload = document.querySelector('.upload_btn');
+    const img_tag = document.querySelector('.post_reviewimg');
+    const remove_btn = document.querySelector('.remove_btn_review');
+
+    upload.addEventListener('click', () => realUpload.click());
+    realUpload.addEventListener('change', getImageFiles);
+    remove_btn.addEventListener('click',remove_img);
    </script>
 <!--  -->
 

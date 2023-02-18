@@ -143,9 +143,9 @@ body {
     border-radius: 24px;
     width: 138px;
     height: 48px;
+    font-size: 20px;
     font-weight: bold;
     border: 1px solid #D6D6D6;
-    font-size: 22px;
 }
 /* ---- */
 .main_text {
@@ -183,4 +183,48 @@ body {
     width: 200px;
     height: 200px;
     margin-right: 20px;
+}
+/* 사진 등록하기 부분 */
+.upload_btn{
+    background-color: #F3F0E7;
+    border-radius: 24px;
+    width: 138px;
+    height: 48px;
+    font-size: 20px;
+    font-weight: bold;
+    border: 1px solid #D6D6D6;
+    text-align: center;
+    padding: 8px;
+    margin: auto;
+    margin-top: 12%;
+}
+.image_preview{
+    margin-top: 20px;
+}
+.remove_btn_review{
+    background-color: #F3F0E7;
+    border-radius: 24px;
+    width: 105px;
+    height: 24px;
+    font-weight: bold;
+    border: 1px solid #D6D6D6;
+    text-align: center;
+    margin-left: 21%;
+    margin-top: 5%;
+}
+#login_btn, #review_cancel_btn{
+    background-color: #DF4629;
+    color: white;
+    border-radius: 24px;
+    width: 138px;
+    height: 48px;
+    font-weight: bold;
+    border: none;
+    font-size: 22px;
+}
+.review_btns{
+    margin-left: 34%;
+}
+#login_btn{
+    margin-right: 10%;
 }
