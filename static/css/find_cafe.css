@@ -212,9 +212,10 @@ input::placeholder {
     margin-right: 20px;
 }
 
-.cafe_name {
+.find_cafe_name {
     font-size: 18px;
     font-weight: bold;
+    margin-bottom: 5px;
 }
 
 .cafe_loc {
