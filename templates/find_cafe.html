@@ -54,13 +54,13 @@
             <div class="keyword_box container d-flex flex-row justify-content-space-between">
                 <div class="d-flex flex-column">
                     <div class="cat1 d-flex flex-row align-center">
-                        <input class="checkbox" type="checkbox" name="date" value="데이트" onclick="onClickKeyword()"/> <span class="checkbox_list date_text">데이트</span>
+                        <input class="checkbox" type="checkbox" name="date" value="데이트" /> <span class="checkbox_list date_text">데이트</span>
                     </div>
                     <div class="cat1 d-flex flex-row align-center">
-                        <input class="checkbox" type="checkbox" name="quiet" value="조용한" onclick="onClickKeyword()"/> <span class="checkbox_list">조용한</span>
+                        <input class="checkbox" type="checkbox" name="quiet" value="조용한" /> <span class="checkbox_list">조용한</span>
                     </div>
                     <div class="cat1 d-flex flex-row align-center">
-                        <input class="checkbox" type="checkbox" name="dessert" value="디저트가 맛있는" onclick="onClickKeyword()"/> <span class="checkbox_list">디저트가 맛있는</span>
+                        <input class="checkbox" type="checkbox" name="dessert" value="디저트가 맛있는" /> <span class="checkbox_list">디저트가 맛있는</span>
                     </div>
                     <div class="cat1 d-flex flex-row align-center">
                         <input class="checkbox" type="checkbox" name="kind" value="친절한" /> <span class="checkbox_list">친절한</span>
@@ -211,7 +211,7 @@
     checkboxes.forEach(function (checkbox) {
         checkbox.addEventListener("change", function () {
             if (this.checked) {
-                checkedCheckboxes.push(this); // 체크된 리스트에 추가
+                checkedCheckboxes.push(this.value); // 체크된 리스트에 추가
                 if (checkedCheckboxes.length > MAX_CHECKBOXES) {
                     var oldestCheckbox = checkedCheckboxes.shift();
                     oldestCheckbox.checked = false;
@@ -219,6 +219,7 @@
             } else {
                 checkedCheckboxes.splice(checkedCheckboxes.indexOf(this), 1);
             }
+            console.log(checkedCheckboxes)
         });
     });
     const dropdown_menu = document.querySelector(".dropdown_location_list");
@@ -269,7 +270,7 @@
         var keyword_picked = event.target;
         var keyword_each = keyword_picked.value;
         clickedKeywordList.push(keyword_each);
-        console.log(clickedKeywordList)
+        // console.log(clickedKeywordList)
         form_keyword_input.value = JSON.stringify(clickedKeywordList);
     }
 
