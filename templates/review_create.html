@@ -33,7 +33,7 @@
     </div>
 
     
-    <form action="{% url 'Review:review_create' %}" method="post" enctype="multipart/form-data">
+    <form action="{% url 'Review:review_create' pk%}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="title_container shadow d-flex flex-row align-items-center">
             <span class="title fw-light">제목:</span>

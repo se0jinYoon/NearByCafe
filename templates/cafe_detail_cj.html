@@ -56,7 +56,8 @@
                     {% comment %} q.안먹힘..user질문 {% endcomment %}
                     {% if request.user.is_authenticated %}
                     <button class="review_like d-flex" data-bs-toggle="modal" data-bs-target="#not_login" onclick="onClickLike({{cafe.id}})">♡ 좋아요</button>
-                    <button class="review_write d-flex" data-bs-toggle="modal" data-bs-target="#not_login" href="">✍🏻 리뷰 하기</button>
+                    <a class="review_write d-flex" href="{% url 'Review:review_create' cafe.id %}">✍🏻 리뷰 하기</a>
+                    
                     {% else %}
     
                     {% endif %}

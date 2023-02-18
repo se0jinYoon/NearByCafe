@@ -33,7 +33,7 @@ def insert_cafe(request,pk):
 
 @csrf_exempt
 @login_required(login_url='User:login')
-def review_create(request):
+def review_create(request,pk):
     if request.method == 'POST':
         ctx = {}
         req = json.loads(request.body)
@@ -42,7 +42,7 @@ def review_create(request):
         if form.is_valid():
             review = form.save(commit=False)
             review.user_id = request.user
-            review.cafe_id = Cafe.objects.get(pk=1)
+            review.cafe_id = Cafe.objects.get(pk)
             # review.cafe_id = Cafe.objects.get(pk=pk)
             review.save()
 
@@ -74,4 +74,4 @@ def review_create(request):
         return redirect('Cafe:main')
  
     else :
-        return render(request,"review_create.html",{"keyword_list" : keyword_list})
+        return render(request,"review_create.html",{"keyword_list" : keyword_list,"pk":pk})
