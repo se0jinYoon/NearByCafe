@@ -103,7 +103,7 @@
 <!-- <button id="login_btn" type="button" onclick="onClickReview()" >제출</button> -->
         <div class="review_btns">
             <button id="login_btn" type="button" onclick="onClickReview()" >등록하기</button>
-            <button id="review_cancel_btn" type="button" onclick="" >취소하기</button> <!--어디 페이지로 가려나-->
+            <button id="review_cancel_btn" type="button" onclick="location.href='{% url 'Cafe:cafe_detail' pk %}'">취소하기</button> <!--어디 페이지로 가려나-->
         </div>
 
     </form>
@@ -249,28 +249,30 @@
     function onClickReview(){
         const title = document.getElementById('title').value
         const content = document.getElementById('content').value
-        const star = document.getElementById('star').value
+        //const star = document.getElementById('star').value
         const data = {
-            
                 "title" : title,
                 "content" : content,
-                 "star" : star,
+                 "star" : star=3,
                  "keywords" : keywords_selected,
             
         }
         
-       const res = fetch('/review_create/',{
+       const res = fetch("/review_create/1",{
             method : "POST",
             headers: {
-      'Content-Type': 'application/json', 
-      'X-CSRFToken': 'your-csrf-token'},
+                'Content-Type': 'application/json', 
+                'X-CSRFToken': 'your-csrf-token'
+            },
       
             body: JSON.stringify(data)
             // body : data,
         }).then((data) =>{
             console.log(data);
+
         }).catch(e => {
             console.log(e);
+            console.log("error");
             throw new Error(e);
         })
     }

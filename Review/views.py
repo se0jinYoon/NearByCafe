@@ -34,15 +34,18 @@ def insert_cafe(request,pk):
 @csrf_exempt
 @login_required(login_url='User:login')
 def review_create(request,pk):
+
     if request.method == 'POST':
         ctx = {}
         req = json.loads(request.body)
         # print(request.POST['title'])
+        
         form = ReviewForm(req)
         if form.is_valid():
             review = form.save(commit=False)
             review.user_id = request.user
             review.cafe_id = Cafe.objects.get(pk)
+            
             # review.cafe_id = Cafe.objects.get(pk=pk)
             review.save()
 
@@ -60,15 +63,13 @@ def review_create(request,pk):
         
             review.cafe_id.keywords=json.dumps(review.keywords)
             review.cafe_id.save()
-
-            
             
         else:
             for field in form:
                 print("Field Error:", field.name,  field.errors)
             print("failed")
             ctx = {
-                'form':form,'keyword_list' : keyword_list
+                'form':form,'keyword_list' : keyword_list,
             }
             return render(request,"review_create.html",ctx)
         return redirect('Cafe:main')
