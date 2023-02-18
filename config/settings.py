@@ -43,8 +43,6 @@ INSTALLED_APPS = [
     "User",
     "Review",
     "Cafe",
-  
-]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

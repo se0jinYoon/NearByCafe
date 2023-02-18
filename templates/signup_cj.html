@@ -1,8 +1,8 @@
 {% extends 'nav.html' %} {% block content %} {% load static %}
 <div class="overlay_cj"></div>
 <main id="signup">
-    <div class="signup_container">
-        <div class="signup__logo"><img src="{% static 'image/logo_small.svg' %}" alt="logo" /> 회원가입</div>
+    <div class="signup_container ">
+        <div class="signup__logo d-flex flex-row align-items-center justify-content-center"><img src="{% static 'image/logo_small.svg' %}" alt="logo" /> <span class="signup_text">회원가입</span> </div>
         <form action="" method="POST">
             <!--action부분에 백엔드 url삽입-->
             {% csrf_token %}
@@ -32,7 +32,7 @@
             <div class="email_box">
                 <p class="box_name">학교 이메일</p>
                 <!--{{ form.email_address }}-->
-                <input class="shadow" type="email" name="email_address" placeholder="    nearbycafe@exmaple.com" />
+                <input class="shadow" type="email" name="email_address" placeholder="nearbycafe@exmaple.com" />
             </div>
 
             <div class="username_box">
@@ -44,7 +44,7 @@
             <!-- 아래에 체크박스 태그 란에 value값을 어케 줘야하나? -->
             <div class="terms_box">
                 <!--NearbyCafe 이용약관 동의-->
-                <p class="box_name"><input class="checkbox shadow" type="checkbox" name="agree1" />NearbyCafe 이용약관 동의</p>
+                <p class="box_name"><input class="checkbox shadow" type="checkbox" name="agree1" /><span>NearbyCafe 이용약관 동의</span></p>
                 <textarea name="" id="" readonly="readonly" cols="60" rows="16">
                 Gorem ipsum dolor sit amet, consectetur 
                   adipiscing elit. Etiam eu turpis molestie, dictu
@@ -63,7 +63,7 @@
 
             <div class="terms_box">
                 <!--개인정보 수집 및 이용 동의-->
-                <p class="box_name"><input class="checkbox shadow" type="checkbox" name="agree2" />개인정보 수집 및 이용 동의</p>
+                <p class="box_name"><input class="checkbox shadow" type="checkbox" name="agree2" /><span>개인정보 수집 및 이용 동의</span></p>
                 <textarea name="" id="" readonly="readonly" cols="60" rows="16">
                 Gorem ipsum dolor sit amet, consectetur 
                   adipiscing elit. Etiam eu turpis molestie, dictu

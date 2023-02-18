@@ -37,7 +37,7 @@
 /* cafe_index */
 .cafe_index{
     background-color: #ffffff;
-    width: 80%;
+    width: 70%;
     height: auto;
     padding: 20px 0 36px 20px;
     margin-bottom: 80px;
@@ -48,23 +48,24 @@
     margin: 20px 40px 30px 20px;
 }
 .cafe_index_name{
-    font-size: 40px;
+    font-size: 35px;
     font-weight: 500;
+    margin-bottom: 10px;
 }
 .cafe_index_district{
-    font-size: 30px;
+    font-size: 25px;
     margin-bottom: 20px;
 }
 .cafe_index_keywords{
-    font-size: 24px;
+    font-size: 20px;
     margin-bottom: 28px;
 }
 .cafe_index_reviewers{
-    font-size: 30px;
+    font-size: 25px;
     
 }
 .cafe_index_score{
-    font-size: 25px;
+    font-size: 23px;
 }
 .cafe_index_star{  
     font-size: 30px;
@@ -75,7 +76,7 @@
     align-items: center;
     width: 180px;
     height: 54px;
-    margin-right: auto;
+    margin-right: 10px;
     
     border-radius: 30px;  /*rem으로 나중에 바꿔야할듯*/
     background-color: #df47297c;
@@ -90,7 +91,7 @@
 /* cafe_info */
 .cafe_info{
     background-color: #ffffff;
-    width: 80%;
+    width: 70%;
     height: auto;
     padding: 48px 0 24px 64px;
     margin-bottom: 80px;
@@ -98,7 +99,10 @@
 .cafe_info_index{
     color: gray;
     margin-right: 40px;
-    font-size: 30px;
+    font-size: 25px;
+}
+.address, .number, .runtime, .cafe_menu {
+    font-size: 25px;
 }
 .cafe_info_address{
     margin-bottom: 28px;
@@ -121,7 +125,7 @@
 /* cafe_reviews */
 .cafe_reviews{
     background-color: #ffffff;
-    width: 80%;
+    width: 70%;
     height: auto;
     padding: 42px 24px 26px 40px;
     margin-bottom: 80px;
@@ -133,7 +137,7 @@
     margin-bottom: 20px;
 }
 .cafe_review_title{
-    font-size: 40px;
+    font-size: 35px;
     font-weight: 500;
     margin-right: 24px;
 }

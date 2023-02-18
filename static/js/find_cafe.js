@@ -11,10 +11,16 @@ const onClickLocationList = async (location) => {
     })
 
     const res = await fetch('/find_cafe_ajax/', {
+
+const onClickLocationList = async (location) => {
+    
+    const res = await fetch('/cafe/find_cafe_ajax/', {
+
         method:"POST",
         headers:{
             "Content-Type":"application/x-www-form-urlencoded",
         },
+
         body:JSON.stringify({location:location,seleted_ck:seleted_ck}),//보내는거
     });
 
@@ -27,8 +33,8 @@ const onClickLocationList = async (location) => {
     console.log(latitude,longtitude,cafes);
     cafeHandleResponse(cafes);
     panTo(latitude,longtitude);
-
 }
+
 
 
 const cafeHandleResponse = (cafes) => {
@@ -62,6 +68,4 @@ const panTo=(latitude,longtitude)=>{
     map.panTo(moveLatLon);
   
 }
-
-
 

@@ -29,20 +29,29 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 60px;
-    background-color: #fff;
+    background-color: white;
     border: 1px solid #D6D6D6;
+    border-radius: 8px;
     margin-top: 150px;
-    width: 30%;
+    width: 384px;
     height: 192px;
 }
 .withdraw_info{
     text-align: center;
     font-size: 18px;
 }
+a:hover{
+    text-decoration: none;
+    color: black;
+}
+.home_tag {
+    text-decoration: none;
+    color: black;
+}
 .withdraw_home_btn{
     background-color: #F3F0E7;
-    border-radius: 24px;
-    width: 138px;
+    border-radius: 10px;
+    width: 180px;
     height: 48px;
     margin-right: 40px;
     font-weight: bold;
@@ -51,14 +60,14 @@
     /* color: #fff; */
 }
 .withdraw_real_btn{
-    background-color: #df47298c;
-    border-radius: 24px;
-    width: 138px;
+    background-color: #DF4629;
+    border-radius: 10px;
+    width: 180px;
     height: 48px;
     font-weight: bold;
     border: 1px solid #DF4629;
     font-size: 22px;
-    /* color: #fff; */
+    color: white;
 }
 
 

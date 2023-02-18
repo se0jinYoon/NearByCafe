@@ -7,17 +7,23 @@
         
         <div class="cafe_index shadow d-flex">
             <div class="cafe_index_image">
-                <img src="https://picsum.photos/300/400" width="150" height="200"/> <!-- ERD : Cafe image 대표사진-->
+                {% if cafe.image %}
+                    <p>
+                        <img src="{{cafe.image.url}}">
+                    </p>
+                {% endif %}
             </div>
             <div class="cafe_indexbox">
                 <div class="cafe_index_name">
-                    카페 상호명:{{cafe.name}} <!-- ERD : Cafe name 상호명-->
+                    카페 상호명:  {{cafe.name}} <!-- ERD : Cafe name 상호명-->
                 </div>
                 <div class="cafe_index_district">
-                    위치:{{cafe.location_id}}<!-- ERD에 명시x , Cafe address에서 '구'만 따로 빼와야할까? -->
+                    위치:  {{cafe.location_id.name}}<!-- ERD에 명시x , Cafe address에서 '구'만 따로 빼와야할까? -->
                 </div>
                 <div class="cafe_index_keywords">
-                    #우선 나중에 <!-- ERD : 'CafeKeyword cafe_id 카페식별자' 외래키참조 -->
+                    #우선 나중에
+                    {{cafe.keywords}}
+                    <!-- ERD : 'CafeKeyword cafe_id 카페식별자' 외래키참조 -->
                 </div>
                 <div class="cafe_index_review d-flex flex-column">
                     <div class="cafe_index_reviewers">
@@ -49,8 +55,8 @@
                     
                     {% comment %} q.안먹힘..user질문 {% endcomment %}
                     {% if request.user.is_authenticated %}
-                    <button class="review_like d-flex" data-bs-toggle="modal" data-bs-target="#not_login" onclick="onClickLike({{cafe.id}}">♡좋아요</button>
-                    <button class="review_write d-flex" data-bs-toggle="modal" data-bs-target="#not_login" href="">✍🏻리뷰 하기</button>
+                    <button class="review_like d-flex" data-bs-toggle="modal" data-bs-target="#not_login" onclick="onClickLike({{cafe.id}})">♡ 좋아요</button>
+                    <button class="review_write d-flex" data-bs-toggle="modal" data-bs-target="#not_login" href="">✍🏻 리뷰 하기</button>
                     {% else %}
     
                     {% endif %}
@@ -58,22 +64,22 @@
             </div>
         </div>
         <div class="cafe_info shadow d-flex flex-column">
-            <div class="cafe_info_address d-flex">
+            <div class="cafe_info_address d-flex align-items-center">
                 <div class="cafe_info_index">주소</div>
                 <div class="address"> {{cafe.address}}</div> <!-- ERD : Cafe address 상세주소-->
             </div>
-            <div class="cafe_info_number d-flex">
+            <div class="cafe_info_number d-flex align-items-center">
                 <div class="cafe_info_index">전화번호</div>
                 <div class="number"> {{cafe.number}}</div> <!-- ERD : Cafe number 전화번호-->
             </div>
-            <div class="cafe_info_runtime d-flex">
+            <div class="cafe_info_runtime d-flex align-items-center">
                 <div class="cafe_info_index">영업시간</div>
                 <div class="runtime"> {{cafe.runtime}}</br></div> <!-- ERD : Cafe runtime 영업시간-->
             </div>
-            <div class="cafe_info_menu d-flex">
+            <div class="cafe_info_menu d-flex align-items-center">
                 <div class="cafe_info_index">메뉴</div>
                 &nbsp; &nbsp;
-                <div class="menu">
+                <div class="cafe_menu">
                     {{cafe.menu}}
                     </div> <!-- ERD : Cafe menu 메뉴정보-->
             </div>
@@ -86,25 +92,31 @@
                         {{review.title}}
                     </div>
                     <div class="cafe_review_nickname d-flex">
-                         {{review.user_id.nickname}}
+                        
+                      {{review.user_id.nickname}}
+                         
+    
                     </div>
                     <div class="cafe_review_time d-flex">
                         {{review.created_at}} <!-- ERD : Review time 작성날짜-->
                     </div>
+                    {% comment %} <div class="cafe_review_studentmark d-flex">
+                        <img src="{% static 'image/main_crown.svg' %}" class="studentmark" width="80px" height="80px"> 
+                    </div> <!--대학생 인증 마크--> {% endcomment %}
+                    {% if review.mark == True %}
                     <div class="cafe_review_studentmark d-flex">
-                        {% if review.mark == true %} 
-                        <img src="/static/image/main_crown 2.png" class="studentmark" width="80px" height="80px"> 
-                        {%else%}
-                        
-                        {% endif %}
+                        <img src="{% static 'image/main_crown.svg' %}" class="studentmark" width="80px" height="80px"> 
                     </div> <!--대학생 인증 마크-->
+                    {%else%}
+                           
+                    {% endif %}
                 </div>
                 <div class="cafe_review_scorestar d-flex">
                     <div class="cafe_review_score d-flex">
-                        {{reveiw.star}}점
+                        {{review.star}}점
                     </div>
                     <div class="cafe_review_star d-flex">
-                        {% comment %} {% if review.star ==1 %}
+                        {% comment %} {% if review.star.equals('1') %}
                         ⭐️️️
                         {% if review.star ==2 %}
                         ⭐️️️️⭐️️️️
@@ -113,7 +125,9 @@
                         {% if review.star ==4 %}
                         ⭐️️️️⭐️️️️⭐️️️️⭐️️️️️️️
                         {% if review.star ==5 %}
-                        ⭐️️️️⭐️️️️⭐️️️️⭐️️️️⭐️️️️️  {% endcomment %}
+                        ⭐️️️️⭐️️️️⭐️️️️⭐️️️️⭐️️️️️   {% endcomment %}
+                        
+                        
                     </div>
                 </div>
             </div>
@@ -123,12 +137,8 @@
                     
             </div>
             <div class="cafe_review_keywords d-flex">
-                {% for value, text in form.keywords.field.choices %}
-                <div class="ui slider checkbox"></div>
-                <input id="id_providers_{{ forloop.counter0 }}" name="{{ form.providers.name }}" type="checkbox" value="{{ value }}"{% if value in checked_providers %} checked="checked"{% endif %}>
-                <label>{{ text }}</label>
-                </div>
-                {% endfor %}
+                {% comment %} {{review.keywords}} {% endcomment %}
+
                 #리뷰키워드 <!-- ERD :  'CafeKeyword review_id 리뷰식별자' 외래키참조-->
             </div>
             <div class="cafe_review_images">
@@ -160,5 +170,6 @@
     </div>
 </div> {% endcomment %}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<script src="/static/js/cafe_like.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="{% static 'js/cafe_like.js' %}"></script>
 {% endblock %}
