@@ -51,11 +51,11 @@
     justify-content: end;
 }
 
-.login_id_box .checkbox {
+.login_id_box .login_checkbox {
     accent-color: #DF4629;
 }
 
-.checkbox {
+.login_checkbox {
     margin-top: 10px;
     margin-left: 5px;
 }
