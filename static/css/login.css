@@ -51,8 +51,13 @@
     justify-content: end;
 }
 
-.login_id_box .checkbox {
+.login_id_box .login_checkbox {
     accent-color: #DF4629;
+}
+
+.login_checkbox {
+    margin-top: 10px;
+    margin-left: 5px;
 }
 
 .login_pw_box {
@@ -67,7 +72,7 @@
     height: 48px;
 }
 
-#login_btn {
+#login_login_btn {
     width: 278px;
     /*피그마에선 278px*/
     height: 70px;

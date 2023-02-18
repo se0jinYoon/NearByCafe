@@ -9,16 +9,16 @@
                 <p class="box_name">아이디</p>
                 <input class="shadow" type="text" name="users_id" {% if recent_login_id %}value="{{recent_login_id}}" {% endif %} />
                 <br />
-                <span
-                    >아이디 저장
-                    <input class="checkbox" type="checkbox" name="isidstorage" {% if isidstorage %}checked{% endif %} />
+                <span class="d-flex align-items-center">
+                    아이디 저장
+                    <input class="login_checkbox" type="checkbox" name="isidstorage" {% if isidstorage %}checked{% endif %} />
                 </span>
             </div>
             <div class="login_pw_box">
                 <p class="box_name">비밀번호</p>
                 <input class="shadow" type="password" name="password" />
             </div>
-            <button id="login_btn" type="submit" onclick="" data-bs-toggle="modal" data-bs-target="#wrong_infromation">로그인</button>
+            <button id="login_login_btn" type="submit" onclick="" data-bs-toggle="modal" data-bs-target="#wrong_infromation">로그인</button>
             <!--onclick에 뭐 들어가야될 거 같음-->
             <div class="login_submenu">
                 <a href="{% url 'User:sign_up' %}">회원가입&nbsp;</a>
