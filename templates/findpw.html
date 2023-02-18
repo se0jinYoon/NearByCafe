@@ -7,7 +7,7 @@
 
     <form class="findpw__form" action="" method="POST">
         {% csrf_token %}
-        <input class="findpw_input shadow" type="text" name="find_pw_email" placeholder="      가입하신 이메일을 입력해주세요." />
+        <input class="findpw_input shadow" type="text" name="find_pw_email" placeholder="가입하신 이메일을 입력해주세요." />
         <button class="findpw_btn shadow text-light fw-bold" data-bs-toggle="modal" data-bs-target="#no_email_modal" onclick="onClickFindPw()">찾기</button>
     </form>
 </div>

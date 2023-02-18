@@ -217,6 +217,7 @@ input::placeholder {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 5px;
+    color: black;
 }
 
 .cafe_loc {

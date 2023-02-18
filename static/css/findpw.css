@@ -36,6 +36,12 @@
 
 }
 
+.findpw_input::placeholder{
+    color: #929292;
+    font-size: 17px;
+    font-weight: light;
+}
+
 .findpw_btn {
     width: 192px;
     height: 48px;
