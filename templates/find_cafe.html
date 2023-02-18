@@ -411,7 +411,8 @@ const cafeMarker=(cafes) => {
             element.innerHTML += `
         <div class="cafe d-flex">
             <img src="/media/${item.image}" alt="이미지가 없습니다" class="cafe_img">
-            <a href='cafe_detail/${item.id}'>${item.name}</a>
+        <div class="d-flex flex-column">
+        <a href='cafe_detail/${item.id}'  class="find_cafe_name">${item.name}</a>
         <span class="cafe_loc">${item.address}</span>
         <span class="cafe_categ">${item.keywords}</span>
         <div class="cafe_star_info">
