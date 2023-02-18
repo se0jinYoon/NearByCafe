@@ -5,7 +5,6 @@
         <div class="location_container d-flex flex-column">
             <div class="location_text fw-bold">지역 설정</div>
             <!-- <button class="search" onclick="onClickSearch('{{location}}')">검색하기</button> -->
-                   
 
             <!-- <button class="selected_location" onClick="onClickLocationButton()" >
                 <input class="selected_location_cat" 
@@ -25,7 +24,7 @@
             <div class="dropdown_location_list display_none">
                 <div class="location_list d-flex flex-column shadow">
                     <div class="loc-text1">검색할 위치를 선택해주세요.</div>
-     
+
                     <div class="d-flex flex-row">
                         <div class="d-flex flex-column">
                             {% for location in location_list_left %}
@@ -103,7 +102,7 @@
                         <input class="checkbox" type="checkbox" name="big" value="장소가 넓은" /> <span class="checkbox_list">장소가 넓은</span>
                     </div>
                     <div class="cat3 d-flex flex-row align-center">
-                        <input class="checkbox" type="checkbox" name="" value="인테리어가 예쁜" /> <span class="checkbox_list">인테리어가 예쁜</span>
+                        <input class="checkbox" type="checkbox" name="interior" value="인테리어가 예쁜" /> <span class="checkbox_list">인테리어가 예쁜</span>
                     </div>
                 </div>
             </div>
@@ -195,6 +194,24 @@
 <!-- <script src="/static/js/find_cafe.js"></script> -->
 
 <script>
+    const MAX_CHECKBOXES = 3;
+    var checkboxes = document.querySelectorAll(".checkbox");
+    var checkedCheckboxes = [];
+
+    // 모든 체크박스마다 이벤트 리스너 추가
+    checkboxes.forEach(function (checkbox) {
+        checkbox.addEventListener("change", function () {
+            if (this.checked) {
+                checkedCheckboxes.push(this); // 체크된 리스트에 추가
+                if (checkedCheckboxes.length > MAX_CHECKBOXES) {
+                    var oldestCheckbox = checkedCheckboxes.shift();
+                    oldestCheckbox.checked = false;
+                }
+            } else {
+                checkedCheckboxes.splice(checkedCheckboxes.indexOf(this), 1);
+            }
+        });
+    });
     const dropdown_menu = document.querySelector(".dropdown_location_list");
     const location_drop = document.querySelector(".location_drop");
 
@@ -219,7 +236,6 @@
         }
     }
 
-
     function onClickLocationList() {
         var location_picked = event.target;
         var location_each = location_picked.innerText;
@@ -234,10 +250,7 @@
             </button>`;
     }
 
-
-
     const onClickSearch = async (location) => {
-
         // var location_picked = event.target;
         // var location_each = location_picked.innerText;
 
@@ -251,14 +264,13 @@
         //     </button>`;
 
         //키워드 선택//
-        var seleted_ck=[];
-        $("input[name=checkbox]:checked").each(function(){
-        var chk=$(this).val();
-        seleted_ck.push(chk);
-        console.log(chk);
-    
-        })
-    
+        var seleted_ck = [];
+        $("input[name=checkbox]:checked").each(function () {
+            var chk = $(this).val();
+            seleted_ck.push(chk);
+            console.log(chk);
+        });
+
         const res = await fetch("/find_cafe_ajax/", {
             method: "POST",
             headers: {
@@ -270,7 +282,6 @@
         // const res = await fetch('/cafe/find_cafe')
         // .then(console.log(Response))
         // .catch(console.log(console.error()))
-        
 
         //받는거
         const { latitude: latitude, longtitude: longtitude, cafes: cafes } = await res.json();
@@ -298,13 +309,13 @@
             element.innerHTML += `
         <div class="cafe d-flex">
             <img src="${item.image}" alt="이미지가 없습니다" class="cafe_img">
-        <span class="cafe_name">${item.name}</span>                    
-        <span class="cafe_loc">${item.address}</span>         
-        <span class="cafe_categ">${item.keywords}</span> 
-        <div class="cafe_star_info">             
-            <span style="color: #F8AA14">3.0</span>                     
-            <span>${star}</span>                
-            <span style="color: #AAAAAA">(65)</span>                    
+        <span class="cafe_name">${item.name}</span>
+        <span class="cafe_loc">${item.address}</span>
+        <span class="cafe_categ">${item.keywords}</span>
+        <div class="cafe_star_info">
+            <span style="color: #F8AA14">3.0</span>
+            <span>${star}</span>
+            <span style="color: #AAAAAA">(65)</span>
         </div>
     </div>`;
         });
