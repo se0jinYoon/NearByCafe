@@ -1,8 +1,10 @@
 {% extends 'nav.html' %} {% block content %} {% load static %}
 <div class="overlay_cj"></div>
 <main id="signup">
-    <div class="signup_container ">
-        <div class="signup__logo d-flex flex-row align-items-center justify-content-center"><img src="{% static 'image/logo_small.svg' %}" alt="logo" /> <span class="signup_text">회원가입</span> </div>
+    <div class="signup_container">
+        <div class="signup__logo d-flex flex-row align-items-center justify-content-center">
+            <img src="{% static 'image/logo_small.svg' %}" alt="logo" /> <span class="signup_text">회원가입</span>
+        </div>
         <form action="" method="POST">
             <!--action부분에 백엔드 url삽입-->
             {% csrf_token %}
@@ -41,43 +43,21 @@
                 <input class="shadow" type="text" name="realname" />
             </div>
 
-            <!-- 아래에 체크박스 태그 란에 value값을 어케 줘야하나? -->
-            <div class="terms_box">
-                <!--NearbyCafe 이용약관 동의-->
+            <!-- <div class="terms_box">
                 <p class="box_name"><input class="checkbox shadow" type="checkbox" name="agree1" /><span>NearbyCafe 이용약관 동의</span></p>
                 <textarea name="" id="" readonly="readonly" cols="60" rows="16">
-                Gorem ipsum dolor sit amet, consectetur 
-                  adipiscing elit. Etiam eu turpis molestie, dictu
-                  m est a, mattis tellus. Sed dignissim, metus nec 
-                  fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi convallis convallis diam sit amet lacinia.
-                   Aliquam in elementum tellus.
-                  Curabitur tempor quis eros tempus lacinia. Nam bibendum pellentesque quam a convallis. Sed ut vulputate nisi. Integer in felis sed leo vestibulum venenatis. Suspendisse quis arcu sem. Aenean feugiat ex eu vestibulum vestibulum. Morbi a eleifend magna. Nam metus lacus, porttitor eu mauris a, blandit ultrices nibh. Mauris sit amet magna non ligula vestibulum eleifend. Nulla varius volutpat turpis sed lacinia. Nam eget mi in purus lobortis eleifend. Sed nec ante dictum sem condimentum ullamcorper quis venenatis nisi.
-                   Proin vitae facilisis nisi, ac posuere leo.
-                  Nam pulvinar blandit velit, 
-                  id condimentum diam faucibus at. Aliquam lacus nisi, 
-                  sollicitudin at nisi nec, fermentum congue felis. 
-                  Quisque mauris dolor, fringilla sed tincidunt ac, finibus non odio. Sed vitae mauris nec ante pretium finibus. Donec nisl neque, pharetra ac elit eu, faucibus aliquam ligula. Nullam dictum, tellus tincidunt tempor laoreet, nibh elit sollicitudin felis, eget feugiat sapien diam nec nisl. Aenean gravida turpis nisi, consequat dictum risus dapibus a. Duis felis ante, varius in neque eu, tempor suscipit sem. Maecenas ullamcorper gravida se.
+                    NearbyCafe 이용약관 동의
               </textarea
                 >
             </div>
 
             <div class="terms_box">
-                <!--개인정보 수집 및 이용 동의-->
                 <p class="box_name"><input class="checkbox shadow" type="checkbox" name="agree2" /><span>개인정보 수집 및 이용 동의</span></p>
                 <textarea name="" id="" readonly="readonly" cols="60" rows="16">
-                Gorem ipsum dolor sit amet, consectetur 
-                  adipiscing elit. Etiam eu turpis molestie, dictu
-                  m est a, mattis tellus. Sed dignissim, metus nec 
-                  fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi convallis convallis diam sit amet lacinia.
-                   Aliquam in elementum tellus.
-                  Curabitur tempor quis eros tempus lacinia. Nam bibendum pellentesque quam a convallis. Sed ut vulputate nisi. Integer in felis sed leo vestibulum venenatis. Suspendisse quis arcu sem. Aenean feugiat ex eu vestibulum vestibulum. Morbi a eleifend magna. Nam metus lacus, porttitor eu mauris a, blandit ultrices nibh. Mauris sit amet magna non ligula vestibulum eleifend. Nulla varius volutpat turpis sed lacinia. Nam eget mi in purus lobortis eleifend. Sed nec ante dictum sem condimentum ullamcorper quis venenatis nisi.
-                   Proin vitae facilisis nisi, ac posuere leo.
-                  Nam pulvinar blandit velit, 
-                  id condimentum diam faucibus at. Aliquam lacus nisi, 
-                  sollicitudin at nisi nec, fermentum congue felis. 
-                  Quisque mauris dolor, fringilla sed tincidunt ac, finibus non odio. Sed vitae mauris nec ante pretium finibus. Donec nisl neque, pharetra ac elit eu, faucibus aliquam ligula. Nullam dictum, tellus tincidunt tempor laoreet, nibh elit sollicitudin felis, eget feugiat sapien diam nec nisl. Aenean gravida turpis nisi, consequat dictum risus dapibus a. Duis felis ante, varius in neque eu, tempor suscipit sem. Maecenas ullamcorper gravida se.
-              </textarea>
-            </div>
+                    개인정보 수집 및 이용 동의
+              </textarea
+                >
+            </div> -->
 
             <button id="signup_btn" type="submit" onclick="" data-bs-toggle="modal" data-bs-target="#howorder">다음</button>
         </form>

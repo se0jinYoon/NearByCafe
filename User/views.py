@@ -251,16 +251,16 @@ def sign_up(request: HttpRequest, *args, **kwargs):
                 request, '올바른 비밀번호 형식을 입력해주세요. (영문 대소문자, 숫자, 특수문자 일부 허용)')
             return redirect('User:sign_up')
 
-        if len(request.POST.getlist('agree1')) == 0:
-            messages.error(
-                request, '이용 약관에 동의해주세요.')
-            return redirect('User:sign_up')
+        # if len(request.POST.getlist('agree1')) == 0:
+        #     messages.error(
+        #         request, '이용 약관에 동의해주세요.')
+        #     return redirect('User:sign_up')
 
-        if len(request.POST.getlist('agree2')) == 0:
-            messages.error(
-                request, '개인정보 수집 및 이용에 동의해주세요.')
-            return redirect('User:sign_up')
-
+        # if len(request.POST.getlist('agree2')) == 0:
+        #     messages.error(
+        #         request, '개인정보 수집 및 이용에 동의해주세요.')
+        #     return redirect('User:sign_up')
+        
         # if len(request.POST.getlist('agree3')) == 0:
         #     messages.error(
         #         request, '위치 기반 서비스 이용약관에 동의해주세요.')
