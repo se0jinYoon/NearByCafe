@@ -111,17 +111,15 @@
 
         <div class="cafe_list_container">
             <div class="sort_container">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="cafe_location_name" id="cafe_location_name" value="" />
+                    <input type="hidden" name="cafe_keyword_name" id="cafe_keyword_name" value="" />
+                    <button class="search" type="submit" onclick="onClickSearch('{{location}}')"><span class="btn_text3">카페 검색하기</span></button>                
+                </form>
                 <div class="sort">
                     <button class="sort_abc"><span class="btn_text1">가나다 순</span></button>
                     <button class="sort_star"><span class="btn_text2">평점 순</span></button>
-                    <form action="" method="POST">
-                        {% csrf_token %}
-                        <input type="hidden" name="cafe_location_name" id="cafe_location_name" value="" />
-                        <input type="hidden" name="cafe_keyword_name" id="cafe_keyword_name" value="" />
-                        <button class="search" type="submit" onclick="onClickSearch('{{location}}')"><span class="btn_text3">카페 검색하기</span></button>                
-                    </form>
-
-
                 </div>
                 <p class="sort_text3">총 <span style="color: #df4629">갯수 넣기</span>개의 카페가 검색되었습니다.</p>
             </div>
