@@ -85,9 +85,12 @@ nav {
 .nav_notice_s {
     width: 59px;
 }
-.nav_login {
+.nav_profile_s {
+    width: 46px;
+}
+.nav_login_s {
     width: 45px;
 }
-.nav_signup {
+.nav_signup_s {
     width: 59px;
 }

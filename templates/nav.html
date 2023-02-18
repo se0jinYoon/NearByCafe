@@ -38,8 +38,8 @@
                 <i class="fa-solid fa-magnifying-glass search_img"></i>
             </div>
             <!--링크 추가 필요-->
-            <a href="" class="menu nav_notice"> <span class="nav_notice_s">공지사항</span></a>
-            <a href="/profile" class="menu nav_login">프로필</a>
+            <a href="" class="menu nav_notice  d-flex"> <span class="nav_notice_s">공지사항</span></a>
+            <a href="/profile" class="menu nav_login d-flex"><span class="nav_profile_s">프로필</span> </a>
             <form action="/logout/" method="POST">
                 {% csrf_token %}
                 <input class="logout_input" type="submit" value="로그아웃" />
@@ -54,9 +54,9 @@
                 <i class="fa-solid fa-magnifying-glass search_img"></i>
             </div>
             <!-- 링크 추가 필요 -->
-            <a href="" class="menu nav_notice"> <span class="nav_notice_s">공지사항</span></a>
-            <a href="/login" class="menu nav_login">로그인</a>
-            <a href="/signup" class="menu nav_signup">회원가입</a>
+            <a href="" class="menu nav_notice d-flex"> <span class="nav_notice_s">공지사항</span></a>
+            <a href="/login" class="menu nav_login d-flex"><span class="nav_login_s">로그인</span></a>
+            <a href="/signup" class="menu nav_signup d-flex"><span class="nav_signup_s" >회원가입</span></a>
         </nav>
         {% endif %} {% block content %} {% endblock %}
 
