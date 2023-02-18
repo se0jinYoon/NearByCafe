@@ -206,15 +206,18 @@
     const MAX_CHECKBOXES = 3;
     var checkboxes = document.querySelectorAll(".checkbox");
     var checkedCheckboxes = [];
+    var checked = []
 
     // 모든 체크박스마다 이벤트 리스너 추가
     checkboxes.forEach(function (checkbox) {
         checkbox.addEventListener("change", function () {
             if (this.checked) {
                 checkedCheckboxes.push(this.value); // 체크된 리스트에 추가
+                checked.push(this)
                 if (checkedCheckboxes.length > MAX_CHECKBOXES) {
                     var oldestCheckbox = checkedCheckboxes.shift();
-                    oldestCheckbox.checked = false;
+                    var oldestCheck = checked.shift();
+                    oldestCheck.checked = false;
                 }
             } else {
                 checkedCheckboxes.splice(checkedCheckboxes.indexOf(this), 1);
