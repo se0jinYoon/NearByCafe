@@ -114,10 +114,10 @@
         <div class="cafe_list_container">
             <div class="sort_container">
                 <!-- <form action="" method="POST"> -->
-                    {% csrf_token %}
-                    <input type="hidden" name="cafe_location_name" id="cafe_location_name" value="" />
-                    <input type="hidden" name="cafe_keyword_name" id="cafe_keyword_name" value="" />
-                    <button class="search" type="button" onclick="onClickSearch()"><span class="btn_text3">카페 검색하기</span></button>
+                {% csrf_token %}
+                <input type="hidden" name="cafe_location_name" id="cafe_location_name" value="" />
+                <input type="hidden" name="cafe_keyword_name" id="cafe_keyword_name" value="" />
+                <button class="search" type="button" onclick="onClickSearch()"><span class="btn_text3">카페 검색하기</span></button>
                 <!-- </form> -->
                 <div class="sort">
                     <button class="sort_abc"><span class="btn_text1">가나다 순</span></button>
@@ -134,7 +134,7 @@
             {% endfor %} -->
 
             <div class="cafe_list">
-                  <!-- <div class="cafe d-flex">
+                <!-- <div class="cafe d-flex">
                     <img src="" alt="" class="cafe_img">
                     <div class="cafe_info d-flex flex-column">
                         <span class="cafe_name">카페 상호명</span>                    
@@ -203,90 +203,90 @@
 <!-- <script src="/static/js/find_cafe.js"></script> -->
 
 <script>
-    var container = document.getElementById('map');
-    var latitude = {{latitude}};
-    var longtitude = {{longtitude}};
-    var options = {
-        // center: new kakao.maps.LatLng( 37.61065041034093,126.99985276595638 ),
-        center: new kakao.maps.LatLng(latitude,longtitude),
-        level: 3
-    };
-   
-
-    var map = new kakao.maps.Map(container, options);
-
-    const panTo=(latitude,longtitude)=>{
-    var moveLatLon=new kakao.maps.LatLng(latitude,longtitude);
-    var markerPosition = new kakao.maps.LatLng(latitude,longtitude);
-    var marker = new kakao.maps.Marker({
-        position : markerPosition
-    })
-    marker.setMap(map);
-    map.panTo(moveLatLon);
-}
-
-//find_cafe 페이지로 이동할 시 이전 메인페이지에 있던 값들 넘겨주면서 지도 이동 + 카페 리스트 띄움
-const Search = async() => {
-    //키워드 선택//
-   
-    const location = '{{loc}}';
-    console.log('지역',location);
-
-    const res = await fetch("/find_cafe_ajax/", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: JSON.stringify({ location: location,}), 
-    });
-
-    // const res = await fetch('/cafe/find_cafe')
-    // .then(console.log(Response))
-    // .catch(console.log(console.error()))
-
-    //받는거
-    const { latitude: latitude, longtitude: longtitude, cafes: cafes } = await res.json();
-    console.log(latitude, longtitude, cafes);
-    cafeHandleResponse(cafes);
-    panTo(latitude, longtitude);
-    cafeMarker(cafes);
-};
+        var container = document.getElementById('map');
+        var latitude = {{latitude}};
+        var longtitude = {{longtitude}};
+        var options = {
+            // center: new kakao.maps.LatLng( 37.61065041034093,126.99985276595638 ),
+            center: new kakao.maps.LatLng(latitude,longtitude),
+            level: 3
+        };
 
 
-const cafeMarker=(cafes) => {
+        var map = new kakao.maps.Map(container, options);
 
-    let cafeNameArr = [];
-    let cafeLatArr = [];
-    let cafeLngArr = [];
-
-
-    var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-    cafes.forEach(item => {
-        cafeNameArr.push(item.name);
-        cafeLatArr.push(item.latitude);
-        cafeLngArr.push(item.longtitude);
-    })
-
-    var positions = []
-    for(var i = 0; i <= cafes.length; i++){
-    positions.push({title : cafeNameArr[i],
-                        latlng : new kakao.maps.LatLng(cafeLatArr[i],cafeLngArr[i])});
-
-    };
-
-    for (var i = 0; i <= cafes.length; i++){
-
-        var imageSize = new kakao.maps.Size(24, 35);
-        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+        const panTo=(latitude,longtitude)=>{
+        var moveLatLon=new kakao.maps.LatLng(latitude,longtitude);
+        var markerPosition = new kakao.maps.LatLng(latitude,longtitude);
         var marker = new kakao.maps.Marker({
-        map: map, // 마커를 표시할 지도
-        position: positions[i].latlng, // 마커를 표시할 위치
-        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-        image : markerImage // 마커 이미지
-    });
+            position : markerPosition
+        })
+        marker.setMap(map);
+        map.panTo(moveLatLon);
     }
 
-}
+    //find_cafe 페이지로 이동할 시 이전 메인페이지에 있던 값들 넘겨주면서 지도 이동 + 카페 리스트 띄움
+    const Search = async() => {
+        //키워드 선택//
+
+        const location = '{{loc}}';
+        console.log('지역',location);
+
+        const res = await fetch("/find_cafe_ajax/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: JSON.stringify({ location: location,}),
+        });
+
+        // const res = await fetch('/cafe/find_cafe')
+        // .then(console.log(Response))
+        // .catch(console.log(console.error()))
+
+        //받는거
+        const { latitude: latitude, longtitude: longtitude, cafes: cafes } = await res.json();
+        console.log(latitude, longtitude, cafes);
+        cafeHandleResponse(cafes);
+        panTo(latitude, longtitude);
+        cafeMarker(cafes);
+    };
+
+
+    const cafeMarker=(cafes) => {
+
+        let cafeNameArr = [];
+        let cafeLatArr = [];
+        let cafeLngArr = [];
+
+
+        var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+        cafes.forEach(item => {
+            cafeNameArr.push(item.name);
+            cafeLatArr.push(item.latitude);
+            cafeLngArr.push(item.longtitude);
+        })
+
+        var positions = []
+        for(var i = 0; i <= cafes.length; i++){
+        positions.push({title : cafeNameArr[i],
+                            latlng : new kakao.maps.LatLng(cafeLatArr[i],cafeLngArr[i])});
+
+        };
+
+        for (var i = 0; i <= cafes.length; i++){
+
+            var imageSize = new kakao.maps.Size(24, 35);
+            var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+            var marker = new kakao.maps.Marker({
+            map: map, // 마커를 표시할 지도
+            position: positions[i].latlng, // 마커를 표시할 위치
+            title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+            image : markerImage // 마커 이미지
+        });
+        }
+
+    }
 </script>
 <script>
     const MAX_CHECKBOXES = 3;
@@ -294,8 +294,6 @@ const cafeMarker=(cafes) => {
     var checkedCheckboxes = [];
     var checked = [];
     const locationInput = document.querySelector("#cafe_location_name");
-    
-   
 
     // 모든 체크박스마다 이벤트 리스너 추가
     checkboxes.forEach(function (checkbox) {
@@ -343,8 +341,7 @@ const cafeMarker=(cafes) => {
 
     var main_location = document.querySelector(".location_picked_text");
     var main_location_text = main_location.innerText;
-    locationInput.value = '{{loc}}'
-
+    locationInput.value = "{{loc}}";
 
     function onClickLocationList() {
         var location_picked = event.target;
@@ -359,7 +356,6 @@ const cafeMarker=(cafes) => {
             <span class="location_picked_text">${location_each}</span>
             </button>`;
 
-       
         locationInput.value = location_each;
         console.log(locationInput);
     }
@@ -376,17 +372,18 @@ const cafeMarker=(cafes) => {
     console.log(checkedCheckboxes);
     const onClickSearch = async () => {
         //키워드 선택//
-        console.log(checkedCheckboxes)
-        checked_keywords=checkedCheckboxes
+        console.log(checkedCheckboxes);
+        checked_keywords = checkedCheckboxes;
         const location = locationInput.value;
-        console.log('지역',location);
+        console.log("지역", location);
+        console.log("키워드", checked_keywords);
 
         const res = await fetch("/find_cafe_ajax/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
-            body: JSON.stringify({ location: location, checked_keywords: checked_keywords}), 
+            body: JSON.stringify({ location: location, checked_keywords: checked_keywords }),
         });
 
         // const res = await fetch('/cafe/find_cafe')
@@ -394,22 +391,22 @@ const cafeMarker=(cafes) => {
         // .catch(console.log(console.error()))
 
         //받는거
-        const { latitude: latitude, longtitude: longtitude, cafes: cafes} = await res.json();
+        const { latitude: latitude, longtitude: longtitude, cafes: cafes } = await res.json();
         console.log(latitude, longtitude, cafes);
         cafeHandleResponse(cafes);
         panTo(latitude, longtitude);
         cafeMarker(cafes);
     };
-  
 
     const cafeHandleResponse = (cafes) => {
         var element = document.querySelector(".cafe_list");
+        element.innerHTML = "";
         // element.innerHTML = `<div class="cafe_list">`;
         cafes.forEach((item) => {
             let star = "⭐⭐⭐⭐⭐";
-            if ( 1 <= item.average_star && item.average_star < 2) {
+            if (1 <= item.average_star && item.average_star < 2) {
                 star = "⭐☆☆☆☆";
-            } else if ( 2 <= item.average_star && item.average_star < 3) {
+            } else if (2 <= item.average_star && item.average_star < 3) {
                 star = "⭐⭐☆☆☆";
             } else if (3 <= item.average_star && item.average_star < 4) {
                 star = "⭐⭐⭐☆☆";
@@ -418,7 +415,7 @@ const cafeMarker=(cafes) => {
             } else if (5 <= item.average_star) {
                 star = "⭐⭐⭐⭐⭐";
             }
-            console.log(item.average_star)
+            console.log(item.average_star);
             element.innerHTML += `
         <div class="cafe d-flex">
             <img src="/media/${item.image}" alt="이미지가 없습니다" class="cafe_img">
@@ -435,7 +432,7 @@ const cafeMarker=(cafes) => {
     </div>`;
         });
     };
-Search();
+    Search();
 </script>
 
 <script
