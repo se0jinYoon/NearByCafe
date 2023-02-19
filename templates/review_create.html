@@ -10,9 +10,9 @@
     <div class="star_container shadow d-flex flex-row align-items-center">
         <span class="star_text fw-light">평점 남기기</span>
         <div class="star">
-            <input type="number" id="star" placeholder="별점" />
+            <!-- <input type="number" id="star" placeholder="별점" /> -->
             <!-- 별점 찍기 (cj) -->
-            <!-- <fieldset>
+            <fieldset>
                 <div>
                     <input type="radio" style="display: none;" id="star1" name="stars" value="1" onclick="review_starlike(1)">
                     <label for="star1"><i class="fa-regular fa-star"></i></label>
@@ -25,7 +25,7 @@
                     <input type="radio" style="display: none;" id="star5" name="stars" value="5" onclick="review_starlike(5)">
                     <label for="star5"><i class="fa-regular fa-star"></i></label>
                 </div>
-            </fieldset>     -->
+            </fieldset>    
             <!--  -->
         </div>
         <!--i태그 써서 구현 변경 필요-->
@@ -236,7 +236,8 @@
     const onClickReview = async () => {
         const title = document.getElementById("title").value;
         const content = document.getElementById("content").value;
-        const star = document.getElementById('star').value
+        // const star = document.getElementById('star').value
+        const star = document.getElementsByClassName('fa-solid fa-star').length
         const data = {
             title: title,
             content: content,
