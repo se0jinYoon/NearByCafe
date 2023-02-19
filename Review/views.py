@@ -35,6 +35,9 @@ def insert_cafe(request,pk):
 @login_required(login_url='User:login')
 def review_create(request,pk):
 
+    # 카페 객체 추가
+    cafe_obj = Cafe.objects.get(id=pk)
+
     if request.method == 'POST':
         ctx = {}
         req = json.loads(request.body)
@@ -69,10 +72,11 @@ def review_create(request,pk):
                 print("Field Error:", field.name,  field.errors)
             print("failed")
             ctx = {
-                'form':form,'keyword_list' : keyword_list,
+                'form':form,'keyword_list' : keyword_list, "cafe":cafe_obj,
             }
             return render(request,"review_create.html",ctx)
         return redirect('Cafe:main')
  
     else :
-        return render(request,"review_create.html",{"keyword_list" : keyword_list,"pk":pk})
+        
+        return render(request,"review_create.html",{"keyword_list" : keyword_list, "pk" : pk, "cafe":cafe_obj})

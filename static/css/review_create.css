@@ -12,14 +12,14 @@
 .overlay {
     width: 100vw;
     height: 100vh;
-    position: absolute; 
+    position: absolute;
     opacity: 0.5;
     z-index: -1;
-    background-color: #F8F4E9;
+    background-color: #f8f4e9;
 }
 
-.shadow{
-    box-shadow: 0 5px 18px -7px rgba(0,0,0,1);
+.shadow {
+    box-shadow: 0 5px 18px -7px rgba(0, 0, 0, 1);
 }
 /* 
 body {
@@ -49,7 +49,7 @@ body {
 }
 
 .rc_text1 {
-    font-size: 28px;
+    font-size: 24px;
 }
 
 .star_container {
@@ -88,11 +88,11 @@ body {
     border: none;
 }
 
-.title_container input:focus{
+.title_container input:focus {
     outline: none;
 }
 
-.title_container>input::placeholder {
+.title_container > input::placeholder {
     font-size: 18px;
     font-weight: light;
     color: #757575;
@@ -116,13 +116,13 @@ body {
     resize: none;
 }
 
-.content>textarea::placeholder {
+.content > textarea::placeholder {
     font-size: 24px;
     font-weight: light;
     color: #757575;
 }
 
-.content_container textarea:focus{
+.content_container textarea:focus {
     outline: none;
 }
 
@@ -136,20 +136,19 @@ body {
     background-color: white;
     padding-left: 36px;
 }
-.review_create_keywordselect{
+.review_create_keywordselect {
     margin-top: 20px;
 }
 
-
 /*-- 키워드버튼 추가 부분 --*/
-.keyword_btn{
-    background-color: #F3F0E7;
+.keyword_btn {
+    background-color: #f3f0e7;
     border-radius: 24px;
     width: 138px;
     height: 48px;
     font-size: 20px;
     font-weight: bold;
-    border: 1px solid #D6D6D6;
+    border: 1px solid #d6d6d6;
 }
 /* ---- */
 .main_text {
@@ -177,46 +176,48 @@ body {
 
 /* ---- */
 /* 별점 매기기 */
-.star > fieldset > input[type=radio]{
+.star > fieldset > input[type="radio"] {
     display: none;
 }
-.fa-regular,.fa-solid{
+.fa-regular,
+.fa-solid {
     color: gold;
 }
-.post_reviewimg{
+.post_reviewimg {
     width: 200px;
     height: 200px;
     margin-right: 20px;
 }
 /* 사진 등록하기 부분 */
-.upload_btn{
-    background-color: #F3F0E7;
+.upload_btn {
+    background-color: #f3f0e7;
     border-radius: 24px;
     width: 138px;
     height: 48px;
     font-size: 20px;
     font-weight: bold;
-    border: 1px solid #D6D6D6;
+    border: 1px solid #d6d6d6;
     text-align: center;
     padding: 8px;
     margin: auto;
     margin-top: 12%;
 }
-.image_preview{
+.image_preview {
     margin-top: 20px;
 }
-.remove_btn_review{
-    background-color: #F3F0E7;
+.remove_btn_review {
+    background-color: #f3f0e7;
     border-radius: 24px;
     width: 105px;
     height: 27px;
     font-weight: bold;
-    border: 1px solid #D6D6D6;
+    border: 1px solid #d6d6d6;
     text-align: center;
     margin-left: 21%;
 }
-#login_btn, #review_cancel_btn{
-    background-color: #DF4629;
+#login_btn,
+#review_cancel_btn {
+    background-color: #df4629;
     color: white;
     border-radius: 24px;
     width: 138px;
@@ -225,9 +226,9 @@ body {
     border: none;
     font-size: 22px;
 }
-.review_btns{
+.review_btns {
     margin-left: 34%;
 }
-#login_btn{
+#login_btn {
     margin-right: 10%;
 }

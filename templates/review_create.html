@@ -1,18 +1,16 @@
-{% extends 'nav.html' %}
-{% block content %}
-{% load static %}
+{% extends 'nav.html' %} {% block content %} {% load static %}
 
 <div class="overlay"></div>
-<div class="container d-flex flex-column ">
+<div class="container d-flex flex-column">
     <div class="top d-flex flex-row align-items-center">
-        <div class="cafe_name fw-bold">카페 상호명</div>  
+        <div class="cafe_name fw-bold">{{cafe.name}}</div>
         <div class="rc_text1 fw-light">에 대한 솔직한 리뷰를 써주세요</div>
     </div>
-   
+
     <div class="star_container shadow d-flex flex-row align-items-center">
         <span class="star_text fw-light">평점 남기기</span>
         <div class="star">
-            <input type="number" id="star" placeholder="별점"/>
+            <input type="number" id="star" placeholder="별점" />
             <!-- 별점 찍기 (cj) -->
             <!-- <fieldset>
                 <div>
@@ -28,50 +26,43 @@
                     <label for="star5"><i class="fa-regular fa-star"></i></label>
                 </div>
             </fieldset>     -->
-        <!--  -->
+            <!--  -->
         </div>
         <!--i태그 써서 구현 변경 필요-->
     </div>
 
-    
     <form action="{% url 'Review:review_create' pk%}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="title_container shadow d-flex flex-row align-items-center">
             <span class="title fw-light">제목:</span>
-            <input class="title_input" type="text" name="title" id="title" placeholder="리뷰의 제목을 입력해주세요!">
+            <input class="title_input" type="text" name="title" id="title" placeholder="리뷰의 제목을 입력해주세요!" />
         </div>
 
         <!--ㅇㅇ에 유저 닉네임 추가 필요-->
         <div class="content_container shadow d-flex flex-row align-items-center">
-            <textarea 
-                class="content"
-                name="content" 
-                id="content" 
-                placeholder="{{user}}님, 카페는 어떠셨나요? 카페의 분위기와 서비스도 궁금해요!"></textarea> 
+            <textarea class="content" name="content" id="content" placeholder="{{user}}님, 카페는 어떠셨나요? 카페의 분위기와 서비스도 궁금해요!"></textarea>
         </div>
-    
-        <div class="keyword_container shadow d-flex flex-column justify-content-center"> 
+
+        <div class="keyword_container shadow d-flex flex-column justify-content-center">
             <div>
                 <span class="main_text">키워드 고르기</span>
-                <span class="sub_text">최대 4개까지 선택할 수 있어요!</span>     
+                <span class="sub_text">최대 4개까지 선택할 수 있어요!</span>
             </div>
-            <div>
-            
-            </div>
+            <div></div>
             <!-- 키워드 선택부분 / 설명 : 4개 선택 후 5번째 선택을 하게 되면 젤 처음에 선택된게 삭제됨(큐 방식)-->
             <div class="review_create_keywordselect">
                 <div class="row mb-3">
-                    <div class="col"><button class="keyword_btn" name="mark" id="데이트" value="데이트" type="button" >데이트</button></div>
-                    <div class="col"><button class="keyword_btn" name="mark" id="작업하기 좋은" value="작업하기 좋은" type="button" >작업하기 좋은</button></div>
-                    <div class="col"><button class="keyword_btn" name="mark" id="공부하기 좋은" value="공부하기 좋은" type="button" >공부하기 좋은</button></div>
-                    <div class="col"><button class="keyword_btn" name="mark" id="조용한" value="조용한" type="button" >조용한</button></div>
-                    <div class="col"><button class="keyword_btn" name="mark" id="시끌벅적한" value="시끌벅적한" type="button" >시끌벅적한</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="데이트" value="데이트" type="button">데이트</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="작업하기 좋은" value="작업하기 좋은" type="button">작업하기 좋은</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="공부하기 좋은" value="공부하기 좋은" type="button">공부하기 좋은</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="조용한" value="조용한" type="button">조용한</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="시끌벅적한" value="시끌벅적한" type="button">시끌벅적한</button></div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col"><button class="keyword_btn" name="mark" id="의자가 편한" value="의자가 편한" type="button" >의자가 편한</button></div>
-                    <div class="col"><button class="keyword_btn" name="mark" id="디저트 맛있는" value="디저트 맛있는" type="button" >디저트 맛있는</button></div>
-                    <div class="col"><button class="keyword_btn" name="mark" id="커피가 맛있는" value="커피가 맛있는" type="button" >커피가 맛있는</button></div>
-                    <div class="col"><button class="keyword_btn" name="mark" id="친절한" value="친절한" type="button" >친절한</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="의자가 편한" value="의자가 편한" type="button">의자가 편한</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="디저트 맛있는" value="디저트 맛있는" type="button">디저트 맛있는</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="커피가 맛있는" value="커피가 맛있는" type="button">커피가 맛있는</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="친절한" value="친절한" type="button">친절한</button></div>
                     <div class="col"><button class="keyword_btn" name="mark" id="혼카페" value="혼카페" type="button">혼카페</button></div>
                 </div>
                 <div class="row mb-3">
@@ -91,22 +82,20 @@
             </div>
 
             <!-- 사진 등록(미완,cj, 16일 3시 24분) -->
-            <input type="file" class="real-upload" accept="image/*" style="display: none;">
-            <div class=" d-flex" style="display: contents;">
-                <div class="image_preview d-flex">
-                </div>
+            <input type="file" class="real-upload" accept="image/*" style="display: none" />
+            <div class="d-flex" style="display: contents">
+                <div class="image_preview d-flex"></div>
                 <div class="upload_btn" width="200" height="200">추가하기</div>
             </div>
             <!--  -->
-
         </div>
-<!-- 제출 임시구현 -->
-<!-- <button id="login_btn" type="button" onclick="onClickReview()" >제출</button> -->
+        <!-- 제출 임시구현 -->
+        <!-- <button id="login_btn" type="button" onclick="onClickReview()" >제출</button> -->
         <div class="review_btns">
-            <button id="login_btn" type="button" onclick="onClickReview()" >등록하기</button>
-            <button id="review_cancel_btn" type="button" onclick="location.href='{% url 'Cafe:cafe_detail' pk %}'">취소하기</button> <!--어디 페이지로 가려나-->
+            <button id="login_btn" type="button" onclick="onClickReview()">등록하기</button>
+            <button id="review_cancel_btn" type="button" onclick="location.href='{% url 'Cafe:cafe_detail' pk %}'">취소하기</button>
+            <!--어디 페이지로 가려나-->
         </div>
-
     </form>
 </div>
 
@@ -114,170 +103,170 @@
 <!-- 별점 찍기(값 넘겨주기는 미완) -->
 <script>
     function review_starlike(value) {
-      for (let i = 1; i <= 5; i++) {
-        let star_icon = document.getElementById("star" + i).nextElementSibling.firstElementChild;
-        if (i <= value) {
-          star_icon.classList.remove("fa-regular");
-          star_icon.classList.add("fa-solid");
-        } else {
-          star_icon.classList.remove("fa-solid");
-          star_icon.classList.add("fa-regular");
+        for (let i = 1; i <= 5; i++) {
+            let star_icon = document.getElementById("star" + i).nextElementSibling.firstElementChild;
+            if (i <= value) {
+                star_icon.classList.remove("fa-regular");
+                star_icon.classList.add("fa-solid");
+            } else {
+                star_icon.classList.remove("fa-solid");
+                star_icon.classList.add("fa-regular");
+            }
         }
-      }
     }
-    </script>
-    
-   <!--사진 등록하기(미완, 사진 4개 이상 저장시 추가버튼 사라지기 구현 못함) -->
-   <script> 
-       function getImageFiles(e){
-           const uploadFiles=[];
-           const files=e.currentTarget.files;
-           const imagepreview=document.querySelector('.image_preview');
-           const docFrag=new DocumentFragment()
-          //  console.log(typeof files,files)
-           if ([...files].length>1){
-              alert('1장만 등록하실 수 있습니다.');
-              return;
-           }
-           [...files].forEach(file =>{
-               if (!file.type.match("image/.*")){
-                  alert('이미지 파일만 업로드 가능합니다.');
-                  return;
-               }
-           
-           if ([...files].length==1){
-               uploadFiles.push(files);
-               const reader =new FileReader();
-               reader.onload=(e)=>{
-                   const preview =createElement(e,file);
-                   imagepreview.appendChild(preview);
-               };
-               reader.readAsDataURL(file);
-           }
-           });
-       }
-   function createElement(e,file){
-       const ui= document.createElement('ui');
-       const img= document.createElement('img');
-       const upload_btn= document.querySelector('.upload_btn');
+</script>
 
-       img.setAttribute('src',e.target.result);
-       img.setAttribute('data-file',file.name);
+<!--사진 등록하기(미완, 사진 4개 이상 저장시 추가버튼 사라지기 구현 못함) -->
+<script>
+    function getImageFiles(e) {
+        const uploadFiles = [];
+        const files = e.currentTarget.files;
+        const imagepreview = document.querySelector(".image_preview");
+        const docFrag = new DocumentFragment();
+        //  console.log(typeof files,files)
+        if ([...files].length > 1) {
+            alert("1장만 등록하실 수 있습니다.");
+            return;
+        }
+        [...files].forEach((file) => {
+            if (!file.type.match("image/.*")) {
+                alert("이미지 파일만 업로드 가능합니다.");
+                return;
+            }
 
-       ui.append(img);
+            if ([...files].length == 1) {
+                uploadFiles.push(files);
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const preview = createElement(e, file);
+                    imagepreview.appendChild(preview);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+    function createElement(e, file) {
+        const ui = document.createElement("ui");
+        const img = document.createElement("img");
+        const upload_btn = document.querySelector(".upload_btn");
 
-       ui.classList.add("d-flex");
-       ui.classList.add("flex-column");
-       ui.classList.add("img_here");
-       img.classList.add("post_reviewimg");
-       ui.innerHTML+=`<button class="remove_btn_review" onclick="remove_img()">삭제하기</button>`;
+        img.setAttribute("src", e.target.result);
+        img.setAttribute("data-file", file.name);
 
+        ui.append(img);
 
-       if (upload_btn.style.display!=='none'){
-        upload_btn.style.display ='none';
-       }
-       else{
-        upload_btn.style.display ='';
-       }
-       
-       return ui;
-   }
-   function remove_img(){
-    let img_remove = document.querySelector('.post_reviewimg');
-    const upload_btn= document.querySelector('.upload_btn');
+        ui.classList.add("d-flex");
+        ui.classList.add("flex-column");
+        ui.classList.add("img_here");
+        img.classList.add("post_reviewimg");
+        ui.innerHTML += `<button class="remove_btn_review" onclick="remove_img()">삭제하기</button>`;
 
-    img_remove.parentNode.remove(img_remove);
-    img_remove.nextSibling.remove();
+        if (upload_btn.style.display !== "none") {
+            upload_btn.style.display = "none";
+        } else {
+            upload_btn.style.display = "";
+        }
 
-    if (upload_btn.style.display!=='none'){
-        upload_btn.style.display ='none';
-       }
-       else{
-        upload_btn.style.display ='';
-       }
-   }
-    const realUpload = document.querySelector('.real-upload');
-    const upload = document.querySelector('.upload_btn');
-    const img_tag = document.querySelector('.post_reviewimg');
-    const remove_btn = document.querySelector('.remove_btn_review');
+        return ui;
+    }
+    function remove_img() {
+        let img_remove = document.querySelector(".post_reviewimg");
+        const upload_btn = document.querySelector(".upload_btn");
 
-    upload.addEventListener('click', () => realUpload.click());
-    realUpload.addEventListener('change', getImageFiles);
-    remove_btn.addEventListener('click',remove_img);
-   </script>
+        img_remove.parentNode.remove(img_remove);
+        img_remove.nextSibling.remove();
+
+        if (upload_btn.style.display !== "none") {
+            upload_btn.style.display = "none";
+        } else {
+            upload_btn.style.display = "";
+        }
+    }
+    const realUpload = document.querySelector(".real-upload");
+    const upload = document.querySelector(".upload_btn");
+    const img_tag = document.querySelector(".post_reviewimg");
+    const remove_btn = document.querySelector(".remove_btn_review");
+
+    upload.addEventListener("click", () => realUpload.click());
+    realUpload.addEventListener("change", getImageFiles);
+    remove_btn.addEventListener("click", remove_img);
+</script>
 <!--  -->
 
 <script>
     var keywords_selected = [];
     function change_btn() {
         var buttons = document.getElementsByClassName("keyword_btn");
-        
+
         for (var i = 0; i < buttons.length; i++) {
-          buttons[i].addEventListener("click", function() {
-            if (keywords_selected.length < 4) {
-              if (keywords_selected.indexOf(this.id) === -1) {
-                this.style.backgroundColor = "#728137";
-                this.style.color= "#fff";
-                keywords_selected.push(this.id);
-                console.log(keywords_selected); //값 잘 넘겨지는지 확인용
-              } else {
-                this.style.backgroundColor = "";
-                this.style.color= "";
-                keywords_selected.splice(keywords_selected.indexOf(this.id), 1);
-                console.log(keywords_selected); //값 잘 넘겨지는지 확인용
-              }
-            } else {
-              if (keywords_selected.indexOf(this.id) === -1) {
-                document.getElementById(keywords_selected[0]).style.backgroundColor = "";
-                document.getElementById(keywords_selected[0]).style.color = "";
-                keywords_selected.splice(0, 1);
-                this.style.backgroundColor = "#728137";
-                this.style.color= "#fff";
-                keywords_selected.push(this.id);
-                console.log(keywords_selected); //값 잘 넘겨지는지 확인용
-              } else {
-                this.style.backgroundColor = "";
-                this.style.color = "";
-                keywords_selected.splice(keywords_selected.indexOf(this.id), 1);
-                console.log(keywords_selected); //값 잘 넘겨지는지 확인용
-              }
-            }
-          });
+            buttons[i].addEventListener("click", function () {
+                if (keywords_selected.length < 4) {
+                    if (keywords_selected.indexOf(this.id) === -1) {
+                        this.style.backgroundColor = "#728137";
+                        this.style.color = "#fff";
+                        keywords_selected.push(this.id);
+                        console.log(keywords_selected); //값 잘 넘겨지는지 확인용
+                    } else {
+                        this.style.backgroundColor = "";
+                        this.style.color = "";
+                        keywords_selected.splice(keywords_selected.indexOf(this.id), 1);
+                        console.log(keywords_selected); //값 잘 넘겨지는지 확인용
+                    }
+                } else {
+                    if (keywords_selected.indexOf(this.id) === -1) {
+                        document.getElementById(keywords_selected[0]).style.backgroundColor = "";
+                        document.getElementById(keywords_selected[0]).style.color = "";
+                        keywords_selected.splice(0, 1);
+                        this.style.backgroundColor = "#728137";
+                        this.style.color = "#fff";
+                        keywords_selected.push(this.id);
+                        console.log(keywords_selected); //값 잘 넘겨지는지 확인용
+                    } else {
+                        this.style.backgroundColor = "";
+                        this.style.color = "";
+                        keywords_selected.splice(keywords_selected.indexOf(this.id), 1);
+                        console.log(keywords_selected); //값 잘 넘겨지는지 확인용
+                    }
+                }
+            });
         }
-    }   
+    }
     change_btn();
 
-    function onClickReview(){
-        const title = document.getElementById('title').value
-        const content = document.getElementById('content').value
+    function onClickReview() {
+        const title = document.getElementById("title").value;
+        const content = document.getElementById("content").value;
         //const star = document.getElementById('star').value
         const data = {
-                "title" : title,
-                "content" : content,
-                 "star" : star=3,
-                 "keywords" : keywords_selected,
-            
-        }
-        
-       const res = fetch("/review_create/1",{
-            method : "POST",
+            title: title,
+            content: content,
+            star: (star = 3),
+            keywords: keywords_selected,
+        };
+
+        const res = fetch("/review_create/1", {
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json', 
-                'X-CSRFToken': 'your-csrf-token'
+                "Content-Type": "application/json",
+                "X-CSRFToken": "your-csrf-token",
             },
-      
-            body: JSON.stringify(data)
+
+            body: JSON.stringify(data),
             // body : data,
-        }).then((data) =>{
-            console.log(data);
-
-        }).catch(e => {
-            console.log(e);
-            console.log("error");
-            throw new Error(e);
         })
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((e) => {
+                console.log(e);
+                console.log("error");
+                throw new Error(e);
+            });
     }
-
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"
+></script>
 {% endblock %}
