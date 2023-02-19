@@ -423,7 +423,7 @@
         <div class="d-flex flex-column">
         <a href='cafe_detail/${item.id}'  class="find_cafe_name">${item.name}</a>
         <span class="cafe_loc">${item.address}</span>
-        <span class="cafe_categ">${item.keywords}</span>
+        <span class="cafe_categ">#${JSON.parse(item.keywords).join(" #")}</span>
         <div class="cafe_star_info">
             <span style="color: #F8AA14">${item.average_star}점</span>
             <span style="color: #F9B717; font-size: 18px; font-weight: bold" >${star}</span>
