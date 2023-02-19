@@ -146,8 +146,8 @@
                 <!-- ERD :  'CafeKeyword review_id 리뷰식별자' 외래키참조-->
             </div>
             <div class="cafe_review_images">
-                {% if cafe.image %}
-                        <img src="{{ cafe.image.url }}" class="cd_img">
+                {% if review.image %}
+                        <img src="{{ review.image.url }}" class="cd_img">
                 {% endif %}
             </div>
         </div>
