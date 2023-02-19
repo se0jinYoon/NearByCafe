@@ -282,8 +282,7 @@ def find_cafe_ajax(request, *args, **kwargs):
         ctx = {
         'latitude':location_dict[location][0],
         'longtitude':location_dict[location][1],
-        'cafes':cafes,
-       
+        'cafes':cafes
         }
         
         return JsonResponse(ctx)

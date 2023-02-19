@@ -384,7 +384,7 @@ const cafeMarker=(cafes) => {
         // .catch(console.log(console.error()))
 
         //받는거
-        const { latitude: latitude, longtitude: longtitude, cafes: cafes } = await res.json();
+        const { latitude: latitude, longtitude: longtitude, cafes: cafes} = await res.json();
         console.log(latitude, longtitude, cafes);
         cafeHandleResponse(cafes);
         panTo(latitude, longtitude);

@@ -68,7 +68,6 @@ def review_create(request,pk):
             
         
         cafe_obj.average_star=round(average_star,1)
-        #cafe_obj.average_star=average_star
         cafe_obj.save()
         
 
@@ -81,41 +80,29 @@ def review_create(request,pk):
 
         # for key in x.itmes():
         #     cafe_keywords.append(key)
-        
-        #seleted_keywords=req['seleted_ck']#선택된 키워드 리스트
-        #review에서 keywords 리스트 가져와서 필터링
-        #cafes=[]
-            # for cafe in cafes_objects:
-            #     # cafe의 리뷰에서 keywords를 가져와서 selected_keywords랑비교
-            #     cafe_keywords=cafe.keywords
-            #     #cafe_keywords랑 selected_keywords 비교
-            #     same=[i for i,j in zip(seleted_keywords,cafe_keywords) if i==j]
-                
-            #     if len(same)>=2:
-            #         cafes.append(cafe)
-        
-        
-
-
-        #리뷰키워드 cafe키워드에 추가
+      
+        #리뷰키워드 빈도수 가장 높은 거 cafe키워드에 추가
         k_list=req['keywords']
         
         review.keywords=json.dumps(k_list,ensure_ascii=False)    
-        cafe_obj.keywords=json.dumps(k_list,ensure_ascii=False)
+        
+        all_list=[]
+        for r in all_review:
+            jsonDec=json.decoder.JSONDecoder()
+            r_keywords=jsonDec.decode(r.keywords)
+            for key in r_keywords:
+                all_list.append(key)
+      
+        x=Counter(all_list).most_common(3)
+        print(x)
+        most_keywords=[]
+        for word in x:
+            most_keywords.append(word[0])
+            
+        cafe_obj.keywords=json.dumps(most_keywords,ensure_ascii=False)
+        
         review.save()
         cafe_obj.save()
-        
-        #cafe_keywords=jsonDec.decode(cafe.keywords)
-    
-        #리뷰등록을 할때 키워드를 보고 카페의 키워드 체크 리스트에서 몇갠지 세고 가장 많은 이름의 것을 카페한테
-        #cafe_keywords_cnt=[0]*15#튜플로 넣어놔서 같은 키워드 이름인거 의 cnt++해서 가장 많은거를 카페의cnt로?
-        #jsonDec=json.decoder.JSONDecoder()
-        #for r in all_review:
-        #    r_list=jsonDec.decode(r.keywords)
-        
-        #jsonDec=json.decoder.JSONDecoder()
-        #cafe_keywords=jsonDec.decode(review.cafe_id.keywords)
-        #cafe_keywords=jsonDec.decode(cafe_obj.keywords)
         
         return redirect('Cafe:main')
  
