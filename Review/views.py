@@ -102,6 +102,7 @@ def review_create(request,pk):
         
         review.keywords=json.dumps(k_list,ensure_ascii=False)    
         cafe_obj.keywords=json.dumps(k_list,ensure_ascii=False)
+        review.save()
         cafe_obj.save()
         
         #cafe_keywords=jsonDec.decode(cafe.keywords)

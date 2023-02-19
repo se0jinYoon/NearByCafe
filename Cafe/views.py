@@ -258,23 +258,32 @@ def find_cafe_ajax(request, *args, **kwargs):
         
         # cafes_latlog = cafes.location.name
         
-        #seleted_keywords=req['seleted_ck']#선택된 키워드 리스트
+        checked_keywords=req['checked_keywords']#선택된 키워드 리스트
         #review에서 keywords 리스트 가져와서 필터링
-        #cafes=[]
-            # for cafe in cafes_objects:
-            #     # cafe의 리뷰에서 keywords를 가져와서 selected_keywords랑비교
-            #     cafe_keywords=cafe.keywords
-            #     #cafe_keywords랑 selected_keywords 비교
-            #     same=[i for i,j in zip(seleted_keywords,cafe_keywords) if i==j]
+        cafes2=[]
+        for cafe in cafes_objects:
+            jsonDec=json.decoder.JSONDecoder()
+            cafe_keywords=jsonDec.decode(cafe.keywords)
+            print("?")
+            x=set.intersection(set(cafe_keywords),set(checked_keywords))
+            
+            if x!=set() and len(x)>=2:
+                print(x)
+                cafes2.append(cafe)
+                print(cafe)
                 
-            #     if len(same)>=2:
-            #         cafes.append(cafe)
+        #q. 넘겨줄때 쿼리셋 접근으로,,
+        
         cafes=list((cafes_objects).values())
+        
+        #print(cafes)
+        
 
         ctx = {
         'latitude':location_dict[location][0],
         'longtitude':location_dict[location][1],
         'cafes':cafes,
+       
         }
         
         return JsonResponse(ctx)

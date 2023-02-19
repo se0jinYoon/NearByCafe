@@ -366,7 +366,8 @@ const cafeMarker=(cafes) => {
     console.log(checkedCheckboxes);
     const onClickSearch = async () => {
         //키워드 선택//
-       
+        console.log(checkedCheckboxes)
+        checked_keywords=checkedCheckboxes
         const location = locationInput.value;
         console.log('지역',location);
 
@@ -375,7 +376,7 @@ const cafeMarker=(cafes) => {
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
-            body: JSON.stringify({ location: location,}), 
+            body: JSON.stringify({ location: location, checked_keywords: checked_keywords}), 
         });
 
         // const res = await fetch('/cafe/find_cafe')
