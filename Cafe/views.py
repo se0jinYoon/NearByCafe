@@ -224,6 +224,9 @@ def find_cafe(request, *args, **kwargs):
 
     loc = request.GET.get('loc')
     keyword = request.GET.get('keyword')
+
+    print(keyword)
+    print('키워드키워드키워드키워드키워드키워드키워드키워드키워드키워드키워드')
     context = {
         "location_list_left": location_list_left,
         "location_list_right": location_list_right,
@@ -234,6 +237,7 @@ def find_cafe(request, *args, **kwargs):
     }
 
     if request.method == 'POST':
+        print("POST REQUEST-----!")
         loc = request.POST.get('cafe_location_name')
         keyword = request.POST.get('cafe_keyword_name')
         print(request.POST)

@@ -105,7 +105,7 @@
                         <input class="checkbox" type="checkbox" name="big" value="장소가 넓은" /> <span class="checkbox_list">장소가 넓은</span>
                     </div>
                     <div class="cat3 d-flex flex-row align-center">
-                        <input class="checkbox" type="checkbox" name="interior" value="인테리어가 예쁜" /> <span class="checkbox_list">인테리어가 예쁜</span>
+                        <input class="checkbox" type="checkbox" name="interior" value="인테리어 예쁜" /> <span class="checkbox_list">인테리어 예쁜</span>
                     </div>
                 </div>
             </div>
@@ -239,7 +239,11 @@
         //키워드 선택//
 
         const location = "{{loc}}";
-        const keyword = "{{keyword}}";
+        var keyword = "{{keyword}}";
+        if (keyword.length !== 0) {
+            keyword = JSON.parse(keyword.replace(/&quot;/g, '"'));
+        }
+
         console.log("지역", location, "키워드", keyword);
 
         const res = await fetch("/find_cafe_ajax/", {
@@ -314,6 +318,23 @@
     var checkedCheckboxes = [];
     var checked = [];
     const locationInput = document.querySelector("#cafe_location_name");
+
+    const main__keywords = "{{keyword}}";
+    console.log(main__keywords.length);
+
+    if (main__keywords.length !== 0) {
+        const selectedValues = JSON.parse(main__keywords.replace(/&quot;/g, '"'));
+        console.log(selectedValues);
+
+        // 메인에서 넘어온 값들 체크
+        checkboxes.forEach(function (checkbox) {
+            if (selectedValues.includes(checkbox.value)) {
+                checkbox.checked = true;
+                checkedCheckboxes.push(checkbox.value);
+                checked.push(checkbox);
+            }
+        });
+    }
 
     // 모든 체크박스마다 이벤트 리스너 추가
     checkboxes.forEach(function (checkbox) {
@@ -396,8 +417,8 @@
         console.log(checkedCheckboxes);
         checked_keywords = checkedCheckboxes;
         const location = locationInput.value;
-        console.log("지역", location);
-        console.log("키워드", checked_keywords);
+        console.log(typeof checked_keywords);
+        console.log("지역", location, "키워드", checked_keywords);
 
         const res = await fetch("/find_cafe_ajax/", {
             method: "POST",
@@ -455,7 +476,7 @@
         <div class="cafe_star_info">
             <span style="color: #F8AA14">${item.average_star}점</span>
             <span style="color: #F9B717; font-size: 18px; font-weight: bold" >${star}</span>
-            <span style="color: #AAAAAA">(${item.review_cnt})</span>                   
+            <span style="color: #AAAAAA">(${item.review_cnt})</span>
         </div>
         </div>
     </div>`;
