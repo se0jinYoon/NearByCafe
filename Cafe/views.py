@@ -253,11 +253,23 @@ def find_cafe_ajax(request, *args, **kwargs):
         print('get')
         req = json.loads(request.body)
         location = req['location']
-        # selected_location = request.GET['location']
         selected_location = location
 
-        cafe_location = Location.objects.get(name=selected_location)
-        cafes_objects = cafe_location.cafe_set.all()
+        print(location)
+
+        # 만약 지역이 '서울 전체'인 경우
+        if selected_location == "서울 전체":
+            cafes_objects = Cafe.objects.all()
+            location = '서울역/이태원/용산'
+            # ctx = {
+            #     'latitude': location_dict['서울역/이태원/용산'][0],
+            #     'longtitude': location_dict['서울역/이태원/용산'][1],
+            #     'cafes': cafes
+            # }
+            # return JsonResponse(ctx)
+        else:
+            cafe_location = Location.objects.get(name=selected_location)
+            cafes_objects = cafe_location.cafe_set.all()
 
         # cafes_latlog = cafes.location.name
 
@@ -271,15 +283,15 @@ def find_cafe_ajax(request, *args, **kwargs):
             cafes = list((cafes_objects).values())
 
         else:
+            cafe_queryset = Cafe.objects.none()
             for cafe in cafes_objects:
 
-            # jsonDec = json.decoder.JSONDecoder()
-            # cafe_keywords = jsonDec.decode(cafe.keywords)
-            # print(cafe_keywords)
-            # print("?")
-            # x = set.intersection(set(cafe_keywords), set(checked_keywords))
+                # jsonDec = json.decoder.JSONDecoder()
+                # cafe_keywords = jsonDec.decode(cafe.keywords)
+                # print(cafe_keywords)
+                # print("?")
+                # x = set.intersection(set(cafe_keywords), set(checked_keywords))
 
-                cafe_queryset = Cafe.objects.none()
                 for kwrds in checked_keywords:
                     temp = Cafe.objects.filter(keywords__icontains=kwrds)
                     cafe_queryset |= temp
@@ -288,8 +300,6 @@ def find_cafe_ajax(request, *args, **kwargs):
             # if x != set() and len(x) >= 2:
             #     print(x)
             #     print(cafe)
-
-        # q. 넘겨줄때 쿼리셋 접근으로,,
 
             cafes = list((cafe_queryset).values())
 
