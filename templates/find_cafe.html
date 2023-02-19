@@ -17,7 +17,10 @@
 
             <div class="d-flex flex-row align-items-center">
                 <div class="selected_location location_input d-flex align-items-center" onclick="onClickLocationButton()">
-                    <p>지역 선택</p>
+                    <!-- <p>지역 선택</p> -->
+                    <button class="location_picked" onclick="onClickLocationText()">
+                        <span class="location_picked_text">{{loc}}</span>
+                    </button>
                 </div>
             </div>
 
@@ -397,15 +400,15 @@ const cafeMarker=(cafes) => {
         // element.innerHTML = `<div class="cafe_list">`;
         cafes.forEach((item) => {
             let star = "⭐⭐⭐⭐⭐";
-            if (item.average_star === 1) {
-                star = "⭐";
-            } else if (item.average_star === 2) {
-                star = "⭐⭐";
-            } else if (item.average_star === 3) {
-                star = "⭐⭐⭐";
-            } else if (item.average_star === 4) {
-                star = "⭐⭐⭐⭐";
-            } else if (item.average_star === 5) {
+            if ( 1 <= item.average_star && item.average_star < 2) {
+                star = "⭐☆☆☆☆";
+            } else if ( 2 <= item.average_star && item.average_star < 3) {
+                star = "⭐⭐☆☆☆";
+            } else if (3 <= item.average_star && item.average_star < 4) {
+                star = "⭐⭐⭐☆☆";
+            } else if (4 <= item.average_star && itme.average_star < 5) {
+                star = "⭐⭐⭐⭐☆";
+            } else if (5 <= item.average_star) {
                 star = "⭐⭐⭐⭐⭐";
             }
             console.log(item.average_star)
@@ -417,9 +420,9 @@ const cafeMarker=(cafes) => {
         <span class="cafe_loc">${item.address}</span>
         <span class="cafe_categ">${item.keywords}</span>
         <div class="cafe_star_info">
-            <span style="color: #F8AA14">평균별점</span>
-            <span>${star}</span>
-            <span style="color: #AAAAAA">(리뷰 수)</span>                   
+            <span style="color: #F8AA14">${item.average_star}점</span>
+            <span style="color: #F9B717; font-size: 18px; font-weight: bold" >${star}</span>
+            <span>리뷰 수</span>                   
         </div>
         </div>
     </div>`;
