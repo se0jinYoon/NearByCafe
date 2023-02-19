@@ -256,12 +256,14 @@
         })
             .then((data) => {
                 console.log(data);
+                history.back();
             })
             .catch((e) => {
                 console.log(e);
                 console.log("error");
                 throw new Error(e);
             });
+            
     }
 </script>
 <script
