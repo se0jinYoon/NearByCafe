@@ -60,7 +60,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col"><button class="keyword_btn" name="mark" id="의자가 편한" value="의자가 편한" type="button">의자가 편한</button></div>
-                    <div class="col"><button class="keyword_btn" name="mark" id="디저트 맛있는" value="디저트 맛있는" type="button">디저트 맛있는</button></div>
+                    <div class="col"><button class="keyword_btn" name="mark" id="디저트가 맛있는" value="디저트가 맛있는" type="button">디저트가 맛있는</button></div>
                     <div class="col"><button class="keyword_btn" name="mark" id="커피가 맛있는" value="커피가 맛있는" type="button">커피가 맛있는</button></div>
                     <div class="col"><button class="keyword_btn" name="mark" id="친절한" value="친절한" type="button">친절한</button></div>
                     <div class="col"><button class="keyword_btn" name="mark" id="혼카페" value="혼카페" type="button">혼카페</button></div>
@@ -259,7 +259,7 @@
         })
             .then((data) => {
                 console.log(data);
-                history.back();
+                location.href = document.referrer;
             })
             .catch((e) => {
                 console.log(e);

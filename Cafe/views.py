@@ -116,6 +116,7 @@ def cafe_detail(request, pk, *args, **kwargs):
         else:
             review.mark = False
 
+        
         review.save()
     cafe.review_cnt = review_cnt
     cafe.save()
@@ -140,7 +141,6 @@ def cafe_detail(request, pk, *args, **kwargs):
         # "r_average_start":r_average_star,
 
     }
-
     return render(request, "cafe_detail_cj.html", context=context)
 
 # 리뷰에서 대학생인증마크 획득
@@ -174,9 +174,40 @@ def school_match(cafe_location, user_school_email):
     }
 
     for key, value in school_to_location.items():
-        for i in match:
+        for i in match:    
             if key == i and cafe_location == value:
+                print("!!")
                 return True
+    return False
+
+def school_match2(cafe_location,user_school_email):
+    school_to_location=[
+        {'g.hongik.ac.kr':'신촌/이대/서대문/아현'},
+        {'smu.kr','종로/인사동/동대문'},
+        {'ewhain.net','신촌/이대/서대문/아현'},
+        {'khu.ac.kr','청량리/회기'},
+        {'hufs.ac.kr','청량리/회기'},
+        {'yonsei.ac.kr','신촌/이대/서대문/아현'},
+        {'duksung.ac.kr','광운대/공릉/노원/도봉'},
+        {'sju.ac.kr','건대입구/세종대'},
+        {'uos.ac.kr','청량리/회기'},
+        {'dongduk.ac.kr','성신여대/안암/성북/길음'},
+        {'kookmin.ac.kr','성신여대/안암/성북/길음'},
+        {'snu.ac.kr','서울대입구/신림'},
+        {'sungshin.ac.kr','성신여대/안암/성북/길음'},
+        {'kw.ac.kr','광운대/공릉/노원/도봉'},
+        {'konkuk.ac.kr','건대입구/세종대'},
+        {'korea.ac.kr','성신여대/안암/성북/길음'},
+        {'hanyang.ac.kr','왕십리/한양대/성수'},
+        {'catholic.ac.kr','서초/교대/사당'},
+        {'sogang.ac.kr','신촌/이대/서대문/아현'},
+        {'cau.ac.kr','동작/흑석/상도'},
+        { 'skku.edu','혜화/성균관대'},]
+    
+    for key in school_to_location:
+        if key==user_school_email:
+            cafe_location==school_to_location[key]
+            return True
     return False
 
 
@@ -297,7 +328,7 @@ def find_cafe_ajax(request, *args, **kwargs):
                 # x = set.intersection(set(cafe_keywords), set(checked_keywords))
 
                 for kwrds in checked_keywords:
-                    temp = Cafe.objects.filter(keywords__icontains=kwrds)
+                    temp = cafes_objects.filter(keywords__icontains=kwrds)
                     cafe_queryset |= temp
                 print(cafe_queryset)
 
