@@ -17,7 +17,10 @@
 
             <div class="d-flex flex-row align-items-center">
                 <div class="selected_location location_input d-flex align-items-center" onclick="onClickLocationButton()">
-                    <p>지역 선택</p>
+                    <!-- <p>지역 선택</p> -->
+                    <button class="location_picked" onclick="onClickLocationText()">
+                        <span class="location_picked_text">{{loc}}</span>
+                    </button>
                 </div>
             </div>
 
