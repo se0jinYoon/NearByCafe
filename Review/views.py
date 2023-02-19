@@ -39,42 +39,35 @@ def review_create(request,pk):
     cafe_obj = Cafe.objects.get(id=pk)
 
     if request.method == 'POST':
+        print("post")
         ctx = {}
         req = json.loads(request.body)
-        # print(request.POST['title'])
+        review = Review()
+        review.user_id = request.user
+        review.title = req['title']
+        review.content = req['content']
+        review.star = req['star']
+        review.keywords = req['keywords']
+        review.cafe_id = Cafe.objects.get(pk=pk)
         
-        form = ReviewForm(req)
-        if form.is_valid():
-            review = form.save(commit=False)
-            review.user_id = request.user
-            review.cafe_id = Cafe.objects.get(pk)
-            
-            # review.cafe_id = Cafe.objects.get(pk=pk)
-            review.save()
+        review.save()
 
-            #리뷰의 키워드(review의 keywords)를 카운트해서 카페 키워드(cafe의 keywords)로 보내주기
-            cafe_keywords=[]
-            cnt=Counter(review.keywords)
-            if cnt>=3:
-                x=cnt.most_common(3)
-            else:x=cnt.most_common(len(cnt))
-
-            for key in x.itmes():
-                cafe_keywords.append(key)
-
-            #리뷰키워드 cafe키워드에 추가
+        #리뷰의 키워드(review의 keywords)를 카운트해서 카페 키워드(cafe의 keywords)로 보내주기
         
-            review.cafe_id.keywords=json.dumps(review.keywords)
-            review.cafe_id.save()
-            
-        else:
-            for field in form:
-                print("Field Error:", field.name,  field.errors)
-            print("failed")
-            ctx = {
-                'form':form,'keyword_list' : keyword_list, "cafe":cafe_obj,
-            }
-            return render(request,"review_create.html",ctx)
+        # cnt=Counter(review.keywords)
+        # if cnt>=3:
+        #     x=cnt.most_common(3)
+        # else:x=cnt.most_common(len(cnt))
+
+        # for key in x.itmes():
+        #     cafe_keywords.append(key)
+
+        #리뷰키워드 cafe키워드에 추가
+    
+        review.cafe_id.keywords=json.dumps(review.keywords)
+        review.cafe_id.save()
+
+        
         return redirect('Cafe:main')
  
     else :
