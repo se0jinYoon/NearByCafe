@@ -123,7 +123,7 @@
                     <button class="sort_abc"><span class="btn_text1">가나다 순</span></button>
                     <button class="sort_star"><span class="btn_text2">평점 순</span></button>
                 </div>
-                <p class="sort_text3">총 <span style="color: #df4629">갯수 넣기</span>개의 카페가 검색되었습니다.</p>
+                <p class="sort_text3">총 <span class="num__of__cafe" style="color: #df4629">갯수 넣기</span>개의 카페가 검색되었습니다.</p>
             </div>
 
             <!-- {% for cafe in cafe_list %} 
@@ -481,6 +481,9 @@
         </div>
     </div>`;
         });
+        console.log(cafes.length);
+        var numofcafes = document.querySelector(".num__of__cafe");
+        numofcafes.innerHTML = cafes.length;
     };
     Search();
 </script>
