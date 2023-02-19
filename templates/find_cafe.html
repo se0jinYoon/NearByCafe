@@ -230,14 +230,15 @@
         //키워드 선택//
 
         const location = '{{loc}}';
-        console.log('지역',location);
+        const keyword = '{{keyword}}';
+        console.log('지역',location,'키워드',keyword);
 
         const res = await fetch("/find_cafe_ajax/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
-            body: JSON.stringify({ location: location,}),
+            body: JSON.stringify({ location: location,checked_keywords:keyword}),
         });
 
         // const res = await fetch('/cafe/find_cafe')
