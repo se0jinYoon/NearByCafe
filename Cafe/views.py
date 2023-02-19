@@ -100,11 +100,11 @@ def cafe_detail(request,pk,*args,**kwargs):
     #카페에 등록된 리뷰들 불러오기
     all_review=cafe.cafe_id.all()
     review_cnt=0
-    sum_star=0
-    average_star=0
+    # sum_star=0
+    # average_star=0
     for review in all_review:
         review_cnt+=1
-        sum_star+=review.star
+        # sum_star+=review.star
         
         #학교인증마크 획득
         if school_match(cafe.location_id.name,review.user_id.email_address):
@@ -113,19 +113,28 @@ def cafe_detail(request,pk,*args,**kwargs):
             review.mark=False
             
         review.save()
-    if review_cnt==0:average_star==0
-    else:average_star=sum_star/review_cnt
+        
+    # if review_cnt==0:average_star==0
+    # else:average_star=sum_star/review_cnt
     
-    r_average_star=round(average_star)
+    # r_average_star=round(average_star)
     
-    cafe.average_star=average_star
-    cafe.save()
+    # cafe.average_star=average_star
+    # cafe.save()
+    
+    
+    jsonDec=json.decoder.JSONDecoder()
+    #cafe_keywords=jsonDec.decode(review.cafe_id.keywords)
+    cafe_keywords=jsonDec.decode(cafe.keywords)
+    print(type(cafe_keywords))
     
     context={
         "cafe":cafe,
         "review_cnt":review_cnt,
         "all_review":all_review,
-        "r_average_start":r_average_star,
+        'cafe_keywords':cafe_keywords,
+        #"r_average_start":r_average_star,
+       
     }
     
     return render(request,"cafe_detail_cj.html",context=context)
@@ -244,7 +253,9 @@ def find_cafe_ajax(request, *args, **kwargs):
         
         cafe_location = Location.objects.get(name = selected_location)
         cafes_objects = cafe_location.cafe_set.all()
+        
         # cafes_latlog = cafes.location.name
+        
         #seleted_keywords=req['seleted_ck']#선택된 키워드 리스트
         #review에서 keywords 리스트 가져와서 필터링
         #cafes=[]

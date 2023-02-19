@@ -22,7 +22,10 @@
                 </div>
                 <div class="cafe_index_keywords">
                     #우선 나중에
-                    {{cafe.keywords}}
+                    {%for key in cafe_keywords%}
+                        #{{key}}
+                    {%endfor%}
+                    
                     <!-- ERD : 'CafeKeyword cafe_id 카페식별자' 외래키참조 -->
                 </div>
                 <div class="cafe_index_review d-flex flex-column">
@@ -139,7 +142,7 @@
             </div>
             <div class="cafe_review_keywords d-flex">
                 {% comment %} {{review.keywords}} {% endcomment %}
-
+                {{review.keywords}}
                 #리뷰키워드 <!-- ERD :  'CafeKeyword review_id 리뷰식별자' 외래키참조-->
             </div>
             <div class="cafe_review_images">

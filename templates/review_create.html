@@ -236,11 +236,11 @@
     const onClickReview = async () => {
         const title = document.getElementById("title").value;
         const content = document.getElementById("content").value;
-        //const star = document.getElementById('star').value
+        const star = document.getElementById('star').value
         const data = {
             title: title,
             content: content,
-            star: 3,
+            star: star,
             keywords: keywords_selected,
         };
 

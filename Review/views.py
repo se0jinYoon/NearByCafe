@@ -51,6 +51,22 @@ def review_create(request,pk):
         review.cafe_id = Cafe.objects.get(pk=pk)
         
         review.save()
+        
+        #카페 평균 별점 계산(카페상세->리뷰등록 이동)
+        all_review=cafe_obj.cafe_id.all()
+        review_cnt=0
+        sum_star=0
+        average_star=0
+        for review in all_review:
+            review_cnt+=1
+            sum_star+=review.star
+            
+        if review_cnt==0:average_star==0
+        else:average_star=sum_star/review_cnt
+        
+        cafe_obj.average_star=round(average_star)
+        cafe_obj.save()
+        
 
         #리뷰의 키워드(review의 keywords)를 카운트해서 카페 키워드(cafe의 keywords)로 보내주기
         
@@ -64,8 +80,18 @@ def review_create(request,pk):
 
         #리뷰키워드 cafe키워드에 추가
     
-        review.cafe_id.keywords=json.dumps(review.keywords)
-        review.cafe_id.save()
+        #review.cafe_id.keywords=json.dumps(review.keywords)
+        test=['beautiful','p']
+        
+        cafe_obj.keywords=json.dumps(test)
+        #review.cafe_id.keywords=req['keywords']
+        
+        #review.cafe_id.save()
+        cafe_obj.save()
+        jsonDec=json.decoder.JSONDecoder()
+        #cafe_keywords=jsonDec.decode(review.cafe_id.keywords)
+        #cafe_keywords=jsonDec.decode(cafe_obj.keywords)
+     
 
         
         return redirect('Cafe:main')

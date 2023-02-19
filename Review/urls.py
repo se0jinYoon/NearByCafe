@@ -4,6 +4,6 @@ from . import views
 app_name = "Review"
 
 urlpatterns = [
-    path('review_create/<int:pk>', views.review_create, name='review_create'),
+    path('review_create/<int:pk>/', views.review_create, name='review_create'),
     
 ]
