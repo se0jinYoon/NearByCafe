@@ -112,9 +112,10 @@ def cafe_detail(request,pk,*args,**kwargs):
             review.mark=True
         else:
             review.mark=False
-            
-        review.save()
         
+        review.save()
+    cafe.review_cnt=review_cnt
+    cafe.save()
     # if review_cnt==0:average_star==0
     # else:average_star=sum_star/review_cnt
     

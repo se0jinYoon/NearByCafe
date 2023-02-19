@@ -44,6 +44,7 @@ class Cafe(models.Model):
     longtitude = models.FloatField(default=126.575308)
     keywords = models.TextField(null=True)
     average_star=models.FloatField(default=0)
+    review_cnt=models.IntegerField(default=0)
     
 
 
