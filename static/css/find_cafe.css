@@ -277,12 +277,3 @@ input::placeholder {
     font-weight: bold;
     font-size: 14px;
 }
-
-/* pin 관련 css */
-
-.cafe__pin__short {
-    position: relative;
-    width: 200px;
-    height: 32px;
-    border: 1px solid #728137;
-}
