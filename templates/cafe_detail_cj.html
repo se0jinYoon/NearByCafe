@@ -1,4 +1,4 @@
-{% extends 'nav.html' %} {% block content %} {% load static %}
+{% extends 'nav.html' %} {% block content %} {% load static %} {% load custom_filters %}
 
 <div class="overlay_cj"></div>
 <main id="cafe_detail">
@@ -107,7 +107,9 @@
                 <!-- ERD : Review content 내용-->
                 {{review.content}}
             </div>
-            <div class="cafe_review_keywords d-flex">{{review.keyword}}</div>
+            {% with keywords=review.keywords|safe|json_loads %}
+            <div class="cafe_review_keywords d-flex">{% for keyword in keywords %} #{{ keyword }} {% endfor %}</div>
+            {% endwith %}
             <div class="cafe_review_images">
                 {% if review.image %}
                 <img src="{{ review.image.url }}" class="cd_img" />
