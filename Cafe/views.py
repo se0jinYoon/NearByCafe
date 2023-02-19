@@ -126,7 +126,7 @@ def cafe_detail(request,pk,*args,**kwargs):
     jsonDec=json.decoder.JSONDecoder()
     #cafe_keywords=jsonDec.decode(review.cafe_id.keywords)
     cafe_keywords=jsonDec.decode(cafe.keywords)
-    print(type(cafe_keywords))
+    #print(type(cafe_keywords))
     
     context={
         "cafe":cafe,

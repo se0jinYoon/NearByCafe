@@ -62,9 +62,13 @@ def review_create(request,pk):
             sum_star+=review.star
             
         if review_cnt==0:average_star==0
-        else:average_star=sum_star/review_cnt
+        else:
+            average_star=sum_star/review_cnt
+            print(sum_star,review_cnt,average_star)
+            
         
-        cafe_obj.average_star=round(average_star)
+        cafe_obj.average_star=round(average_star,1)
+        #cafe_obj.average_star=average_star
         cafe_obj.save()
         
 
