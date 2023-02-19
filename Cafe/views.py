@@ -102,6 +102,7 @@ def cafe_detail(request,pk,*args,**kwargs):
     review_cnt=0
     # sum_star=0
     # average_star=0
+    reivew_keywords_list=[]
     for review in all_review:
         review_cnt+=1
         # sum_star+=review.star
@@ -124,9 +125,10 @@ def cafe_detail(request,pk,*args,**kwargs):
     
     
     jsonDec=json.decoder.JSONDecoder()
-    #cafe_keywords=jsonDec.decode(review.cafe_id.keywords)
     cafe_keywords=jsonDec.decode(cafe.keywords)
-    #print(type(cafe_keywords))
+    
+    
+    print(type(cafe_keywords))
     
     context={
         "cafe":cafe,

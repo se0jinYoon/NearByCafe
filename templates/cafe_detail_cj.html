@@ -21,7 +21,6 @@
                     위치:  {{cafe.location_id.name}}<!-- ERD에 명시x , Cafe address에서 '구'만 따로 빼와야할까? -->
                 </div>
                 <div class="cafe_index_keywords">
-                    #우선 나중에
                     {%for key in cafe_keywords%}
                         #{{key}}
                     {%endfor%}
@@ -143,7 +142,8 @@
             <div class="cafe_review_keywords d-flex">
                 {% comment %} {{review.keywords}} {% endcomment %}
                 {{review.keywords}}
-                #리뷰키워드 <!-- ERD :  'CafeKeyword review_id 리뷰식별자' 외래키참조-->
+                
+                <!-- ERD :  'CafeKeyword review_id 리뷰식별자' 외래키참조-->
             </div>
             <div class="cafe_review_images">
                 {% if cafe.image %}
