@@ -14,10 +14,13 @@ class EmailThread(threading.Thread):
         threading.Thread.__init__(self)
 
     def run(self):
+        print('Email content:', self.subject, self.body, self.from_email,
+              self.recipient_list, self.fail_silently, self.html)
         msg = EmailMultiAlternatives(
             self.subject, self.body, self.from_email, self.recipient_list)
         if self.html:
             msg.attach_alternative(self.html, "text/html")
+        print('Sending email to:', self.recipient_list)
         msg.send(self.fail_silently)
 
 
