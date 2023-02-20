@@ -4,8 +4,8 @@ const strip = (string) => {
 cnt=0
 // <button class="review_like d-flex" data-bs-toggle="modal" data-bs-target="#not_login" onclick="onClickLike({{cafe.id}}">♡좋아요</button>
 const onClickLike=async(id,clicked)=>{
-    console.log(clicked)
-    //if (clicked==true) cnt=3
+    console.log(clicked,cnt)
+    
      //좋아요 눌렀을때
     if (cnt==0){
         clicked=true
@@ -16,6 +16,7 @@ const onClickLike=async(id,clicked)=>{
         clicked=false
         cnt=0
     }
+    console.log(clicked)
     
 
     const url="/cafe_like/"
@@ -28,6 +29,7 @@ const onClickLike=async(id,clicked)=>{
 }
 
 const likeHandleResponse=(id,clicked)=>{
+    console.log(clicked)
     
     const element=document.querySelector('.review_like');
     const orginhtml=element.innerHTML;

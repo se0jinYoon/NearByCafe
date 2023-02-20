@@ -197,6 +197,10 @@ def cafe_like(request):
     like_id = req['id']
     clicked = req['clicked']
     cafe = Cafe.objects.get(id=like_id)  # cafe객체
+    
+    if cafe.cafe_like.exists():
+        clicked=False
+        print("이미 눌렀지롱2")
 
     # 좋아요 누름
     if clicked == True:
