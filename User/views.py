@@ -260,7 +260,7 @@ def sign_up(request: HttpRequest, *args, **kwargs):
         #     messages.error(
         #         request, '개인정보 수집 및 이용에 동의해주세요.')
         #     return redirect('User:sign_up')
-        
+
         # if len(request.POST.getlist('agree3')) == 0:
         #     messages.error(
         #         request, '위치 기반 서비스 이용약관에 동의해주세요.')
@@ -271,7 +271,7 @@ def sign_up(request: HttpRequest, *args, **kwargs):
             verify_email(request, form)
 
             url = reverse('User:mail_notice', kwargs={
-                          'user_name': request.POST['username'], 
+                          'user_name': request.POST['username'],
                           'user_email': request.POST['email_address']})
             return redirect(url)  # 인증메일 발송 안내 페이지로 리다이렉트
 
@@ -357,6 +357,7 @@ def activate(request, uid64, token):
 def mail_notice(request, user_name=None, user_email=None):
     print(user_name)
     print(user_email)
+
     if request.method == "POST":
         verify_email_later(request, user_name=user_name, user_email=user_email)
     return render(request, 'send_mail.html')
