@@ -274,10 +274,21 @@ def find_cafe_ajax(request, *args, **kwargs):
         # selected_location = request.GET['location']
         selected_location = location
 
-        cafe_location = Location.objects.get(name=selected_location)
-        cafes_objects = cafe_location.cafe_set.all()
+        # 만약 지역이 '서울 전체'인 경우
+        if selected_location == "서울 전체":
+            cafes_objects = Cafe.objects.all()
+            location = '서울역/이태원/용산'
+            # ctx = {
+            #     'latitude': location_dict['서울역/이태원/용산'][0],
+            #     'longtitude': location_dict['서울역/이태원/용산'][1],
+            #     'cafes': cafes
+            # }
+            # return JsonResponse(ctx)
+        else:
+            cafe_location = Location.objects.get(name=selected_location)
+            cafes_objects = cafe_location.cafe_set.all()
 
-        # cafes_latlog = cafes.location.name
+        
 
         checked_keywords = req['checked_keywords']  # 선택된 키워드 리스트
         # review에서 keywords 리스트 가져와서 필터링
