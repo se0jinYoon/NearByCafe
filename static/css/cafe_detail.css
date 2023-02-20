@@ -109,6 +109,9 @@
 .address, .number, .runtime, .cafe_menu {
     font-size: 25px;
 }
+.cafe_menu {
+    margin-left: 20px;
+}
 .cafe_info_address{
     margin-bottom: 28px;
     font-size: 30px;
