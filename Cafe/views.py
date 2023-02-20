@@ -132,9 +132,9 @@ def cafe_detail(request, pk, *args, **kwargs):
     # if review_cnt==0:average_star==0
     # else:average_star=sum_star/review_cnt
 
-    # r_average_star=round(average_star)
+    
 
-    cafe_average_star = cafe.average_star
+    cafe_average_star = int(cafe.average_star)
     # cafe.average_star=average_star
     # cafe.save()
 

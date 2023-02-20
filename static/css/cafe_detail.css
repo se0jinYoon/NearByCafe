@@ -9,7 +9,7 @@
     box-sizing: border-box;
     /* background-color: #F8F4E9; */
 }
-.overlay_cj {
+.overlay {
     width: 100vw;
     height: 100vh;
     position: fixed; /*기존(overlay) : position: absolute;*/
@@ -71,10 +71,16 @@
 }
 .cafe_index_score{
     font-size: 23px;
+    margin-bottom: 15px;
+}
+.cafe_index_star>svg {
+    width: 20px;
+    height: 20px;
 }
 .cafe_index_star{  
     font-size: 30px;
     margin-bottom: 28px;
+    margin-left: 10px;
 }
 .review_like, .review_write{
     justify-content: center;

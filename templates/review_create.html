@@ -75,22 +75,20 @@
             </div>
         </div>
 
-        <div class="image_container shadow d-flex flex-column">
+        <!-- <div class="image_container shadow d-flex flex-column">
             <div>
                 <span class="main_text">사진 등록하기</span>
                 <span class="sub_text">최대 1장까지 업로드 할 수 있어요!</span>
             </div>
 
-            <!-- 사진 등록(미완,cj, 16일 3시 24분) -->
+          
             <input type="file" class="real-upload" accept="image/*" style="display: none" />
             <div class="d-flex" style="display: contents">
                 <div class="image_preview d-flex"></div>
                 <div class="upload_btn" width="200" height="200">추가하기</div>
             </div>
-            <!--  -->
-        </div>
-        <!-- 제출 임시구현 -->
-        <!-- <button id="login_btn" type="button" onclick="onClickReview()" >제출</button> -->
+           
+        </div> -->
         <div class="review_btns">
             <button id="login_btn" type="button" onclick="onClickReview()">등록하기</button>
             <button id="review_cancel_btn" type="button" onclick="location.href='{% url 'Cafe:cafe_detail' pk %}'">취소하기</button>
@@ -117,7 +115,7 @@
 </script>
 
 <!--사진 등록하기(미완, 사진 4개 이상 저장시 추가버튼 사라지기 구현 못함) -->
-<script>
+<!-- <script>
     function getImageFiles(e) {
         const uploadFiles = [];
         // const files = e.currentTarget.files;
@@ -214,7 +212,7 @@
     upload.addEventListener("click", () => realUpload.click());
     realUpload.addEventListener("change", getImageFiles);
     // remove_btn.addEventListener("click", remove_img);
-</script>
+</script> -->
 <!--  -->
 
 <script>
@@ -261,41 +259,27 @@
         const title = document.getElementById("title").value;
         const content = document.getElementById("content").value;
         const star = document.getElementsByClassName('fa-solid fa-star').length;
-        const img = document.getElementsByClassName('post_reviewimg')[0].src;
-        // const img = document.getElementsByClassName('real-upload');
-        console.log(img)
+        // const img = document.getElementsByClassName('post_reviewimg')[0].src;
         const data = {
             title: title,
             content: content,
             star: star,
             keywords: keywords_selected,
-            image : img,
+            // image : img,
         };
-        // var file=base64toFile(img.src,img.data-file);
-        // const formdata= new FormData();
-        // formdata.enctype="multipart/form-data";
-        // formdata.append('title',title)
-        // formdata.append('content',content)
-        // formdata.append('star',star)
-        // formdata.append('keywords',keywords_selected)
-        // formdata.append('image',img);
 
         await fetch("/review_create/{{pk}}/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                // 'Content-Type': 'multipart/form-data',
                 "X-CSRFToken": "your-csrf-token",
             },
 
             body: JSON.stringify(data),
-            // body: formdata,
 
-            // body : data,
         })
             .then((data) => {
-                console.log(data);
-                //location.href = document.referrer;
+                location.href = document.referrer;
             })
             .catch((e) => {
                 console.log(e);

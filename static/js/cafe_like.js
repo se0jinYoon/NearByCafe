@@ -34,10 +34,10 @@ const likeHandleResponse=(id,clicked)=>{
     const element=document.querySelector('.review_like');
     const orginhtml=element.innerHTML;
     if(clicked===true){
-        element.innerHTML=`♥좋아요`;
+        element.innerHTML=`♥ 좋아요`;
     }
     else{
-        element.innerHTML=`♡좋아요`;
+        element.innerHTML=`♡ 좋아요`;
     }
     
 };
