@@ -161,7 +161,7 @@ def school_match(cafe_location, user_school_email):
     pattern = re.compile(r'@([\w.]+)')
     match = pattern.findall(user_school_email)
     school_to_location = {
-        'g.hongik.ac.kr': '신촌/이대/서대문/아현',
+        'g.hongik.ac.kr': '홍대/합정/망원/서강',
         'smu.kr': '종로/인사동/동대문',
         'ewhain.net': '신촌/이대/서대문/아현',
         'khu.ac.kr': '청량리/회기',

@@ -13,10 +13,10 @@
             </div>
             <div class="cafe_indexbox">
                 <div class="cafe_index_name">
-                    카페 상호명: {{cafe.name}}
+                    {{cafe.name}}
                     <!-- ERD : Cafe name 상호명-->
                 </div>
-                <div class="cafe_index_district">위치: {{cafe.location_id.name}}<!-- ERD에 명시x , Cafe address에서 '구'만 따로 빼와야할까? --></div>
+                <div class="cafe_index_district">{{cafe.location_id.name}}<!-- ERD에 명시x , Cafe address에서 '구'만 따로 빼와야할까? --></div>
                 <div class="cafe_index_keywords">
                     {%for key in cafe_keywords%} #{{key}} {%endfor%}
 
@@ -138,7 +138,7 @@
             </div>
             <div class="cafe_info_menu d-flex align-items-center">
                 <div class="cafe_info_index">메뉴</div>
-                &nbsp; &nbsp;
+                
                 <div class="cafe_menu">{{cafe.menu|linebreaks}}</div>
                 <!-- ERD : Cafe menu 메뉴정보-->
             </div>

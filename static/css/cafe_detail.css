@@ -118,6 +118,9 @@
 .cafe_menu {
     margin-left: 20px;
 }
+.cafe_menu>p{
+    text-align: start;
+}
 .cafe_info_address{
     margin-bottom: 28px;
     font-size: 30px;
