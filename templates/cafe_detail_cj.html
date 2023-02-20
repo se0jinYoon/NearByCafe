@@ -42,7 +42,12 @@
                     <!-- <button  href="#not_login" class="review_like d-flex" role="button" data-toggle="modal">♥좋아요</button> -->
 
                     {% comment %} q.안먹힘..user질문 {% endcomment %} {% if request.user.is_authenticated %}
-                    <button class="review_like d-flex" data-bs-toggle="modal" data-bs-target="#not_login" onclick="onClickLike({{cafe.id}})">♡좋아요</button>
+                    {% if cafe_like_clicked == True %}
+
+                    <button class="review_like d-flex" data-bs-toggle="modal" data-bs-target="#not_login" onclick="onClickLike({{cafe.id}},true)">♥좋아요</button>
+                    {%else%}
+                    <button class="review_like d-flex" data-bs-toggle="modal" data-bs-target="#not_login" onclick="onClickLike({{cafe.id}},false)">♡좋아요</button>
+                    {%endif%}
                     <a class="review_write d-flex" href="{% url 'Review:review_create' cafe.id %}">✍🏻 리뷰 하기</a>
 
                     {% else %} {% endif %}

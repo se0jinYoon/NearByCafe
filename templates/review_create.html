@@ -120,10 +120,11 @@
 <script>
     function getImageFiles(e) {
         const uploadFiles = [];
+        // const files = e.currentTarget.files;
         const files = e.currentTarget.files;
         const imagepreview = document.querySelector(".image_preview");
         const docFrag = new DocumentFragment();
-        //  console.log(typeof files,files)
+        // console.log(typeof files, files);
         if ([...files].length > 1) {
             alert("1장만 등록하실 수 있습니다.");
             return;
@@ -144,22 +145,31 @@
                 reader.readAsDataURL(file);
             }
         });
+        
     }
     function createElement(e, file) {
         const ui = document.createElement("ui");
         const img = document.createElement("img");
         const upload_btn = document.querySelector(".upload_btn");
+        const image_preview = document.querySelector(".image_preview");
 
         img.setAttribute("src", e.target.result);
         img.setAttribute("data-file", file.name);
-
+        
         ui.append(img);
+    //     var newImage = document.createElement("img");
+    // newImage.setAttribute("class", 'img');
+
+    // //이미지 source 가져오기
+    // newImage.src = URL.createObjectURL(file);   
 
         ui.classList.add("d-flex");
         ui.classList.add("flex-column");
         ui.classList.add("img_here");
         img.classList.add("post_reviewimg");
         ui.innerHTML += `<button class="remove_btn_review" onclick="remove_img()">삭제하기</button>`;
+
+        // console.log(windows.atob(img))
 
         if (upload_btn.style.display !== "none") {
             upload_btn.style.display = "none";
@@ -169,6 +179,20 @@
 
         return ui;
     }
+    // function base64toFile(base_data, filename) {
+
+    // var arr = base_data.split(','),
+    //     mime = arr[0].match(/:(.*?);/)[1],
+    //     bstr = atob(arr[1]),
+    //     n = bstr.length,
+    //     u8arr = new Uint8Array(n);
+            
+    // while(n--){
+    //     u8arr[n] = bstr.charCodeAt(n);
+    // }
+    
+    // return new File([u8arr], filename, {type:mime});
+    // }
     function remove_img() {
         let img_remove = document.querySelector(".post_reviewimg");
         const upload_btn = document.querySelector(".upload_btn");
@@ -236,9 +260,10 @@
     const onClickReview = async () => {
         const title = document.getElementById("title").value;
         const content = document.getElementById("content").value;
-        // const star = document.getElementById('star').value
         const star = document.getElementsByClassName('fa-solid fa-star').length;
-        const img = document.getElementsByClassName('post_reviewimg');
+        const img = document.getElementsByClassName('post_reviewimg')[0].src;
+        // const img = document.getElementsByClassName('real-upload');
+        console.log(img)
         const data = {
             title: title,
             content: content,
@@ -246,20 +271,31 @@
             keywords: keywords_selected,
             image : img,
         };
+        // var file=base64toFile(img.src,img.data-file);
+        // const formdata= new FormData();
+        // formdata.enctype="multipart/form-data";
+        // formdata.append('title',title)
+        // formdata.append('content',content)
+        // formdata.append('star',star)
+        // formdata.append('keywords',keywords_selected)
+        // formdata.append('image',img);
 
         await fetch("/review_create/{{pk}}/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                // 'Content-Type': 'multipart/form-data',
                 "X-CSRFToken": "your-csrf-token",
             },
 
             body: JSON.stringify(data),
+            // body: formdata,
+
             // body : data,
         })
             .then((data) => {
                 console.log(data);
-                location.href = document.referrer;
+                //location.href = document.referrer;
             })
             .catch((e) => {
                 console.log(e);

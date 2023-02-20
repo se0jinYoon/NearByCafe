@@ -1,4 +1,3 @@
-
 from .models import Review
 
 from django.shortcuts import render,redirect

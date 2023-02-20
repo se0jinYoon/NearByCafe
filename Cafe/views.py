@@ -103,8 +103,17 @@ def cafe_detail(request, pk, *args, **kwargs):
     # 카페에 등록된 리뷰들 불러오기
     all_review = cafe.cafe_id.all()
     review_cnt = 0
+    cafe_like_clicked=False
     # sum_star=0
     # average_star=0
+    
+    
+    #카페의 카페like객체가 있을때?좋아요 이미 눌러져있게
+    if cafe.cafe_like.exists():
+        print("이미 눌렀지롱")
+        cafe_like_clicked=True
+    print(cafe_like_clicked)
+        
     reivew_keywords_list = []
     for review in all_review:
         review_cnt += 1
@@ -138,6 +147,7 @@ def cafe_detail(request, pk, *args, **kwargs):
         "review_cnt": review_cnt,
         "all_review": all_review,
         'cafe_keywords': cafe_keywords,
+        'cafe_like_clicked':cafe_like_clicked,
         # "r_average_start":r_average_star,
 
     }
@@ -180,36 +190,6 @@ def school_match(cafe_location, user_school_email):
                 return True
     return False
 
-def school_match2(cafe_location,user_school_email):
-    school_to_location=[
-        {'g.hongik.ac.kr':'신촌/이대/서대문/아현'},
-        {'smu.kr','종로/인사동/동대문'},
-        {'ewhain.net','신촌/이대/서대문/아현'},
-        {'khu.ac.kr','청량리/회기'},
-        {'hufs.ac.kr','청량리/회기'},
-        {'yonsei.ac.kr','신촌/이대/서대문/아현'},
-        {'duksung.ac.kr','광운대/공릉/노원/도봉'},
-        {'sju.ac.kr','건대입구/세종대'},
-        {'uos.ac.kr','청량리/회기'},
-        {'dongduk.ac.kr','성신여대/안암/성북/길음'},
-        {'kookmin.ac.kr','성신여대/안암/성북/길음'},
-        {'snu.ac.kr','서울대입구/신림'},
-        {'sungshin.ac.kr','성신여대/안암/성북/길음'},
-        {'kw.ac.kr','광운대/공릉/노원/도봉'},
-        {'konkuk.ac.kr','건대입구/세종대'},
-        {'korea.ac.kr','성신여대/안암/성북/길음'},
-        {'hanyang.ac.kr','왕십리/한양대/성수'},
-        {'catholic.ac.kr','서초/교대/사당'},
-        {'sogang.ac.kr','신촌/이대/서대문/아현'},
-        {'cau.ac.kr','동작/흑석/상도'},
-        { 'skku.edu','혜화/성균관대'},]
-    
-    for key in school_to_location:
-        if key==user_school_email:
-            cafe_location==school_to_location[key]
-            return True
-    return False
-
 
 @csrf_exempt
 def cafe_like(request):
@@ -224,6 +204,8 @@ def cafe_like(request):
             cafe_id=cafe,
             user_id=request.user,
         )
+        print(cafe,request.user)
+        
 
     else:  # 취소 누름
         # cafe_like=cafe.cafelike_set.all
@@ -255,9 +237,6 @@ def find_cafe(request, *args, **kwargs):
 
     loc = request.GET.get('loc')
     keyword = request.GET.get('keyword')
-
-    print(keyword)
-    print('키워드키워드키워드키워드키워드키워드키워드키워드키워드키워드키워드')
     context = {
         "location_list_left": location_list_left,
         "location_list_right": location_list_right,
@@ -268,7 +247,6 @@ def find_cafe(request, *args, **kwargs):
     }
 
     if request.method == 'POST':
-        print("POST REQUEST-----!")
         loc = request.POST.get('cafe_location_name')
         keyword = request.POST.get('cafe_keyword_name')
         print(request.POST)
@@ -288,23 +266,11 @@ def find_cafe_ajax(request, *args, **kwargs):
         print('get')
         req = json.loads(request.body)
         location = req['location']
+        # selected_location = request.GET['location']
         selected_location = location
 
-        print(location)
-
-        # 만약 지역이 '서울 전체'인 경우
-        if selected_location == "서울 전체":
-            cafes_objects = Cafe.objects.all()
-            location = '서울역/이태원/용산'
-            # ctx = {
-            #     'latitude': location_dict['서울역/이태원/용산'][0],
-            #     'longtitude': location_dict['서울역/이태원/용산'][1],
-            #     'cafes': cafes
-            # }
-            # return JsonResponse(ctx)
-        else:
-            cafe_location = Location.objects.get(name=selected_location)
-            cafes_objects = cafe_location.cafe_set.all()
+        cafe_location = Location.objects.get(name=selected_location)
+        cafes_objects = cafe_location.cafe_set.all()
 
         # cafes_latlog = cafes.location.name
 
@@ -318,15 +284,15 @@ def find_cafe_ajax(request, *args, **kwargs):
             cafes = list((cafes_objects).values())
 
         else:
-            cafe_queryset = Cafe.objects.none()
             for cafe in cafes_objects:
 
-                # jsonDec = json.decoder.JSONDecoder()
-                # cafe_keywords = jsonDec.decode(cafe.keywords)
-                # print(cafe_keywords)
-                # print("?")
-                # x = set.intersection(set(cafe_keywords), set(checked_keywords))
+            # jsonDec = json.decoder.JSONDecoder()
+            # cafe_keywords = jsonDec.decode(cafe.keywords)
+            # print(cafe_keywords)
+            # print("?")
+            # x = set.intersection(set(cafe_keywords), set(checked_keywords))
 
+                cafe_queryset = Cafe.objects.none()
                 for kwrds in checked_keywords:
                     temp = cafes_objects.filter(keywords__icontains=kwrds)
                     cafe_queryset |= temp
@@ -335,6 +301,8 @@ def find_cafe_ajax(request, *args, **kwargs):
             # if x != set() and len(x) >= 2:
             #     print(x)
             #     print(cafe)
+
+        # q. 넘겨줄때 쿼리셋 접근으로,,
 
             cafes = list((cafe_queryset).values())
 
