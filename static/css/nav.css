@@ -58,6 +58,7 @@ nav {
     border-radius: 45px;
     border: 1px solid #b1b1b1;
     cursor: pointer;
+    opacity: 0;
 }
 
 .search_img {
@@ -67,6 +68,7 @@ nav {
     position: absolute;
     top: 16px;
     right: 14px;
+    opacity: 0;
 }
 
 .nav_notice,
@@ -85,12 +87,15 @@ nav {
 .nav_notice_s {
     width: 59px;
 }
+
 .nav_profile_s {
     width: 46px;
 }
+
 .nav_login_s {
     width: 45px;
 }
+
 .nav_signup_s {
     width: 59px;
 }
