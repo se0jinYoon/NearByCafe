@@ -166,6 +166,11 @@
 }
 .cafe_review_star{
     font-size: 24px;
+    color: #F8AA14;
+}
+.cafe_review_star>svg {
+    width: 20px;
+    height: 20px;
 }
 .cafe_review_content{
     font-size: 24px;

@@ -134,6 +134,7 @@ def cafe_detail(request, pk, *args, **kwargs):
 
     # r_average_star=round(average_star)
 
+    cafe_average_star = cafe.average_star
     # cafe.average_star=average_star
     # cafe.save()
 
@@ -148,7 +149,7 @@ def cafe_detail(request, pk, *args, **kwargs):
         "all_review": all_review,
         'cafe_keywords': cafe_keywords,
         'cafe_like_clicked':cafe_like_clicked,
-        # "r_average_start":r_average_star,
+        "cafe_average_star":cafe_average_star,
 
     }
     return render(request, "cafe_detail_cj.html", context=context)
